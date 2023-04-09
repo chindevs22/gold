@@ -1,0 +1,329 @@
+
+.wrapper {
+    display: block;
+    float: left;
+    background-color: #fff;
+    padding: 50px;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
+    resize: both;
+    overflow: auto;
+    border-radius: 4px;
+    font-family:roboto;
+}
+
+/*------------------------------------*/
+.emagic * {box-sizing: border-box;}
+.emagic {display: block; float: left; width: 100%;}
+/*.emagic div {
+    border-color: #e1e1e1;
+    border-color: rgba(0,0,0,0.1);
+    border-style: solid;
+    border-width: 0px;
+}*/
+
+.emagic .dbfl {display: block; float: left; width: 100%;}
+.emagic .difl {display: inline-block; float: left;}
+
+.emagic i.material-icons {
+    vertical-align: bottom;
+    display: inline;
+    height: 1em;
+    margin-right: 5px;
+}
+
+.emagic .em_wrap {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.emagic .em-info-area {display: none;}
+.emagic #em-area-1 {display: block;}
+
+.em-color {color: cornflowerblue;}
+
+.emagic .em-bg {background-color: cornflowerblue;}
+.emagic .em-bg-lt {
+    background-color: #fafafa;
+    background-color:  rgba(0,0,0,0.1);
+}
+
+/*Animations*/
+
+@keyframes em-circle {
+    0% {filter: grayscale(100%);}
+    100% {filter: grayscale(0);}
+}
+
+/*---------Wide Themes----------*/
+
+/*Tabs*/
+
+.emWide .emActiveTab {
+    background-color: #fafafa;
+    background-color: rgba(0,0,0,0.1);
+}
+
+.em-user-account.emWide .em-user-nav {
+    width: 25%;
+    display: inline-block;
+    float: left;
+    border-right-width: 1px;
+}
+
+.emWide .em-user-tabs {overflow: hidden;}
+.emWide .em-menu-tab {
+    padding: 1em 0.5em;
+    border-left-width: 5px;
+    border-left-color: transparent;
+    display: block;
+    float: left;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.emWide .em-menu-tab:hover {
+    background-color: #fafafa;
+    background-color: rgba(0,0,0,0.05);
+    cursor: pointer;
+    border-left-width: 5px;
+    border-left-color: cornflowerblue;
+    padding-left: 2em;
+}
+
+/*Content Area*/
+
+.emWide .em-tab-content-main {
+    width: 75%; 
+    display: inline-block;
+    float: left;
+    padding: 20px;
+    border-left: 1px solid rgba(0,0,0,0.1);
+    padding-top: 0px;
+    min-height: 240px;
+}
+
+/*---------Narrow Themes----------*/
+
+/*Tabs*/
+
+.emNarrow .emActiveTab {
+    background-color: #fafafa;
+    background-color: rgba(0,0,0,0.1);
+    width: 50% !important;
+    border-bottom-width: 1px;
+}
+
+.emNarrow .em-user-nav {
+    width: 100%;
+    display: block;
+    float: left;
+    margin-bottom: 50px;
+    border-bottom-width: 1px;
+}
+
+.emNarrow .em-user-tabs {overflow: hidden;}
+.emNarrow .em-menu-tab {
+    padding: 1em 0.5em;
+    border-left-width: 0px;
+    border-bottom-color: transparent;
+    display: inline-block;
+    float: left;
+    width: 2em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: clip;
+    border-bottom-width: 1px;
+}
+
+.emNarrow .em-menu-tab:hover {
+    background-color: #fafafa;
+    background-color: rgba(0,0,0,0.05);
+    cursor: pointer;
+}
+
+/*Content Area*/
+
+.emNarrow .em-tab-content-main {
+    width: 100%; 
+    display: block;
+    float: left;
+    padding: 20px;
+}
+
+/*----------Common CSS--------------*/
+
+.emagic .em-tab-content-main {text-align: left;}
+.emagic .em-booking-row span.em-booking-label { 
+    width: 50%; 
+    float: left; 
+    font-weight: bold}
+.emagic .em-booking-row span.em-booking-detail  {
+    width: 50%; 
+    float: left;
+    
+}
+.emagic .em-user-row {padding: 1em 0;}
+.emagic .em-icon i {
+    font-size: 3em;
+    border-radius: 100%;
+    padding: 0.5em;
+    color: #fff;
+    line-height: 2em;
+}
+
+.emagic .em-menu-tab {
+    transition: 0.3s;
+    text-align: left;
+}
+
+/*Personal Details*/
+
+.emagic .em-user-information {position: relative;}
+.emagic .em-info-area {position: absolute; top: 0; left: 0;}
+
+.emagic .em-user-card {
+    height: 10em;
+    overflow: hidden;
+}
+
+.emagic .em-user-name {
+    font-size: 2.5em;
+    line-height: 1em;
+    padding: 1em 0.5em 0em 1em;
+    text-align: center;
+}
+
+.emagic .em-user-notice {
+    font-size: 0.5em;
+    text-align: left;
+    font-weight: lighter;
+}
+
+.emagic .em-field-row label,
+.emagic .em-field-row span {
+    display: inline-block;
+    float: left;
+    width: 45%;
+    text-align: left;
+}
+
+.emagic .em-field-row label {margin-right: 5%;}
+.emagic .emagic .em-field-row span {margin-left: 5%;}
+
+.emagic .em-user-fields {width: 100%;}
+.emagic .em-field-row {padding: 0.5em 0;}
+
+.emagic .em-field-row img.em-user-upload {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    padding: 5px;
+}
+
+/* Registrations*/
+.emagic table.em-user-data {
+    width: 100%; 
+    border-collapse: collapse; 
+    text-align: left;
+}
+
+.emagic table.em-user-data th {padding: 0.5em;}
+.emagic table.em-user-data td {
+    line-height: 2em;
+    height: 2em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.emagic table.em-user-data td i {
+    padding-left: 1.5em;
+    cursor: pointer;
+}
+
+.emagic table.em-user-data tr {transition: 0.2s;}
+.emagic table.em-user-data tr:hover {
+    background-color: #fafafa;
+    background-color: rgba(0,0,0,0.05);
+}
+.emagic .emNarrow .tab-links.em-tab-vertical-menu { width: 100%; }
+.emagic .emWide .tab-links.em-tab-vertical-menu  { width: 25%; padding: 0px;  }
+.emagic .emWide .tab-links.em-tab-vertical-menu .em-tab-nav{
+    display: inline-block;
+    position: relative;
+    width: 100%;
+}
+.emagic .tab-links.em-tab-vertical-menu {    
+    display: block;
+    width: 30%;
+    float: left;
+    padding: 10px;}
+
+
+.emagic .em-user-name-submission {
+    display: inline-block;
+    float: left;
+    width: calc(100% - 10em);
+}
+/*Submission Page Custom CSS*/
+.emagic .em-user-card img { height: 10em; width: auto; float: left; border-radius: 0px; border: none; padding: 0px; animation: em-circle 1s linear 1; margin: 0px;}
+.emagic .em-user-card .em-user-name {
+    width: auto;
+    float: left;
+    display: inline-block;
+    padding: 30px 0px 0px 30px;
+    text-align: left;
+}
+.em-user-name-subtitle{
+    padding: 20px 0px 0px 30px;
+    text-align: left;
+}
+.emagic .em-user-details-card hr { clear: both; margin: 0px;}
+.em-tab-content td, .em-tab-content th, .em-tab-content tr, .em-tab-content table {
+    border: none;
+    text-align: left;
+    white-space: nowrap;
+    padding: 3px 12px;
+    table-layout: auto;
+}
+
+.emagic #ep-tabmenu .em_profile_table .ep-profile-events-title  {
+    text-align: left;
+}
+
+.emagic #ep-tabmenu .em_profile_table .ep-profile-events-action a  {
+    text-decoration: none;
+    text-shadow:none
+    
+}
+
+.ep-profile-events-title a{
+    table-layout: fixed;
+    word-break: break-word;
+    white-space: nowrap;
+    max-width: 130px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+}
+
+.entry-content:after {
+    display: block;
+    clear: both;
+    content: "";
+}
+/*Inbox*/
+.emagic .em-inbox-data tr:nth-child(4n-1) {background-color: rgb(250,250,250); }
+.emagic .em-inbox-data tr:nth-child(4n-3) {background-color: rgb(255,255,255); }
+.emagic .em-inbox-data tr.em_email_detail_container:nth-child(4n) {background-color: rgb(250,250,250); }
+.emagic .em-inbox-data tr.em_email_detail_container:nth-child(4n-2) {background-color: rgb(255,255,255); }
+.emagic .em-inbox-data tr.em_email_detail_container:nth-child(4n-2):hover{ background-color: rgb(255,255,255); }
+.emagic .em-inbox-data tr.em_email_detail_container:nth-child(4n):hover{ background: rgb(250,250,250);}
+.emagic .em-inbox-data .em_inbox_email_unread td{ font-weight: bold;}
+
+.emagic .em-inbox-data .em_email_detail_label{ width: 120px; font-weight: bold;}
+.emagic .em-inbox-data .em_email_detail_body{width: calc( 100% - 120px); word-break: break-word; white-space: normal;}
+

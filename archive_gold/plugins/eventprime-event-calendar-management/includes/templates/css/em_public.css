@@ -1,0 +1,8457 @@
+/* Adding Material Icons Font. */
+@font-face {
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    src: url(iconfont/MaterialIcons-Regular.eot); /* For IE6-8 */
+    src: local('Material Icons'),
+        local('MaterialIcons-Regular'),
+        url(iconfont/MaterialIcons-Regular.woff2) format('woff2'),
+        url(iconfont/MaterialIcons-Regular.woff) format('woff'),
+        url(iconfont/MaterialIcons-Regular.ttf) format('truetype');
+}
+
+.material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;  /* Preferred icon size */
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+
+    /* Support for all WebKit browsers. */
+    -webkit-font-smoothing: antialiased;
+    /* Support for Safari and Chrome. */
+    text-rendering: optimizeLegibility;
+
+    /* Support for Firefox. */
+    -moz-osx-font-smoothing: grayscale;
+
+    /* Support for IE. */
+    font-feature-settings: 'liga';
+}
+
+.emagic {
+    display: inline-block;
+    width: 100%;
+    -webkit-animation: em_appear 0.8s linear 1;
+    -moz-animation: em_appear 0.8s linear 1;
+    -o-animation: em_appear 0.8s linear 1;
+    animation: em_appear 0.8s linear 1;
+}
+
+.emagic.emagic_archive {
+    padding: 20px;
+}
+
+.emagic * {
+    box-sizing: border-box;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
+.emagic div {
+    border: 0px solid rgba(150, 150, 150, 0.3);
+    -webkit-border: 0px solid rgba(150, 150, 150, 0.3);
+    -moz-border: 0px solid rgba(150, 150, 150, 0.3);
+}
+
+.emagic .kf-event-share a,
+.emagic a {
+    text-transform: none;
+    text-decoration: none;
+    text-shadow: none;
+    box-shadow: none;
+    box-shadow: none !important;
+    border-bottom: 0px;
+}
+
+.emagic .kf-event-share a i {
+    font-size: 18px;
+    margin-right: 3px;
+}
+.emagic .kf-event-share a {
+    display: inline-block;
+}
+
+.emagic i[aria-hidden=true] {
+    margin-right: 0.5em;
+}
+
+.emagic img {
+    margin: 0px;
+}
+
+.emagic .dbfl {
+    display: block;
+    float: left;
+    width: 100%;
+}
+
+.emagic .difl {
+    display: inline-block;
+    float: left;
+}
+
+.emagic .difr {
+    display: inline-block;
+    float: right;
+}
+
+.emagic .em_wrap {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+}
+
+.emagic button.kf-button {
+    background-color: transparent;
+    background-image: none;
+    font-weight: normal;
+    border: 0px;
+    box-shadow: none;
+    outline: 0px;
+    cursor: pointer;
+    text-shadow: none;
+    text-transform: uppercase;
+    letter-spacing: inherit;
+}
+
+.emagic button.kf-button:hover {
+    background-color: transparent;
+}
+
+.emagic button.kf-button[disabled]:hover {
+    background-color: transparent;
+    color: inherit;
+    letter-spacing: inherit;
+    font-weight: inherit;
+}
+
+.emagic .kf-text-crop {
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+    transition: 1s;
+}
+
+.emagic .kf-pull-down {
+    height: 100px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 1));
+}
+
+.emagic span.kf-pull-caret {
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    width: 100%;
+    display: block;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.emagic .em_card1 {
+    width: 98%;
+}
+
+.emagic .em_card2 {
+    width: 48%;
+    margin: 20px 1%;
+}
+
+.emagic .em_card3 {
+    width: 31.33%;
+}
+
+.emagic .em_card4 {
+    width: 23%;
+}
+
+.emagic .em_card5 {
+    width: 18%;
+}
+
+.emagic .em_performer {
+    margin-bottom: 20px;
+}
+
+.emagic .em_event_performers .em_card3 {
+    min-height: 180px;
+}
+
+.emagic .em_event_performers .em_card4 {
+    min-height: 200px;
+}
+
+.emagic .em_event_performers .em_card5 {
+    min-height: 220px;
+}
+
+.emagic .em_color {
+    color: transparent;
+}
+
+
+/* Disabling CSS for Event Search Button on Frontend
+.emagic .em_bg,
+.emagic input[type="submit"].em_bg,
+.emagic input[type="submit"].em_bg:hover {
+    background-color: rgba(150, 150, 150, 0.1);
+}
+*/
+
+.emagic .em_bg_lt {
+    background-color: #fafafa;
+    background-color: rgba(150, 150, 150, 0.1);
+}
+
+.emagic .em_bg_dk {
+    background-color: #fafafa;
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+.emagic .em_block {
+    margin: 15px 0;
+}
+
+.emagic .em-col-pad20 {
+    padding: 20px
+}
+
+.emagic .em-col-row {
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.emagic .em-col-12 {
+    width: 100%;
+}
+
+.emagic .em-col-11 {
+    width: 91.66666667%;
+}
+
+.emagic .em-col-10 {
+    width: 83.33333333%;
+}
+
+.emagic .em-col-9 {
+    width: 75%;
+}
+
+.emagic .em-col-8 {
+    width: 66.66666667%;
+}
+
+.emagic .em-col-7 {
+    width: 58.33333333%;
+}
+
+.emagic .em-col-6 {
+    width: 50%;
+}
+
+.emagic .em-col-5 {
+    width: 41.66666667%;
+}
+
+.emagic .em-col-4 {
+    width: 33.33333333%;
+}
+
+.emagic .em-col-3 {
+    width: 25%;
+}
+
+.emagic .em-col-2 {
+    width: 16.66666667%;
+}
+
+.emagic .em-col-1 {
+    width: 8.33333333%;
+}
+
+.emagic .kf-tickets:hover,
+.emagic .kf-tickets:focus,
+.emagic .kf-tickets {
+    background: transparent;
+    outline: none;
+}
+
+
+/*
+Animations
+*/
+
+@keyframes em_slide {
+    0% {
+        transform: translateY(-200px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+@keyframes em_pop {
+    0% {
+        transform: scale(1, 1);
+    }
+    50% {
+        transform: scale(1.4, 1.4);
+    }
+    100% {
+        transform: scale(1, 1);
+    }
+}
+
+@-webkit-keyframes em_slide {
+    0% {
+        transform: translateY(-200px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+@-webkit-keyframes em_pop {
+    0% {
+        transform: scale(1, 1);
+    }
+    50% {
+        transform: scale(1.4, 1.4);
+    }
+    100% {
+        transform: scale(1, 1);
+    }
+}
+
+@-moz-keyframes em_slide {
+    0% {
+        transform: translateY(-200px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+@-moz-keyframes em_pop {
+    0% {
+        transform: scale(1, 1);
+    }
+    50% {
+        transform: scale(1.4, 1.4);
+    }
+    100% {
+        transform: scale(1, 1);
+    }
+}
+
+@-o-keyframes em_slide {
+    0% {
+        transform: translateY(-200px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+@-o-keyframes em_pop {
+    0% {
+        transform: scale(1, 1);
+    }
+    50% {
+        transform: scale(1.4, 1.4);
+    }
+    100% {
+        transform: scale(1, 1);
+    }
+}
+
+.emagic .em_pop {
+    -webkit-animation: em_pop 1s ease-in-out 1 2s;
+    -moz-animation: em_pop 1s ease-in-out 1 2s;
+    -o-animation: em_pop 1s ease-in-out 1 2s;
+    animation: em_pop 1s ease-in-out 1 2s;
+}
+
+@keyframes em_appear {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes em_blow {
+    0% {
+        transform: scale(1, 1);
+    }
+    50% {
+        transform: scale(1.2, 1.2);
+    }
+    100% {
+        transform: scale(1, 1);
+    }
+}
+
+@-webkit-keyframes em_appear {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes em_blow {
+    0% {
+        transform: scale(1, 1);
+    }
+    50% {
+        transform: scale(1.5, 1.5);
+    }
+    100% {
+        transform: scale(1, 1);
+    }
+}
+
+@-moz-keyframes em_appear {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@-moz-keyframes em_blow {
+    0% {
+        transform: scale(1, 1);
+    }
+    50% {
+        transform: scale(1.5, 1.5);
+    }
+    100% {
+        transform: scale(1, 1);
+    }
+}
+
+@-o-keyframes em_appear {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@-o-keyframes em_blow {
+    0% {
+        transform: scale(1, 1);
+    }
+    50% {
+        transform: scale(1.5, 1.5);
+    }
+    100% {
+        transform: scale(1, 1);
+    }
+}
+
+
+/*
+Events Page
+*/
+
+.emagic .em_card {
+    margin: 0 1% 20px 1%;
+    text-align: center;
+    transition: 0.4s;
+    position: relative;
+    border-width: 1px;
+    -webkit-border-width: 1px;
+    -moz-border-width: 1px;
+    border-radius: 0px;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    overflow: hidden;
+}
+
+.emagic .em_not_bookable {
+    pointer-events: none;
+}
+
+.emagic .em_card:hover {
+    /*box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);*/
+    border-width: 1px;
+    -webkit-border-width: 1px;
+    -moz-border-width: 1px;
+}
+
+.emagic .em_card:hover .em-compat-object-fit {
+    -webkit-animation: em_blow 10s ease-in 1;
+    -moz-animation: em_blow 10s ease-in 1;
+    -o-animation: em_blow 10s ease-in 1;
+    animation: em_blow 10s ease-in 1;
+}
+
+.emagic .em_event_cover {
+    overflow: hidden;
+    height: 200px;
+}
+
+.emagic .em_event_cover img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    margin: 0px;
+    padding: 0px;
+}
+
+.emagic .em_card_info {
+    padding: 0px 10px;
+}
+
+.emagic .em_event_title {
+    font-size: 130%;
+}
+
+.emagic .em_event_address {
+    font-size: 86%;
+    color: rgb(157, 157, 157);
+}
+
+.emagic .em_event_description {
+    height: 80px;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    font-size: 12px;
+    margin-top: 10px;
+}
+
+.emagic .em_card .em_event_cover .em-compat-object-fit {
+    width: 100%;
+    height: 100%;
+    float: left;
+    background-size: cover;
+    background-position: 0% 50%;
+    background-repeat: no-repeat;
+}
+
+.emagic .em_event_start {
+    font-weight: bold;
+    font-size: 86%;
+    padding-right: 5px;
+}
+
+
+/*
+======================
+Revamped  Events Page
+======================
+*/
+
+.emagic .em_card .em-card-description {
+    text-align: left;
+    padding: 10px;
+    min-height: 205px;
+}
+
+.emagic .em_event_price {
+    font-size: 120%;
+    padding: 12px 12px;
+    line-height: 20px;
+    /*-webkit-animation: em_slide 2s ease-in-out 1;
+-moz-animation: em_slide 2s ease-in-out 1;
+-o-animation: em_slide 2s ease-in-out 1;
+animation: em_slide 2s ease-in-out 1;8*/
+}
+
+.emagic .em_card .em-cards-footer {
+    border-top-width: 1px;
+    -webkit-border-top-width: 1px;
+    -moz-border-top-width: 1px;
+}
+
+.emagic .em_card .em-cards-footer .em_eventpage_register .em_header_button {
+    background-color: transparent;
+    text-transform: uppercase;
+    border: 0px;
+    padding: 12px 12px;
+    margin: 0px;
+    line-height: 20px;
+    font-weight: 400;
+    cursor: pointer;
+    text-decoration: none;
+    float: right;
+}
+
+.emagic .em_card .em-cards-footer .em_eventpage_register .em_header_button.em_event_expired {
+    cursor: default;
+    color: #f87070;
+    color: rgb(248, 112, 112);
+}
+
+.emagic .em_event_register .em_not_bookable {}
+
+.emagic .em_card .em-cards-footer .em_event_register input.em_header_button {
+    background-color: transparent;
+    text-transform: uppercase;
+    border: 0px;
+    padding: 12px 12px;
+    margin: 0px;
+    line-height: 20px;
+    float: left;
+    box-shadow: none;
+    text-shadow: none;
+    color: rgb(233, 102, 86);
+}
+
+.emagic .em_cards .em-cards-wrap {
+    width: 100%;
+    float: left;
+}
+
+.emagic .em_cards .em-cards-wrap .em_card.em_card4 .em_event_cover a.em-compat-object-fit {
+    background-position: 40% 50%;
+}
+
+.emagic .em_card .em-card-description .em_event_title a {
+    border-bottom: 0px;
+    color: #000;
+    color: rgb(0, 0, 0);
+    float: left;
+    width: auto;
+    max-width: 94%;
+}
+
+.emagic .em_card .em-card-description .em_event_title .ep-add-to-wishlist {
+    float: right;
+}
+
+.emagic .em_card .em-card-description .em_event_title {
+    margin: 0px;
+}
+
+
+/*
+======================
+Revamped Single Event
+======================
+*/
+
+.emagic .kf-event-row {
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+.emagic .kf-row-heading {
+    height: 25px;
+    border-top: 2px solid #e5e5e5;
+    position: relative;
+}
+
+.emagic .kf-row-heading .kf-row-title {
+    position: absolute;
+    font-size: 16px;
+    line-height: 16px;
+    bottom: 16px;
+    width: auto;
+    text-align: center;
+    padding: 0 10px;
+    background-color: #FFF;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-style: italic;
+    left: 35%;
+    left: calc(50% - 5em);
+}
+
+.emagic .kf-event-header {
+    border: 2px solid #e5e5e5;
+    margin-bottom: 50px;
+}
+
+.emagic #em_primary.em_content_area .em_cover_image img.ep-event-cover {
+    width: 100%;
+    height: 100%;
+    max-height: 350px;
+    object-fit: cover;
+}
+
+.emagic .kf-event-title {
+    border-bottom: 2px solid #e5e5e5;
+    background-color: #fafafa;
+}
+
+.emagic .kf-event-date-large {
+    max-width: 120px;
+    padding: 10px;
+}
+
+.emagic .kf-event-buy-tickets {
+    padding: 10px;
+    border-bottom: 2px solid #e5e5e5;
+}
+
+.emagic .em_event_attr_box {
+    width: 100%;
+}
+
+.emagic .kf-event-header .kf-event-attributes {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.emagic .kf-event-header .kf-event-attributes .kf-event-attr-value {
+    margin-bottom: 10px;
+}
+
+.emagic .kf-event-content.kf-event-row .kf-event-col1 .kf-event-attr-name {
+    padding: 10px 0px;
+}
+
+.emagic .kf-event-gallery .em_photo_gallery a img {
+    margin: 3px;
+    width: 90px;
+    height: 90px;
+}
+
+.emagic .kf-event-buy-tickets .kf-tickets-button a.kf-tickets {
+    text-transform: uppercase;
+    width: 80%;
+    font-weight: bold;
+    background: #23C16C;
+    color: #fff;
+    border-radius: 4px;
+    transition: 0.2s;
+    text-shadow: none;
+    border: 0px;
+    line-height: 40px;
+    height: 40px;
+    padding: 0px;
+    margin: 0 0 0 20%;
+    float: left;
+    text-align: center;
+}
+
+.emagic .kf-event-title-text {
+    width: 80%;
+    width: calc(100% - 120px);
+    padding: 10px;
+}
+
+.emagic.narrow .kf-event-title-text {
+    width: 60%;
+    width: calc(100% - 120px);
+}
+
+.emagic .em_photo_gallery a {
+    display: inline-block;
+}
+
+.emagic .single-event-expired.kf-booking-expired {
+    text-transform: uppercase;
+    border: 0px;
+    padding: 12px 12px;
+    margin: 0px;
+    line-height: 20px;
+    float: right;
+    text-align: right;
+    color: #f87070;
+    color: rgb(248, 112, 112);
+}
+
+.emagic .kf-booking-not-started {
+    text-transform: uppercase;
+    border: 0px;
+    padding: 12px 12px;
+    margin: 0px;
+    line-height: 20px;
+    float: left;
+}
+
+.emagic .kf-single-event.kf-booking-not-started {
+    float: right;
+}
+
+
+/*---- Match-performers -----*/
+
+.emagic .kf-event-performers .kf-match-performers {
+    text-align: center;
+    position: relative;
+    width: 93%;
+}
+
+.emagic .kf-event-performers .kf-match-performers span {
+    position: absolute;
+    top: 40px;
+    width: 40px;
+    height: 40px;
+    background-color: #fff;
+    border-radius: 100%;
+    line-height: 43px;
+    text-align: center
+}
+
+
+/* Date icon in header*/
+
+.emagic .kf-date-large-icon {
+    text-align: center;
+    width: 100px;
+    height: 100px;
+    color: #fff;
+    overflow: hidden;
+}
+
+.emagic .kf-date-icon-top {
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: bold;
+    height: 40px;
+    line-height: 40px;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.emagic .kf-date-icon-bottom {
+    font-size: 36px;
+    height: 60px;
+    line-height: 60px;
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+
+/* Title of the event */
+
+.entry-title,
+.entry-meta {
+    display: block;
+}
+
+.emagic .kf-event-title-text {
+    padding: 20px;
+}
+
+.emagic .kf-post-title {
+    font-size: 20px;
+    line-height: 1.5em;
+    overflow: hidden;
+}
+
+.emagic .kf-post-organizer {
+    color: #b5b5b5;
+    font-size: 16px;
+}
+
+.emagic .kf-event-price,
+.emagic .kf-tickets-button {
+    width: 60%;
+}
+
+.emagic .kf-tickets-button .em_eventpage_register button.kf-tickets {
+    float: right;
+    overflow: hidden;
+}
+
+.emagic .kf-event-price {
+    font-weight: lighter;
+    width: 40%;
+    line-height: 40px;
+    font-size: 22px;
+    text-align: right;
+}
+
+.emagic .kf-event-buy-tickets .kf_ticket_price {
+    width: 70%;
+    float: right;
+}
+
+.emagic .kf-event-share {
+    width: 30%;
+    font-size: 28px;
+    line-height: 40px;
+}
+
+.emagic .kf-event-share a {
+    cursor: pointer;
+}
+
+.emagic .kf-event-share i {
+    cursor: pointer;
+}
+
+.emagic i.fa-twitter {
+    color: #00aced;
+}
+
+.emagic i.fa-facebook-official {
+    color: #3b5998;
+}
+.emagic i.fa-linkedin-official {
+    color: #0A66C2;
+}
+
+.emagic i.fa-whatsapp-official{color:#25D366}
+
+.emagic .kf-event-price i {
+    margin: 0;
+    font-size: 22px;
+}
+
+.emagic .kf-event-buy-tickets input.kf-tickets,
+.emagic .kf-event-buy-tickets button.kf-tickets {
+    text-transform: uppercase;
+    width: 80%;
+    font-weight: bold;
+    background: #23C16C;
+    color: #fff;
+    border-radius: 4px;
+    transition: 0.2s;
+    text-shadow: none;
+    border: 0px;
+    line-height: 40px;
+    height: 40px;
+    padding: 0;
+    margin: 0 0 0 20%;
+    cursor: pointer;
+}
+
+.emagic .kf-event-buy-tickets button.em_header_button {
+    text-transform: uppercase;
+    width: 80%;
+    font-weight: bold;
+    color: #fff;
+    border-radius: 4px;
+    transition: 0.2s;
+    text-shadow: none;
+    border: 0px;
+    line-height: 40px;
+    height: 40px;
+    padding: 0;
+    margin: 0 0 0 20%;
+}
+
+.emagic.narrow .kf-event-buy-tickets button.kf-tickets {
+    width: 80%;
+    margin: 0 0 0 20%;
+}
+
+.emagic .kf-event-buy-tickets button.kf-tickets:hover {
+    background: #2EB96F !important;
+    box-shadow: none;
+}
+
+.emagic .kf-event-buy-tickets button.kf-tickets:active {
+    background: #3FAB71 !important;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+
+/*----------- Event Attributes Table----------------*/
+
+.emagic .kf-event-attr {
+    padding: 20px;
+    width: 50%;
+    font-size: 12px;
+}
+
+.emagic .kf-event-header .kf-event-attr:nth-child(odd) {
+    border-right: 2px solid #E5E5E5;
+}
+
+.emagic .kf-event-header .kf-event-attr:nth-child(even) {
+    border-left: 2px solid #E5E5E5;
+    margin-left: -2px;
+}
+
+.emagic .kf-event-attr-name {
+    text-transform: uppercase;
+    font-weight: bold;
+    margin: 2px 0;
+}
+
+.emagic .em_progressbar {
+    height: 5px;
+    width: 50%;
+    margin: 10px 50% 0 0;
+    background-color: #e5e5e5;
+    background-color: rgba(0, 0, 0, 0.06);
+    border-radius: 50px;
+    overflow: hidden;
+}
+
+.emagic .em_card .em_progressbar {
+    margin: 10px auto;
+}
+
+.emagic .em_progressbar_fill {
+    height: 10px;
+}
+
+.emagic img.kf-google-calendar-add {
+    height: 18px;
+    width: auto;
+    vertical-align: text-bottom;
+    display: inline-block;
+    margin: 0px;
+}
+
+.emagic .ep-addto-calendar svg {    
+    float: left;
+    width: 20px;
+    height: 20px;
+    margin-right: 2px;
+}
+
+.emagic .ep-addto-calendar .ep-ical-download { 
+    cursor: pointer;
+}
+
+/*------------------Event Content Area----------------------*/
+
+.emagic .kf-event-content p {
+    font-size: 14px;
+}
+
+.emagic .kf-event-col1 {
+    width: 60%;
+    margin-left: 5%;
+}
+
+.emagic.narrow .kf-event-col1 {
+    width: 100%;
+    margin: 0;
+}
+
+.emagic .kf-event-col2 {
+    width: 35%;
+    overflow: hidden;
+}
+
+.emagic.narrow .kf-event-col2 {
+    width: 100%;
+    padding: 0px;
+    margin-bottom: 20px;
+}
+
+.emagic .kf-event-col-title {
+    padding: 15px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.emagic .kf-event-col2 .kf-fb-link {
+    word-break: break-all;
+}
+
+.emagic .kf-event-col2 .kf-event-attr {
+    padding: 20px;
+    width: 100%;
+    font-size: 12px;
+    background-color: rgba(255, 255, 255, 0.95);
+    color: #000;
+}
+
+.emagic.narrow .kf-event-col2 .kf-event-attr {
+    padding: 20px;
+    width: 100%;
+    font-size: 12px;
+}
+
+.emagic .kf-event-col1 .kf-event-attr-name {
+    padding: 10px;
+}
+
+
+/*-----Child Event------*/
+
+.kf-child-event-wrap {}
+
+.kf-child-event-wrap .kf_child_name {
+    position: relative;
+}
+
+.kf-child-event-wrap .kf_child_name span {
+    position: absolute;
+    left: 0px;
+    top: 3px;
+    background-color: #fff;
+    padding-right: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 14px
+}
+
+.kf_child_name::before {
+    content: "";
+    background-color: #e5e5e5;
+    width: 100%;
+    height: 2px;
+    display: inline-block;
+}
+
+
+/*--------------Performers Area--------------------------*/
+
+.emagic .kf-event-venue-area .kf-event-performers {
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+}
+
+.emagic .kf-performer-card {
+    border: 2px solid #e5e5e5;
+    width: 48%;
+    margin: 10px 2% 10px 0;
+    color: #a1a1a1;
+    border-radius: 10px;
+    overflow: hidden;
+    height: 100px;
+}
+
+.emagic.narrow .kf-performer-card {
+    width: 46%;
+    margin: 10px 2%;
+    height: 220px;
+}
+
+.emagic .kf-performer-img {
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    background-color: #fafafa;
+}
+
+.emagic.narrow .kf-performer-img {
+    width: 100%;
+    text-align: center;
+}
+
+.emagic .kf-performer-img img {
+    border-radius: 100%;
+    padding: 10px !important;
+    height: 100px;
+    width: 20%;
+    width: calc(100px - 0px);
+    object-fit: cover;
+    object-position: center;
+    margin: auto;
+}
+
+.emagic .kf-performer-details {
+    width: 80%;
+    width: calc(100% - 100px);
+    padding: 10px;
+    overflow: hidden;
+    border-left: 2px solid #e5e5e5;
+    height: 100%;
+}
+
+.emagic .kf-performer-details .kf-performer-name a {
+    padding-left: 10px;
+}
+
+.emagic.narrow .kf-performer-details {
+    width: 100%;
+    text-align: center;
+    border-width: 2px 0 0 0;
+    height: auto;
+}
+
+.emagic .kf-performer-description {
+    line-height: 1.2em;
+    font-size: 80%;
+}
+
+.emagic.narrow .kf-performer-description {
+    margin-top: 10px;
+}
+
+.emagic .kf-event-performers.kf-event-row .kf-performer-card .kf-performer-details .kf-performer-description {
+    font-size: 14px;
+}
+
+.emagic .kf-event-performers.kf-event-row .kf-performer-card .kf-performer-details .kf-performer-description .ep-performer-description {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 90%;
+    display: inline-block;
+}
+
+.emagic .kf-event-performers.kf-event-row .kf-performer-card .kf-performer-details .kf-performer-nodetails {
+    font-size: 14px;
+}
+
+.emagic span.kf-performer-details {
+    display: block;
+    line-height: 100px;
+    text-align: center;
+}
+
+.emagic.narrow span.kf-performer-details {
+    border-top: 2px solid #e5e5e5;
+}
+
+
+/*------All Performer Revamping-----*/
+
+.emagic .kf-performer-wrap {
+    display: inline-block;
+    border: 1px solid rgba(204, 204, 204, 0.53);
+    min-height: 300px;
+}
+
+.emagic .kf-event-counter-title .kf-events-count-wrap {
+    border-radius: 100%;
+    display: inline-block;
+    margin-left: 8px;
+    min-height: 30px
+}
+
+.emagic .kf-event-counter-title .em_events_count_no {
+    background-color: rgba(255, 255, 255, 0.95);
+    min-width: 30px;
+    min-height: 30px;
+    display: inline-block;
+    text-align: center;
+    padding: 5px;
+    line-height: 21px
+}
+
+.emagic .kf-performer-card-footer {
+    border-top-width: 1px;
+    -webkit-border-top-width: 1px;
+    -moz-border-top-width: 1px;
+    padding: 5px;
+}
+
+.emagic.narrow .em_performers .em_performer_card {
+    margin-bottom: 20px
+}
+
+.emagic .em_performers .em_performer_image {
+    text-align: center
+}
+
+.emagic .em_performers .em_performer_image img {
+    border-radius: 100%;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    margin: 0px auto;
+    width: 150px;
+    height: 150px;
+}
+
+.emagic .em_performers .kf-performer-wrap .em_performer_description {
+    text-align: center;
+    min-height: 100px;
+}
+
+.emagic .em_performers .kf-performer-wrap .em_performer_name a {
+    color: currentColor
+}
+
+.emagic .em_performers .kf-performer-wrap .kf_performer_desc {
+    overflow: hidden;
+    padding: 0px 8px 0px 8px;
+    font-size: 14px;
+    line-height: 22px;
+    margin-bottom: 10px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 96%;
+}
+
+.emagic .em_performers .kf-performer-wrap .kf_performer_desc p {
+    padding: 0px;
+    margin: 0px;
+}
+
+.emagic .em_performers .em_performer_card {
+    margin: 20px 1%;
+    position: relative;
+}
+
+.emagic .kf-performer-wrap .em_event_count {
+    position: absolute;
+    top: -17px;
+    right: 4px;
+    width: 36px;
+    height: 36px;
+    background-color: #037acc;
+    color: #fff;
+    text-align: center;
+    border-radius: 50%;
+    line-height: 32px;
+}
+
+
+/* ---performers page theme fixes---*/
+
+.emagic a::after {
+    display: none;
+}
+
+
+/*-----------------Venue Block------------------*/
+
+.emagic .kf-event-venue-area {
+    padding-bottom: 20px;
+    /* border-bottom: 1px solid #e5e5e5;*/
+    margin-bottom: 20px;
+}
+
+.emagic .kf-event-venue-details {
+    width: 100%;
+    font-size: 12px;
+    text-align: center;
+    padding: 10px 50px 50px 50px;
+}
+
+.emagic .kf-event-venue-name {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 14px;
+    color: #000;
+}
+
+.emagic .kf-event-venue-name i {
+    color: #FF4E5E;
+    vertical-align: baseline;
+}
+
+.emagic .kf-event-venue-name i.fa-external-link {
+    color: inherit;
+}
+
+.emagic .kf-event-venue-name img {
+    border-radius: 100%;
+    margin-right: -20px;
+    height: 75px;
+    width: 75px;
+    display: inline-block;
+}
+
+.emagic .kf-event-venue-address {
+    font-style: italic;
+}
+
+.emagic .kf-event-venue-capacity {
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.emagic .kf-event-venue-markers {
+    font-size: 16px;
+}
+
+.emagic .kf-event-venue-markers i {
+    margin: 0 20px;
+}
+
+.emagic .kf-event-venue-description {
+    width: 50%;
+    text-align: left;
+}
+
+.emagic.narrow .kf-event-venue-description {
+    width: 100%;
+    text-align: center;
+}
+
+.emagic .kf-event-venue-description img {
+    width: 75px;
+    height: 75px;
+}
+
+.emagic .kf-event-venue-events {
+    width: 45%;
+    margin-left: 5%;
+}
+
+.emagic.narrow .kf-event-venue-events {
+    width: 100%;
+    margin: 20px 0;
+}
+
+.emagic .kf-upcoming-events,
+.emagic .kf-event-venue-events .kf-event-attr-name {
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 10px 20px;
+    margin: 0;
+}
+
+.emagic .kf-upcoming-events div {
+    margin-bottom: 10px;
+}
+
+.emagic .kf-upcoming-events .em-upcoming-event-load-more {
+    text-align: center;
+}
+
+.emagic .kf-upcoming-events .em-upcoming-event-load-more a.ep-load-more {
+    transition: all .21s ease;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    display: inline-block;
+    margin-top: 26px;
+    border: 1px solid !important;
+    border-radius: 3px;
+    padding: 10px;
+    width: 100%;
+}
+
+.emagic .kf-upcoming-events div a {
+    text-decoration: none;
+    border-bottom: 0px;
+    margin-bottom: 10px;
+
+}
+
+.emagic .kf-upcoming-events div a:not(.emagic .kf-upcoming-events .em-upcoming-event-load-more .ep-load-more){
+    color: #000;
+
+}
+
+.emagic .kf-upcoming-events {
+    color: #000;
+}
+
+.emagic .kf-event-venue-area .kf-event-venue-markers {
+    text-align: center
+}
+
+.emagic.emagic_archive .em_venue_image .em_cover_image img {
+    max-width: 100%;
+    height: 100%;
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+}
+
+.emagic .em_venue_image .em_cover_image .kf-event-single-venue-sidebar {
+    width: 30%;
+    float: right;
+    height: auto;
+    max-height: 79%;
+    position: absolute;
+    bottom: -40px;
+    right: 2%;
+}
+
+.emagic .em_venue_image .em_cover_image .kf-event-single-venue-sidebar .kf-event-attr-wrap {
+    background-color: rgba(255, 255, 255, 0.95);
+    height: auto;
+    max-height: 82%;
+}
+
+.emagic.emagic_archive .ep-venue-description {
+    border-top: 1px solid rgba(150, 150, 150, 0.3);
+    margin-top: 16px;
+    padding-top: 12px;
+}
+
+.emagic .em_venue_image .em_cover_image .kf-event-single-venue-sidebar .kf-event-attr {
+    width: 100%;
+    padding: 2px 20px 2px 20px;
+}
+
+.emagic .em_venue_image .em_cover_image .kf-event-single-venue-sidebar .kf-event-attr .kf-event-attr-name {
+    margin: 0px 0;
+}
+
+.emagic .em_venue_image .em_cover_image .kf-event-single-venue-sidebar .kf-event-col-title {
+    padding: 8px 15px;
+}
+
+.emagic .ep-single-venue-map {
+    position: relative;
+    margin: 40px 0px;
+}
+
+.emagic .ep-single-venue-map .em-venue-direction {
+    width: 100%;
+    height: 300px;
+}
+
+.emagic .ep-single-venue-map .em-venue-direction .kf-row-title,
+.emagic .em_photo_gallery.em-single-venue-photo-gallery .kf-row-title {
+    left: calc(50% - 2em);
+    font-style: normal;
+    text-transform: capitalize;
+}
+
+.emagic .em_photo_gallery.em-single-venue-photo-gallery {
+    text-align: center;
+}
+
+
+/*--------------All Venue Revamping ------------------*/
+
+.emagic.narrow .em_venues .em_venue_card {
+    margin-bottom: 20px;
+}
+
+.emagic .kf-venue-wrap {
+    display: inline-block;
+    border: 1px solid rgba(204, 204, 204, 0.53);
+}
+
+.emagic .em_venues .em_venue_card {
+    margin: 20px 1%;
+    position: relative;
+}
+
+.emagic .em_venues .em_venue_card .kf-events-count-wrap {
+    position: absolute;
+    top: -17px;
+    right: 4px;
+    width: 36px;
+    height: 36px;
+    background-color: #037acc;
+    color: #fff;
+    text-align: center;
+    border-radius: 50%;
+    line-height: 32px;
+}
+
+.emagic .em_venues .kf-venue-wrap .em_venue_description {
+    text-align: center;
+    padding: 0px 8px;
+}
+
+.emagic .em_venues .kf-venue-wrap .em_venue_image img {
+    border-radius: 100%;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    margin: 0px auto;
+    width: 150px;
+    height: 150px;
+}
+
+.emagic .kf-venue-card-footer {
+    border-top-width: 1px;
+    -webkit-border-top-width: 1px;
+    -moz-border-top-width: 1px;
+    padding: 10px;
+}
+
+.emagic .kf-venue-wrap .em_venue_name a {
+    color: currentColor;
+}
+
+.emagic .kf-venue-wrap .em_venue_add {
+    height: 50px;
+    overflow: hidden;
+    font-size: 14px;
+    line-height: 23px;
+    margin-top: 5px;
+}
+
+.emagic .em_venues .kf-venue-wrap .kf-venue-details {
+    text-transform: uppercase;
+}
+
+.emagic .em_venue_card .kf-venue-seating-capacity {
+    min-height: 28px;
+}
+
+
+/*--------------Single Venue Revamping ------------------*/
+
+.em-single-venue-photo-gallery {
+    margin: 0px;
+    padding-top: 20px;
+}
+
+.emagic .em_single_fullwidth .em_venue_image .em_cover_image {
+    position: relative;
+    max-height: 300px;
+}
+
+.emagic .em_single_fullwidth .em_venue_image .em_cover_image .em-venue-direction {
+    width: 30%;
+    float: right;
+    height: 72%;
+    position: absolute;
+    background-color: rgb(255, 255, 255);
+    z-index: 99999;
+    border: 1px solid rgb(230, 230, 230);
+    top: 50%;
+    right: 2%;
+    padding: 12px;
+}
+
+.em_performer_events .em_events_count-wrap {
+    border-radius: 100%;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    display: inline-block;
+    margin-left: 8px;
+}
+
+.em_performer_events .em_events_count-wrap .em_events_count_no {
+    background-color: rgba(255, 255, 255, 0.95);
+    min-width: 30px;
+    min-height: 30px;
+    display: inline-block;
+    text-align: center;
+    padding: 3px;
+    line-height: 20px
+}
+
+.emagic .kf-upcoming-event-row .kf-upcoming-event-thumb img {
+    border-radius: 100%;
+    object-fit: cover;
+    margin: auto;
+    width: 80px;
+    height: 80px;
+}
+
+.emagic .kf-upcoming-event-row .em_header_button {
+    padding: 0px;
+    float: right;
+}
+
+.emagic .em_photo_gallery.em-single-venue-photo-gallery a {
+    margin: 5px;
+}
+
+.emagic .em_photo_gallery.em-single-venue-photo-gallery img {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 0px;
+}
+
+.emagic .em_single_fullwidth .em_performer_events {
+    margin-top: 40px;
+}
+
+.emagic .kf-single-venue-post-title {
+    font-size: 20px;
+    line-height: 1.5em;
+    overflow: hidden;
+    width: 68%;
+}
+
+.emagic .kf-event-single-venue-sidebar .kf-event-attr-value {
+    min-height: inherit;
+    word-break: break-all;
+}
+
+.emagic .kf-event-single-venue-sidebar .kf-event-attr {
+    padding: 0px 20px 20px 20px;
+}
+
+.emagic .kf-upcoming-event-post-date {
+    font-size: 14px;
+}
+
+.emagic .kf-venue-address {
+    font-size: 14px;
+    margin-top: 3px;
+    color: rgb(181, 181, 181);
+    width: 68%;
+}
+
+.emagic .kf-venue-address .kf-vanue-directions {
+    padding-left: 0px;
+    margin-left: 10px;
+}
+
+
+/*--------------Sponsors------------------*/
+
+.emagic .kf-event-sponsors {
+    padding-bottom: 20px;
+    border-bottom: 2px solid #e5e5e5;
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+.emagic .kf-event-sponsor-logo {
+    height: 100px;
+    overflow: hidden;
+    padding: 10px;
+    margin-right: 10px;
+    float: none;
+}
+
+.emagic .kf-event-sponsor-logo img {
+    max-height: 100%;
+    width: auto;
+}
+
+
+/*
+Performers Page
+*/
+
+.emagic .em_performer_card .em_performer_role {
+    min-height: 24px;
+}
+
+.emagic .em_block_left {
+    width: 40%;
+    width: calc(150px - 0px);
+    height: 150px;
+    overflow: hidden;
+}
+
+.emagic .em_block_left img {
+    border-radius: 100%;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    padding: 15px;
+}
+
+.emagic .em_block_right {
+    width: 60%;
+    width: calc(100% - 150px);
+    line-height: 1.5em;
+    padding-top: 50px;
+    padding-top: calc(75px - 1.5em);
+}
+
+.emagic .em_performer_role {
+    font-size: 86%;
+    text-transform: uppercase;
+}
+
+.emagic .em_venues .em_venue_card .em_venue_image_cover {
+    text-align: center;
+}
+
+.emagic .em_venues .em_venue_card .kf-venue-seating-capacity .kf-event-attr-name {
+    text-transform: capitalize;
+    margin: 0px 0;
+}
+
+
+/*Performer Page*/
+
+.emagic table.em_event_list td {
+    padding: 0.5em;
+    white-space: normal;
+    max-width: 24%;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.emagic table.em_event_list td img {
+    border-radius: 100%;
+}
+
+.emagic .em_performer_profile .em_performer_image {
+    text-align: left;
+}
+
+
+/*.emagic .em_performer_profile .em_performer_image img { border-radius: 50%; width: 150px; height: 150px; object-fit: cover; margin: 0;}/*
+
+/* Single Performer page Revamping*/
+
+.emagic .kf-single-performer {
+    width: 100%;
+    border: 1px solid rgba(150, 150, 150, 0.3);
+    text-align: center;
+    padding: 24px 0px;
+    background-color: #fbfbfb;
+}
+
+.emagic .ep-single-performer-head {
+    border-bottom-width: 1px;
+    padding-bottom: 15px;
+}
+
+.emagic .em_performer_profile .ep-performer-description {
+    margin-bottom: 30px;
+}
+
+.emagic .em_performer_profile .kf-single-performer img {
+    border-radius: 100%;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    margin: 0px auto;
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+}
+
+.emagic .kf-performer-name {
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #323232;
+    text-align: center;
+}
+
+.emagic .kf-performer-role {
+    color: #b7b7b7;
+    text-align: center;
+}
+
+.emagic .em_performer_events .kf-row-title {
+    bottom: 10px;
+    font-style: normal;
+    text-transform: capitalize;
+}
+
+.emagic .kf-upcoming-event-row .kf-upcoming-event-booking {
+    text-align: right;
+    padding: 20px 0px;
+    text-transform: uppercase;
+    margin-top: 20px;
+}
+
+
+/*Event Types*/
+
+.emagic .em_event_type {
+    padding: 0.5em;
+    -webkit-border-width: 1px;
+    -moz-border-width: 1px;
+    border-width: 1px;
+    text-align: center;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+}
+
+
+/*Profile Page*/
+
+.emagic .ui-state-default {
+    background: none !important;
+    border-width: 0 0 1px 0 !important;
+    -webkit-border-width: 0 0 1px 0 !important;
+    -moz-border-width: 0 0 1px 0 !important;
+    border-style: solid;
+}
+
+.emagic .ui-widget {
+    font-family: inherit !important;
+    font-size: 1em !important;
+}
+
+.em_upcoming_event a {
+    display: block;
+}
+
+.emagic .ui-tabs .ui-tabs-nav li {
+    display: inline-block;
+    float: left;
+    width: 25%;
+    text-align: center;
+    background-color: transparent;
+    border-bottom-width: 1px;
+    -moz-border-bottom-width: 1px;
+    -webkit-border-bottom-width: 1px;
+    margin: 0px !important;
+}
+
+.emagic .ui-tabs .ui-tabs-nav {
+    padding: 0px !important;
+    margin: 0px !important
+}
+
+.emagic li.active.tab-link.ui-state-default.ui-corner-top.ui-tabs-active.ui-state-active,
+.emagic li.tab-link.ui-state-default.ui-corner-top.ui-tabs-active.ui-state-active,
+.emagic .ui-tabs .ui-tabs-nav li.ui-tabs-active {
+    border-width: 1px 1px 0 1px !important;
+    -webkit-border-width: 1px 1px 0 1px !important;
+    -moz-border-width: 1px 1px 0 1px !important;
+    margin: 0px !important;
+    padding: 0px !important;
+}
+
+.emagic .ui-tabs .ui-tabs-nav .ui-tabs-anchor {
+    float: none !important;
+    display: block !important;
+}
+
+.emagic .ui-tabs .ui-tabs-nav li.ui-tabs-active .ui-tabs-anchor:focus,
+.emagic .ui-tabs .ui-tabs-nav li.ui-state-disabled .ui-tabs-anchor:focus,
+.emagic .ui-tabs .ui-tabs-nav li.ui-tabs-loading .ui-tabs-anchor:focus {
+    outline: none;
+}
+
+.emagic table.em_profile_table {
+    text-align: left;
+    width: 100%;
+}
+
+.emagic table.em_profile_table th.em_profile_serial {
+    width: 10%;
+}
+
+.emagic table.em_profile_table th {
+    width: 22.5%;
+}
+
+.emagic .em_profile_table {
+    float: left;
+    margin: 30px 0px 15px;
+    ;
+}
+
+.emagic .em_venue_dir {
+    clear: both;
+    margin: 15px 0px;
+}
+
+.emagic .em_venue_dir a {
+    margin-right: 10px;
+}
+
+
+/*--------JQuery UI---------*/
+
+.emagic .ui-widget-content {
+    border: none;
+    background: transparent;
+    color: inherit;
+}
+
+.emagic .ui-widget-header {
+    border: none;
+    background: transparent;
+    color: inherit;
+    font-weight: normal;
+}
+
+.ui-state-active,
+.ui-widget-content .ui-state-active,
+.ui-widget-header .ui-state-active {
+    background: transparent;
+    border: none;
+}
+
+
+/*Checkout Page*/
+
+.emagic .em-before-payment .kf-before-payment-wrap {
+    border-width: 1px;
+    -webkit-border-width: 1px;
+    -moz-border-width: 1px;
+}
+
+.emagic .em-before-payment .em_booking_heading {
+    border-bottom-width: 1px;
+    -webkit-border-bottom-width: 1px;
+    -moz-border-bottom-width: 1px;
+    padding: 20px 10px;
+    font-weight: 700;
+}
+
+.emagic .em_payment_progress_wrap,
+.emagic .em_payment_progress {
+    height: 3px;
+}
+
+.emagic .em_payment_progress_wrap .em_payment_progress {
+    max-width: 100%;
+}
+
+.emagic .em-before-payment .kf-payment-details {
+    padding: 20px 10px 0px 10px;
+}
+
+.emagic .kf-payment-info {
+    padding: 10px 10px 15px 10px;
+    font-size: 12px;
+}
+
+.emagic .kf-checkout-footer {
+    border-top-width: 1px;
+}
+
+.emagic .em-before-payment .em_booking_event_title {
+    font-weight: 700;
+    padding: 10px 0px;
+}
+
+.emagic .em-before-payment .kf-booking-event-info {
+    font-size: 14px;
+}
+
+.emagic .em-before-payment .kf-booking-event-info span.kf-booking-event-date {
+    color: #a2a2a2;
+    color: rgb(150, 150, 150);
+}
+
+.emagic .em-before-payment .kf-booked-event-seat-num {
+    margin-top: 25px;
+}
+
+.emagic .payment_prcoessors .kf-payment-mode-select {
+    display: inline-block;
+    margin: 0 20px 0 0;
+}
+
+.emagic .payment_prcoessors .kf-payment-mode-select input[type="radio"] {
+    -webkit-appearance: radio;
+    width: auto;
+    margin: 0px;
+    margin-right: 10px;
+    line-height: inherit;
+    min-height: 20px;
+}
+
+.emagic .kf-notice-print-tickets {
+    text-align: center;
+    font-size: 14px;
+    color: #b1b1b1;
+    color: rgb(177, 177, 177);
+    font-weight: normal;
+    font-style: italic;
+}
+
+
+/*
+Widgets
+*/
+
+#eventm_event_countdown-2.widget.box.widget_eventm_event_countdown {
+    padding: 5px;
+    text-align: center;
+}
+
+.em-cal-state-highlight {
+    background-color: grey;
+}
+
+.em-cal-state-highlight .ui-state-default {
+    background: none !important;
+    color: #FFF !important;
+}
+
+.em_widget_search .em_widget_label,
+.kf-widget-label {
+    float: left;
+    width: 100%;
+    font-size: 14px;
+    margin-top: 10px;
+    text-align: left;
+    font-weight: normal;
+}
+
+.em_widget_search input.em_input {
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+    border-radius: 8px;
+    height: 44px;
+}
+
+.kf-event-search-filter {
+    border: 1px solid rgba(150, 150, 150, 0.3);
+    padding: 10px;
+    border-radius: 8px;
+    margin: 15px 0px;
+}
+
+.kf-event-search-filter .kf-event-types .kf-event-type {
+    text-align: left;
+    width: 100%;
+    float: left;
+}
+
+.kf-event-search-filter .kf-event-types .kf-event-type .em_radio {
+    float: left;
+    width: 100%;
+}
+
+.kf-event-search-filter .kf-event-types .kf-event-type .em_radio input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    float: left;
+    margin-right: 4px;
+}
+
+.kf-event-search-filter .kf_widget_label {
+    width: 20%;
+    float: left;
+    max-width: 46px;
+}
+
+#em_event_search_form a#hide_filter {
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    display: inline-block;
+    padding-top: 4px;
+}
+
+.kf-widget-venue-filter .kf_widget-input-group .em_widget_label {
+    width: 20%;
+    float: left;
+}
+
+.kf_widget-input-group {
+    display: inline-table;
+    vertical-align: middle;
+    position: relative;
+    border-collapse: separate;
+    width: 100%;
+}
+
+.kf_widget-input-addon {
+    border-right: 0;
+    padding: 9px 12px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1;
+    color: #555;
+    text-align: center;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    white-space: nowrap;
+    vertical-align: -webkit-baseline-middle;
+    float: left;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    height: 44px;
+}
+
+.kf_widget-input-group input {
+    width: 100%;
+    float: left;
+    height: 44px;
+    border-radius: 8px;
+    box-shadow: none;
+    border: 1px solid rgba(150, 150, 150, 0.3);
+}
+
+.start-end-date .kf_widget-input-group input {
+    background: url(../images/kf-date-select.png) left no-repeat;
+    padding: 0px;
+    text-indent: 55px;
+}
+
+.kf-event-search-filter .start-end-date #reset_date {
+    width: 100%;
+    float: left;
+    text-align: right;
+    cursor: pointer;
+}
+
+.kf-event-search-filter a.kf-date-reset {
+    float: left;
+    width: 100%;
+    text-align: right;
+}
+
+.kf-widget-venue-filter .kf_widget-input-group select#em_venues {
+    max-width: 100%;
+    -webkit-appearance: none;
+    width: 100%;
+    float: left;
+    height: 44px;
+    border-radius: 8px;
+    box-shadow: none;
+    border: 1px solid rgba(150, 150, 150, 0.3);
+    background-color: rgb(255, 255, 255);
+    background: url(../images/kf-venues-select.png) left no-repeat;
+    padding-left: 55px;
+    outline: 0px;
+}
+
+.em_widget_container em_widget_filter {
+    margin-top: 20px;
+}
+
+#em_event_search_form .em_widget_search_buttons input {
+    padding: 0px;
+    background-color: transparent;
+    background-image: none;
+    border: 0px;
+    text-shadow: none;
+    outline: 0px;
+    margin: 6px;
+    font-weight: normal;
+    width: auto;
+}
+
+#em_event_search_form .em_widget_search_buttons input:hover {
+    background-color: transparent
+}
+
+#em_event_search_form .em_widget_search_buttons button {
+    padding: 0px;
+    background-color: transparent;
+    border: 0px;
+    text-shadow: none;
+    outline: 0px;
+    font-weight: normal;
+}
+
+#em_event_search_form .em_widget_search_buttons button:hover {
+    background-color: transparent
+}
+
+#em_event_search_form .em_widget_search_buttons {
+    margin-top: 10px;
+    text-align: right;
+}
+
+#em_event_search_form.em_widget_search_buttons .widget_eventm_event_countdown {
+    padding-top: 0px;
+}
+
+
+/*
+ * Expired Events
+ */
+
+.emagic .em_card .em_event_cover {
+    position: relative;
+}
+
+
+/*
+ * Seats View
+ */
+
+.emagic .em_seat_table {
+    width: 100%;
+    overflow-y: hidden;
+    padding: 5px 0px 0px 0px;
+    margin-bottom: 10px;
+}
+
+.emagic .em_seat_table table.em_venue_seating {
+    width: auto;
+    margin: 0px auto;
+    overflow-x: auto;
+    -webkit-overflow-x: auto;
+    -ms-overflow-x: auto;
+    -moz-overflow-x: auto;
+    border: none !important;
+}
+
+.emagic .em_venue_seating {
+    text-align: center;
+    border: none;
+    width: auto;
+    margin: 0px auto;
+}
+
+.emagic tr.row {
+    height: 35px;
+    display: block;
+}
+
+.emagic .seat {
+    border: 3px solid #8cc600;
+    -webkit-border: 3px solid #8cc600;
+    -moz-border: 3px solid #8cc600;
+    border-bottom-color: transparent;
+    float: left;
+    width: 30px;
+    height: 15px;
+    margin: 1px 5px;
+    padding: 2px !important;
+    font-size: 12px;
+    border-bottom: 0px;
+}
+
+.emagic .em_venue_seating tr {
+    padding: 0px !important;
+}
+
+.emagic .em_venue_seating tr td {
+    padding: 2px 2px !important;
+}
+
+.emagic .em_venue_seating tr th {}
+
+.emagic .seat_avail {
+    height: 20px;
+    line-height: 15px;
+    text-align: center;
+    color: #FFF;
+    background: #8cc600;
+    font-size: 0px;
+    border-radius: 0px 0px 10px 10px;
+    -webkit-border-radius: 0px 0px 10px 10px;
+    -moz-border-radius: 0px 0px 10px 10px;
+}
+
+.emagic .seat.reserve {
+    border-color: #e35849;
+    -webkit-border-color: #e35849;
+    -moz-border-color: #e35849;
+}
+
+.emagic .seat.reserve .seat_avail {
+    background: #e35849;
+}
+
+.emagic .seat.selected {
+    border-color: grey;
+    -webkit-border-color: grey;
+    -moz-border-color: grey;
+}
+
+.emagic .seat.selected .seat_avail {
+    background: grey;
+}
+
+.emagic .seat.tmp {
+    border-color: orange;
+    -webkit-border-color: orange;
+    -moz-border-color: orange;
+}
+
+#booking_dialog .seat.tmp .seat_avail {
+    background-color: orange;
+}
+
+.emagic .seat.sold {
+    border-color: orange;
+    -webkit-border-color: orange;
+    -moz-border-color: orange;
+}
+
+.emagic .seat.sold .seat_avail {
+    background-color: orange;
+}
+
+.emagic .em_venue_seating tr.row,
+.emagic .em_venue_seating tr {
+    background-color: transparent;
+    border: 0px;
+    margin: 0px;
+}
+
+.emagic .em_venue_seating tr.row td:nth-child(1) {
+    border-color: transparent;
+    text-align: left;
+    color: #999;
+    width: 40px;
+    height: 15px;
+    float: left;
+    padding: 0px;
+    margin: 0px;
+}
+
+.emagic .em_venue_seating tr.row td:nth-child(1) .em_seat_row_number {
+    font-size: 14px;
+}
+
+.emagic .em_venue_seating tr.row td:nth-child(1) .seat_avail {
+    display: none;
+}
+
+.emagic .seat_avail.seat_avail_number {
+    display: none;
+}
+
+.emagic .em_venue_seating {
+    padding-top: 30px;
+}
+
+.emagic .em_venue_seating tr:nth-child(2) td {
+    position: relative;
+}
+
+.emagic .em_venue_seating tr:nth-child(2) td:not(:first-child) .em_seat_col_number {
+    position: absolute;
+    top: -30px;
+    color: #999;
+}
+
+.emagic .kf-no-upcoming-event {
+    text-align: center;
+}
+
+
+/*
+ * User Details pop-up
+ */
+
+#TB_window #TB_ajaxContent {
+    width: 95% !important;
+}
+
+.em_modal_wrapper#em_booking_details_modal {
+    font-size: 14px;
+}
+
+
+/*From External library*/
+
+#TB_closeWindowButton {
+    top: 0;
+}
+
+#TB_closeAjaxWindow .screen-reader-text {
+    display: none;
+}
+
+.emagic .pm-popup-mask {
+    display: none;
+    background-color: black;
+    opacity: 0.25;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 999999;
+}
+
+.emagic #pm-change-password-dialog {
+    display: none;
+    z-index: 9999999;
+}
+
+.emagic .pm-popup-container {
+    left: calc(50% - 300px);
+    display: block;
+    float: left;
+    width: 600px;
+    background-color: #FFF;
+    position: fixed;
+    top: 15%;
+    overflow: hidden;
+    z-index: 999999;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.2);
+    z-index: 9999999;
+}
+
+.emagic .pm-popup-title .title {
+    border-width: 0 0 1px 0;
+    border-style: solid;
+    border-color: #e1e1e1;
+    position: relative;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.emagic .pm-login-box {
+    text-align: center;
+    padding: 10px 20px;
+    background-color: #fafafa;
+}
+
+.emagic .pm-popup-close {
+    height: 24px;
+    width: 24px;
+    opacity: 0.5;
+    cursor: pointer;
+    position: relative;
+    top: 0px;
+    right: 0px;
+    float: right;
+}
+
+.emagic #add-to-google-calendar #authorize-button,
+.emagic #add-to-google-calendar #addToCalendar {
+    background-repeat: no-repeat;
+    width: 200px;
+    background-size: cover;
+    height: 30px;
+    border: none;
+    cursor: pointer;
+    margin: 10px 0px;
+}
+
+.emagic #authorize-button.kf-event-add-calendar {
+    margin: 12px 0px;
+}
+
+.emagic #add-to-google-calendar.ep-addto-calendar  {  
+    margin-top: 10px;
+}
+
+.emagic .kf-live,
+.widget_eventm_event_countdown .kf-live,
+.em_widget_container .em_upcoming_events .em_upcoming_event .kf-live {
+    position: relative;
+    top: -5px;
+    font-size: 12px;
+    color: red;
+    margin-left: 5px;
+}
+
+.em_widget_container .em_upcoming_events .em_upcoming_event a {
+    display: inline-block;
+}
+
+.emagic .kf-legends {
+    margin-bottom: 20px;
+    max-width: 800px;
+    text-align: center;
+}
+
+.emagic .kf-legend {
+    width: 25%;
+    display: inline-block;
+    float: left;
+    line-height: 20px;
+    font-size: 14px;
+}
+
+.emagic .kf-legend-box {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    line-height: 20px;
+    margin-right: 10px;
+}
+
+.emagic .kf-available {
+    background: #8cc600;
+}
+
+.emagic .kf-booked {
+    background: #ffa500;
+}
+
+.emagic .kf-reserved {
+    background: #e35849;
+}
+
+.emagic .kf-selected {
+    background: grey;
+}
+
+.emagic .pagination {
+    display: block;
+    padding-left: 0;
+    text-align: center;
+    border: none;
+    border-top-width: 1px;
+    padding-top: 10px;
+    width: 100%;
+    float: left;
+}
+
+.emagic .pagination:after,
+.emagic .pagination:before {
+    display: none;
+}
+
+.emagic .pagination li {
+    display: inline-block;
+    border-width: 1px;
+    border-style: solid;
+    border-right-width: 0px;
+    margin: 0px;
+}
+
+.emagic .pagination li:last-child {
+    border-right-width: 1px;
+}
+
+.emagic .pagination li a {
+    position: relative;
+    float: left;
+    padding: 5px 15px;
+    margin-left: -1px;
+    text-decoration: none;
+    border-width: 0px;
+}
+
+.emagic.emagic_archive {
+    padding: 20px;
+}
+
+.emagic table.event_list {
+    width: 100%;
+}
+
+.emagic table.event_list img {
+    border-radius: 100%;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+}
+
+.emagic table.event_list td {
+    vertical-align: middle !important;
+    text-align: center;
+    width: 25%;
+    padding: 10px 0;
+}
+
+#booking_dialog {
+    position: relative;
+}
+
+.emagic .em_progress_screen {
+    display: block;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-image: url(../images/kf-loader.gif);
+    background-repeat: no-repeat;
+    background-size: 100px;
+    background-position: 50% 40%;
+    z-index: 999999;
+    max-width: 100%;
+    top: 0px;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+#booking_dialog .em_progress_screen {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 999999;
+    background-image: none;
+}
+
+#booking_dialog .em_progress_screen:after {
+    content: "";
+    border: 8px solid #d4d3d3;
+    border-top: 8px solid #3498db;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    animation: ep-loader-spin 2s linear infinite;
+    position: absolute;
+    top: 40%;
+    left: 45%;
+    z-index: 9999;
+    border-top-color: inherit;
+}
+
+@keyframes ep-loader-spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.emagic .kf_cal_disabled {
+    opacity: 0.5;
+}
+
+
+/*Count Down*/
+
+.widget_eventm_event_countdown .event_title {
+    margin-bottom: 10px;
+}
+
+.em_countdown_timer span {
+    border-radius: 5px;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
+    background-color: rgb(255, 255, 255);
+    display: inline-block;
+    position: relative;
+    font-size: 25px;
+    width: 44px;
+    height: 80px;
+    text-align: center;
+    /*background: #ff2782;*/
+    color: #FFF;
+    line-height: 30px;
+    padding-top: 10px;
+    margin: 0px 1px 1px 1px;
+}
+
+.em_countdown_timer span:after {
+    font-size: 10px;
+    display: block;
+}
+
+.em_countdown_timer .days:after {
+    content: "Days";
+}
+
+.em_countdown_timer .hours:after {
+    content: "Hours";
+}
+
+.em_countdown_timer .minutes:after {
+    content: "Minutes";
+}
+
+.em_countdown_timer .seconds:after {
+    content: "Seconds";
+}
+
+.kikfyre .pm-edit-user #addToCalendar[disabled="disabled"] {
+    pointer-events: none !important;
+}
+
+.kf-event-attr p {
+    margin: 0;
+    line-height: 1.25em;
+}
+
+.emagic .kf_no_info {
+    color: #a1a1a1;
+}
+
+.kf-event-venue-markers a {
+    box-shadow: none !important;
+}
+
+.kf-event-venue-markers a:hover {
+    text-decoration: none;
+}
+
+
+/*---User register login page----*/
+
+.emagic .em_register_form .em_login form,
+.emagic .em_register_form .em_reg_form form {
+    padding: 20px;
+}
+
+.emagic .em_register_form .em_login form .em_input_row,
+.emagic .em_register_form .em_reg_form form .em_input_row {
+    margin: 10px 0px 10px 0px;
+}
+
+.emagic .em_register_form .em_login form .em_input_row .em_form_errors,
+.emagic .em_register_form .em_reg_form form .em_input_row .em_form_errors {
+    color: rgb(230, 0, 0);
+}
+
+.emagic .em_register_form .em_reg_form .em_login_notice {
+    padding: 20px;
+}
+
+.emagic .em_register_form .em_reg_form form .em_input_row input.em_input_field {
+    width: 100%;
+}
+
+.emagic .em_register_form .em_login form .em_input_row input.em_input_field {
+    width: 100%;
+}
+
+
+/*---jQuery Ui Calendar Widget----*/
+
+#em_calendar_widget .kf-calendar-header {
+    padding: 10px;
+    color: rgb(255, 255, 255);
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+}
+
+.em_widget_container #em_calendar_widget .ui-datepicker-inline.ui-datepicker {
+    padding: 0px;
+    border: 1px solid rgba(150, 150, 150, 0.3);
+    width: 100%;
+}
+
+.em_widget_container #em_calendar_widget .ui-datepicker-inline.ui-datepicker .ui-datepicker-calendar td a.ui-state-default {
+    background-color: transparent;
+    background-image: none;
+    border: 0px;
+    text-align: center;
+    pointer-events: none;
+    color: rgb(84, 84, 84);
+}
+
+.em_widget_container #em_calendar_widget .ui-datepicker-inline.ui-datepicker .ui-datepicker-calendar td a.ui-state-highlight.ui-state-active {
+    cursor: pointer;
+    pointer-events: auto;
+    color: #fff;
+}
+
+.em_widget_container #em_calendar_widget .ui-datepicker-inline.ui-datepicker .ui-datepicker-calendar td {
+    pointer-events: none;
+    background-color: transparent;
+    padding: 0px;
+}
+
+.em_widget_container #em_calendar_widget .ui-datepicker-inline.ui-datepicker .ui-datepicker-calendar td.em-cal-state-highlight {
+    background-color: grey;
+}
+
+.em_widget_container #em_calendar_widget .ui-datepicker-inline.ui-datepicker .ui-datepicker-calendar td.ui-datepicker-current-day {
+    pointer-events: auto;
+    border-right: 1px solid rgb(245, 245, 245);
+}
+
+.em_widget_container #em_calendar_widget .ui-datepicker-inline.ui-datepicker .ui-datepicker-calendar td.em-cal-state-highlight {
+    pointer-events: auto;
+    cursor: pointer;
+    border-right: 1px solid #fff;
+    border-bottom: 1px solid #fff;
+}
+
+.em_widget_container #em_calendar_widget table.ui-datepicker-calendar {
+    border: 0px;
+    width: 100%;
+    text-align: center;
+}
+
+.em_widget_container #em_calendar_widget table.ui-datepicker-calendar tr th {
+    text-align: center;
+}
+
+.em_widget_container #em_calendar_widget table.ui-datepicker-calendar tr {}
+
+#em_calendar_widget .ui-datepicker .ui-datepicker-header {
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    padding: 9px 0px 9px 0px;
+}
+
+#em_calendar_widget .ui-datepicker-header .ui-datepicker-prev,
+#em_calendar_widget .ui-datepicker-header .ui-datepicker-next {
+    top: 9px !important;
+}
+
+#em_calendar_widget .ui-datepicker-header .ui-datepicker-prev.ui-state-hover,
+#em_calendar_widget .ui-datepicker-header .ui-datepicker-next.ui-state-hover {
+    background-image: none !important;
+    background-color: transparent !important;
+    border: 0px !important;
+    top: 9px !important;
+}
+
+#em_calendar_widget .ui-datepicker select.ui-datepicker-month,
+#em_calendar_widget .ui-datepicker select.ui-datepicker-year {
+    color: rgb(173, 172, 172);
+    margin: 4px;
+    width: 43%;
+    height: 20px;
+    border: 0px;
+    font-size: 12px;
+    display: inline-block;
+    padding: 2px 5px;
+}
+
+#em_calendar_widget .ui-datepicker-header .ui-datepicker-prev {
+    left: 2px !important;
+}
+
+#em_calendar_widget .ui-datepicker-header .ui-datepicker-next {
+    right: 2px !important;
+}
+
+#em_calendar_widget .ui-datepicker-header .ui-datepicker-prev .ui-icon {
+    background: rgb(255, 255, 255) url(../images/kf-calendar-arrow-icon.png) no-repeat;
+    background-position: top center;
+    border-radius: 100%;
+}
+
+#em_calendar_widget .ui-datepicker-header .ui-datepicker-next .ui-icon {
+    background: rgb(255, 255, 255) url(../images/kf-calendar-arrow-icon.png) no-repeat;
+    background-position: bottom center;
+    border-radius: 100%;
+}
+
+.em_widget_container form .em_upcoming_events {
+    text-align: left;
+    margin: 8px 0px 8px 0px;
+}
+
+.em_calendar_widget-events-title {
+    font-size: 16px;
+    text-align: left;
+    padding: 10px 0px 10px 0px;
+}
+
+#em_calendar .fc-widget-content td.fc-today {
+    background-color: rgba(238, 238, 238, 0);
+}
+
+#em_calendar .fc-view-container .fc-scroller.fc-day-grid-container {
+    height: inherit !important;
+    overflow: visible !important;
+}
+
+#em_calendar .fc-view-container .fc-view .fc-head .fc-head-container.fc-widget-header .fc-widget-header {
+    margin-right: 0px !important;
+}
+
+#em_calendar .fc-icon-left-single-arrow:after {
+    color: #fff;
+    content: '\e314';
+    font-family: 'Material Icons';
+}
+
+#em_calendar .fc-view-container .fc-list-view .fc-list-table .fc-list-heading,
+#em_calendar .fc-view-container .fc-list-view .fc-list-table .fc-list-item {
+    position: relative;
+    float: left;
+    width: 100%;
+    display: inline-table;
+}
+
+#em_calendar .fc-view-container .fc-list-view .fc-scroller {
+    height: auto !important;
+    overflow: unset !important;
+}
+
+#em_calendar .fc-icon-left-single-arrow,
+#em_calendar .fc-icon-right-single-arrow {
+    height: 44px;
+    width: 25px;
+    top: 10px;
+    line-height: 22px;
+    margin: 0px;
+}
+
+#em_calendar .fc-icon-right-single-arrow:after {
+    color: #fff;
+    content: '\e315';
+    font-family: 'Material Icons';
+}
+
+
+/*Checkout Page Multiday*/
+
+.emagic .kf-before-payment {
+    border-width: 1px;
+    -webkit-border-width: 1px;
+    -moz-border-width: 1px;
+}
+
+.emagic .kf-before-payment .em_booking_heading {
+    border-bottom: 1px solid rgba(150, 150, 150, 0.3);
+    padding: 10px;
+}
+
+.emagic .kf-before-payment .kf-payment-details {
+    padding: 10px;
+}
+
+.emagic .em-before-payment .kf-payment-details .kf-checkout-info {
+    margin-bottom: 40px;
+}
+
+.emagic .kf-before-payment .kf-checkout-footer {
+    border-top: 1px solid rgba(150, 150, 150, 0.3);
+}
+
+.emagic .kf-before-payment .kf-checkout-footer .kf-final-payment {
+    padding: 5px 10px 5px 10px;
+}
+
+.emagic .kf-before-payment .kf-checkout-footer .kf-checkout-button {
+    padding: 9px 10px 9px 10px;
+    line-height: 40px;
+}
+
+.emagic .kf-checkout-footer .payment_prcoessors {
+    margin-top: 10px;
+}
+
+.emagic .kf-checkout-footer .em_checkout_btn .kf-button {
+    padding: 0px;
+    margin-top: 0px;
+}
+
+
+/*Checkout using Stripe payment Page*/
+
+.emagic em_checkout_btn a.kf-stripe-checkout-btn {
+    text-transform: uppercase;
+    margin-top: 10px;
+}
+
+.emagic .em_checkout_btn {
+    margin-top: 10px;
+}
+
+.emagic #kf-stripe-purchase-form-wrap #emStripeForm input[type="text"] {
+    background-color: #fff;
+    background-color: rgb(255, 255, 255);
+    border-radius: 0px;
+    margin: 9px 0px;
+    width: 100%;
+}
+
+.emagic #kf-stripe-purchase-form-wrap #emStripeForm input.kf-expiration-input {
+    width: 25%;
+}
+
+.emagic #kf-stripe-purchase-form-wrap fieldset {
+    border: 1px solid rgba(150, 150, 150, 0.3);
+    padding: 14px;
+}
+
+.emagic #kf-stripe-purchase-form-wrap fieldset legend {
+    width: auto;
+    border: 0px;
+    margin: 0px;
+    font-size: 18px;
+    padding: 0px;
+}
+
+#kf-stripe-purchase-form-wrap .em_checkout_btn a.kf-proceed-btn {
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+
+/* END Checkout using Stripe payment Page*/
+
+
+/*Checkout Page Child Event Card Multiday*/
+
+.emagic .em_child_event_cards .kf_day_card {
+    margin: 20px 1%;
+    width: 30%
+}
+
+.emagic .em_child_event_cards .kf_day_card .kf-day-card-wrap {
+    display: inline-block;
+    border-width: 1px;
+    padding: 8px;
+    position: relative;
+}
+
+.emagic .em_child_event_cards .kf-day-card-wrap .kf-day-event-title {
+    font-size: 14px;
+    font-weight: 700;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.emagic .em_child_event_cards .kf-day-card-wrap .kf-day-event-date {
+    font-size: 12px;
+    font-weight: 700;
+    color: #a2a2a2;
+    color: rgb(150, 150, 150);
+}
+
+.emagic .em_child_event_cards .kf-day-card-wrap .em_price_ticket {
+    text-align: center;
+    margin: 15px 0px;
+}
+
+.emagic .em_child_event_cards .kf-day-card-wrap .em_price_ticket span {
+    font-size: 34px;
+    font-weight: normal;
+}
+
+.emagic .kf-event-booking-mod {
+    text-align: center;
+}
+
+.emagic .kf-event-booking-mod a {
+    cursor: pointer;
+}
+
+.emagic .kf-event-expired {
+    position: absolute;
+    top: 0px;
+    height: 100%;
+    width: 100%;
+    left: 0px;
+    background-color: #fff;
+    background-color: rgba(255, 255, 255, 0.94);
+}
+
+.emagic .kf-event-expired-label {
+    top: 45%;
+    position: absolute;
+    margin: 0px auto;
+    width: 60%;
+    text-align: center;
+    left: 20%;
+    border-top: 1px solid #f87070;
+    border-bottom: 1px solid #f87070;
+    color: #f87070;
+    padding: 5px 0px;
+    font-size: 20px;
+}
+
+.emagic .kf-seats-soldout {
+    position: absolute;
+    top: 0px;
+    height: 100%;
+    width: 100%;
+    left: 0px;
+    background-color: #fff;
+    background-color: rgba(255, 255, 255, 0.94);
+}
+
+.emagic .kf_day_card .kf-day-card-wrap .kf-seats-left {
+    height: 22px;
+}
+
+
+/*----Checkout- seat popup---*/
+
+@-webkit-keyframes popup {
+    0% {
+        transform: scale(0.5, 0.5);
+    }
+    100% {
+        transform: scale(1, 1);
+    }
+}
+
+@-moz-keyframes popup {
+    0% {
+        transform: scale(0.5, 0.5);
+    }
+    100% {
+        transform: scale(1, 1);
+    }
+}
+
+@-o-keyframes popup {
+    0% {
+        transform: scale(0.5, 0.5);
+    }
+    100% {
+        transform: scale(1, 1);
+    }
+}
+
+@keyframes popup {
+    0% {
+        transform: scale(0.5, 0.5);
+    }
+    100% {
+        transform: scale(1, 1);
+    }
+}
+
+@-moz-keyframes popup_wrap {
+    0% {
+        background: rgba(0, 0, 0, 0);
+    }
+    100% {
+        background: rgba(0, 0, 0, 0.5);
+    }
+}
+
+@-o-keyframes popup_wrap {
+    0% {
+        background: rgba(0, 0, 0, 0);
+    }
+    100% {
+        background: rgba(0, 0, 0, 0.5);
+    }
+}
+
+@-webkit-keyframes popup_wrap {
+    0% {
+        background: rgba(0, 0, 0, 0);
+    }
+    100% {
+        background: rgba(0, 0, 0, 0.5);
+    }
+}
+
+@keyframes popup_wrap {
+    0% {
+        background: rgba(0, 0, 0, 0);
+    }
+    100% {
+        background: rgba(0, 0, 0, 0.5);
+    }
+}
+
+.emagic .kf-seat-table-popup.kf_config_pop_wrap {}
+
+.emagic .kf-seat-table-popup {}
+
+.emagic #kf-seat-table-parent.kf_config_pop {}
+
+.emagic #kf-seat-table-parent {}
+
+.emagic #kf-seat-table-parent .kf-booking-seat-wrap {
+    overflow: auto;
+    max-height: 75%;
+    border-width: 1px;
+    margin-bottom: 20px;
+    padding: 8px 15px;
+}
+
+.emagic .kf-seat-table-popup.kf_config_pop_wrap .em_venue_seating {
+    min-width: 800px;
+}
+
+.emagic .kf-seat-table-popup .em_venue_seating .kf-booking-head {
+    border: 0px;
+}
+
+.emagic .kf-booking-head .kf-single-ticket-price,
+.emagic .kf-booking-head .kf-max-ticket-booking-note {
+    text-align: left;
+    font-weight: 700;
+    font-size: 15px;
+}
+
+.emagic .kf-seat-table-popup-head {
+    border-width: 1px 1px 0px 1px;
+    padding: 20px 10px;
+}
+
+.csscalc .site-main .type-page {
+    width: 100%;
+}
+
+.emagic .kf-seat-table-popup-overlay {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+}
+
+.emagic .kf-popup-title {
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.emagic .kf-popup-sub-title {
+    font-size: 12px;
+    font-weight: normal;
+    color: rgb(138, 138, 138);
+}
+
+.emagic .kf-booking-seat-wrap .em_booking_screen {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.emagic #kf-seat-table-parent .kf-modal-close {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    height: 24px;
+    width: 24px;
+    cursor: pointer;
+}
+
+.emagic #kf-seat-table-parent .kf-modal-close svg {
+    opacity: 0.5;
+}
+
+.emagic .kf-standing-type-popup.kf-standing-type-popup-wrap {}
+
+.emagic .kf-standing-type-popup {}
+
+.emagic #kf-seat-table-parent .kf-standing-order input {
+    width: 300px;
+    height: 40px;
+    border-radius: 0px
+}
+
+.emagic #kf-seat-table-parent .kf-standing-order {
+    padding: 18px;
+}
+
+.emagic #kf-seat-table-parent .kf-standing-order.ep-booking-row {
+    background-color: #f2f2f2;
+    width: 100%;
+}
+
+.emagic #kf-seat-table-parent .ep-booking-quantity,
+.emagic #kf-seat-table-parent .ep-booking-event-name,
+.emagic #kf-seat-table-parent .ep-booking-event-price,
+.emagic #kf-seat-table-parent .ep-booking-event-button {
+    display: inline-block;
+}
+
+.emagic #kf-seat-table-parent .ep-booking-quantity {
+    margin-right: 40px;
+}
+
+.emagic #kf-seat-table-parent .ep-booking-event-name {
+    margin-right: 40px;
+}
+
+.emagic #kf-seat-table-parent .ep-booking-quantity input {
+    width: 100px;
+}
+
+
+/*--- Booking Confirmation Page ------*/
+
+.emagic .kf-booking-confirmation .kf-booked-event-details {
+    border-width: 1px;
+    -webkit-border-width: 1px;
+    -moz-border-width: 1px;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.emagic .kf-booking-confirmation .kf-booked-event-details .kf-booked-event-print a {
+    padding: 18px 3px;
+}
+
+.emagic .kf-booked-event-cover {
+    max-width: 194px;
+    width: 25%;
+    margin-right: 15px
+}
+
+.emagic .kf-booked-event-cover img {
+    width: 100%;
+    max-height: 194px;
+    height: auto;
+    object-fit: cover;
+}
+
+.emagic .kf-booked-event-details-wrap {
+    width: 70%;
+}
+
+.emagic .kf-booked-event-description {
+    display: block;
+    width: 100%;
+    font-size: 14px;
+    line-height: 1.4;
+    -webkit-line-clamp: 8;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.emagic .kf-event-venue-info {
+    border-width: 1px;
+    -webkit-border-width: 1px;
+    -moz-border-width: 1px;
+    width: 100%;
+    margin-top: 4%;
+    padding: 10px;
+}
+
+.emagic .kf-booked-event-print,
+.emagic .kf-booked-event-view {
+    text-align: center
+}
+
+.emagic .kf-booked-event-print a.bg_grad_button,
+.emagic .kf-booked-event-view a.kf-event-view {
+    color: #fff;
+    color: rgb(255, 255, 255);
+    padding: 10px;
+    line-height: 45px;
+    cursor: pointer;
+}
+
+.emagic .kf-booking-confirmation-notice {
+    font-size: 1.5em;
+    font-weight: 600;
+    text-align: left;
+}
+
+.emagic .kf-booked-event-name,
+.emagic .kf-booked-event-venue-name {
+    font-size: 1.5em;
+    font-weight: 300;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    line-height: 26px;
+}
+
+.emagic .kf-booked-event-details-wrap #add-to-google-calendar {
+    margin-top: 10px;
+}
+
+.emagic .kf-booking-confirmation .kf-event-share-icon img {
+    cursor: pointer;
+}
+
+
+/* theme fixes */
+
+
+/*Confirmation Pop up*/
+
+#kf-reconfirm-popup {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    top: 0;
+    left: 0;
+    z-index: 10;
+}
+
+#kf-reconfirm-popup .kf-reconfirm-popup-content {
+    position: relative;
+    top: 35%;
+    padding: 30px;
+    width: 40%;
+    left: 30%;
+    background: #fafafa;
+    text-align: center;
+}
+
+#kf-reconfirm-popup .kf-reconfirm-pc {
+    margin: 0px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 20px;
+    height: auto;
+}
+
+.kf-booked-event-seat-num a,
+.kf-booked-qty a,
+#pm_seat {
+    cursor: pointer;
+}
+
+.kf-seat-selector {
+    text-align: left;
+    font-weight: 700;
+}
+
+#kf-reconfirm-popup .kf-reconfirm-popup-close {
+    top: 0px;
+    text-align: right;
+    font-size: 22px;
+    width: 60px;
+    cursor: pointer;
+    margin: 12px;
+    float: right;
+    position: absolute;
+    right: 7px;
+}
+
+
+/*--- Bokking Page Filters-----*/
+
+.emagic .em_event_views {}
+
+.emagic .ep-event-filters {
+    border: 1px solid rgba(150, 150, 150, 0.3);
+    border-radius: 5px;
+    padding: 0px 10px;
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    align-content: center;
+}
+
+.emagic .ep-event-filters .ep-event-filter-block {
+    max-width: 100%;
+    border-right: 1px solid rgba(150, 150, 150, 0.3);
+    padding: 0px 12px;
+    min-height: 80px;
+    width: 100%;
+    min-width: 100px;
+}
+
+.emagic .ep-event-filters .ep-event-filter-block.ep-search-filter-block {
+
+}
+
+.emagic .ep-event-filters .ep-event-filter-block:last-child {
+    border: 0px
+}
+
+.emagic .em_event_views_wrap .em_event-filter-reset button {
+    background-color: transparent;
+    text-transform: capitalize;
+    font-weight: normal;
+    box-shadow: 0 1px 0 0 currentColor;
+    padding: 2px 0px;
+    border-radius: 0px;
+    border: 0px;
+    outline: 0px;
+}
+
+.emagic .em_event_views_wrap .em_event-filter-reset button:hover {
+    box-shadow: 0 0px 0 0 currentColor;
+}
+
+.emagic .em_event_views .ep-event-view-sort {
+    margin: 2px 4px;
+}
+
+.emagic .em_event_views .ep-event-view-sort a {
+    color: #000;
+    color: rgb(0, 0, 0);
+}
+
+.emagic .em_event_views .ep-event-view-sort a i {
+    margin-right: 4px;
+    line-height: 28px
+}
+
+.emagic .ep-event-filter-block .ep-filter-label {
+    font-size: 12px;
+    margin-top: 18px;
+}
+
+.emagic .ep-event-filter-search input {
+    background-color: transparent;
+    border: 0px;
+    outline: 0px;
+    padding: 0px;
+    height: auto;
+    font-size: 12px;
+    line-height: 30px;
+    margin-top: 5px;
+}
+
+.emagic .ep-event-filter-search_buttons {
+    margin-top: 22px;
+    text-align: center;
+}
+
+.emagic .ep-event-filter-search_buttons input {
+    text-transform: capitalize;
+    padding: 12px 24px;
+    font-weight: normal;
+    height: auto;
+    line-height: 12px;
+    width: 100%;
+    max-width: 200px;
+}
+
+.emagic .ep-event-date {
+    position: relative;
+}
+
+.emagic .ep-event-date input {
+    border: 0px;
+    width: 100%;
+    background-image: none;
+    background-color: transparent;
+    position: relative;
+    z-index: 1;
+    cursor: pointer;
+    height: auto;
+    padding: 0px;
+    font-size: 12px;
+    line-height: 30px;
+    margin-top: 5px;
+}
+
+.ep-event-search-venue-wrap + .select2-container--default .select2-results__option--highlighted[aria-selected] {
+    background-color: #fff;
+}
+
+#select2-em-event-venue-filter-results .select2-results__option--highlighted[aria-selected],
+#select2-em-event-type-filter-results .select2-results__option--highlighted[aria-selected]{
+    background-color: #fff;
+    color: #404040;
+}
+
+#select2-em-event-venue-filter-results .select2-results__option[aria-selected],
+#select2-em-event-type-filter-results .select2-results__option[aria-selected]{
+    font-size: 12px;
+    word-break: break-all;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    background-color: transparent;
+}
+
+#select2-em-event-venue-filter-results .select2-results__option:before,
+#select2-em-event-type-filter-results .select2-results__option:before{
+    margin-right: 5px;
+    color: #373737;
+    background-color: #ececec;
+    padding-left: 3px;
+}
+
+.ep-event-venue-filter .select2-container--default .select2-selection--multiple .select2-selection__choice {
+    font-size: 11px;
+    overflow: hidden;
+    width: 80%;
+    text-overflow: ellipsis;
+}
+
+.ep-event-types-wrap .select2-container--default .select2-selection--multiple {
+    max-height: 36px;
+    font-size: 12px;
+    border: 1px solid rgba(150, 150, 150, 0.3);
+}
+
+.ep-event-venue-filter .select2-container--default .select2-selection--multiple {
+    font-size: 12px;
+    border: 1px solid rgba(150, 150, 150, 0.3);
+    margin-bottom: 5px;
+}
+
+.ep-event-types-wrap .select2-container--default.select2-container--focus .select2-selection--multiple {
+    border: 1px solid rgb(150 150 150 / 69%);
+
+}
+
+.ep-event-types-wrap .select2-container--default .select2-selection--multiple .select2-selection__rendered li.select2-selection__choice {
+    list-style: none;
+    font-size: 12px;
+    background-color: #f4f4f4;
+    border: 1px solid #e0e0e0;
+    padding: 3px 8px;
+    color: #929292;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 140px;
+    line-height: 16px;
+    margin: 4px 0px;
+}
+
+.ep-event-types-wrap .select2-container--default .select2-selection--multiple .select2-selection__rendered li  {
+    font-size: 12px;
+    padding: 3px 0px;
+    color: #a6a6a6;
+    margin: 0px 0px;
+}
+
+.ep-event-types-wrap .select2.select2-container.select2-container--default {
+    background-color: transparent;
+    padding: 0px;
+    margin: 0px;
+    width:100% !important;
+}
+
+.ep-event-types-wrap .select2-container--default .select2-search--inline .select2-search__field {
+    max-height: 30px;
+    min-height: 30px;
+    margin: 0px;
+    padding: 0px;
+    box-shadow: none;
+    border: 0px;
+    outline: 0px !important;
+    width:auto !important;
+}
+
+.ep-event-venue-filter .select2-container--default{
+    width: 100% !important;
+    padding: 0px;
+    margin: 0px;
+    background-color: transparent;
+}
+
+.select2-container--open .select2-dropdown--below {
+    border: 1px solid rgba(150, 150, 150, 0.3);
+    box-shadow: 1px 1px 5px rgb(150 150 150 / 15%);
+    margin-top: 0px !important;
+}
+
+.select2-container--open .select2-dropdown {
+    border: 1px solid rgba(150, 150, 150, 0.3);
+}
+
+/*--- Bokking Page Calendar-----*/
+
+#em_calendar .fc-view-container {
+    background-color: #fafafa;
+}
+
+#em_calendar .fc-view-container .fc-head .fc-head-container table {
+    margin: 0px;
+}
+
+#em_calendar .fc-view-container .fc-head .fc-head-container table tr {
+    background-color: #fff;
+}
+
+#em_calendar .fc-view-container .fc-head .fc-head-container table tr th.fc-day-header {
+    padding: 8px 0px;
+    border: 0px;
+}
+
+#em_calendar .fc-view-container .fc-head .fc-head-container {
+    border: 0px;
+}
+
+#em_calendar .fc-view-container .fc-head .fc-head-container thead {
+    border: 0px;
+}
+
+#em_calendar .fc-view-container .fc-basic-view > table {
+    border: 0px;
+}
+
+#em_calendar .fc-header-toolbar .fc-center {
+    background-color: #45bdff;
+    width: 100%;
+    padding: 6px 0px;
+    text-align: center;
+}
+
+#em_calendar .fc-header-toolbar .fc-center > div {
+    width: 100%;
+}
+
+#em_calendar .fc-header-toolbar .fc-center > div .fc-prev-button,
+#em_calendar .fc-header-toolbar .fc-center > div h2,
+#em_calendar .fc-header-toolbar .fc-center > div .fc-next-button {
+    display: inline-block;
+    background-color: transparent;
+    background-image: none;
+    border: 0px;
+    box-shadow: none;
+}
+
+#em_calendar .fc-header-toolbar .fc-center > div h2 {
+    font-size: 18px;
+    color: rgb(255, 255, 255);
+    font-weight: 400;
+    padding: 0px;
+    margin: 0px;
+}
+
+#em_calendar .fc-row .fc-content-skeleton {
+    position: static;
+    z-index: 1;
+}
+
+#em_calendar .fc-day-grid .fc-row {
+    z-index: unset;
+}
+
+#em_calendar .fc-row.fc-rigid {
+    overflow: visible;
+}
+
+#em_calendar .fc-row .fc-content-skeleton .fc-today {
+    position: relative;
+    z-index: 9;
+}
+
+#em_calendar .fc-row .fc-content-skeleton .fc-event-container .fc-day-grid-event {
+    border-radius: 0px;
+    border: 0px;
+    font-size: 12px;
+    line-height: 20px;
+}
+
+#em_calendar .fc-row .fc-content-skeleton .fc-event-container > .fc-day-grid-event .fc-content {
+    position: relative;
+    z-index: 99;
+    background-color: inherit;
+    padding: 2px 5px;
+    text-align: left;
+}
+
+#em_calendar a.fc-event,
+#em_calendar fc-event {
+    background-color: #0087be;
+    color: #fff;
+}
+
+
+/*--- Event Types ------*/
+
+.ep-event-types {
+    width: 100%;
+    float: left;
+    position: relative;
+}
+
+.ep-event-types .ep-event-type {
+    float: left;
+    margin-right: 20px;
+}
+
+.ep-event-types .ep-event-title {
+    float: left;
+    width: 100%;
+    position: relative;
+}
+
+.ep-event-types .ep-event-title:after {
+    font-family: 'Material Icons';
+    content: '\e313';
+    font-size: 26px;
+    float: right;
+    line-height: 35px;
+    display: inline-block;
+    position: absolute;
+    right: -6px;
+}
+
+.emagic .ep-event-date:after {
+    font-family: 'Material Icons';
+    content: '\e313';
+    font-size: 26px;
+    float: right;
+    line-height: 33px;
+    position: absolute;
+    top: 5px;
+    right: 0px;
+    z-index: 0;
+    cursor: pointer;
+}
+
+.ep-event-types .ep-event-title i {
+    line-height: 32px;
+    display: inline-block;
+    float: right;
+}
+
+.ep-event-types .ep-event-type span {
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+    margin: 5px 0px -2px 3px;
+}
+
+.ep_menu_item_hide {
+    display: none
+}
+
+.ep-event-types-wrap {
+    box-sizing: border-box;
+    z-index: 1000;
+    text-align: left;
+    width: 100%;
+    font-size: 12px;
+    margin: 5px 0px;
+
+    /*min-width: 236px;
+    left: -13px;
+    top: 66px;
+    box-shadow: 0px 20px 17px 0 rgba(40, 44, 53, .1), 0 2px 4px 0 rgba(40, 44, 53, .1);
+    padding: 10px;*/
+}
+
+
+/*--- Event Details Popup ------*/
+
+.emagic #em_calendar {
+    position: relative;
+}
+
+.emagic .ep-all_event_calendar {
+    margin-bottom: 170px;
+    font-family: sans-serif;
+}
+
+.emagic #em_calendar .em_event_detail_popup {
+    position: absolute;
+    top: -23px;
+    left: 80px;
+    width: 348px;
+    min-width: 348px;
+    max-width: 100%;
+    background-color: #fff;
+    z-index: 9999;
+    box-shadow: 0px 1px 10px 1px #ccc;
+    text-align: left;
+}
+
+.emagic .em_event_detail_popup .ep-event-detail-row .ep_event_performers ul {
+    margin: 0px;
+    padding: 0px;
+}
+
+.emagic .em_event_detail_popup .ep_event_detail_popup_head {
+    padding: 10px 10px;
+    color: #fff;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+}
+
+.emagic .em_event_detail_popup .ep_event_detail_popup_head .ep_event_title {
+    width: 16em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.emagic .em_event_detail_popup .ep_event_detail_popup_head .ep_event_title a {
+    color: rgb(255, 255, 255);
+}
+
+.emagic .em_event_detail_popup .ep_event_performers ul li {
+    list-style: none;
+    display: inline-block
+}
+
+.emagic .em_event_detail_popup .ep_event_performers ul li img {
+    border-radius: 100%;
+    margin: 8px 4px 4px 0px;
+    width: 36px;
+    height: 36px;
+}
+
+.emagic .em_event_detail_popup .ep-event-detail-wrap {
+    width: 90%;
+    max-width: 100%;
+    margin: 0px auto;
+    display: grid;
+}
+
+.emagic .em_event_detail_popup .ep-event-detail-row {
+    font-size: 12px;
+    color: #000;
+    color: rgba(0, 0, 0, 0.70);
+    margin-bottom: 12px;
+}
+
+.emagic .em_event_detail_popup .ep-event-detail-row i {
+    float: left;
+    margin-right: 5px;
+}
+
+.emagic .em_event_detail_popup .ep-event-detail-wrap #progressbar {
+    width: 100%;
+}
+
+.emagic .em_event_detail_popup .ep-event-detail-wrap .ep-book-now {
+    border-top: 1px solid rgba(150, 150, 150, 0.3);
+    margin-top: 10px;
+    padding: 10px 0px;
+    color: rgba(0, 0, 0, 0.73);
+}
+
+.emagic .em_event_detail_popup .ep-event-detail-wrap .ep-book-now button {
+    background-color: transparent;
+    height: auto;
+    padding: 10px 12px;
+}
+
+.emagic .em_event_detail_popup .ep-event-detail-wrap .ep-book-now a {
+    padding: 8px 0px;
+    float: left;
+}
+
+.emagic .em_event_detail_popup .ep-event-detail-wrap .ep-book-now .em_event_expired {
+    cursor: default;
+    color: #f87070;
+    color: rgb(248, 112, 112);
+}
+
+
+/*--- Event Slider Widget -----*/
+
+.em_event_slides {
+    position: relative;
+    list-style: none;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.em_event_slides li {
+    -webkit-backface-visibility: hidden;
+    position: absolute;
+    display: none;
+    width: 100%;
+    left: 0;
+    top: 0;
+}
+
+.em_event_slides li:first-child {
+    position: relative;
+    display: block;
+    float: left;
+}
+
+.em_event_slides img {
+    display: block;
+    height: auto;
+    float: left;
+    width: 100%;
+    border: 0;
+    height: 200px;
+    object-fit: cover;
+}
+
+.kf-widget-slider-meta {
+    width: 100%;
+    position: absolute;
+    bottom: 0px;
+    padding: 10px;
+    color: #fff;
+    background-color: rgba(118, 118, 118, 0.5);
+    opacity: 0.9;
+}
+
+.kf-widget-slider-date {
+    font-size: 12px;
+}
+
+.em_event_slides {
+    margin-bottom: 20px;
+}
+
+#em_widget_container {
+    float: left;
+    width: 100%;
+}
+
+#em_widget_container ul.em_event_slides {
+    max-width: 600px;
+    margin: 20px auto;
+    float: none;
+}
+
+.sidebar .widget,
+.widget-widget_eventm_event_countdown {
+    overflow: visible !important;
+}
+
+[ng\:cloak],
+[ng-cloak],
+.ng-cloak {
+    display: none;
+}
+
+
+/*--- theme Fixes----*/
+
+#colorbox #cboxWrapper #cboxCurrent {
+    bottom: -30px;
+    font-size: 14px
+}
+
+#TB_window #TB_closeWindowButton {
+    top: 0px!important;
+}
+
+#em_calendar .fc-row .fc-content-skeleton .fc-day-number {
+    position: relative;
+    z-index: 9;
+}
+
+#em_calendar .fc-row .fc-content-skeleton .fc-day-top.fc-other-month {
+    opacity: 1;
+    color: rgba(160, 160, 160, 0.60);
+}
+
+.theme-twentytwentytwo .emagic,
+.theme-twentytwentythree .emagic{
+    display: table;
+}
+
+
+/*---- Event Types----*/
+
+.emagic .ep-event-type-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+}
+
+.emagic .ep-event-type-cards .ep-event-type-card {
+    flex: 0 0 28%;
+    margin-bottom: 35px;
+    margin-right: 4%;
+}
+
+.emagic .ep-event-type-cards .ep-event-type-card {
+    border-width: 1px;
+    -webkit-border-width: 1px;
+    -moz-border-width: 1px;
+    position: relative;
+}
+
+.emagic .ep-event-type-cards .ep-event-type-name,
+.emagic .ep-event-type-cards .ep-event-type-age,
+.emagic .ep-event-type-cards .ep-event-type-instructions {
+    padding: 5px 8px;
+}
+
+.emagic .ep-event-type-cards .ep-event-type-age .ep-event-type-title {
+    display: inline-block;
+    margin-right: 7px;
+}
+
+.emagic .ep-event-type-cards .ep-event-type-age {
+    font-size: 0.8em;
+}
+
+.emagic .ep-event-type-cards .ep-event-type-instructions {
+    font-size: 12px;
+    border-top: 1px solid rgba(150, 150, 150, 0.3);
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 90px;
+    margin-top: 10px;
+}
+
+.emagic .ep-event-type-card .ep-event-type-cover img {
+    width: 100%;
+    object-fit: cover;
+    height: 130px
+}
+
+.emagic .ep-event-type-cards .ep-event-type-count {
+    position: absolute;
+    top: -17px;
+    right: 4px;
+    width: 36px;
+    height: 36px;
+    background-color: #037acc;
+    color: #fff;
+    text-align: center;
+    border-radius: 50%;
+    line-height: 32px;
+}
+
+
+/*---- Single Event Types----*/
+
+.emagic .ep-event-type-single .ep-event-type-head {
+    border-bottom-width: 1px;
+    padding-bottom: 15px
+}
+
+.emagic .ep-event-type-single .ep-event-type-head .ep-event-type-name {
+    font-size: 1.3em
+}
+
+.emagic .ep-event-type-single .ep-event-type-instructions {
+    margin-bottom: 30px;
+}
+
+.emagic .ep-event-type-single .kf-upcoming-event-row .em_header_button {
+    line-height: 40px;
+}
+
+.emagic .ep-event-type-single .ep-event-type-head .ep-event-type-title {
+    display: inline-block;
+    margin-right: 7px;
+}
+
+.emagic .ep-event-type-cover img {
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+}
+
+.emagic .ep-event-type-events .kf-row-title {
+    bottom: 10px;
+    font-style: normal;
+    text-transform: capitalize;
+}
+
+.emagic .ep-event-type-events .em_events_count-wrap {
+    border-radius: 100%;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    display: inline-block;
+    margin-left: 8px;
+}
+
+.emagic .ep-event-type-events .em_events_count-wrap .em_events_count_no {
+    background-color: rgba(255, 255, 255, 0.95);
+    min-width: 30px;
+    min-height: 30px;
+    display: inline-block;
+    text-align: center;
+    padding: 3px;
+    line-height: 20px;
+}
+
+#em_event_search_form #ep-filter-bar-collapse-toggle {
+    display: none;
+}
+
+#em_event_search_form.ep-event-filter-bar #ep-filter-bar-collapse-toggle {
+    display: block;
+    width: 100%;
+}
+
+#em_event_search_form.ep-event-filter-bar {
+    position: relative;
+}
+
+#em_event_search_form.ep-event-filter-bar-open #ep-event-filterbar {
+    display: flex!important;
+}
+
+#em_event_search_form.ep-event-filter-bar #ep-event-filterbar {
+    display: none;
+}
+
+#em_event_search_form.ep-event-filter-bar #ep-filter-bar-collapse-toggle .ep-filters-toggle-text-show {
+    display: block;
+}
+
+#ep-filter-bar-collapse-toggle .ep-filters-toggle-text-show {
+    display: none
+}
+
+#ep-filter-bar-collapse-toggle .ep-filters-toggle-text-hide {
+    display: none;
+}
+
+#em_event_search_form.ep-event-filter-bar #ep-filter-bar-collapse-toggle.ep-filter-bar-open .ep-filters-toggle-text-show {
+    display: none;
+}
+
+#em_event_search_form.ep-event-filter-bar #ep-filter-bar-collapse-toggle.ep-filter-bar-open .ep-filters-toggle-text-hide {
+    display: block;
+}
+
+#em_event_search_form.ep-event-filter-bar #ep-event-filterbar {
+    position: absolute;
+    z-index: 21;
+    float: none;
+    left: auto;
+    padding-top: 5px;
+    overflow: hidden;
+    right: auto;
+    width: 100%;
+    background: #ffffff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, .2);
+}
+
+#em_event_search_form.ep-event-filter-bar #ep-event-filterbar .ep-event-filter-block {
+    width: 100%;
+    border-right: 0px;
+    border-bottom: 1px solid #f5f5f5;
+}
+
+.emagic #ep-tabmenu .em_profile_table {
+    margin-top: 0px;
+    margin: 0px;
+    padding: 0px;
+}
+
+.emagic #ep-tabmenu .em-tab-content-main .em-tab-content .ep-wishlist-message {
+    color: #856404;
+    background-color: #fff3cd;
+    position: relative;
+    padding: .75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    border-color: #ffeeba;
+}
+
+.emagic #ep-tabmenu .em-tab-content-main .em-tab-content {
+    margin-top: 0px;
+}
+
+
+
+.emagic #ep-tabmenu .em_profile_table tbody tr:nth-child(odd) {}
+
+.emagic #ep-tabmenu .em_profile_table tbody tr:nth-child(even) {
+    background-color: #fdfdfd;
+}
+
+
+.emagic #ep-tabmenu .em_profile_table thead{
+    background-color: #1a88d0;
+    color: #fff;
+}
+
+.emagic #ep-tabmenu .em_profile_table thead tr {   
+
+}
+
+/* --- Responsive --*/
+
+@media only screen and (max-width:1600px) {
+    .emagic .kf-event-buy-tickets button.em_header_button {
+        font-size: 12px;
+    }
+}
+
+@media only screen and (max-width:1500px) {
+    .emagic .em_card .em-cards-footer .em_eventpage_register .em_header_button {
+        font-size: 13px;
+    }
+}
+
+@media only screen and (max-width:979px) {
+    #ui-datepicker-div.ui-datepicker {
+        z-index: 9999 !important;
+    }
+    .emagic .em_venue_image .em_cover_image .kf-event-single-venue-sidebar {
+        max-height: 100%;
+    }
+}
+
+@media only screen and (max-width:760px) {
+    .ep-event-filter-bar #ep-event-filterbar {
+        display: none;
+    }
+    .emagic #em_calendar .em_event_detail_popup {
+        width: 100%;
+        min-width: 200px;
+        max-width: 250px;
+    }
+    .emagic .em_performer_profile .kf-single-performer img {
+        width: 170px;
+        height: 170px;
+    }
+    .emagic .kf_config_pop_wrap .kf-popup-title {
+        width: 100%;
+    }
+    .emagic .ep-event-type-cards .ep-event-type-card {
+        flex: 0 0 45%;
+        margin-right: 4%;
+    }
+    .emNarrow .em-tab-content-main .tab {
+        overflow: auto;
+    }
+    .emagic .em_venue_image .em_cover_image .kf-event-single-venue-sidebar {
+        max-height: 100%;
+    }
+    .emagic .kf-popup-title,
+    .emagic .kf-popup-sub-title {
+        width: 100%;
+        float: left;
+    }
+    #kf-reconfirm-popup .kf-reconfirm-popup-content {
+        width: 80%;
+        left: 11%;
+    }
+    .emagic .kf-checkout-footer .kf-final-payment {
+        width: 100%;
+    }
+
+    .emagic #kf-seat-table-parent .kf-standing-order.ep-booking-row .ep-booking-event-button  {
+        width: 100%;
+        margin-top: 14px;
+    }
+
+}
+
+@media only screen and (max-width:768px) {
+    .emagic .em_event_views .ep-event-view-sort {
+        margin: 2px 2px;
+    }
+    .emagic .kf-event-buy-tickets .kf_ticket_price .kf-tickets-button {
+        width: 100%;
+    }
+    .emagic .em_performer_profile .kf-single-performer img {
+        width: 100px;
+        height: 100px;
+    }
+    .emagic .em_venue_image .em_cover_image .kf-event-single-venue-sidebar {
+        width: 70%;
+        float: right;
+        height: auto;
+        max-height: 80%;
+        position: absolute;
+        bottom: 18px;
+        right: 2%;
+    }
+    .emagic .kf-single-venue-post-title {
+        width: 100%;
+        padding: 5px 0px;
+    }
+    .emagic .kf-venue-address {
+        width: 100%;
+    }
+    .emagic.emagic_archive .ep-venue-description {
+        margin-top: 0px;
+    }
+    .emagic .kf-upcoming-event-row .kf-upcoming-event-thumb {
+        width: 100%;
+        text-align: center
+    }
+    .emagic .kf-upcoming-event-row .kf-upcoming-event-title {
+        width: 100%;
+        text-align: center;
+    }
+    .emagic .kf-upcoming-event-row .kf-upcoming-event-title .kf-upcoming-event-post-date {
+        width: 100%;
+    }
+    .emagic .kf-upcoming-event-row .kf-upcoming-event-title .kf-upcoming-event-post-date .em_event_start {
+        width: 100%;
+    }
+    .emagic .kf-upcoming-event-row .kf-upcoming-event-booking {
+        width: 100%;
+        text-align: center;
+        margin-top: 0px;
+    }
+    
+    
+    .emagic  #ep-upcoming-events .em_performer_event_mini_list .kf-upcoming-event-row {
+        border-bottom: 1px solid rgb(242 242 242 / 80%);
+    } 
+    
+    .emagic .event_list .kf-upcoming-event-row {
+        border-bottom: 1px solid rgba(150, 150, 150, 0.3);
+    }
+    .emagic .event_list .kf-upcoming-event-row:last-child {
+        border: 0px;
+    }
+    .emagic .kf-upcoming-event-row .em_header_button {
+        float: none;
+    }
+    .emagic .ep-event-type-cards .ep-event-type-card {
+        flex: 0 0 100%;
+        margin-right: 0px;
+    }
+    .emNarrow .em-tab-content-main .tab {
+        overflow: auto;
+    }
+    .emagic #kf-seat-table-parent .kf-standing-order input {
+        width: 100%;
+    }
+}
+
+/*--- Event Submit Form -----*/
+
+#ui-datepicker-div dd[class*="hide"], #ui-datepicker-div dt[class*="hide"] {
+    display: none;
+}
+#ui-datepicker-div {
+    z-index: 99999 !important;
+} 
+#ui-datepicker-div dl {
+    display: block;
+    width: 100%;
+    float: left;
+}
+#ui-datepicker-div dd,
+#ui-datepicker-div dt {
+    display: inline-block;
+    width: 40%;
+}
+
+.ep-event-submit-form .ep_event_form form { 
+    padding: 20px;
+    float: left;
+    width: 100%;
+}
+
+.ep-event-submit-form .ep_event_form form .em_input_row {margin: 10px 0px 10px 0px;}
+
+.ep-event-submit-form .ep_event_form form .em_input_row input.em_input_field,
+.ep-event-submit-form .ep_event_form form .em_input_row select{
+    width: 100%;
+}
+
+.ep-event-submit-form .ep_event_form form .em_input_row .emfield_error {   
+    color: #ff0000;
+}
+
+.ep-event-submit-form .form_errors ul { 
+    margin: 0px;
+    padding: 0px 20px;
+}
+
+.ep-event-submit-form .form_errors ul li {    
+    list-style: none;
+    color: #a94442;
+    background-color: #f2dede;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.ep-event-submit-form .ep-success-message {  
+    color: #3c763d;
+    background-color: #dff0d8;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #d6e9c6;
+    border-radius: 4px;
+}
+
+.em_progress_screen.ep-progress-loader {   
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 999999;
+    background-image: none;
+}
+
+.em_progress_screen.ep-progress-loader:after {
+    content: "";
+    border: 8px solid #d4d3d3;
+    border-top: 8px solid #3498db;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    animation: ep-loader-spin 2s linear infinite;
+    position: absolute;
+    top: 40%;
+    left: 45%;
+    z-index: 9999;
+    border-top-color: inherit;
+}
+
+#ui-datepicker-div.ep-datepicker .ui-datepicker-header {   
+    background-image: none;
+    background-color: #767676;
+    border: 0px;
+}
+
+
+#ui-datepicker-div.ep-datepicker .ui-datepicker-header select.ui-datepicker-year {
+    color: rgb(173, 172, 172);
+    margin: 4px;
+    width: 43%;
+    height: 20px;
+    border: 0px;
+    font-size: 12px;
+    display: inline-block;
+    padding: 2px 5px;
+}
+
+#ui-datepicker-div.ep-datepicker .ui-datepicker-calendar tbody tr td a.ui-state-default {   
+    background-color: transparent;
+    background-image: none;
+    border: 0px;  
+    text-align: center;
+    border: 1px solid transparent;
+}
+
+#ui-datepicker-div.ep-datepicker .ui-datepicker-calendar tbody tr td a.ui-state-default.ui-state-highlight {
+    background-color: #767676;
+    color: #fff;
+}
+
+#ui-datepicker-div.ep-datepicker .ui-datepicker-calendar tbody tr td a.ui-state-default.ui-state-active {
+    border: 1px solid #767676;
+}
+
+#ui-datepicker-div.ep-datepicker .ui-timepicker-div.ui-timepicker-oneLine { 
+    width: 100%; 
+    float: left;
+    margin-top: 22px;
+}
+
+#ui-datepicker-div.ep-datepicker .ui-timepicker-div.ui-timepicker-oneLine .ui_tpicker_time input.ui_tpicker_time_input {width: 100%;}
+
+#ui-datepicker-div.ep-datepicker .ui-timepicker-div.ui-timepicker-oneLine dt {   
+    font-size: 15px;
+    font-weight: normal;
+}
+
+#ui-datepicker-div.ep-datepicker .ui-timepicker-div.ui-timepicker-oneLine dd select {   
+    background-image: none;
+    height: 30px;
+    margin: 5px 0px;
+}
+
+#ui-datepicker-div.ep-datepicker .ui-datepicker-buttonpane button {    
+    background-image: none;
+    font-weight: normal;
+    font-size: 14px;
+    background-color: #767676;
+    color: #ffffff;
+}
+
+#ui-datepicker-div.ep-datepicker .ui-datepicker-header .ui-datepicker-title .ui-datepicker-month {
+    color: #fff;
+}
+
+
+/*--- Login Form---- */
+
+
+.ep-login-form form#loginform {
+    margin-top: 20px;
+}
+
+
+.ep-login-form form#loginform input[type="text"],
+.ep-login-form form#loginform input[type="password"]{
+    width:100%;
+}
+
+
+
+
+/*--- Organizer block on Single Event Page -----*/
+
+.emagic .ep-organizer-details .kf-event-attr-value {
+    padding-top: 8px;
+}
+
+.emagic .ep-organizer-details .ep-organizer-tel-label, 
+.emagic .ep-organizer-details .ep-organizer-email-label,
+.emagic .ep-organizer-details .ep-organizer-website-label{
+    font-weight: bold;
+}
+
+
+/*--- Attendee Info for boooking page -----*/
+
+.emagic .ep-attendee-info-wrap {
+    margin-top: 20px;
+    width:100%;
+}
+
+.emagic .ep-attendee-info-wrap .ep-attendee-heading-text {
+    background: #e8e8e8;
+    border-top: 1px solid #e4e4e4;
+    border-bottom: 1px solid #e4e4e4;
+    padding: 15px 20px;
+    margin: 0px;
+}
+.emagic .ep-attendee-info-wrap ul {
+    margin: 0px 0px;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    border: 1px solid #e4e4e4;
+    padding: 10px 10px;
+}
+
+.emagic .ep-attendee-info-wrap ul .ep-attendee-sub-heading{
+    padding: 4px 15px;
+    font-size: 13px;
+}
+
+.emagic .ep-attendee-info-wrap ul li {
+    list-style: decimal;
+    width: calc(33.33% - 25px);
+    float: left;
+    margin: 20px;
+}
+.emagic .ep-attendee-info-wrap ul input {}
+
+.emagic #booking_summary .ep-attendees-info {}
+
+.emagic #booking_summary .ep-attendees-info .ep-attendees-heading-text {
+    background: #f1f1f1;
+    border-top: 1px solid #e4e4e4;
+    border-bottom: 1px solid #e4e4e4;
+    padding: 15px 20px;
+    margin: 0px;
+}
+
+.emagic #booking_summary .ep-attendees-info .ep-attendees-list {    
+    padding: 20px 10px;
+    background: #f5f5f5;
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.emagic #booking_summary .ep-attendees-info .ep-attendees-list ol.ep-attendee-display {   
+    margin: 0px 0px 0px 15px;
+    padding: 0px;
+    width: 100%;
+    float: left;
+    list-style: none;
+    counter-reset: my-awesome-counter;
+}
+
+.emagic #booking_summary .ep-attendees-info .ep-attendees-list ol.ep-attendee-display li {
+    counter-increment: my-awesome-counter;
+    padding: 20px;
+    width: calc(32% - 20px);
+    float: left;
+    margin: 10px;
+    background-color: #fff;
+    border-left: 4px solid #a2a2a2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.emagic #booking_summary .ep-attendees-info .ep-attendees-list ol.ep-attendee-display li::before {
+    content: counter(my-awesome-counter) ". ";
+
+}
+
+
+
+/*--- Attendee Ext for Event Page -----*/
+
+.emagic #em_primary .ep-attendees-wrap .kf-event-attendees {    
+    padding: 20px 10px;
+    background-color: rgba(255, 255, 255, 0.95);
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+}
+.emagic #em_primary .ep-attendees-wrap .kf-event-attendees ol{
+    padding: 0px;
+    width: 100%;
+    float: left;
+    list-style: none;
+    counter-reset: ep-attendees-counter;
+    margin: 0px;
+}
+.emagic #em_primary .ep-attendees-wrap .kf-event-attendees li {    
+    padding: 20px 10px 20px 30px;
+    counter-increment: ep-attendees-counter;
+    width: calc(32% - 10px);
+    float: left;
+    margin: 10px;
+    background-color: #fafafa;
+    border-left: 4px solid #a2a2a2;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    border: 2px solid #e5e5e5 !important;
+    border-radius: 4px;
+    position: relative;
+    display: none;
+
+}
+.emagic #em_primary .ep-attendees-wrap .kf-event-attendees li span { 
+    width:0px; 
+    height: 0px;
+}
+
+.emagic #em_primary .ep-attendees-wrap .kf-event-attendees li span::before{  
+    content: counter(ep-attendees-counter) ". ";
+    background-color:inherit;
+    position: absolute;
+    left: -15px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    text-align: center;
+    color: #fff;
+}
+
+.emagic #em_primary .ep-attendees-wrap .ep-attendees-title {
+    padding: 15px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+.emagic #em_primary .ep-attendees-container  {   
+    margin: 30px 0px;
+}
+
+.emagic #em_primary .ep-loadMore-wrap {    
+    text-align: center;
+    margin: 20px 0px;
+}
+
+.emagic #em_primary .ep-loadMore-wrap a#ep-loadMore.ep-noattendees { 
+    display: none;
+}
+
+ul.ep-attendee-input.ng-scope.pLi > li {
+    list-style-type: none;
+}
+
+.perror {
+    color: red;
+}
+
+
+
+/*---- Submit event Login-----*/
+
+.emagic .ep-login-form form#loginform {    
+    padding: 20px;
+}
+
+.emagic .ep-login-form .ep-login-header {
+    margin: 0px;
+    padding: 20px;
+}
+
+.emagic .em_input_row .emnote.ep-map-note  {
+    font-size: 12px;
+    margin-top: 9px;
+    text-align: left;
+}
+
+.emagic .ep-submit-event-fields-box.ep-submit-event-details { 
+    border: 0px;
+    padding: 0px;
+    margin-top: 0px;
+    padding-top: 0px;
+    box-shadow: none;
+}
+
+.emagic .ep-submit-event-fields-box {
+
+    border: 1px solid rgba(214, 214, 214, 0.43);
+    padding: 20px;
+    margin: 20px 0px; 
+    box-shadow: 0 2px 6px -3px #d8d8d8;
+}
+
+.emagic .ep-submit-event-fields-box .ep-submit-event-box-label {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0;
+    text-transform: capitalize;
+    padding: 15px 20px;
+    background: rgb(243 243 243);
+    margin: -20px;
+    margin-bottom: 30px;
+    box-shadow: 0px 1px 1px 0px #e6e6e6;
+}
+
+.emagic .ep-submit-event-fields-box .ep-fes-featured-image-section {
+    float: left;
+    width: auto;
+}
+
+.emagic .ep-submit-event-fields-box .ep-fes-featured-image-section .ep-fes-remove-image { 
+    float: right;
+    margin-left: -12px;
+    top: -9px;
+    vertical-align: top;
+    padding: 0px;
+    line-height: 18px;
+    cursor: pointer;
+    border: 1px solid #dedede;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    font-size: 12px;
+    color: #333333;
+    position: relative;
+    background: #f3f3f3;
+    box-shadow: 0px 1px 1px #f9f9f9;
+}
+
+.ep-event-submit-form .ep_event_form form .em_input_row input#em-pac-input{
+    background-color: #ffff;
+    width: 70%;
+    font-size: 14px;
+    margin-top: 12px;
+}
+
+.emagic .ep-submit-event-fields-box .ep-fes-featured-image-section img {
+    /*        object-fit: contain;*/
+}
+
+.emagic .ep-submit-event-fields-box .em_input_form_field {
+    margin-bottom: 12px;
+}
+
+.emagic .ep-submit-event-fields-box .em_input_form_field ul.emradio {   
+    margin-top: 12px;
+}
+
+.emagic .ep-submit-event-fields-box .em_input_form_field ul.emradio li {
+    list-style: none;
+}
+
+.emagic .ep-submit-event-fields-box .em_input_form_field input[type="checkbox"]{
+    margin-left: 6px;
+}
+
+.emagic .ep-submit-event-fields-box .em_input_form_field .ep_custom_age-slider #slider{  
+    border: 1px solid #c5c5c5;
+    max-width: 200px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.emagic .ep-submit-event-fields-box .em_input_form_field .ep_custom_age-slider #slider .ui-slider-handle  {
+    border: 1px solid #d3d3d3 !important;
+    background-color: rgb(245 245 245) !important;
+}
+
+.emagic textarea.kf-note {
+    width: 100%;
+    min-height: 100px;
+    background-color: lightyellow;
+}
+
+.emagic .em-add-hide-performer-button,
+.emagic .em-add-hide-organizer-button{
+    float: right;
+}
+
+/*------- Save Event Ext----*/
+
+.emagic .em_event_detail_popup .ep-event-detail-wrap .ep-booking-footer {
+    border-top: 1px solid rgba(150, 150, 150, 0.3);
+    float: left;
+    width: 100%;
+    margin-top: 18px;
+    padding-top: 10px;
+    position: relative;
+}
+
+.emagic .em_event_detail_popup .ep-event-detail-wrap .ep-booking-footer .ep-book-now {
+    border: 0px;
+    margin-top: 0px;
+}
+
+/* User profile booking detail popup */
+
+.em_modal_wrapper#em_booking_details_modal table.em_modal_table {
+    border-collapse: separate;
+    border-spacing: 0;
+    border-width: 1px 0 0 1px;
+    margin: 0 0 1.5em;
+    width: 100%;
+}
+
+.em_modal_wrapper#em_booking_details_modal table.em_modal_table, 
+.em_modal_wrapper#em_booking_details_modal table.em_modal_table td, 
+.em_modal_wrapper#em_booking_details_modal table.em_modal_table th {
+    border: 1px solid rgba(0,0,0,.1);
+}
+
+.em_modal_wrapper#em_booking_details_modal table.em_modal_table td {
+    padding: 8px;
+    border-bottom: 1px dotted silver;
+}
+
+.em_modal_wrapper#em_booking_details_modal table.em_modal_table td, 
+.em_modal_wrapper#em_booking_details_modal table.em_modal_table th {
+    padding: 8px;
+    text-align: left;
+    border-width: 0 1px 1px 0;
+}
+
+
+/*---- Automatic Discount----*/
+
+.em-event-old-price { 
+    text-decoration: line-through;
+}
+
+/* Card View Pagination */
+
+nav.prev-next-posts{
+    float: left;
+    width: 100%;
+    text-align: left;
+}
+
+nav.prev-next-posts .next-posts-link { 
+    display: inline-block;
+    margin: 0px 8px;
+}
+
+/* Masonry Event Card View */
+
+.ep-masonry-item-wrap {
+    width: calc(33.33% - 30px);
+    padding: 0;
+    margin: 0 1% 20px 1%;
+    min-height: 10px;
+    position: relative;
+    float: left;
+    border: 1px solid #000;
+    width: 22%;
+}
+.ep-events-masonry-wrap {
+    display: block;
+    width: auto;
+}
+
+.ep-masonry-item-wrap {
+    background: #ffffff;
+    height: auto;
+    border: 1px solid rgb(204 204 204 / 30%) !important;
+    box-shadow: 0 6px 12px -4px rgb(0 0 0 / 5%);
+}
+
+.ep-masonry-item-wrap .ep-masonry-event-address-wrap {    
+    border-top: 1px solid rgb(217 217 217);
+    border-bottom: 1px solid rgb(217 217 217);
+    border-radius: 0px;
+    font-size: 12px;
+    margin: 16px 0px 0px 0px;
+    width: 100%;
+    padding: 10px 0px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    color: #767676;
+}
+
+.ep-masonry-item-wrap .ep-masonry-event-address-wrap span{
+    width: 20px;
+}
+.ep-masonry-item-wrap .ep-masonry-event-address-wrap .ep-masonry-event-address{
+    width: calc(100% - 20px);
+    float: left;
+    padding: 0px 0px 0px 8px;
+
+}
+
+.ep-masonry-item-wrap .ep-masonry-event-description {
+    color: #767676;
+    padding: 16px 0px 0px 0px;
+    text-align: left;
+    font-size: 12px;
+    line-height: 1.54;
+    /* height: 108px;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;*/
+    max-height: 160px;
+    display: -webkit-box;
+    -webkit-line-clamp: 8;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.ep-event-attenders-wrap .ep-event-attenders{
+    font-weight: 600;
+    padding-right: 3px;
+}
+
+.ep-event-attenders-wrap span.material-icons {
+    padding-right: 6px;
+}
+
+.ep-masonry-booking-row.ep-event-attenders-main{
+    border-bottom: 1px solid rgb(217 217 217);
+    padding: 10px 0px;
+    margin-top: 0px;
+}
+
+.ep-masonry-item-wrap .ep-masonry-event-description p {padding: 0px; margin: 0px;}
+
+.ep-masonry-event-date-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    align-content: stretch;
+    width: 100%;
+
+}
+.ep-masonry-booking-row {
+    font-size: 14px;
+    margin: 16px 0px 0px 0px;
+}
+
+.ep-event-attenders-wrap {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+    font-size: 12px;
+    color: #767676;
+}
+
+
+
+.ep-masonry-event-date-row span {
+    width: 20px;
+    margin-right: 8px;
+}
+
+.ep-masonry-event-date {
+    width: calc(100% - 35px);
+    color: #767676;
+    font-size: 13px;
+    padding-left: 5px;
+}
+
+.emagic .em-masonry-footer {
+    border-top-width: 1px;
+    -webkit-border-top-width: 1px;
+    -moz-border-top-width: 1px;
+    margin-top: 16px;
+}
+
+.emagic .em-masonry-footer button.kf-tickets {
+    float: right;
+    background-color: transparent;
+    text-transform: uppercase;
+    border: 0px;
+    padding: 12px 12px;
+    margin: 0px;
+    line-height: 20px;
+    font-weight: 400;
+    cursor: pointer;
+    text-decoration: none;
+    float: right;
+}
+
+.em-masonry-description-wrap {
+    padding: 0px 15px
+}
+
+.em-masonry-description-wrap .em_event_title a {
+    color: rgb(0, 0, 0);
+}
+
+.em-masonry-description-wrap .ep-add-to-wishlist { 
+    float: right;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgb(255 255 255);
+    border-radius: 50%;
+    height: 25px;
+    width: 25px;
+    text-align: center;
+    line-height: 28px;
+}
+
+.em-masonry-description-wrap .ep-wishlist-message {
+    top: 40px;
+    right: 10px;
+    background-color: rgb(255 255 255);
+    font-size: 12px;
+    position: absolute;
+    padding: 2px 6px;
+    border-radius: 6px;
+    color: #333;
+    display: none;
+}
+
+.emagic .em-masonry-footer .em_eventpage_register .em_header_button {
+    background-color: transparent;
+    text-transform: uppercase;
+    border: 0px;
+    padding: 12px 12px;
+    margin: 0px;
+    line-height: 20px;
+    font-weight: 400;
+    cursor: pointer;
+    text-decoration: none;
+    float: right;
+}
+.emagic .ep-masonry-item-wrap.em_card4 .em-masonry-footer .em_event_price,
+.emagic .ep-masonry-item-wrap.em_card4 .em-masonry-footer .em_event_special_price {
+    font-size: 12px;
+    /*float: left;*/
+    padding: 12px 8px;
+    line-height: 20px;
+}
+
+.emagic .ep-masonry-item-wrap.em_card5 .em-masonry-footer .em_event_price,
+.emagic .ep-masonry-item-wrap.em_card5 .em-masonry-footer .em_event_special_price {
+    font-size: 12px;
+    float: left;
+    padding: 12px 8px;
+    line-height: 20px;
+}
+
+.emagic .ep-masonry-item-wrap.em_card2 .em-masonry-footer .em_event_price,
+.emagic .ep-masonry-item-wrap.em_card2 .em-masonry-footer .em_event_special_price {
+    font-size: 14px;
+    float: left;
+    padding: 12px 8px;
+    line-height: 20px;
+}
+
+.emagic .ep-masonry-item-wrap.em_card2 .em-masonry-footer .em_eventpage_register .em_header_button {
+    font-size: 14px;
+}
+
+.emagic .ep-masonry-item-wrap.em_card4 .em-masonry-footer .em_eventpage_register .em_header_button {
+    font-size: 12px;
+}
+
+.ep-masonry-load-more-wrap,
+.ep-view-load-more-wrap {
+    text-align: center;
+    display: block;
+    width: 100%;
+    padding-top: 20px;
+    position: relative;
+    float: left;
+}
+
+.ep-masonry-load-more-wrap .ep-load-more-button,
+.ep-view-load-more-wrap .ep-loading-view-btn{
+    box-shadow: none;
+    transition: all .21s ease;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border: 2px solid #e8e8e8;
+    color: #fff;
+    border-radius: 50px;
+    padding: 0 28px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    line-height: 42px;
+    height: 42px;
+    display: inline-block;
+}
+
+.ep-masonry-load-more-wrap .ep-load-more-button:hover,
+.ep-view-load-more-wrap .ep-loading-view-btn:hover{
+    text-decoration: underline;
+}
+
+.emagic .ep-masonry-item-wrap .em_event_cover_masonry img {
+    width: 100%;
+    height: auto;
+    max-height: 300px;
+    object-fit: cover;
+}
+
+/* Masonry Event Card View */
+/* view dropdown */
+.ep-sort-select-wrapper {
+    position: relative;
+    user-select: none;
+    width: 100%;
+}
+.ep-sort-select {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    border-width: 0 2px 0 2px;
+    border-style: solid;
+    border-color: #394a6d;
+}
+.ep-sort-select__trigger {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 22px;
+    font-weight: 300;
+    color: #3b3b3b;
+    height: 28px;
+    background: #ffffff;
+    cursor: pointer;
+    border-width: 2px 0 2px 0;
+    border-style: solid;
+    border-color: #394a6d;
+}
+.ep-sort-select__trigger span{padding-right:15px;}
+.ep-sort-options {
+    position: absolute;
+    display: block;
+    top: 100%;
+    left: 0;
+    right: 0;
+    border: 2px solid #394a6d;
+    border-top: 0;
+    background: #fff;
+    transition: all 0.5s;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    z-index: 2;
+}
+.ep-sort-select.open .ep-sort-options {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: all;
+    border: 1px solid;
+}
+
+.ep-sort-option.selected {
+    color: #000;
+}
+.ep-sorting-arrow {
+    position: relative;
+    height: 12px;
+    width: 12px;
+}
+.ep-sorting-arrow::before, .ep-sorting-arrow::after {
+    content: "";
+    position: absolute;
+    bottom: 0px;
+    width: 0.15rem;
+    height: 85%;
+    transition: all 0.5s;
+}
+.ep-sorting-arrow::before {
+    left: -3px;
+    transform: rotate(45deg);
+    background-color: #394a6d;
+}
+
+.ep-sorting-arrow::after {
+    left: 3px;
+    transform: rotate(-45deg);
+    background-color: #394a6d;
+}
+.open .ep-sorting-arrow::before {
+    left: -3px;
+    transform: rotate(-45deg);
+}
+.open .ep-sorting-arrow::after {
+    left: 4px;
+    transform: rotate(45deg);
+}
+
+/* Slider View */
+.em_slider_img {
+    position: relative;
+    width: 50%;
+    height: 100%;
+    float: right;
+    margin: 0;
+    overflow: hidden;
+}
+.em_slider_content {
+    width: 50%;
+    float: left;
+    height: 100%;
+
+}
+.em_slider_view .centered-btns1_nav {
+    position: absolute;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    top: 50%;
+    left: 0;
+    z-index: 99;
+    opacity: 0.7;
+    text-indent: -9999px;
+    overflow: hidden;
+    text-decoration: none;
+    height: 61px;
+    width: 38px;
+    background: transparent url(images/themes.gif) no-repeat left top !important;
+    margin-top: -45px;
+}
+.em_slider_view .centered-btns1_nav.next {
+    left: auto;
+    background-position: right top !important;
+    right: 0;
+}
+
+/*--- Views Dropdown All Events---*/
+
+.ep-sort-select.open ul.ep-sort-options {
+    border: 1px solid rgba(221,221,221,.85);
+    border-radius: 3px;
+    -webkit-box-shadow: 0 5px 10px rgb(0 0 0 / 20%);
+    -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+    box-shadow: 0 1px 1px rgb(0 0 0 / 20%);
+    margin: 0px;
+    padding: 0px;
+    width: 160px;
+}
+
+.ep-sort-select.open ul.ep-sort-options li.ep-sort-option {
+    border-bottom: 1px solid rgba(221,221,221,.85) !important;
+    font-size: 14px;
+}
+
+
+.ep-sort-select.open ul.ep-sort-options li.ep-sort-option::before{
+    display: none;
+}
+
+.ep-sort-select.open ul.ep-sort-options li.ep-sort-option :before,
+.ep-sort-select.open ul.ep-sort-options li.ep-sort-option :after{ 
+    display: none
+}
+
+.ep-sort-select.open ul.ep-sort-options li.ep-sort-option {
+    position: relative;
+    display: block;
+    padding: 8px 20px;
+    font-size: 14px;
+    font-weight: 300;
+    color: #3b3b3b;
+    line-height: 34px;
+    cursor: pointer;
+    transition: all 0.1s;
+    list-style: none;
+}
+
+.ep-sort-select.open ul.ep-sort-options li.ep-sort-option:last-child{
+    border: 0px !important;
+}
+.ep-sort-select.open ul.ep-sort-options li.ep-sort-option:hover {
+    cursor: pointer;
+    background-color: #f9f9f9;
+    text-decoration: underline;
+}
+
+.ep-sort-select.open ul.ep-sort-options li.ep-sort-option span {
+    line-height: 46px;
+}
+
+.ep-sort-select.open ul.ep-sort-options li.ep-sort-option span i {
+    font-size: 20px;
+    padding-right: 5px;
+}
+
+
+/*--- End Views Dropdown All Events---*/
+
+/*--- Calendar Year/Month Selector ---*/
+
+.emagic #em_calendar .fc-toolbar.fc-header-toolbar .fc-right {
+    position: absolute;
+    top: 7px;
+    right: 5px;
+    display: inline-flex;
+}
+
+.emagic #em_calendar .fc-toolbar.fc-header-toolbar {
+    display: block;
+}
+
+.emagic #em_calendar .fc-toolbar.fc-header-toolbar .fc-right select.select_year.form-control {
+    padding: 0px 5px;
+    outline: 0px;
+    margin: 0px;
+    width: auto;
+    max-width: 105px;
+    background: rgb(255 255 255 / 92%);
+    color: #2f2f2f;
+    font-size: 14px;
+    border: 1px solid rgb(238 238 238 / 68%);
+    border-radius: 2px;
+    box-shadow: 0 2px 0 0 rgb(0 0 0 / 18%);
+    transition: all .33s ease;
+    height: 32px;
+    margin-right: 3px;
+    min-width: auto;
+    font-family: sans-serif;
+}
+
+.emagic #em_calendar .fc-toolbar.fc-header-toolbar .fc-right select.select_month.form-control {
+    padding: 0px 5px;
+    outline: 0px;
+    margin: 0px;
+    width: auto;
+    max-width: 105px;
+    background: rgb(255 255 255 / 92%);
+    color: #2f2f2f;
+    font-size: 14px;
+    transition: all .33s ease;
+    height: 32px;
+    border: 1px solid rgb(238 238 238 / 68%);
+    border-radius: 2px;
+    box-shadow: 0 2px 0 0 rgb(0 0 0 / 18%);
+    min-width: auto;
+    font-family: sans-serif;
+}
+
+
+.emagic .ep-calendar-selector #em_calendar .fc-toolbar.fc-header-toolbar .fc-right {
+    margin: 12px 0px;
+    background: #fafafa;
+    overflow: hidden;
+    box-shadow: 0 3px 2px 0 rgb(0 0 0 / 1%);
+    width: 100%;
+    position: relative;
+    right: 0px;
+    top: 0px;
+    padding: 10px 15px;
+    border: 1px solid #efefef;
+}
+
+.emagic .ep-calendar-selector #em_calendar .fc-toolbar.fc-header-toolbar .fc-right select.select_year.form-control,
+.emagic .ep-calendar-selector #em_calendar .fc-toolbar.fc-header-toolbar .fc-right select.select_month.form-control{
+    background: #fff;
+    font-size: 13px;
+    color: #777;
+    border: 1px solid #efefef;
+    margin: 0 0 0 -1px;
+    box-shadow: none;
+    float: none;
+    margin: 0px 4px;
+    width: 46%;
+    max-width: 100%;
+}
+
+.emagic .ep-event-filters .ep-event-filter-block .ep-event-venue-filter .ep-event-search-venue select {
+    display: block !important;
+
+}
+
+.emagic .ep-event-filters .ep-event-filter-block .ep-event-venue-filter .ep-event-search-venue .chosen-container-single {
+    display: none;
+}
+
+
+.emagic #em_calendar .fc-toolbar.fc-header-toolbar .fc-right select.select_year.form-control,
+.emagic #em_calendar .fc-toolbar.fc-header-toolbar .fc-right select.select_month.form-control{
+    display: block !important;
+    -webkit-appearance: auto;
+    -moz-appearance: auto;
+    appearance: auto
+}
+
+.emagic #em_calendar .fc-toolbar.fc-header-toolbar .fc-right .chosen-container-single {
+    display: none;
+}
+
+/*--- End Calendar Year/Month Selector ---*/
+
+
+/*---- Slider View-----*/
+
+.emagic .ep-events-slider-wrap {
+    width: 100%;
+    position: relative;
+    text-align: center;
+    z-index: 0;
+    margin: 20px 0px;
+}
+
+.emagic .ep-events-slider-wrap ul.em_event_slides {
+    margin: 0px auto !important;
+    padding: 0px !important;
+    width: 86%;
+    max-width: 100%;
+    display: inline-block;
+    box-shadow: 0 5px 35px 0 rgb(0 0 0 / 13%);
+    float: none;
+}
+.emagic .ep-events-slider-wrap ul.em_event_slides li {
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+.emagic .ep-events-slider-wrap ul.em_event_slides li .em_slider {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: stretch;
+    align-content: center;
+}
+
+.emagic .ep-events-slider-wrap .em_event_slides img {
+    display: block;
+    float: left;
+    width: 100%;
+    border: 0;
+    height: 370px;
+    object-fit: cover;
+}
+
+
+.emagic .ep-events-slider-wrap .ep-slider-event-description{
+    max-height: 135px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    font-size: 12px;
+    margin: 10px 0px;
+}
+
+.emagic .ep-events-slider-wrap .em-slider-footer .em_event_price {
+    padding: 0px 12px;
+}
+
+.emagic .ep-events-slider-wrap .em_rslides_nav.centered-btns1_nav.next {
+    display: none;
+}
+
+.emagic .ep-events-slider-wrap .em_slider_content {
+    height: auto;
+    text-align: left;
+    padding: 20px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.emagic .ep-events-slider-wrap .em-slider-footer {
+    position: absolute;
+    border-top-width: 1px;
+    padding: 10px 0px;
+    bottom: 0px;
+    left: 0px;
+}
+
+.emagic .ep-events-slider-wrap .ep-slider-event-date {
+    font-weight: bold;
+    font-size: 88%;
+    padding-right: 5px;
+}
+
+.emagic .ep-events-slider-wrap .em_slider_content .ep-slider-event-date-row .ep-slider-event-date {
+    font-size: 14px;
+}
+
+.emagic .ep-events-slider-wrap .em-slider-footer .em_eventpage_register {
+    border: 0px;
+    padding: 0px 12px;
+    margin: 0px;
+    line-height: 20px;
+    font-weight: 400;
+    text-align: right;
+}
+
+.emagic .ep-events-slider-wrap  .em_event_title {
+    margin-top: 0px;
+}
+
+.emagic .ep-events-slider-wrap .ep-slider-event-address-wrap {
+    border: 1px solid rgb(217 217 217);
+    border-radius: 85px;
+    font-size: 10px;
+    margin: 0px 0px 10px 0px;
+    width: 100%;
+    padding: 4px 20px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+}
+
+.emagic .ep-events-slider-wrap .ep-slider-event-address-wrap span{
+    width: 20px;
+    margin: 0px 5px;
+}
+
+.emagic .ep-events-slider-wrap .em-slider-footer .kf-tickets-button .em_eventpage_register button.kf-tickets {
+    padding: 0px 5px;
+    background-color: transparent !important;
+    border: 0px;
+}
+
+.emagic .ep-events-slider-wrap .em_event_title {
+    max-height: 135px;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin: 10px 0px;
+    width: 100%;
+}
+
+/*---Theme Fixes----*/
+
+body.is-light-theme .emagic{
+    display: block;
+}
+
+body.is-light-theme .emagic #em_event_search_form.ep-event-filter-bar {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+body.is-light-theme .emagic .ep-events-slider-wrap .em-slider-footer .kf-tickets-button .em_eventpage_register button.kf-tickets {
+    font-size: 14px;
+}
+
+body.is-light-theme .emagic .ep-events-slider-wrap .ep-slider-event-description{
+
+}
+
+body.is-light-theme .emagic .ep-events-slider-wrap .em_slider_content {
+    font-size: 12px;
+}
+
+.emagic .ep-events-slider-wrap ul.em_event_slides li::before{
+    display: none;
+}
+
+.emagic .ep-events-slider-wrap .em_event_slides img {
+    padding: 0px;
+    border-radius: 0px;
+}
+
+body.is-light-theme .emagic .em_event_views {
+    position: relative;
+    z-index: 999999;
+}
+
+html.elevate-wp-theme .emagic img.kf-google-calendar-add {
+    height: 20px !important;
+}
+
+/**** cbf start ****/
+
+
+.emagic .ep-attendee-info-wrap ul.em-custom-booking-fields-input {
+    margin: -1px 0px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    align-content: space-around;
+    max-width: 100%;
+}
+
+
+.emagic .ep-attendee-info-wrap ul.em-custom-booking-fields-input li{
+    list-style: none;
+    width: 45%;
+    margin: 15px 10px;
+}
+
+.emagic .ep-attendee-info-wrap ul.em-custom-booking-fields-input li label{
+    width: 100%;
+}
+
+.emagic .ep-attendee-info-wrap ul.em-custom-booking-fields-input li input{
+    margin-bottom: 0px;
+    width: 100%;
+}
+
+.emagic .ep-attendee-info-wrap {
+    counter-reset: attendee-counter;
+}
+
+/*.emagic .ep-attendee-info-wrap ul.em-custom-booking-fields-input::before  {
+    counter-increment: attendee-counter;
+    content: "Attendee "counter(attendee-counter) ". ";
+    width: 100%;
+    margin-left: 18px;
+    font-weight: 700
+}*/
+
+.emagic .ep-attendee-info-wrap ul .em-booking-attendee-info-section{
+    width: 100%;
+    font-weight: 700;
+    padding: 10px 10px;
+}
+
+.emagic #booking_summary .ep-cbf-attendee-wrap  {
+    /*  counter-reset: attendees-counter;*/
+}
+
+.emagic .ep-cbf-attendee-wrap .ep-cbf-attendee-display ul li {}
+
+.emagic .ep-cbf-attendee-wrap .ep-cbf-attendee-display ul::before  {
+    /*    counter-increment: attendees-counter;
+        content: "Attendee "counter(attendees-counter) ". ";
+        width: 100%;
+        margin: 3px 0px 0px 24px;*/
+}
+
+.emagic .ep-cbf-attendee-wrap  .ep-cbf-attendee-display ul {
+    list-style: none;
+    margin: 0px 0px 0px 0px;
+    padding: 0px;
+    background-color: #fdfdfd;
+}
+
+.emagic .ep-cbf-attendee-wrap .ep-cbf-attendee-display ul li label {
+
+}
+
+.emagic .ep-cbf-attendee-wrap  .ep-cbf-attendee-display ul li {
+    margin: 0px 0px;
+    border-bottom: 1px solid #e9e9e9 !important;
+    padding: 10px 20px;
+    font-size: 85%;
+    list-style: none;
+}
+
+.emagic .ep-cbf-attendee-wrap .ep-cbf-attendee-display ul li span.ep-cbf-attendee-value{
+    padding-left: 12px;
+    color: rgb(139 139 139);
+}
+
+.emagic .ep-cbf-attendee-wrap  .ep-cbf-attendee-display.ep-active-toggle ul.ep-attendee-info-content {
+    display: block !important;
+} 
+
+.ep-attendee-info-head {
+    padding: 10px 20px;
+    border-bottom: 1px solid #f1f1f1 !important;
+    width: 100%;
+    cursor: pointer;
+    position: relative
+}
+
+.ep-attendee-info-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.ep-attendee-info-head .ep-attendee-toggle {
+    font-size: 20px;
+}
+
+/**** cbf end ****/
+
+
+/*---- Checkout Page ---*/
+
+.emagic .ep-billing-details-wrap {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    align-content: stretch;
+
+}
+
+.emagic .ep-final-due-amount {
+    border-width: 1px 0px 1px 0px;
+    margin: 20px 0px 0px 0px;
+    padding: 20px;
+    text-align: right;
+}
+
+.ep-payment-integration .kf-payment-mode-select,
+.ep-payment-integration .ep-payment_prcoessors{
+
+}
+
+.ep-payment-integration .kf-payment-mode-select {
+    margin-left: 18px;
+    align-items: center;
+}
+/*
+.ep-payment-integration .ep-payment_prcoessors {
+    padding: 10px 18px;
+    align-items: flex-start;
+}*/
+
+.emagic .ep-coupon-code-wrap {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: flex-end;
+    align-content: flex-start;
+    padding: 20px;
+}
+
+.emagic .ep-billing-details-wrap .ep-billing-coupons {
+    max-width: 100%;
+    width: 340px;
+} 
+
+.emagic .ep-coupon-code-wrap .ep-coupon-code-input label{
+    padding-bottom: 5px;
+    display: inline-block;
+    width: 100%;
+    text-align: left;
+}
+
+.emagic .ep-coupon-code-wrap .ep-coupon-code-input {
+    padding-right: 10px;
+}
+
+.emagic .ep-billing-details {
+    padding: 20px 20px 0px 0px;
+}
+
+.emagic .ep-payment-checkout-btn {
+    text-align: right;
+    border-top-width: 1px;
+    padding: 0px 10px 10px 0px;
+    /*top:0px; */
+
+}
+
+
+/*
+.ep-payment-integration .ep-payment_prcoessors {
+    position: relative;
+    height: 118px
+}*/
+
+.ep-billing-details-wrap .ep-billing-details .ep-billing-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    align-content: stretch;
+}
+
+.ep-billing-details-wrap .em-checkout-booking-title {
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+
+.emagic .em-before-payment .kf-payment-details {
+    padding: 0px 0px 0px 0px;
+}
+
+.emagic .ep-cart__item-list .ep-cart-item.ep-cart-item-head {
+    background-color: #FCFCFC;
+    border-bottom: 1px solid #DEDEDE;
+
+}
+
+.emagic .ep-cart__item-list {
+    display: grid;
+    grid-template-columns: 1;
+
+}
+
+.emagic .ep-cart__item-list .ep-cart-item{
+    text-align: left;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    align-items: center;
+    justify-items: center;
+    padding: 12px 10px;
+    border-bottom: 1px solid #DEDEDE;
+}
+
+.emagic .ep-woocommerce-checkout-forms {
+    margin-top: 50px;
+}
+
+.emagic .ep-card-booking-row {
+    margin: 16px 0px 6px 0px;
+}
+
+.emagic #booking_summary .ep-attendees-info {
+    border-width: 1px;
+    margin-top: 30px;
+    border-top-width: 0px;
+}
+
+
+.ep-payment-integration .kf-payment-mode-select input {
+    margin-right: 6px;
+}
+
+/*--- Single Event Page top block-----*/
+
+
+.emagic .kf-event-header .ep-event-title-block {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    align-content: stretch;
+    padding-right: 10px;
+    cursor:pointer;
+}
+
+.emagic .kf-event-header  .ep-single-event-title {
+    margin-top: 5px;
+}
+
+.ep_ticket_price-wrap .ep_ticket_price-button .kf-tickets {
+    text-transform: uppercase;
+    width: 100%;
+    font-weight: bold;
+    background: #23C16C;
+    color: #fff;
+    border-radius: 4px;
+    transition: 0.2s;
+    text-shadow: none;
+    border: 0px;
+    line-height: 22px;
+    padding: 12px 12px;
+    font-size: 14px;
+    height: auto;
+}
+
+.ep_ticket_price-wrap .ep_ticket_price-button .kf-tickets a {
+
+}
+
+.emagic .kf-event-header .ep-single-event-title .kf-post-title {
+    height: 70px;
+    padding-top: 4px;
+}
+
+@media only screen and (max-width:479px) { 
+
+    .emagic .kf-event-header .ep-event-title-block {
+        flex-direction: column;
+        padding-bottom: 15px;
+    }
+
+    .emagic .kf-event-header .ep-event-title-block .ep-event-title-wrap .kf-event-date-large {
+        display: flex;
+        margin: 0px auto;
+        float: none;
+    }
+
+    .emagic .kf-event-header .ep-single-event-title {
+        margin-top: 5px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .emagic .kf-event-share {
+        width: 100%;
+        font-size: 28px;
+        line-height: 40px;
+        text-align: center;
+    }
+
+    .emagic .kf-event-header .ep-single-event-title .kf-post-title {
+        height: auto;
+    }
+
+}
+
+.ep-event-pricing-info {
+    padding: 25px 0px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.ep-event-pricing-info .ep-event-pricing-label input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+}
+
+.ep-event-pricing-info .ep-event-pricing-label {
+    cursor: pointer;
+    width: 100%;
+    border-radius: 10px;
+}
+
+.ep-event-pricing-info .ep-event-pricing-label .ep-event-pricing-box {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border: 1px solid #e1e2e7;
+    border-radius: 10px;
+    -webkit-transition: -webkit-box-shadow 0.4s;
+    transition: -webkit-box-shadow 0.4s;
+    -o-transition: box-shadow 0.4s;
+    transition: box-shadow 0.4s;
+    transition: box-shadow 0.4s, -webkit-box-shadow 0.4s;
+    position: relative;
+    background-color: #fff;
+}
+
+
+.ep-event-pricing-box-wrap {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: start;
+    align-items: center;
+    align-content: stretch;
+    padding: 0px 30px 0px 0px;
+}
+
+
+
+.ep-event-pricing-info .ep-event-pricing-label .ep-event-pricing-box .ep-event-pricing-details {
+    width: 100%;
+    padding: 22px;
+}
+
+
+
+.ep-event-pricing-info .ep-event-pricing-label .ep-event-pricing-box .ep-event-pricing-details .ep-event-price {}
+
+.ep-event-pricing-info .ep-event-pricing-label .ep-event-pricing-details span {
+    margin-bottom: 10px;
+    display: block;
+    font-size: 16px;
+    line-height: 24px;
+    color: #252f42;
+}
+
+.ep-event-price-wrap {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+    align-items: self-end;
+    align-content: stretch;
+    font-size: 20px;
+    line-height: 24px;
+    width: 38%;
+
+}
+
+
+
+.ep-event-price-wrap .ep-event-price-discount ~ .ep-event-price-spacial{
+    display: none;
+}
+
+.em-price-option-price .ep-event-price-discount {
+    text-align: center;
+}
+.em-price-option-price .ep-event-price-discount span.ep-event-sale {
+    text-align: center;
+    color: #B30000;
+    width: 100%;
+    display: inline-block;
+    text-transform: uppercase;
+    font-size: 16px;
+}
+
+.em-price-option-price .ep-event-price-discount .ep-event-sale-price {
+    text-align: center;
+    color: #B30000;
+    text-decoration: line-through;
+    width: 100%;
+    display: inline-block;
+    text-transform: uppercase;
+    font-size: 22px;
+}
+
+.em-price-option-price .ep-event-price-spacial {font-size: 22px;}
+.em-price-option-special-price {
+    font-size: 22px;
+}
+
+.ep-event-pricing-info .ep-event-pricing-label .ep-event-pricing-details p {
+    margin: 0px;
+    padding: 0px;
+    font-size: 13px;
+    color: rgb(0 0 0 / 52%);
+
+}
+
+.ep-event-pricing-info .ep-event-pricing-label .ep-event-pricing-box:hover {
+    -webkit-box-shadow: 0px 3px 5px 0px #e8e8e8;
+    box-shadow: 0px 3px 5px 0px #e8e8e8;
+}
+
+.ep-event-pricing-info .ep-event-pricing-label input[type="radio"]:checked + .ep-event-pricing-box:after {
+    content: "";
+    width: 36px;
+    height: 36px;
+    right: -17px;
+    top: calc(50% - 16px);
+    border-radius: 100%;
+    -webkit-appearance: none;
+    background-color: #29A159;
+    box-shadow: 0 1px 2px rgb(0 0 0 / 5%), inset 0px -15px 10px -12px rgb(0 0 0 / 5%);
+    padding: 10px;
+    display: inline-block;
+    vertical-align: middle;
+    cursor: pointer;
+    position: absolute;
+    z-index: 999;
+}
+
+.ep-event-pricing-info .ep-event-pricing-label input[type="radio"]:checked + .ep-event-pricing-box:before{
+    content: '';
+    display: block;
+    position: absolute;
+    top: calc(50% - 10px);
+    right: -4px;
+    width: 10px;
+    height: 19px;
+    border: solid #ffffff;
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
+    z-index: 99999;
+}
+
+
+.ep-event-pricing-info .ep-event-pricing-label input[type="radio"]:checked + .ep-event-pricing-box {
+    border: 1px solid #216ee0;
+    background: inherit;
+    -webkit-transition: ease-in 0.3s;
+    -o-transition: ease-in 0.3s;
+    transition: ease-in 0.3s;
+}
+
+.ep-event-pricing-info .ep-event-pricing-label input[type="radio"]:checked + .ep-event-pricing-box {
+    border-color: inherit;
+}
+
+@media screen and (max-width: 991px) {
+    .ep-event-pricing-info {
+        margin: 0 20px;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        -webkit-box-align: start;
+        -ms-flex-align: start;
+        align-items: flex-start;
+        padding: 40px;
+    }
+
+    .ep-event-pricing-info .ep-event-pricing-label {
+        width: 100%;
+    }
+
+
+    .ep-event-pricing-info .ep-event-pricing-label .ep-event-pricing-box .ep-event-pricing-details {
+        width: 70%;
+        display: inline-block;
+    }
+
+    .ep-event-pricing-info .ep-event-pricing-label input[type="radio"]:checked + .ep-event-pricing-box:after {
+        top: 45%;
+        -webkit-transform: translate(-50%);
+        -ms-transform: translate(-50%);
+        transform: translate(-50%);
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .ep-event-pricing-info .ep-event-pricing-label .ep-event-pricing-box .ep-event-pricing-details {
+        width: 60%;
+        display: inline-block;
+    }
+}
+
+@media screen and (max-width: 540px) {
+    .ep-event-pricing-info .ep-event-pricing-label .ep-event-pricing-box img {
+        margin-bottom: 20px;
+        height: 56px;
+        -webkit-transition: height 0.4s;
+        -o-transition: height 0.4s;
+        transition: height 0.4s;
+    }
+
+    .ep-event-pricing-info .ep-event-pricing-label input[type="radio"]:checked + .ep-event-pricing-box:after {
+        top: 20px;
+        right: 10px;
+    }
+
+    .ep-event-pricing-info .ep-event-pricing-label .ep-event-pricing-box .ep-event-pricing-details {
+        width: 100%;
+    }
+
+    .ep-event-pricing-info .ep-event-pricing-label .ep-event-pricing-box .ep-event-pricing-box-wrap {
+        padding: 20px;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        -webkit-box-align: baseline;
+        -ms-flex-align: baseline;
+        align-items: baseline;
+    }
+}
+
+/* inspiration */
+.inspiration {
+    font-size: 12px;
+    margin-top: 50px;
+    position: absolute;
+    bottom: 10px;
+    font-weight: 300;
+}
+
+.inspiration a {
+    color: #666;
+}
+@media screen and (max-width: 767px) {
+    /* inspiration */
+    .inspiration {
+        display: none;
+    }
+}
+
+
+.ep-event-price-selector {
+    margin-bottom: 12px;
+}
+
+.emagic .ep-event-price-selector .ep-event-price-swatch-icon {
+    border-right-width: 1px !important;
+    border-style: solid !important;
+    border-color: inherit !important;
+    display: inline-block;
+    width: 100%;
+    max-width: 125px;
+}
+
+.ep-event-pricing-info .ep-event-pricing-label .ep-event-pricing-box img {
+    padding: 8px 16px;
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+}
+
+.ep-event-booking-status {
+
+}
+
+.ep-event-pricing-info-wrap {
+    margin-top: 36px;
+}
+
+.ep-event-pricing-info-wrap .ep-attendee-heading-text {
+    font-weight: 500;
+}
+
+.ep-event-price-selector.event-price-disabled {
+    opacity: 0.5;
+    cursor: default;
+}
+.em_event_old_price{text-decoration:  line-through;}
+
+/*--- List View ---*/
+
+.ep-event-list-standard .ep-event-article {
+    position: relative;
+    display: block;
+    margin-bottom: 25px;
+    border: 1px solid #e9e9e9;
+    box-shadow: 0 2px 0 0 rgb(0 0 0 / 2%);
+    overflow: hidden;
+    border-radius: 3px;
+}
+.ep-wrap .ep-clear:after {
+    clear: both;
+}
+.ep-wrap .ep-clear:after, .ep-wrap .ep-clear:before {
+    content: " ";
+    display: table;
+}
+.ep-event-list-standard .ep-topsec {
+    display: flex;
+    width: 100%;
+    align-content: center;
+    align-items: stretch;
+    justify-content: center;
+    flex-direction: row;
+}
+
+#wrap .ep-wrap, #wrap .ep-wrap div {
+    font-family: acumin-pro,proxima-nova,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+}
+
+.ep-event-list-standard .ep-col-table-c.ep-event-image-wrap {
+    vertical-align: top;
+}
+
+.ep-event-list-standard .col-md-3.ep-event-image-wrap {
+    padding-left: 0;
+}
+
+.ep-topsec .ep-event-image {
+    line-height: 1px;
+}
+.container [class*=col-] img, .container-fluid [class*=col-] img {
+    max-width: 100%;
+}
+
+.ep-event-list-standard .ep-event-content {
+    padding-top: 15px;
+    padding-right: 30px;
+}
+
+.ep-event-list-standard .ep-event-content h3.ep-event-title {
+    margin: 0px;
+    padding: 0px;
+}
+
+.wn-wrap .ep-event-list-standard .ep-event-title {
+    letter-spacing: 0;
+}
+
+.ep-event-list-standard .ep-event-title {
+    font-weight: 700;
+    letter-spacing: -1px;
+    margin: 0 0 10px;
+}
+.ep-event-list-standard h3.ep-event-title {
+    font-size: 24px;
+    line-height: 1.2;
+    margin-bottom: 8px;
+}
+.ep-event-list-standard .ep-col-table-c.ep-event-meta-wrap {
+    vertical-align: top;
+    float: none!important;
+    padding: 12px 12px;
+    border-left: 1px solid rgb(233, 233, 233);;
+    position: relative;
+}
+.ep-event-footer {
+    position: relative;
+    border-top: 1px solid #efefef;
+    padding: 20px;
+    min-height: 80px;
+    margin: 0;
+    background: #fafafa;
+}
+.ep-event-list-standard .ep-event-title a {
+    color: #292929;
+    transition: color .3s ease;
+}
+.ep-wrap .ep-event-article .ep-color-hover {
+    box-shadow: none;
+    border: none;
+}
+.event-color {
+    width: 14px;
+    display: inline-block;
+    height: 14px;
+    margin-left: 5px;
+    border-radius: 50%;
+}
+.ep-wrap .ep-cancellation-reason span, .ep-wrap .ep-labels-normal .ep-label-normal {
+    position: relative;
+    top: -3px;
+    font-size: 11px;
+    font-weight: 300;
+    margin-left: 10px;
+    line-height: 1.9;
+    letter-spacing: 1px;
+    color: #fff;
+    padding: 2px 7px;
+    border-radius: 2px;
+    white-space: nowrap;
+}
+
+.ep-event-footer {
+    position: relative;
+    border-top: 1px solid #efefef;
+    padding: 20px;
+    min-height: 80px;
+    margin: 0;
+    background: #fafafa;
+}
+.ep-wrap {
+    position: relative;
+}
+#wrap .ep-wrap div {
+    font-family: acumin-pro,proxima-nova,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+}
+.ep-ongoing-normal-label {
+    background-color: #40d9f1;
+}
+.elementor *, .elementor :after, .elementor :before {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.ep-event-list-standard .ep-date-details, .ep-event-list-standard .ep-local-time-details, .ep-event-list-standard .ep-time-details, .ep-event-list-standard .ep-venue-details {
+    position: relative;
+    padding-left: 28px;
+    margin-bottom: 10px;
+}
+.ep-event-list-standard .ep-event-meta span.ep-event-d, .ep-event-list-standard .ep-event-meta span.ep-event-m {
+    font-size: 17px;
+    font-weight: 700;
+    padding-right: 6px;
+    color: #444;
+    text-transform: uppercase;
+}
+.ep-event-list-standard .ep-event-meta .ep-event-address {
+    font-style: normal;
+    letter-spacing: 0;
+    font-size: 12px;
+    font-weight: 300;
+    margin: 0 12px 0 0;
+}
+.ep-event-footer .ep-booking-button {
+    box-shadow: none;
+    transition: all .21s ease;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    background: #fff;
+    color: #767676;
+    border: 1px solid #e8e8e8;
+    position: absolute;
+    top: 20px;
+    right: 15px;
+    padding: 0 16px;
+    line-height: 37px;
+    height: 38px;
+}
+
+.ep-wrap .ep-cancellation-reason span, .ep-wrap .ep-labels-normal .ep-label-normal {
+    position: relative;
+    top: -3px;
+    font-size: 11px;
+    font-weight: 300;
+    margin-left: 10px;
+    line-height: 1.9;
+    letter-spacing: 1px;
+    color: #fff;
+    padding: 2px 7px;
+    border-radius: 2px;
+    white-space: nowrap;
+}
+
+@media (min-width: 961px){
+    .ep-wrap .col-md-6 {
+        width: 50%;
+    }
+}
+
+@media (min-width: 961px)
+{
+    .ep-wrap .col-md-6 {
+        width: 50%;
+    }
+}
+
+@media (min-width: 961px)
+{
+    .ep-wrap .em-col-1 {
+        float: left;
+    }
+
+
+
+}
+@media only screen and (min-width: 1200px)
+{
+    .ep-event-list-standard .em-col-3,
+    .ep-event-list-standard .em-col-6{
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .ep-event-list-standard .em-col-3 { padding-left: 0px;}
+}
+
+
+
+@media only screen and (max-width:760px) {
+
+    .emagic .ep-event-list-standard .em-col-3,
+    .emagic .ep-event-list-standard .em-col-4,
+    .emagic .ep-event-list-standard .em-col-5{
+        width: 100%;
+    }
+
+    .ep-event-list-standard .ep-topsec {display: inline-block;}
+
+    .ep-event-list-standard .ep-col-table-c.ep-event-meta-wrap { 
+        border: 0px;
+        padding: 0px 0px 0px 0px;
+    }
+
+    .ep-event-list-standard .ep-event-meta-wrap .ep-list-view-footer {
+        position: relative;
+        float: left;
+        margin-top: 12px;
+    }
+
+    .ep-event-list-standard .ep-event-content,
+    .emagic .ep-event-list-standard .ep-view-woocommerce-product{
+        padding: 10px 12px;
+    }
+
+    .ep-event-list-standard .ep-list-event-date-row,
+    .ep-event-list-standard .ep-event-meta .em-list-view-venue-details{
+        padding: 5px 10px;
+    }
+    .emagic .ep-list-booking-status.ep-event-attenders-main {
+        padding: 0px 12px !important;
+    }
+
+    .emagic .ep-events-list-wrap .ep-view-woocommerce-product {
+        padding: 0px 10px !important;
+    }
+
+    .emagic  .ep-event-list-standard .ep-list-booking-status {
+        margin-top: 12px;
+        padding: 0px 20px;
+        display: inline-block;
+        width: 100%;
+    }
+
+}
+
+@media only screen and (max-width:479px) {}
+
+.kf-tickets-button.difr{
+    text-align: right;
+}
+
+.ep-event-article .ep-topsec .ep-event-image img {
+    max-width: 100%;
+    height: 268px;
+    object-fit: cover;
+}
+
+.ep-event-meta .em-list-view-venue-details {
+    font-size: 10px;
+    margin: 5px 0px 0px 0px;
+    width: 100%;
+    padding: 10px 3px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.emagic .ep-list-booking-status.ep-event-attenders-main {
+    padding: 0px 5px;
+    margin-top: 0px;
+    font-size: 12px;
+}
+
+.ep-event-meta .em-list-view-venue-details span.ep-list-event-location {
+    width: 20px;
+}
+
+.ep-event-meta .em-list-view-venue-details .em-list-event-address {
+    width: calc(100% - 22px);
+    float: left;
+    padding: 0px 0px 0px 12px;
+    margin: 0px;
+    color: #767676;
+    font-size: 12px;
+}
+
+.emagic .ep-list-booking-status .em_progressbar {
+    width: 100%;
+}
+
+.emagic .ep-list-booking-status {
+    display: inline-block;
+    width: 100%;
+}
+
+.ep-month-divider {
+    text-align: center;
+    margin: 40px 0;
+}
+.ep-month-divider span.ep-listed-event-month {
+    text-transform: uppercase;
+    font-size: 22px;
+    font-weight: 700;
+    padding-bottom: 5px;
+    color: #313131;
+    border-bottom: 4px solid #ebebeb;
+    width: 100%;
+    display: block;
+    padding-bottom: 10px;
+    position: relative;
+}
+.ep-month-divider span.ep-listed-event-month-tag {
+    border-bottom: 4px solid rgb(0, 122, 204);
+    font-size: 6px;
+    content: "";
+    text-align: center;
+    position: absolute;
+    bottom: -4px;
+    margin-left: -30px;
+    left: 50%;
+    width: 60px;
+}
+
+.em_list_view .ep-event-description {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+
+.ep-event-list-standard .ep-col-table-c.ep-event-image-wrap .em_event_cover_list img {
+    height: 260px;
+    object-fit: cover;
+    width: 100%;
+}
+
+.ep-list-event-date-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    align-content: stretch;
+    width: 100%;
+}
+
+
+.ep-list-event-date-row span{    
+    width: 20px;
+}
+
+.emagic .ep-venue-event-list-standard .ep-event-article .ep-list-event-date-row span {
+    width: auto
+}
+
+.emagic .ep-venue-event-list-standard .ep-event-article .ep-topsec .kf-tickets-button .em_not_started {
+    font-size: 11px;  
+}
+
+
+.ep-list-event-date {
+    width: calc(100% - 35px);
+    color: #767676;
+    padding-left: 5px;
+    font-size: 12px;
+}
+
+
+.ep-event-meta-wrap .ep-list-view-footer {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    left: 0px;
+    border-top: 1px solid #e9e9e9;
+    padding: 10px 10px;
+}
+
+.ep-event-meta-wrap .ep-list-view-footer .em_event_price {
+    padding: 0px 12px;
+}
+
+.ep-event-meta-wrap .ep-list-view-footer .em_event_expired {
+    cursor: default;
+    color: #f87070;
+    color: rgb(248, 112, 112);
+    font-size: 13px;
+}
+
+.ep-event-meta-wrap .ep-list-view-footer .em_eventpage_register button.kf-tickets {
+    padding: 6px 0px;
+    border: 0px;
+    box-shadow: none;
+}
+
+.em-list-view-venue-details .ep-list-event-location svg {
+    width: 26px;
+    height: 26px;
+}
+
+
+/**** List view ends ****/
+
+
+/**** -- Organizer Block  For Single Event-- ****/
+
+.ep-organizer-cards-wrap {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-items: stretch;
+    align-content: stretch;
+}
+
+
+.ep-organizer-cards-wrap .kf-organizer-card {
+    border: 2px solid #e5e5e5;
+    width: 48%;
+    margin: 10px 2% 10px 0;
+    color: #a1a1a1;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+
+}
+
+.ep-organizer-cards-wrap .kf-organizer-img {
+    width: 100px;
+    overflow: hidden;
+    background-color: #fafafa;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-around;
+    justify-content: space-between;
+    align-items: stretch;
+}
+
+.emagic .kf-organizer-details {
+    width: 80%;
+    width: calc(100% - 100px);
+    padding: 10px;
+    overflow: hidden;
+    border-left: 2px solid #e5e5e5;
+    height: 100%;
+}
+
+
+.ep-organizer-cards-wrap .kf-organizer-img img{   
+    border-radius: 100%;
+    padding: 10px !important;
+    height: 100px;
+    width: 20%;
+    width: calc(100px - 0px);
+    object-fit: cover;
+    object-position: center;
+    margin: auto;
+}
+
+.emagic .kf-organizer-details .kf-event-attr-value {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.emagic .kf-organizer-details i.fa{
+    margin-right: 12px;
+}
+
+
+/****  Single Organizer Block  ****/
+
+.ep-organizer-cards-wrap .kf-organizer-card.organizer_single {
+    width: 100%;
+}
+
+.ep-organizer-cards-wrap .kf-organizer-card.organizer_single .kf-organizer-details {
+    display: flex;
+}
+
+
+.ep-organizer-cards-wrap .kf-organizer-card.organizer_single .kf-organizer-details .kf-event-attr-value {
+    text-align: center;
+    border-right: 2px solid #e5e5e5;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.ep-organizer-cards-wrap .kf-organizer-card.organizer_single .kf-organizer-details .kf-event-attr-value:last-child{
+    border: 0px;
+}
+
+
+.ep-organizer-cards-wrap .kf-organizer-card.organizer_single .ep-organizer-name-label,
+.ep-organizer-cards-wrap .kf-organizer-card.organizer_single .ep-organizer-tel-label,
+.ep-organizer-cards-wrap .kf-organizer-card.organizer_single .ep-organizer-email-label,
+.ep-organizer-cards-wrap .kf-organizer-card.organizer_single .ep-organizer-website-label{
+    color: #202020;
+}
+
+/****  Single Organizer Block Ends ****/
+
+
+
+
+/****  Organizer Block  For Single Event Ends ****/
+
+/**** Elementor ****/
+
+.elementor img {
+    height: auto;
+    max-width: 100%;
+    border: none;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+img {
+    vertical-align: middle;
+}
+
+/**** Elementor ****/
+
+
+/*---- Multi price Seating ---*/
+
+
+.emagic .ep-seat-booking-popover {
+    position: relative;
+}
+.emagic .ep-seat-info-popover {
+    display: none
+}
+
+.emagic .ep-seat-booking-popover:hover .ep-seat-info-popover{
+    display: block;
+}
+
+.emagic .ep-seat-info-popover {
+    width: 128px;
+    height: 100px;
+    top: -118px;
+    left: -54px;
+    position: absolute;
+    z-index: 1060;
+    max-width: 276px;
+    padding: 10px 7px;
+    font-size: 14px;
+    font-weight: 400;
+    text-align: left;
+    white-space: normal;
+    background-color: #fff;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0,0,0,.2);
+    border-radius: 6px;
+    -webkit-box-shadow: 0 5px 10px rgb(0 0 0 / 20%);
+    box-shadow: 0 5px 10px rgb(0 0 0 / 20%);
+    color: #414141; 
+}
+
+.emagic .ep-seat-info-popover.em-seat-last-popover {
+    top: -118px;
+    left: -90px;
+}
+
+.emagic .ep-seat-info-popover.em-seat-last-popover.ep-seat-info-popover-arrow {}
+
+.emagic .ep-seat-info-popover .ep-seat-info-popover-row {
+    padding-bottom: 8px;
+    font-size: 12px;
+}
+
+.emagic .ep-seat-info-popover .ep-seat-info-popover-row.ep-seat-booking-cat {
+    font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.emagic .ep-seat-info-popover>.ep-seat-info-popover-arrow:after {
+    content: "";
+    border-width: 10px;
+}
+
+.emagic .ep-seat-info-popover>.ep-seat-info-popover-arrow, 
+.emagic .ep-seat-info-popover>.ep-seat-info-popover-arrow:after {
+    position: absolute;
+    display: block;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+}
+
+.emagic .ep-seat-info-popover>.ep-seat-info-popover-arrow:after{
+    bottom: 1px;
+    margin-left: -10px;
+    content: " ";
+    border-top-color: #fff;
+    border-bottom-width: 0;
+}
+
+.emagic .ep-seat-info-popover>.ep-seat-info-popover-arrow {
+    border-width: 11px;
+}
+
+.emagic .ep-seat-info-popover>.ep-seat-info-popover-arrow {
+    bottom: -11px;
+    left: 50%;
+    margin-left: -11px;
+    border-bottom-width: 0;
+    border-bottom-color: #999;
+    border-top-color: rgba(0,0,0,.25);
+}
+
+
+/*--- Booking Summary Box---*/
+
+.emagic .ep-booking-summary-wrap {    
+    border-width: 1px;
+}
+
+.emagic .ep-booking-summary-wrap .ep-booking-summary-head,
+.emagic .ep-booking-summary-wrap .ep-booking-summary-row{
+    border-bottom-width: 1px;
+    -webkit-border-bottom-width: 1px;
+    -moz-border-bottom-width: 1px;
+    padding: 20px 15px;
+
+}
+
+.emagic .ep-booking-summary-wrap .ep-booking-summary-head .ep-booking-summary-title {
+    font-weight: 700;
+}
+
+
+.emagic .ep-booking-summary-wrap .ep-booking-summary-head .ep-booked-ticket-info,
+.emagic .ep-booking-summary-wrap .ep-booking-summary-row,
+.emagic .ep-booking-summary-wrap .ep-booking-summary-head{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    align-content: space-between;
+}
+
+.emagic .ep-booking-summary-wrap .ep-booking-summary-row.ep-booking-summary-footer {
+    border-width: 1px 0px 0px 0px;
+}
+
+.emagic .ep-booking-summary-wrap .ep-booking-date {
+    border-right-width: 1px;
+    padding-right: 5px;
+    margin-right: 5px;
+}
+.emagic .ep-booking-summary-wrap .ep-booking-zone {
+    color: rgb(170 170 170);
+}
+
+
+/*-- Booking Details Page--*/
+
+.ep-booking-details-container {
+    border: 1px solid #e7e8e9;
+    background: #fff;
+    box-shadow: 0 1px 9px -8px #4d5358;
+    margin-bottom: 30px;
+    overflow: hidden;
+}
+
+.ep-booking-table-main .ep-booking-table {    
+    border-collapse: collapse;
+    table-layout: fixed;
+    background: #f6f8fA;
+    border-bottom: 1px solid #e7e8e9;
+}
+
+.ep-booking-details-container table,
+.ep-booking-details-container table th,
+.ep-booking-details-container table td{
+    border: 0px;
+    padding: 0px;
+    margin: 0px;
+    font-family: sans-serif;
+    font-size: 14px;
+    vertical-align: top;
+    text-align: left;
+}
+
+.ep-booking-details-container table{
+    width: 100%;
+}
+
+.ep-booking-details-container table.ep-booking-table{
+    width: 100%;
+}
+
+
+.ep-booking-items-table th.ep-booking-item {
+    font-size: 14px;
+    color: #000;
+    font-weight: 600;
+    line-height: 24px;
+    padding: 20px 2px;
+    text-align: center;
+}
+
+.ep-booking-items-table th.ep-booking-item{}
+
+
+.ep-booking-items-table td.ep-booking-item {
+    text-align: center;
+    color: #75787b;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 24px;
+    padding: 20px 2px;
+}
+
+.ep-booking-totsl-t {
+    font-size: 14px;
+    text-align: right;
+}
+
+.ep-booking-total-p {
+    font-size: 14px;
+    text-align: center;
+}
+
+.ep-booking-details-container .booking-details-head {
+    padding: 20px 18px;
+    border-bottom: 1px solid #e7e8e9;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    align-content: space-between;
+}
+
+.ep-booking-attendees-wrap{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    align-content: center;
+
+}
+
+
+
+.ep-booking-attendees-wrap .ep-booking-attendee {
+    border: 1px solid #e7e8e9;
+    background-color: #fcfcfc;
+    box-shadow: 0 1px 9px -8px #4d5358;
+    margin-bottom: 30px;
+    width: calc( 100%/2 - 15px);
+    margin-right: 30px;
+    position: relative;
+}
+
+.ep-booking-attendees-wrap .ep-booking-attendee:nth-child(2n) {
+    margin-right: 0;
+}
+
+.ep-booking-attendee-profile {
+    margin-right: 12px;
+    position: absolute;
+    top: -30px;
+    left: 8px;
+    display: none;
+}
+
+.ep-booking-attendee-profile img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+}
+
+.ep-booking-attendee-info {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: flex-start;
+}
+
+.ep-booking-attendee-info-wrap {
+    padding: 10px 15px;
+}
+
+.ep-booking-attendee-info .ep-booking-attendee-label {
+    margin-right: 10px;
+    color: #000;
+    width: 130px;
+}
+.ep-booking-attendee-info .ep-booking-attendee-value {    
+    color: #75787b;
+    font-weight: 400;
+    line-height: 25px;
+}
+
+.ep-booking-items-table .ep-booking-totsl-t,
+.ep-booking-items-table .ep-booking-total-p{
+    padding: 10px 0px;
+    line-height: 50px;
+    font-weight: 600;
+}
+
+.ep-booking-items-table .ep-booking-totsl-t{
+    text-align: right
+}
+.ep-booking-items-table .ep-booking-total-p{
+    text-align: center;
+}
+
+.ep-booking-items-title,
+.ep-booking-attendees-title{    
+    text-transform: uppercase;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.ep-booking-attendees-title {   
+    margin-bottom: 20px;
+}
+
+.booking-details-border {
+    border-bottom: 2px solid #000;
+}
+
+.ep-booking-details-container .ep-booking-print .ep-ticket-print-table td {
+    vertical-align: baseline;
+    padding: 0px 10px;
+}
+
+.ep-booking-details-container .ep-booking-print {    
+    border-left-width: 1px;
+    padding-left: 12px;
+}
+
+.ep-booking-print svg {
+    margin-right: 5px;
+}
+
+/*-- End: Booking Details Page--*/
+
+
+
+/*--- Frontent Event Organizer Block ---*/
+
+.emagic .ep-new-organizer-block ul.ep-organizer-input {
+    margin: 14px 0px;
+    padding: 0px;
+}
+
+.emagic .ep-new-organizer-block ul.ep-organizer-input li {
+    list-style: none;
+    margin: 10px 0px;
+}
+
+.emagic .ep-new-organizer-block ul.ep-organizer-input li input {
+    width: 80%;
+    width: calc(100% - 80px);
+    margin-right: 15px;
+}
+
+.emagic .ep-new-organizer-block ul.ep-organizer-input li:last-child{}
+
+/*--- Ends: Frontent Event Organizer Block ---*/
+
+
+/*--- Frontent Event Performer Block ---*/
+
+.emagic .ep-submit-event-fields-box .em_input_form_field ul.emradio {
+    margin: 16px 0px;
+    padding: 0px;
+}
+
+.emagic .ep-submit-event-fields-box .em_input_form_field ul.emradio li {
+    list-style: none;
+    margin: 10px 0px 0px 0px;
+}
+
+/*--- Ends: Frontent Event Performer Block ---*/
+
+/* SEO URL */
+.ep-main-container {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.emagic.ep-single-page,
+.emagic-sidebar.ep-event-sidebar{   
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.emagic.ep-single-page {
+    -ms-flex: 0 0 66.66666667%;
+    flex: 0 0 66.66666667%;
+    max-width: 66.66666667%;
+}
+
+.emagic-sidebar.ep-event-sidebar {
+    -ms-flex: 0 0 33.333333%;
+    flex: 0 0 33.333333%;
+    max-width: 33.333333%;
+
+} 
+/* End SEO URL */
+
+#em_booking_status_message{
+    padding: 10px;
+}
+
+/*** filter multi select ***/
+
+.select2-results__option:before {
+    content: "";
+    display: inline-block;
+    position: relative;
+    height: 20px;
+    width: 20px;
+    border: 2px solid #e9e9e9;
+    border-radius: 4px;
+    background-color: #fff;
+    margin-right: 20px;
+    vertical-align: middle;
+}
+.select2-results__option[aria-selected=true]:before {
+    font-family:fontAwesome;
+    content: "\f00c";
+    color: #fff;
+    background-color: #f77750;
+    border: 0;
+    display: inline-block;
+    padding-left: 2px;
+    line-height: 18px;
+}
+.select2-container--open .select2-dropdown--below {
+    overflow: hidden;
+}
+
+#ep-event-filterbar #em-event-venue-filter, #ep-event-filterbar #em-event-type-filter{
+    max-height: 29px;
+    padding: 0;
+}
+
+/*--- All Event Modal Fixes---*/
+
+
+
+#em_calendar .fc-row .fc-content-skeleton .fc-event-container:nth-child(n+6):last-child .fc-day-grid-event .em_event_detail_popup {
+    left: calc(100% - 348px);
+    top: 20px; 
+}
+.emagic .em_register_form .em_reg_form form .em_input_row .em_input_form_field .intl-tel-input{ width: 100%; }
+
+
+/*----Pages---*/
+
+
+.ep-box-wrap{
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+.ep-box-row{
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -8px;
+    margin-left: -8px
+}
+
+.ep-box-center{    
+    align-items: center;
+}
+
+.ep-box-bottom{    
+    align-items: flex-end;
+}
+
+.ep-box-top{    
+    align-items:flex-start;
+}
+
+.ep-text-item-right{
+    text-align: right
+}
+
+
+
+.ep-box-pl-0, .ep-box-px-0 {
+    padding-left: 0!important;
+}
+.ep-box-pr-0, .ep-box-px-0 {
+    padding-right: 0!important;
+}
+
+.ep-box-ml-0, .ep-box-mx-0 {
+    margin-left: 0!important;
+}
+.ep-box-mr-0, .ep-box-mx-0 {
+    margin-right: 0!important;
+}
+
+.ep-box-col-1,
+.ep-box-col-2,
+.ep-box-col-3,
+.ep-box-col-4,
+.ep-box-col-5,
+.ep-box-col-6,
+.ep-box-col-7,
+.ep-box-col-8,
+.ep-box-col-9,
+.ep-box-col-10,
+.ep-box-col-11,
+.ep-box-col-12{   
+    position: relative;
+    width: 100%;
+    min-height: 1px;
+    padding-right: 8px;
+    padding-left: 8px;
+}
+
+
+
+@media (min-width: 768px){
+
+    .ep-box-col-1{
+        -ms-flex: 0 0 8.333333%;
+        flex: 0 0 8.333333%;
+        max-width: 8.333333%;
+    }
+
+    .ep-box-col-2{ 
+        -ms-flex: 0 0 16.66667%;
+        flex: 0 0 16.66667%;
+        max-width: 16.66667%;
+
+    }
+
+    .ep-box-col-3 {
+        -ms-flex: 0 0 25%;
+        flex: 0 0 25%;
+        max-width: 25%;
+    }
+
+    .ep-box-col-4 {
+        -ms-flex: 0 0 33.33333%;
+        flex: 0 0 33.33333%;
+        max-width: 33.33333%;
+    }
+
+    .ep-box-col-5 {    
+        -ms-flex: 0 0 41.66667%;
+        flex: 0 0 41.66667%;
+        max-width: 41.66667%;
+    }
+
+
+    .ep-box-col-6 {
+        -ms-flex: 0 0 50%;
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+
+    .ep-box-col-7 {
+        -ms-flex: 0 0 58.3333333333%;
+        flex: 0 0 58.3333333333%;
+        max-width: 58.3333333333%;
+
+    }
+
+    .ep-box-col-8 {
+        -ms-flex: 0 0 66.666667%;
+        flex: 0 0 66.666667%;
+        max-width: 66.666667%;
+    }
+
+    .ep-box-col-9 {
+        -ms-flex: 0 0 75%;
+        flex: 0 0 75%;
+        max-width: 75%;
+    }
+
+    .ep-box-col-10 {
+        -ms-flex: 0 0 83.3333333333%;
+        flex: 0 0 83.3333333333%;
+        max-width: 83.3333333333%;
+    }
+
+    .ep-box-col-11 {
+        -ms-flex: 0 0 91.666667%;
+        flex: 0 0 91.666667%;
+        max-width: 91.666667%;
+    }
+
+    .ep-box-col-12 {
+        -ms-flex: 0 0 100%;
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+
+
+}
+
+
+
+
+/*----Pages End---*/
+
+
+/*---card---*/
+
+.ep-box-card-item {
+    position: relative;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.ep-box-card-item .ep-box-card-thumb {
+    position: relative;
+    overflow: hidden;
+}
+
+.emagic .ep-box-wrap .ep-box-card-item{  
+    transition: all 0.4s ease;
+    -webkit-transition: all 0.4s ease;
+    -moz-transition: all 0.4s ease;
+    -ms-transition: all 0.4s ease;
+    box-shadow: 0 10px 30px rgb(0 0 0 / 6%);
+    border-bottom: 7px solid var(--themeColor);
+}
+
+.ep-performer-card-wrap .ep-box-card-thumb {
+    padding: 0px;
+}
+
+.ep-box-card-content {
+    padding: 20px 14px;
+}
+
+.ep-box-card-item:hover .ep-box-card-content {
+    background-color: var(--themeColor);
+}
+
+.ep-box-card-item .ep-box-card-thumb {
+    display: block;
+    line-height: 0;
+}
+
+.ep-box-card-item .ep-box-card-thumb img {
+    width: 100%;
+    height: 225px;
+    max-width: 100%;
+    margin: 0px auto;
+    padding: 0px;
+    object-fit: cover;
+
+}
+
+.ep-box-card-item:hover .ep-box-card-thumb img {filter: brightness(0.5);}
+
+/*.ep-box-card-item .ep-box-card-thumb a:before {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    content: "";
+    background-color: rgba(0,0,0,.4);
+    transition: all 0.4s ease;
+    -webkit-transition: all 0.4s ease;
+    -moz-transition: all 0.4s ease;
+    -ms-transition: all 0.4s ease;
+    opacity: 0;
+}*/
+
+/*.ep-box-card-item:hover .ep-box-card-thumb a img:before {
+    opacity: 1;
+}*/
+
+.ep-box-title {
+    margin: 0 0 0px;
+    font-size: 1.2em;
+    font-weight: bold;
+    line-height: 24px;
+}
+
+.ep-box-title a {
+    color: #333;
+    text-overflow: ellipsis;
+    width: 100%;
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-decoration: none !important;
+}
+
+.ep-box-card-role{
+    margin: 0 0 0px;
+    font-size: 1em;
+    font-weight: normal;
+    line-height: 26px;
+    color: #a0a0a0;
+}
+
+.ep-box-card-item:hover .ep-box-card-title a {
+    color:#fff;
+}
+
+.ep-box-card-item:hover .ep-box-card-role {
+    color:#fff;
+}
+
+
+/*--Card Social---*/
+
+
+.ep-box-card-item .ep-box-card-social {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    width: 100%;
+    z-index: 2;
+    gap: 10px;
+}
+
+.ep-box-card-item .ep-box-card-social {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.ep-box-card-item .ep-box-card-social a {
+    display: inline-block;
+    background-color: #fff;
+    width: 40px;
+    height: 40px;
+    line-height: 45px;
+    color: var(--theme-color);
+    font-size: 16px;
+    text-align: center;
+    margin-right: 15px;
+    -webkit-transition: 0.3s ease-in-out;
+    transition: 0.3s ease-in-out;
+}
+
+.ep-box-col-3 .ep-box-card-item .ep-box-card-social a  {
+    width: 30px;
+    height: 30px;
+    padding: 0px 0px;
+    line-height: 34px;
+}
+
+.ep-box-col-3 .ep-box-card-item .ep-box-card-social a svg {
+    width: 12px !important;
+    padding: 0px;
+}
+
+
+.ep-box-col-3 .ep-box-card-item .ep-box-card-social a:nth-child(1) svg {
+    width: 8px !important;
+}
+
+.ep-box-card-item .ep-box-card-social a{
+    visibility: hidden;
+    opacity: 0;
+    -webkit-transform: translateY(60px);
+    transform: translateY(60px);
+    -webkit-transition: 0.4s ease-in-out;
+    transition: 0.4s ease-in-out;
+    border-radius: 999px;
+    margin-right: 0;
+    padding: 4px 2px;
+}
+
+.ep-box-card-item .ep-box-card-social a svg {
+    width: 18px;
+    padding: 2px 0px;
+    fill: var(--themeColor);
+}
+
+.ep-box-card-item .ep-box-card-social a:hover {
+    background-color: var(--themeColor);
+}
+
+.ep-box-card-item .ep-box-card-social a:hover svg {
+    fill:#fff;
+}
+
+.ep-box-card-item:hover .ep-box-card-social a {
+    visibility: visible;
+    opacity: 1;
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+}
+
+.ep-box-card-item .ep-box-card-social a:nth-child(1){
+    -webkit-transition-delay: 0s;
+    transition-delay: 0s;
+}
+
+.ep-box-card-item .ep-box-card-social a:nth-child(2) {
+    -webkit-transition-delay: 0.1s;
+    transition-delay: 0.1s;
+}
+
+.ep-box-card-item .ep-box-card-social a:nth-child(3) {
+    -webkit-transition-delay: 0.2s;
+    transition-delay: 0.2s;
+}
+
+.ep-box-card-item .ep-box-card-social a:nth-child(4) {
+    -webkit-transition-delay: 0.3s;
+    transition-delay: 0.3s;
+}
+
+.ep-box-card-item .ep-box-card-social a:nth-child(5) {
+    -webkit-transition-delay: 0.4s;
+    transition-delay: 0.4s;
+}
+
+.ep-box-card-item .ep-box-card-social a:nth-child(1) svg {
+    width: 16px;
+}
+
+
+
+/*--Card Social---*/
+
+
+
+/*---Card End---*/
+
+/*---List---*/
+
+.ep-performer-list {
+    box-shadow: 0 2px 0 0 rgb(0 0 0 / 2%);
+    margin-bottom: 25px;
+    position: relative;
+    border-width: 1px;
+}
+
+
+.emagic .ep-box-list-wrap {
+    position: relative;
+    display: block;
+    margin-bottom: 25px;
+    border: 1px solid #e9e9e9;
+    box-shadow: 0 2px 0 0 rgb(0 0 0 / 2%);
+}
+
+
+.ep-box-profile-image img {
+    width:100%;
+    height: 100%;
+    min-height: 268px;
+    max-width: 100%;
+    object-fit: cover;
+    margin: 0px !important;
+}
+
+.emagic .ep-list-box-table {
+    display: flex;
+    align-items: center;
+}
+
+.ep-box-phone svg,
+.ep-box-email svg,
+.ep-box-website svg{
+    width: 18px;
+    height: 18px;
+    fill: var(--themeColor);
+}
+
+.ep-box-phone,
+.ep-box-email,
+.ep-box-website{
+    vertical-align: middle;
+    margin: 0px 6px 0px 0px;
+}
+
+.ep-box-social-links {}
+ul.ep-box-social-links li {
+    list-style: none;
+}
+
+ul.ep-box-social-links li a svg {
+    width: 18px;
+    height: 18px;
+}
+
+ul.ep-box-social-links li:before,
+ul.ep-box-social-links li::marker{
+    display: none
+}
+
+.ep-box-list-wrap .ep-box-social-links {
+    width: 100%;
+    text-align: center;
+}
+
+.emagic .ep-box-wrap .ep-box-list-items .ep-view-details {
+    margin: 12px 0px;
+    display: inline-block;
+    width: 100%;
+}
+
+.emagic .ep-box-wrap .ep-box-list-items .ep-view-details-button {
+    border: 1px solid var(--themeColor);
+    font-size: 12px;
+    padding: 10px 12px;
+    border-radius: 1px;
+    color: var(--themeColor);
+}
+
+.emagic .ep-box-wrap .ep-box-list-items .ep-view-details-button:hover{
+    background-color: var(--themeColor);
+    color: #fff;
+}
+
+
+/*--List Responsive---*/
+
+
+@media only screen and (max-width: 768px) {
+
+    ul.ep-box-social-links li {
+        list-style: none;
+        display: inline-block;
+        margin: 15px 8px;
+    }
+
+    .ep-box-list-items {
+        width: 100%;
+        text-align: center;
+    }
+
+    .emagic .ep-event-meta .ep-time-details {
+        text-align: center;
+    }
+
+    .emagic .ep-box-search-form .ep-box-filter-search input[type="text"] {
+        margin: 7px 0px 14px 0px;
+    }
+
+}
+
+
+
+
+
+
+
+/*-End: List Responsive---*/
+
+
+
+
+
+/*---List End---*/
+
+/*---Box view---*/
+.ep-column-populated {
+    transition: background .3s,border .3s,border-radius .3s,box-shadow .3s;
+    margin: 0;
+    width: 100%;
+}
+
+
+.ep-box-widget-wrap {
+    padding: 30px 30px 20px 30px;
+}
+
+.ep-box-column {   
+    display: flex;
+}
+
+.ep-box-box-item {
+    position: relative;
+    margin-bottom: 30px;
+}
+.ep-box-box-item .ep-box-box-thumb{
+    margin-bottom: 15px;
+    position: relative;
+    overflow: hidden;
+}
+
+.ep-box-box-item .ep-box-box-thumb img{    
+    width: 100%;
+    transition: all .4s ease;
+    -webkit-transition: all .4s ease;
+    -moz-transition: all .4s ease;
+    -ms-transition: all .4s ease;
+}
+
+.ep-box-box-item .ep-box-box-thumb:hover img {
+    transform: scale(1.1);
+}
+
+.ep-box-box-item .ep-box-box-thumb img {
+    height: 100%;
+    max-width: 100%;
+    max-height: 220px;
+    min-height: 220px;
+    object-fit: cover;
+    border: none;
+    border-radius: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.ep-box-box-item .ep-performers-social {
+    display: none; 
+}
+
+.ep-time-details span {
+
+    color: #626262;
+}
+
+.ep-event-meta .ep-time-details {
+    text-transform: uppercase;
+    font-size: 11px;
+    font-weight: 300;
+    padding-top: 0;
+    text-align: left;
+    margin-bottom: 5px;
+}
+
+.ep-event-meta { margin-top: 20px;}
+
+.ep-performer-box-wrap .ep-box-card-role {
+    color: inherit;
+}
+
+.ep-performer-box-wrap .ep-performer-content {
+    text-align: center;
+}
+
+
+/*---Box view End---*/
+
+
+
+/*--Site Location Card View ---*/
+
+.emagic .ep-box-wrap.ep-venue-card-wrap .ep-box-card-item {
+    display: inline-block;
+    width: 100%;
+}
+
+.emagic .ep-box-wrap.ep-venue-card-wrap .ep-box-card-item .ep-box-card-content {
+    display: inline-block;
+    width: 100%;
+}
+
+.emagic .ep-box-wrap.ep-venue-card-wrap .ep-box-card-item .ep-box-card-content .em_venue_add {
+    font-size: 0.7em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    height: 40px;
+}
+
+.emagic .ep-box-wrap.ep-venue-card-wrap .ep-box-card-item .ep-box-card-content .kf-venue-seating-capacity {
+    margin-bottom: 25px;
+}
+
+.emagic .ep-box-wrap.ep-venue-card-wrap .ep-box-card-item:hover .ep-box-card-content .em_venue_add {
+    color: #fff;
+}
+
+.emagic .ep-box-wrap.ep-venue-card-wrap .ep-box-card-item:hover .ep-box-card-content .kf-event-attr-name,
+.emagic .ep-box-wrap.ep-venue-card-wrap .ep-box-card-item:hover .ep-box-card-content .kf-event-attr-value{
+    color: #fff !important;
+}
+
+.emagic .ep-single-venue-wrapper ul.ep-single-box-details-meta li .kf-event-attr-name {
+    margin-right: 8px;
+    white-space: nowrap;
+}
+
+.emagic .ep-single-venue-wrapper ul.ep-single-box-details-meta li {
+    width: 100%;
+}
+
+.emagic .ep-single-venue-wrapper ul.ep-single-box-details-meta li .kf-venue-address {
+    color: rgb(50 50 50);
+}
+
+.emagic .ep-single-venue-wrapper .ep-single-box-content .ep-vanue-directions {
+
+}
+
+.emagic .ep-single-venue-wrapper .ep-single-box-content .ep-vanue-directions a {display: flex;}
+
+.emagic .ep-single-venue-wrapper .ep-single-box-content .ep-vanue-directions a svg{
+    fill: var(--themeColor);
+    width: 14px;
+    margin-left: 5px;
+}
+
+
+.emagic .ep-box-list-wrap .ep-box-list-items .em_venue_add {
+    color: rgb(98 98 98);
+    margin: 15px 0px;
+    font-size: 0.9em;
+    word-break: break-word;
+}
+
+.emagic .ep-box-wrap.ep-venue-box-wrap .ep-box-box-item .ep-venue-content {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+}
+
+
+.emagic .ep-box-wrap.ep-venue-box-wrap .ep-box-box-item .ep-venue-content .em_venue_add {
+    font-size: 0.7em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    height: 40px;
+}
+
+.emagic .ep-box-wrap.ep-venue-box-wrap .ep-box-box-item .ep-venue-content .kf-venue-seating-capacity {
+    margin-bottom: 25px;
+}
+
+.emagic  .ep-box-wrap.ep-venue-details-info-wrap ul.ep-single-box-details-meta li .kf-venue-address  {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+/*--- Site Location Card View ---*/
+
+
+/*--Box Search---*/
+
+.ep-box-search-wrap .ep-box-search-form {
+    position: relative;
+    border: 1px solid #efefef;
+    padding: 20px 5px;
+    margin: 0 0 20px;
+    background: #fafafa;
+    overflow: hidden;
+    box-shadow: 0 3px 2px 0 rgb(0 0 0 / 1%);
+    min-height: 78px;
+    font-family: sans-serif;
+}
+
+.ep-box-search-form .ep-box-filter-search input[type="text"] {
+    min-height: 36px;
+    height: 44px;
+    line-height: 36px;
+    background: #fff;
+    font-size: 13px;
+    color: #777;
+    border: 1px solid #efefef;
+    margin-top: 6px;
+    width: 100%;
+    padding: 4px 10px;
+}
+
+.ep-box-search-form .ep-box-filter-search_buttons input[type="submit"] {
+    color: #fff;
+    min-height: 36px;
+    height: 44px;
+    line-height: 36px;
+    background: #353535;
+    font-size: 13px;
+    border: 1px solid #efefef;
+    margin-top: 6px;
+    width: 100%;
+    padding: 4px 10px;
+
+}
+
+/*--Box Search End---*/
+
+
+/* -- Single Performer---*/
+
+.ep-upcoming-events .ep-event-box-card {
+    border-radius: 3px;
+    overflow: hidden;
+    background-color: #fff;
+    box-shadow: none;
+    margin-bottom: 20px;
+    border-width: 1px;
+    font-family: sans-serif;
+
+}
+
+.ep-event-box-card {
+    border-radius: 5px;
+    overflow: hidden;
+    background-color: #fff;
+    box-shadow: -1px 3px 4px rgb(179 176 176 / 7%);
+    padding: 0px;
+}
+
+.emagic .ep-event-box-card .em_event_cover {
+    position: relative;
+}
+
+.emagic .ep-event-box-card .em_event_cover .em-compat-object-fit {
+    width: 100%;
+    height: 100%;
+    float: left;
+    background-size: cover;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+}
+
+.emagic .ep-event-box-card .em-card-description {
+    padding: 16px 20px 16px;
+    border-color: #f6f6f6;
+    border-width: 0px 1px 0px 1px;
+}
+
+.emagic .ep-card-event-date-wrap span svg{
+    width: 22px;
+}
+
+.ep-card-event-date-wrap .ep-card-event-date {
+    color: #272727;
+    font-size: 13px;
+    padding-left: 5px;
+}
+
+.ep-single-box-info {
+    height: 100%;
+    background-color: var(--themeColor);
+    border-radius: 25px;
+
+}
+
+.ep-single-box-content {
+    position: relative;
+    z-index: 1;
+    height: 100%;
+    padding: 50px 50px 50px 220px;
+    border-radius: 20px;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.95);
+
+}
+
+.ep-single-figure-box {
+    padding: 50px 0;
+    margin-right: -200px;
+    position: relative;
+    z-index: 2;
+}
+
+.ep-single-figure-box img {
+    border-radius: 20px;
+    max-width: 100%;
+}
+
+.ep-single-box-details-meta {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+ul.ep-single-box-details-meta li {    
+    display: inline-flex;
+    align-content: center;
+    align-items: center;
+    font-size: 12px;
+}
+
+ul.ep-single-box-details-meta li a {
+    text-decoration: none;
+    box-shadow: none;
+}
+
+.ep-single-box-title-info .ep-single-box-title {
+    margin-bottom: 8px;
+    padding: 0px;
+    margin-top:0px;
+
+}
+
+.ep-single-box-social a {
+    text-decoration: none;
+    box-shadow: none;
+    margin-right: 12px;
+    display: inline-block;
+    padding: 0;
+    line-height: 16px;
+}
+
+.ep-single-box-social a svg {
+    width: 20px;
+}
+
+.ep-single-box-social {
+    border-top: 2px solid rgb(14 14 14 / 4%);
+    padding: 14px 0px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.ep-single-box-desc {
+    margin: 0px;
+    margin-top: 0px;
+    border-top: 2px solid rgb(14 14 14 / 4%);
+    padding: 20px 0px;
+    font-size: 13px;
+}
+
+
+ul.ep-single-box-details-meta li svg {
+    width: 18px;
+    margin-right: 6px;
+}
+
+.emagic .ep-single-box-title-info .ep-single-box-title {
+    margin-bottom: 10px;
+    word-break: break-word;
+    white-space: normal;
+}
+
+.emagic .ep-single-performer-wrapper {
+    margin-bottom: 50px;
+}
+
+.emagic .ep-single-box-footer {
+    border-top-width: 1px;
+}
+
+.emagic .ep-single-box-tickets-button {
+    text-align: right;
+    padding: 12px 12px;
+    line-height: 20px;
+}
+
+.ep-event-box-cards {
+    margin-top: 25px;
+}
+
+.ep-single-performer-wrapper {
+    margin-bottom: 35px;
+}
+
+.ep-event-address-wrap {
+    margin-top: 10px;
+}
+
+/* -- Single Performer End---*/
+
+
+/* -- Single Performer Responsive---*/
+
+.ep-single-performer-wrapper {
+
+}
+
+/* //Mobile ---*/
+
+@media screen and (max-width: 768px) {
+
+    .ep-single-figure-box {
+        margin-right: 0px;
+        text-align: center;
+    }
+
+
+    .ep-single-box-content {
+        padding: 50px 50px 50px 50px;
+    }
+}
+
+
+@media screen and (max-width: 800px) {
+    
+}
+
+/* -- Single Performer Responsive- End---*/
+
+
+/*--- Popular Performer Widget --*/
+
+.ep-popular-performer {
+    display: flex;
+    margin: 12px 0px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 8px 10px;
+    border-radius: 6px;
+}
+
+.ep-popular-performer .ep-fimage a {
+    display: inline-block;
+}
+
+.ep-popular-performer .ep-fdata .ep-fname a {
+    flex: 1;
+    width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.ep-popular-performer .ep-fimage img {
+    border-radius: 50%;
+    width: 60px !important;
+    height: 60px !important;
+    object-fit: cover;
+}
+
+.ep-popular-performer .ep-fdata {
+    margin-left: 20px;
+    flex: 1;
+}
+
+.ep-popular-performer .ep-fdata .ep-fname{
+    margin-top: 10px;
+    font-size: 15px;
+    align-items: center;
+    padding-right: 8px;
+    display: flex;
+}
+
+.ep-popular-performer .ep-fdata .ep-performer-role {
+    margin-top: 3px;
+    color: rgb(147 142 142 / 86%);
+}
+
+
+/*--- Ends: Popular Performer Widget --*/
+
+
+/*--- Featured Performers Widget ---*/
+
+.ep-featured-performer {
+    margin: 12px 0px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+}
+
+.ep-featured-performer .ep-fimage {
+    width: 100%;
+    text-align: center;
+    background-color: #f7f7f7;
+    padding: 16px 0px;
+    margin-bottom: 18px;
+}
+
+.ep-featured-performer .ep-fimage img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+
+.ep-featured-performer .ep-fdata {
+    text-align: center;
+    margin-bottom: 18px;
+}
+
+.ep-featured-performer .ep-fdata .ep-fname {}
+
+.ep-featured-performer .ep-fdata .ep-fname a {
+    text-overflow: ellipsis;
+    width: 80%;
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-decoration: none !important;
+    margin: 0 0 0px;
+    font-size: 1.3em;
+    line-height: 24px;
+}
+
+.ep-featured-performer-role {
+    margin: 0 0 0px;
+    font-size: 1.3em;
+    font-weight: normal;
+    line-height: 26px;
+    color: rgb(160 160 160);
+} 
+
+/*---End: Featured Performers Widget ---*/
+
+.ep-event-title-block .em_event_custom_link .ep-event-custom-link{
+    text-transform: uppercase;
+    width: 100%;
+    font-weight: bold;
+    background: #23C16C;
+    color: #fff;
+    border-radius: 4px;
+    transition: 0.2s;
+    text-shadow: none;
+    border: 0px;
+    line-height: 22px;
+    padding: 12px 12px;
+    font-size: 14px;
+}
+
+.ep-attendees-container .ep-attendees-list-container ol li{ display: block !important;}
+
+.ep-paypal-active #paypal-button-container.ep-paypal-wrap {
+    margin-top: 10px;
+    padding: 0px 20px;
+    width: 460px;
+    max-width: 100%;
+
+}
+
+.ep-paypal-active #paypal-button-container.ep-paypal-wrap {
+    margin-top: 10px;
+}
+
+.ep-paypal-active .ep-payment-integration .ep-payment_prcoessors {
+
+}
+
+.emagic .ep-paypal-active .ep-payment-checkout-btn {
+    top: 62px;
+}
+
+.ep-payment-checkout-wrap .ep-payment-selector {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 10px;
+}
+
+.ep-payment-checkout-btn-wrap {
+    display: flex;
+    border-radius: 4px;
+    padding: 7px 20px;
+    min-height: 46px;
+    max-height: 46px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #000;
+    background-color: #fcfcfc;
+    border: 1px solid #f4f4f4;
+    cursor: pointer;
+    line-height: 28px;
+}
+
+.ep-payment-checkout-btn-wrap.ep-payment-checkout-paypal {
+    /*  border: 2px solid #3C85CD;*/
+}
+
+.ep-payment-checkout-btn-wrap.ep-payment-checkout-stripe {
+    /*border: 2px solid #5B48F9;*/
+}
+.ep-payment-checkout-btn-wrap.ep-payment-checkout-offline {
+    /*   border: 2px solid var(--themeColor);*/
+    /* border: 2px solid #000;*/
+    padding: 7px 40px;
+}
+
+
+
+.kf-payment-mode-select input[type="radio"]:checked+label.ep-payment-checkout-paypal {
+    border: 2px solid #3C85CD;
+}
+
+.kf-payment-mode-select input[type="radio"]:checked+label.ep-payment-checkout-stripe {
+    border: 2px solid #5B48F9;
+}
+
+.kf-payment-mode-select input[type="radio"]:checked+label.ep-payment-checkout-offline {
+    border: 2px solid #000;
+}
+
+.kf-payment-mode-select input[type="radio"] {
+    display: none;
+}
+
+
+.ep-payment-checkout-btn-wrap span {
+    line-height: 10px;
+    padding: 0px;
+    margin-left: 12px;
+    display: inline-flex;
+    align-items: center;
+}
+
+.ep-payment-checkout-btn-wrap span svg {
+    height: 32px;
+    width:100%;
+}
+
+.ep-payment-checkout-btn-wrap.ep-payment-checkout-paypal span svg {
+    height: 24px;
+}
+
+
+
+/*---FrontEnd Event_--*/
+
+
+@media only screen and (max-width: 600px) {
+    .ep-event-submit-form .ep_event_form form .em_input_row input#em-pac-input {
+        left: 9px !important;
+        top: -2px !important;
+        height: 42px;
+        width: 75%;
+    }
+}

@@ -1,0 +1,27 @@
+.em_modal_table {border:1px solid #ddd; margin-top: 20px; color: #666;}
+
+.em_modal_table tr:nth-child(even) {background: #eeeeee;}
+.em_modal_table tr:nth-child(odd) {background: #ffffff;}
+
+.em_modal_table tr td{ border: none; padding: 10px 15px;}
+.em_modal_table tr td:nth-child(odd) {text-transform: uppercase;}
+
+.em_modal_table tr td:nth-child(odd) {
+    text-transform: uppercase;
+    border-right: 1px solid #eee;
+}
+.em_modal_table tr:nth-child(even) td:nth-child(odd) {
+    border-right: 1px solid #fff;
+}
+#em_cancelled_btn{
+    text-transform: capitalize;
+    font-weight: normal;
+    padding: 5px 8px;
+    letter-spacing: 0px;
+    background-color: #999;
+    color: #fff;
+}
+#em_cancelled_btn:hover {
+    background-color: #666;
+}
+

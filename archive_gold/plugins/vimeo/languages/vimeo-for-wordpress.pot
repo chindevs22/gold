@@ -1,0 +1,146 @@
+# Copyright (C) 2021 Vimeo
+# This file is distributed under the GPL v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Vimeo 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/vimeo-plugin\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2021-09-21T19:53:57+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.5.0\n"
+"X-Domain: vimeo-for-wordpress\n"
+
+#. Plugin Name of the plugin
+#. Author of the plugin
+msgid "Vimeo"
+msgstr ""
+
+#. Plugin URI of the plugin
+msgid "https://vimeo.com/create?vcid=40636"
+msgstr ""
+
+#. Description of the plugin
+msgid "Bring the power of video to your WordPress site and WooCommerce product pages by easily creating, uploading, and embedding videos to boost engagement and drive conversion."
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://vimeo.com/?vcid=40637"
+msgstr ""
+
+#: src/Settings/Settings.php:63
+msgid "User Tracking Consent"
+msgstr ""
+
+#: src/Settings/Settings.php:66
+msgid "Help us improve our features and services by sharing non-sensitive data via usage tracking that shows us how Vimeo is used. No personal data is tracked or stored."
+msgstr ""
+
+#: src/Settings/Settings.php:78
+msgid "Activation key*"
+msgstr ""
+
+#: src/Settings/Settings.php:87
+msgid "Paste the Activation Key from Vimeo.com in the box above."
+msgstr ""
+
+#: src/Settings/Settings.php:102
+msgid "Share anonymous usage data?"
+msgstr ""
+
+#: src/Settings/Settings.php:132
+msgid "Activation Successful."
+msgstr ""
+
+#: src/Settings/Settings.php:135
+msgid "Cannot validate activation key. Please try again."
+msgstr ""
+
+#: src/Settings_Page/Settings_Page.php:27
+msgid "Settings"
+msgstr ""
+
+#: src/Settings_Page/Settings_Page.php:47
+#: src/Settings_Page/Settings_Page.php:48
+msgid "Vimeo Settings"
+msgstr ""
+
+#: src/Vimeo/Vimeo_Auth.php:33
+#: src/Vimeo/Vimeo_Auth.php:40
+msgid "Error disconnecting account, please try again."
+msgstr ""
+
+#: src/Vimeo/Vimeo_Auth.php:38
+msgid "Your account has been disconnected successfully."
+msgstr ""
+
+#: src/WooCommerce/Vimeo_WC.php:29
+msgid "Vimeo video gallery"
+msgstr ""
+
+#: src/WooCommerce/Vimeo_WC_Video_Tab.php:32
+#: src/WooCommerce/Vimeo_WC_Video_Tab.php:53
+msgid "Videos"
+msgstr ""
+
+#: Views/Settings.php:13
+msgid "Vimeo for WordPress Settings"
+msgstr ""
+
+#: Views/Settings.php:29
+msgid "You’re ready to start using Vimeo for WordPress"
+msgstr ""
+
+#: Views/Settings.php:32
+msgid "You can now access your account."
+msgstr ""
+
+#: Views/Settings.php:40
+msgid "Invalid Activation Key. Please re-enter your activation key."
+msgstr ""
+
+#: Views/_no_auth_user.php:6
+msgid "Step 1"
+msgstr ""
+
+#: Views/_no_auth_user.php:7
+msgid "Vimeo for WooCommerce and Wordpress Settings"
+msgstr ""
+
+#: Views/_no_auth_user.php:9
+msgid "Head over to Vimeo to get your activation key. You’ll need this to connect your account to WordPress. Don’t have a Vimeo account?"
+msgstr ""
+
+#: Views/_no_auth_user.php:11
+msgid "Sign up"
+msgstr ""
+
+#: Views/_no_auth_user.php:24
+msgid "Get an activation key"
+msgstr ""
+
+#: Views/_no_auth_user.php:31
+msgid "Step 2"
+msgstr ""
+
+#: Views/_no_auth_user.php:32
+msgid "Vimeo App settings"
+msgstr ""
+
+#: Views/_no_auth_user.php:34
+msgid "Using the activation key you recieved on Vimeo.com, copy and paste it below to connect your account."
+msgstr ""
+
+#. translators: %1$s is replaced with the total number of videos
+#: Views/_profile.php:29
+msgid "%1$s video"
+msgid_plural "%1$s videos"
+msgstr[0] ""
+msgstr[1] ""
+
+#: Views/_profile.php:41
+msgid "Disconnect Vimeo Account"
+msgstr ""
