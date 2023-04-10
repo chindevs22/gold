@@ -8,7 +8,7 @@
  * Text Domain:       chindevs
  */
 
-
+define( 'CD_TEMP', dirname( __FILE__ ) );
 /**
  * Plugin version.
  */
@@ -53,68 +53,90 @@ $productCategoryMap = array(
 
 use \Elementor\Plugin;
 
-//require plugin_dir_path(__FILE__) . 'cd_functions/*.php';
+// load all files in functions.php
 $cd_functions_dir = plugin_dir_path(__FILE__) . 'cd_functions/';
 foreach (glob($cd_functions_dir . '*.php') as $filename) {
     require_once $filename;
 }
+
+// load the template files on top of the LMS template path
+add_filter('stm_lms_template_file', function($path, $template_name){
+    if(file_exists(CD_TEMP.$template_name)) {
+        return CD_TEMP;
+    }
+    return $path;
+}, 10, 2);
+
+// register Gift Course style
+function gift_course_scripts() {
+    wp_enqueue_style( 'gift-course-style', plugins_url( '/css/gift-course.css', __FILE__ ) );
+    wp_enqueue_script( 'gift-course-script', plugins_url( '/js/gift-course.js', __FILE__ ) );
+}
+
+add_action( 'wp_enqueue_scripts', 'gift_course_scripts' );
+// add_action( 'wp_enqueue_scripts', 'gift_course_script' );
+
+// register script
+
+// data migration
 function read_csv($file_name, $type) {
     //file mapping from our File Manager
-	$fileName = "/home/freewaydns-dev108/cd-test-docs/{$file_name}";
-	$file = fopen($fileName, 'r');
-	$dataArray = array();
- 	$headerLine = true;
-	while (($line = fgetcsv($file)) !== FALSE) {
+    $fileName = "/home/freewaydns-dev108/cd-test-docs/{$file_name}";
+    $file = fopen($fileName, 'r');
+    $dataArray = array();
+    $headerLine = true;
+    while (($line = fgetcsv($file)) !== FALSE) {
         // check header line and if so store for the column names
-	    if($headerLine) {
-	        $headerLine = false;
-	        $mappingLine = $line;
-	        continue;
-	    }
+        if($headerLine) {
+            $headerLine = false;
+            $mappingLine = $line;
+            continue;
+        }
         // loop through the column values in one row
         $count = 0;
         $tempArray = array();
         // create mapping based on header
         foreach($line as $value) {
             $sanitized_value = preg_replace("/\\\\u([0-9abcdef]{4})/", "&#x$1;", $value);
-			$tempArray[$mappingLine[$count++]] = $sanitized_value;
+            $tempArray[$mappingLine[$count++]] = $sanitized_value;
         }
-		if ($type == "lesson") {
-			create_lesson_from_csv($tempArray);
-		} else if ($type == "course") {
-			create_course_from_csv($tempArray);
-		} else if ($type == "question") {
-			create_question_from_csv($tempArray);
-		} else if ($type == "user") {
-		    create_user_from_csv($tempArray);
-		} else if ($type == "userquiz") {
-		    progress_users_quiz_from_csv($tempArray);
-		} else if ($type == "useranswers") {
-		    progress_users_answers_from_csv($tempArray);
-		} else if ($type == "enrol") {
-		    enrol_users_from_csv($tempArray);
-		} else if ($type == "publications") {
-			create_publications_from_csv($tempArray);
-		}
-	}
-	fclose($file);
+        if ($type == "lesson") {
+            create_lesson_from_csv($tempArray);
+        } else if ($type == "course") {
+            create_course_from_csv($tempArray);
+        } else if ($type == "question") {
+            create_question_from_csv($tempArray);
+        } else if ($type == "user") {
+            create_user_from_csv($tempArray);
+        } else if ($type == "userquiz") {
+            progress_users_quiz_from_csv($tempArray);
+        } else if ($type == "useranswers") {
+            progress_users_answers_from_csv($tempArray);
+        } else if ($type == "enrol") {
+            enrol_users_from_csv($tempArray);
+        } else if ($type == "publications") {
+            create_publications_from_csv($tempArray);
+        }
+    }
+    fclose($file);
 }
 
 
-//FEEDBACK FORM
+// FEEDBACK FORM
 // based on form submission
 function submit_form_js() {
-    ?>
-        <script>
-			document.addEventListener( 'wpcf7submit', function( event ) {
-			  button = document.getElementsByClassName("stm-lms-lesson_navigation_complete")[0];
-			  button.style.display = "inline";
-			}, false );
+?>
+    <script>
+        document.addEventListener( 'wpcf7submit', function( event ) {
+          button = document.getElementsByClassName("stm-lms-lesson_navigation_complete")[0];
+          button.style.display = "inline";
+        }, false );
 
-        </script>
-    <?php
+    </script>
+<?php
 }
 
+// ??
 function hide_complete_button() {
 	?>
 		<style>.stm-lms-lesson_navigation_complete {display: none;}</style>
@@ -132,8 +154,5 @@ function ms_change_single_course_button_text( $text ) {
     return 'New Button Text';
 }
 add_filter( 'ms_single_course_button_text', 'ms_change_single_course_button_text' );
-
-// add_shortcode( 'test-functions', 'create_country_options' );
-// add_action('wp_head', 'update_registration_form');
 add_shortcode( 'test-functions', 'create_course_data' );
 
