@@ -9,6 +9,8 @@
  */
 
 define( 'CD_TEMP', dirname( __FILE__ ) );
+define( 'GIFT_COURSE_URL', plugin_dir_url( __FILE__ ) );
+
 /**
  * Plugin version.
  */
@@ -53,6 +55,8 @@ $productCategoryMap = array(
 
 use \Elementor\Plugin;
 
+require_once  plugin_dir_path(__FILE__) . 'gift_courses.php';
+
 // load all files in functions.php
 $cd_functions_dir = plugin_dir_path(__FILE__) . 'cd_functions/';
 foreach (glob($cd_functions_dir . '*.php') as $filename) {
@@ -68,15 +72,16 @@ add_filter('stm_lms_template_file', function($path, $template_name){
 }, 10, 2);
 
 // register Gift Course style
-function gift_course_scripts() {
-    wp_enqueue_style( 'gift-course-style', plugins_url( '/css/gift-course.css', __FILE__ ) );
-    wp_enqueue_script( 'gift-course-script', plugins_url( '/js/gift-course.js', __FILE__ ) );
-}
 
 add_action( 'wp_enqueue_scripts', 'gift_course_scripts' );
-// add_action( 'wp_enqueue_scripts', 'gift_course_script' );
+function gift_course_scripts() {
 
-// register script
+	$assets = GIFT_COURSE_URL;
+	error_log("trying to enqueue scripts");
+	error_log($assets);
+	wp_enqueue_script( 'gift-course-scripts', plugins_url( '/js/gift-course.js', __FILE__ ), array(), false, true );
+    wp_enqueue_style( 'gift-course', $assets . '/css/gift-course.css', array(), 'false', false);
+}
 
 // data migration
 function read_csv($file_name, $type) {

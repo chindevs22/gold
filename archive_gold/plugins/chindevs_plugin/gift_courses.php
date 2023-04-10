@@ -94,7 +94,7 @@ function gc_cart_items_fields( $fields ) {
 
 function add_gift_course_button( $course_id ) {
 	$price = get_price( $course_id );
-
+    error_log("hi trying to add the button");
 	if ( ! empty( $price ) ) {
 		STM_LMS_Templates::show_lms_template( 'gift_courses/buy', compact( 'course_id', 'price' ) );
 	}

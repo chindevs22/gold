@@ -1,6 +1,3 @@
-// we completely deleted the enterprise version of assets/js/enterprise-course.js
-//masterstudy-lms-learning-management-system/_core/assets/js/gift-course.js
-
 "use strict";
 
 (function ($) {
