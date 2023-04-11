@@ -1,5 +1,3 @@
-// masterstudy-lms-learning-management-system-pro/stm-lms-templates/gift_courses/gift-course-modal.php
-
 <?php
 /**
  * @var $course_id

@@ -150,11 +150,6 @@ function hide_complete_button() {
 add_action('wp_head', 'submit_form_js');
 add_shortcode('shortcodefeedback', 'hide_complete_button'); // required on lesson page
 
-function my_theme_enqueue_styles() {
-    wp_enqueue_style( 'my_theme_css', get_template_directory_uri() . '/cd_themes/css/style.css' );
-}
-add_action( 'wp_enqueue_scripts', 'my_theme_enqueue_styles' );
-
 function ms_change_single_course_button_text( $text ) {
     return 'New Button Text';
 }

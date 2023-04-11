@@ -1,6 +1,3 @@
-//masterstudy-lms-learning-management-system-pro/stm-lms-templates/modals/gift-course.php'
-// defines the modal to display
-
 <?php
 /**
  *
