@@ -102,6 +102,7 @@
       var item_id = $(this).data('delete-course');
       var group_id = $(this).data('delete-enterprise');
       var guest = $(this).data('delete-guest');
+      var gift_course_id = $(this).data('delete-gift-course'); //ChinDevs add
       $.ajax({
         url: stm_lms_ajaxurl,
         dataType: 'json',
@@ -111,6 +112,7 @@
           nonce: stm_lms_nonces['stm_lms_delete_from_cart'],
           item_id: item_id,
           group_id: group_id,
+          gift_course_id: gift_course_id,
           guest: guest
         },
         beforeSend: function beforeSend() {

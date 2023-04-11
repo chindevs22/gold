@@ -40,6 +40,8 @@ $items = stm_lms_get_cart_items($user_id, apply_filters('stm_lms_cart_items_fiel
                 <div class="stm_lms_cart__item_delete" data-label="<?php esc_html_e('Delete', 'masterstudy-lms-learning-management-system'); ?>">
                     <i class="lnr lnr-cross"
                        <?php if(!empty($item['enterprise'])) echo "data-delete-enterprise=" . $item['enterprise']; ?>
+                       //ChinDevs code add
+                       <?php if(!empty($item['gift_course'])) echo "data-delete-gift-course=" . $item['gift_course']; ?>
                        data-delete-course="<?php echo intval($item['item_id']); ?>"></i>
                 </div>
 
