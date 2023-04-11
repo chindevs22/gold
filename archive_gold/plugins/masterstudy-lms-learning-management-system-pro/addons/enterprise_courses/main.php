@@ -712,10 +712,14 @@ class STM_LMS_Enterprise_Courses {
 	}
 
 	public function delete_from_cart( $user_id ) {
+		error_log("inside Enterprise delete from cart");
 		$group_id = ( ! empty( $_GET['group_id'] ) ) ? intval( $_GET['group_id'] ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		$item_id  = intval( $_GET['item_id'] ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
+		$gc_id = ( ! empty( $_GET['gift_course_id'] ) ) ? intval( $_GET['gift_course_id'] ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+
 		if ( ! empty( $group_id ) && ! empty( $item_id ) ) {
+			error_log("group id is NOT empty");
 			global $wpdb;
 			$table = stm_lms_user_cart_name( $wpdb );
 
@@ -729,7 +733,8 @@ class STM_LMS_Enterprise_Courses {
 			);
 		}
 
-		if ( empty( $group_id ) ) {
+		if ( empty( $group_id ) && empty( $gc_id ) ) {
+			error_log("hitting Enterprise else condition");
 			stm_lms_get_delete_cart_item( $user_id, $item_id );
 		}
 

@@ -250,28 +250,36 @@ function check_gift_course_in_cart( $user_id, $item_id, $gc_id, $fields = array(
 }
 
 // delete from the cart table if they remove it from cart
-function delete_from_cart_gc() {
+function delete_from_cart_gc( $user_id ) {
 	error_log("inside delete from cart GC");
-// 	$group_id = ( ! empty( $_GET['group_id'] ) ) ? intval( $_GET['group_id'] ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-// 	$item_id  = intval( $_GET['item_id'] ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
-// 	if ( ! empty( $group_id ) && ! empty( $item_id ) ) {
-// 		global $wpdb;
-// 		$table = stm_lms_user_cart_name( $wpdb );
+	$gc_id= ( ! empty( $_GET['gift_course_id'] ) ) ? intval( $_GET['gift_course_id'] ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
-// 		$wpdb->delete(
-// 			$table,
-// 			array(
-// 				'user_id'    => $user_id,
-// 				'item_id'    => $item_id,
-// 				'enterprise' => $group_id,
-// 			)
-// 		);
-// 	}
+	$group_id = ( ! empty( $_GET['group_id'] ) ) ? intval( $_GET['group_id'] ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+    error_log("is there a gc id present?");
+    error_log($gc_id);
 
-// 	if ( empty( $group_id ) ) {
-// 		stm_lms_get_delete_cart_item( $user_id, $item_id );
-// 	}
+	$item_id  = intval( $_GET['item_id'] ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+
+   // if u have an enterprise and course id
+	if ( ! empty( $gc_id ) && ! empty( $item_id ) ) {
+		global $wpdb;
+		$table = stm_lms_user_cart_name( $wpdb );
+
+		$wpdb->delete(
+			$table,
+			array(
+				'user_id'    => $user_id,
+				'item_id'    => $item_id,
+				'gift_course' => $gc_id,
+			)
+		);
+	}
+
+	if ( empty( $gc_id ) && empty($group_id) ) {
+		error_log("hitting GC else condition");
+		stm_lms_get_delete_cart_item( $user_id, $item_id );
+	}
 
 }
 
