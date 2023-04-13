@@ -22,7 +22,6 @@ add_filter( 'stm_lms_cart_items_fields', 'gc_cart_items_fields' );
 add_filter( 'stm_lms_before_create_order', 'stm_lms_before_create_gc_order', 100, 2 );
 add_filter( 'stm_lms_post_types', 'gc_stm_lms_post_types', 10, 1 );
 
-
 // NEED TO UPDATE THESE TWO FCNS
 function gc_order_accepted( $user_id, $cart_items ) {
 	error_log("inside order method");
@@ -82,10 +81,10 @@ function delete_from_cart_gc_filter() {
 }
 
 function gc_stm_lms_post_types( $post_types ) {
-		$post_types[] = 'stm-gc-emails';
+	$post_types[] = 'stm-gc-emails';
 
-		return $post_types;
-	}
+	return $post_types;
+}
 
 function gc_cart_items_fields( $fields ) {
 	$fields[] = 'gift_course';
@@ -171,8 +170,6 @@ function stm_lms_before_create__gc_order( $order_meta, $cart_item ) {
 	return $order_meta;
 }
 
-
-
 /*Product*/
 function create_product( $id ) {
 	error_log("create product");
@@ -252,6 +249,7 @@ function check_gift_course_in_cart( $user_id, $item_id, $gc_id, $fields = array(
 // delete from the cart table if they remove it from cart
 function delete_from_cart_gc( $user_id ) {
 	error_log("inside delete from cart GC");
+// 	error_log($_GET['gift_course_id']);
 
 	$gc_id= ( ! empty( $_GET['gift_course_id'] ) ) ? intval( $_GET['gift_course_id'] ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
@@ -284,7 +282,6 @@ function delete_from_cart_gc( $user_id ) {
 }
 
 function add_to_cart_gc() {
-
 	error_log("adding to cart gc");
 	if ( ! is_user_logged_in() || empty( $_GET['course_id'] ) ) {
 		die;
@@ -300,17 +297,16 @@ function add_to_cart_gc() {
 	}
 
 	$emails = ( ! empty( $data['emails'] ) ) ? sanitize_text_field( implode( ',', $data['emails'] ) ) : '';
-
-	error_log("The emails returned on add to cart");
-	error_log(print_r($emails, true));
 	// create a post with the email
 	$gc_email_id = wp_insert_post(
 		array(
 			'post_title' => sanitize_text_field("Gift Course for ". $emails),
+			'post_content' => sanitize_text_field($emails),
 			'post_type'  => 'stm-gc-emails',
 			'post_status' => 'publish'
 		)
 	);
+
 	update_post_meta( $gc_email_id, 'emails', $emails );
 	update_post_meta( $gc_email_id, 'author_id', $user_id );
 
@@ -355,11 +351,23 @@ function add_to_cart_gc() {
 }
 
 // update the name of the item in the cart with a "gift" tag
-add_filter( 'woocommerce_cart_item_name', 'woo_cart_group_name', 100, 3 );
-function woo_cart_group_name( $title, $cart_item, $cart_item_key ) {
+add_filter( 'stm_lms_after_single_item_cart_title', 'after_single_item_cart_title_gc');
+function after_single_item_cart_title_gc( $item ) {
+	$gift_course = '';
+	$gc_email = get_post_field('post_content', $item['gift_course'] );
+	if ( ! empty( $item['gift_course'] ) ) {
+		/* translators: %s Title */
+		$gift_course = "<span class='enterprise-course-added'> " . sprintf( esc_html__( '%1$sCourse Gift%2$s for user %3$s', 'masterstudy-lms-learning-management-system-pro' ), '<label>', '</label>', '<strong>' . $gc_email . '</strong>' ) . '</span>';
+	}
+	echo wp_kses_post( $gift_course );
+}
+
+add_filter( 'woocommerce_cart_item_name', 'woo_cart_gift_course_name', 999, 3 );
+function woo_cart_gift_course_name( $title, $cart_item, $cart_item_key ) {
 	if ( ! empty( $cart_item['gift_course_id'] ) ) {
 		$course_id = $cart_item['gift_course_id'];
-		$sub_title = "<span class='product-enterprise-group'>" . sprintf( esc_html__( 'Gift for %s', 'masterstudy-lms-learning-management-system-pro' ), "friends" ) . '</span>';
+		error_log("shud apply tag");
+		$sub_title = "<span class='product-enterprise-group'>" . sprintf( esc_html__( 'Course Gift For %s', 'masterstudy-lms-learning-management-system-pro' ), "friends" ) . '</span>';
 
 		$title .= $sub_title;
 	}
