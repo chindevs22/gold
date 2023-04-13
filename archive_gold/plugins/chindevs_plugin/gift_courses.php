@@ -1,12 +1,4 @@
 <?php
-// if ( class_exists( 'STM_LMS_Woocommerce_Courses_Admin' ) && STM_LMS_Cart::woocommerce_checkout_enabled() ) {
-// 	new STM_LMS_Woocommerce_Courses_Admin(
-// 		'gift_course',
-// 		esc_html__( 'Gift Course LMS Products', 'masterstudy-lms-learning-management-system-pro' ),
-// 		$gift_meta_key
-// 	);
-// }
-//
 
 /* Actions */
 add_action( 'wp_ajax_stm_lms_add_to_cart_gc', 'add_to_cart_gc' );
@@ -24,38 +16,32 @@ add_filter( 'stm_lms_post_types', 'gc_stm_lms_post_types', 10, 1 );
 
 // NEED TO UPDATE THESE TWO FCNS
 function gc_order_accepted( $user_id, $cart_items ) {
-	error_log("inside order method");
-// 	if ( ! empty( $cart_items ) ) {
-// 		foreach ( $cart_items as $cart_item ) {
+	if ( ! empty( $cart_items ) ) {
+		foreach ( $cart_items as $cart_item ) {
 
-// 			if ( ! empty( $cart_item['enterprise'] ) ) {
-// 				/*Get Group Members*/
-// 				$group_id = intval( $cart_item['enterprise'] );
-
-// 				$users = self::get_group_users( $group_id );
-
-// 				if ( ! empty( $users ) ) {
-// 					foreach ( $users as $id ) {
-// 						STM_LMS_Course::add_user_course( $cart_item['item_id'], $id, 0, 0, false, $group_id );
-// 						STM_LMS_Course::add_student( $cart_item['item_id'] );
-// 					}
-// 				}
-// 			} else {
-// 				STM_LMS_Course::add_user_course( $cart_item['item_id'], $user_id, 0, 0 );
-// 				STM_LMS_Course::add_student( $cart_item['item_id'] );
-// 			}
-// 		}
-// 	}
+			if ( ! empty( $cart_item['gift_course'] ) ) {
+				/*Get Group Members*/
+				$gc_id = intval( $cart_item['gift_course'] );
+				error_log("gc order accepted");
+				error_log($gc_id);
+				add_users_to_course($gc_id);
+			} else {
+				STM_LMS_Course::add_user_course( $cart_item['item_id'], $user_id, 0, 0 );
+				STM_LMS_Course::add_student( $cart_item['item_id'] );
+			}
+		}
+	}
 	/*Delete Cart*/
 	stm_lms_get_delete_cart_items( $user_id );
 }
 
 // NEED TO UPDATE THESE TWO FCNS
 function gc_order_removed( $course_id, $cart_item ) {
-// 	if ( ! empty( $cart_item['enterprise'] ) ) {
-// 		$group_id = intval( $cart_item['enterprise'] );
+	error_log("order was removed");
+// 	if ( ! empty( $cart_item['gift_course'] ) ) {
+// 		$gc_id = intval( $cart_item['gift_course'] );
 
-// 		$users = self::get_group_users( $group_id );
+// 		$users = create_group_users( $gc_id );
 
 // 		if ( ! empty( $users ) ) {
 // 			foreach ( $users as $id ) {
@@ -103,6 +89,16 @@ function get_price( $course_id ) {
 	return get_post_meta( $course_id, 'price', true );
 }
 
+function add_users_to_course($emails) {
+	$users    = create_group_users( $emails );
+
+	if ( ! empty( $users ) ) {
+		foreach ( $users as $id ) {
+			STM_LMS_Course::add_user_course( $course_data['item_id'], $id, 0, 0);
+			STM_LMS_Course::add_student( $course_data['item_id'] );
+		}
+	}
+}
 //  on the existing action where woocomerce approves order
 //  add this code this is from includes/classes/class-woocommerce.php
 function stm_lms_woocommerce_gc_order_approved( $course_data ) {
@@ -116,11 +112,10 @@ function stm_lms_woocommerce_gc_order_approved( $course_data ) {
 		error_log("on order approved");
 		error_log(print_r($emails, true));
 		$users    = create_group_users( $emails );
-		error_log("the users");
-		error_log(print_r($users, true));
+
 		if ( ! empty( $users ) ) {
 			foreach ( $users as $id ) {
-				STM_LMS_Course::add_user_course( $course_data['item_id'], $id, 0, 0, false, 55555 );
+				STM_LMS_Course::add_user_course( $course_data['item_id'], $id, 0, 0, false);
 				STM_LMS_Course::add_student( $course_data['item_id'] );
 			}
 		}
@@ -243,13 +238,10 @@ function check_gift_course_in_cart( $user_id, $item_id, $gc_id, $fields = array(
 	return $wpdb->get_results($wpdb->prepare(
     "SELECT * FROM wp_stm_lms_user_cart WHERE `user_id` = %d AND `item_id` = %d AND `gift_course` = %d",
       $user_id, $item_id, $gc_id), ARRAY_N );
-
 }
 
 // delete from the cart table if they remove it from cart
 function delete_from_cart_gc( $user_id ) {
-	error_log("inside delete from cart GC");
-// 	error_log($_GET['gift_course_id']);
 
 	$gc_id= ( ! empty( $_GET['gift_course_id'] ) ) ? intval( $_GET['gift_course_id'] ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
@@ -278,7 +270,6 @@ function delete_from_cart_gc( $user_id ) {
 		error_log("hitting GC else condition");
 		stm_lms_get_delete_cart_item( $user_id, $item_id );
 	}
-
 }
 
 function add_to_cart_gc() {
@@ -345,6 +336,7 @@ function add_to_cart_gc() {
 		$r['text']     = esc_html__( 'Go to Cart', 'masterstudy-lms-learning-management-system-pro' );
 		$r['cart_url'] = esc_url( wc_get_cart_url() );
 	}
+
 
 	$r['redirect'] = STM_LMS_Options::get_option( 'redirect_after_purchase', false );
 	wp_send_json( $r );
