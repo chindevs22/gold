@@ -65,6 +65,7 @@ function stm_lms_accept_order() {
 }
 
 //** CART FUNCTIONS **/
+// DELETE FROM CART RELIES on LMS.js and masterstudy-lms-learning-management-system/_core/stm-lms-templates/checkout/items.php
 function delete_from_cart_gc_filter() {
 	return false;
 }
