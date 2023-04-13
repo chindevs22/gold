@@ -9,9 +9,6 @@
 
 
 	$body.on('click', '.add-to-cart', function (e) {
-		console.log("adding to cart!");
-		alert("hi");
-		console.log(emails);
       e.preventDefault();
 	  if ($('.stm_lms_popup_add_users__inner').find('.group-emails').children().length < 2) {
         $('.stm_lms_popup_add_users__inner').find('.heading_font').children().removeClass('warning');
