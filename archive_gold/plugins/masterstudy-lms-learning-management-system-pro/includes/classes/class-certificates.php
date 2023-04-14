@@ -31,6 +31,35 @@ class STM_LMS_Certificates {
 
 	}
 
+
+    //ChinDevs function to add GPA to certificate
+	public static function generate_certificate_student_gpa ( $user_id , $course_id ) {
+		error_log("getting GPA for student in course");
+        global $wpdb;
+        $table = stm_lms_user_quizzes_name( $wpdb );
+
+        $request = "SELECT progress FROM {$table}
+                WHERE
+                user_id = {$user_id} AND
+                course_id = {$course_id}";
+
+        // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+        $quiz_grades = $wpdb->get_results( $request, ARRAY_A );
+        error_log(print_r($quiz_grades, true));
+
+		$total_quizzes = count($quiz_grades);
+		$grade = 0;
+		foreach($quiz_grades as $quiz_row) {
+			$grade += $quiz_row['progress'];
+		}
+		if ($total_quizzes == 0) {
+			return 100;
+		} else {
+			return $grade/$total_quizzes;
+		}
+	}
+
+
 	public static function generate_certificate_user_code( $user_id, $course_id ) {
 		$current_code = get_user_meta( $user_id, "stm_lms_certificate_code_{$course_id}", true );
 		if ( ! empty( $current_code ) ) {
