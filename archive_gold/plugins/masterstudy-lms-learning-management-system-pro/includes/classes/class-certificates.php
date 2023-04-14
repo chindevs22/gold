@@ -34,7 +34,6 @@ class STM_LMS_Certificates {
 
     //ChinDevs function to add GPA to certificate
 	public static function generate_certificate_student_gpa ( $user_id , $course_id ) {
-		error_log("getting GPA for student in course");
         global $wpdb;
         $table = stm_lms_user_quizzes_name( $wpdb );
 
@@ -45,7 +44,6 @@ class STM_LMS_Certificates {
 
         // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
         $quiz_grades = $wpdb->get_results( $request, ARRAY_A );
-        error_log(print_r($quiz_grades, true));
 
 		$total_quizzes = count($quiz_grades);
 		$grade = 0;
