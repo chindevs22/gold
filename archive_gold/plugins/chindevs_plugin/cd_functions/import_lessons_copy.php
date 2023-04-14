@@ -16,6 +16,8 @@
 		} else {
 			//study material post meta
 			$link = 'https://dev108.freewaydns.net/wp-content/uploads/course_materials/'.$lessonData['course_id'].'/'.$lessonData['attachment'];
+			// TODO: edit this to be the PDF flipbook code
+			// [3d-flip-book mode="fullscreen" pdf="https://dev108.freewaydns.net/wp-content/uploads/2023/04/shlokas.pdf"][/3d-flip-book]
 			$file_content = '<a href="https:////dev108.freewaydns.net/wp-content/plugins/pdfjs-viewer-shortcode/pdfjs/web/viewer.php?file='.$link.'&amp;dButton=false&amp;pButton=true&amp;oButton=false&amp;sButton=true#zoom=auto&amp;pagemode=none" target="_blank" rel="noopener"><img src="https://dev108.freewaydns.net/wp-content/uploads/2023/02/button_open-pdf.png" alt="PDF icon" /></a>';
 			// audio post meta
 			$embedded_audio = '[embed]'.$lessonData['audio_url'].'[/embed]';
