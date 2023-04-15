@@ -422,6 +422,10 @@ class STM_LMS_User_Menu {
 					case 'groups':
 						$add_element = class_exists( 'STM_LMS_Enterprise_Courses' ) && $full_menu;
 						break;
+// 					ChinDevs code for adding user events tab
+					case 'user_events':
+						$add_element = $full_menu;
+						break;
 					case 'my_points':
 						$add_element = class_exists( 'STM_LMS_Point_System_Interface' ) && $full_menu;
 						break;
