@@ -19,10 +19,10 @@ add_filter(
 	function ( $menus ) {
 		$menus[] = array(
 			'order'        => 111,
-			'id'           => 'groups',
-			'slug'         => 'enterprise-groups',
+			'id'           => 'user_events',
+			'slug'         => 'user-events',
 			'lms_template' => 'stm-lms-user-events',
-			'menu_title'   => esc_html__( 'Groups #2', 'masterstudy-lms-learning-management-system-pro' ),
+			'menu_title'   => esc_html__( 'Enrolled Events', 'masterstudy-lms-learning-management-system-pro' ),
 			'menu_icon'    => 'fa-users',
 			'menu_url'     => user_events_url(),
 			'menu_place'   => 'learning',
