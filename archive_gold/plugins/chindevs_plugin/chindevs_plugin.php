@@ -56,7 +56,7 @@ $productCategoryMap = array(
 use \Elementor\Plugin;
 
 require_once  plugin_dir_path(__FILE__) . 'gift_courses.php';
-
+require_once  plugin_dir_path(__FILE__) . 'user_events.php';
 // load all files in functions.php
 $cd_functions_dir = plugin_dir_path(__FILE__) . 'cd_functions/';
 foreach (glob($cd_functions_dir . '*.php') as $filename) {
