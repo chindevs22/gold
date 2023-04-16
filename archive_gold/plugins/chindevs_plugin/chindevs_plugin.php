@@ -160,3 +160,14 @@ function ms_change_single_course_button_text( $text ) {
 add_filter( 'ms_single_course_button_text', 'ms_change_single_course_button_text' );
 add_shortcode( 'test-functions', 'create_course_data' );
 
+//to be moved
+// Add the Assignment field to the backend Admin View
+ add_filter( 'stm_wpcfto_fields', 'stm_lms_assignment_field', 99, 1);
+
+function stm_lms_assignment_field($fields) {
+	$fields['stm_student_assignment']['section_group']['fields']['assignment_grade'] = array(
+		'type'  => 'number',
+		'label' => esc_html__( 'Assignment Grade', 'masterstudy-lms-learning-management-system-pro' ),
+	);
+	return $fields;
+}

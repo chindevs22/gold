@@ -149,6 +149,10 @@ class STM_LMS_User_Assignment {
 			)
 		);
 
+		//ChinDevs code to add grade
+        $grade       = wp_kses_post( $_POST['assignment_grade'] );
+        update_post_meta( $assignment_id, 'assignment_grade', $grade );
+
 		update_post_meta( $assignment_id, 'editor_comment', $comment );
 		update_post_meta( $assignment_id, 'status', $status );
 		update_post_meta( $assignment_id, 'who_view', 0 );

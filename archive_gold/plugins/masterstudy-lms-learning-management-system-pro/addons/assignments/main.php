@@ -697,7 +697,7 @@ class STM_LMS_Assignments {
 				wp_safe_redirect( remove_query_arg( array( 'start_assignment', 'course_id' ), self::get_current_url() ) );
 				die;
 			}
-
+            $assignment_grade = 0;
 			$assignment_try = self::number_of_assignments( $item_id ) + 1;
 
 			$new_assignment = array(
@@ -708,6 +708,7 @@ class STM_LMS_Assignments {
 
 			$assignment_id = wp_insert_post( $new_assignment );
 
+            update_post_meta( $assignment_id, 'assignment_grade', $assignment_grade);
 			update_post_meta( $assignment_id, 'try_num', $assignment_try );
 			update_post_meta( $assignment_id, 'start_time', time() * 1000 );
 			update_post_meta( $assignment_id, 'status', '' );
