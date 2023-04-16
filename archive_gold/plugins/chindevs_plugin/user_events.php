@@ -14,6 +14,18 @@ function user_events_url() {
 	return get_the_permalink( $settings['user_url'] ) . 'user-events';
 }
 
+add_filter( 'stm_lms_custom_routes_config', function( $routes ) {
+
+    // Define your custom route configuration
+    $routes['user_url']['sub_pages']['user_events'] = array(
+    			'template'  => 'stm-lms-user-events',
+    			'protected' => true,
+    			'url'       => 'user-events',
+    		);
+    return $routes;
+    } 
+);
+
 add_filter(
 	'stm_lms_menu_items',
 	function ( $menus ) {

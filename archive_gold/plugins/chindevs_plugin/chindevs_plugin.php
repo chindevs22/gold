@@ -6,6 +6,7 @@
  * Author:            Chin Devs
  * Author URI:        https://www.alecrust.com/
  * Text Domain:       chindevs
+ * Depends: 		  event-tickets
  */
 
 define( 'CD_TEMP', dirname( __FILE__ ) );
@@ -57,7 +58,7 @@ use \Elementor\Plugin;
 
 require_once  plugin_dir_path(__FILE__) . 'gift_courses.php';
 require_once  plugin_dir_path(__FILE__) . 'user_events.php';
-require_once  plugin_dir_path(__FILE__) . 'classes/user-event-class.php'
+require_once  plugin_dir_path(__FILE__) . 'classes/user-event-class.php';
 
 // load all files in functions.php
 $cd_functions_dir = plugin_dir_path(__FILE__) . 'cd_functions/';
@@ -75,15 +76,16 @@ add_filter('stm_lms_template_file', function($path, $template_name){
 
 // register Gift Course style
 
-add_action( 'wp_enqueue_scripts', 'gift_course_scripts' );
-function gift_course_scripts() {
-
-	$assets = GIFT_COURSE_URL;
-	error_log("trying to enqueue scripts");
-	error_log($assets);
-	wp_enqueue_script( 'gift-course-scripts', plugins_url( '/js/gift-course.js', __FILE__ ), array(), false, true );
-    wp_enqueue_style( 'gift-course', $assets . '/css/gift-course.css', array(), 'false', false);
+add_action('wp_enqueue_scripts', 'user_events_style');
+function user_events_style() {
+	    wp_enqueue_style( 'user-events', GIFT_COURSE_URL . '/assets/css/enrolled-events.css', array(), 'false', false);
 }
+
+function gift_course_scripts() {
+	wp_enqueue_script( 'gift-course-scripts', plugins_url( '/assets/js/gift-course.js', __FILE__ ), array(), false, true );
+    wp_enqueue_style( 'gift-course', GIFT_COURSE_URL . '/assets/css/gift-course.css', array(), 'false', false);
+}
+add_action( 'wp_enqueue_scripts', 'gift_course_scripts' );
 
 // data migration
 function read_csv($file_name, $type) {
