@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="AutoImportSettings">
-    <option name="autoReloadType" value="SELECTIVE" />
-  </component>
   <component name="ChangeListManager">
-    <list default="true" id="41fbe813-706f-44a4-bae6-9e9102909974" name="Default Changelist" comment="" />
+    <list default="true" id="0b28451b-193c-4fe6-bef1-355e03e956b5" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -21,116 +20,15 @@
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
   </component>
-  <component name="ProjectId" id="2OD6bBgUYnpzfjQeCu91ksylt7c" />
-  <component name="ProjectViewState">
-    <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showLibraryContents" value="true" />
-  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/archive_gold/plugins/chindevs_plugin/stm_lms_templates/modals" />
+    <property name="jdk.selected.JAVA_MODULE" value="11" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
   </component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\vags_\IdeaProjects\gold\archive_gold\plugins\chindevs_plugin\stm_lms_templates\modals" />
-      <recent name="C:\Users\vags_\IdeaProjects\gold\archive_gold\plugins\chindevs_plugin\stm_lms_templates" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\vags_\IdeaProjects\gold\archive_gold\plugins\chindevs_plugin\assets" />
-      <recent name="C:\Users\vags_\IdeaProjects\gold\archive_gold\plugins\chindevs_plugin" />
-      <recent name="C:\Users\vags_\IdeaProjects\gold\archive_gold\plugins\chindevs_plugin\" />
-      <recent name="C:\Users\vags_\IdeaProjects\gold\archive_gold\plugins\chindevs_plugin\gift_course" />
-      <recent name="C:\Users\vags_\IdeaProjects\gold\archive_gold\plugins" />
-    </key>
-  </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
-    <task active="true" id="Default" summary="Default task">
-      <changelist id="41fbe813-706f-44a4-bae6-9e9102909974" name="Default Changelist" comment="" />
-      <created>1681082875383</created>
-      <option name="number" value="Default" />
-      <option name="presentableId" value="Default" />
-      <updated>1681082875383</updated>
-    </task>
-    <task id="LOCAL-00001" summary="create chindevs plugin">
-      <created>1681083121238</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1681083121238</updated>
-    </task>
-    <task id="LOCAL-00002" summary="make changes to chindevs plugin">
-      <created>1681163509168</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1681163509168</updated>
-    </task>
-    <task id="LOCAL-00003" summary="make changes to chindevs plugin">
-      <created>1681169345219</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1681169345220</updated>
-    </task>
-    <task id="LOCAL-00004" summary="necessray for sending gift_course_id on delete of cart item">
-      <created>1681177449572</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1681177449572</updated>
-    </task>
-    <task id="LOCAL-00005" summary="rework gift course">
-      <created>1681178259550</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1681178259550</updated>
-    </task>
-    <task id="LOCAL-00006" summary="giftcourse delete now working (relient on changes to lms and enterprise modal)">
-      <created>1681180888730</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1681180888730</updated>
-    </task>
-    <task id="LOCAL-00007" summary="supposed to delete these 2 files">
-      <created>1681181875534</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1681181875534</updated>
-    </task>
-    <task id="LOCAL-00008" summary="supposed to delete these 2 files">
-      <created>1681181897430</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1681181897430</updated>
-    </task>
-    <task id="LOCAL-00009" summary="add gc tag">
-      <created>1681345095376</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1681345095376</updated>
-    </task>
-    <task id="LOCAL-00010" summary="some working version">
-      <created>1681348278948</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1681348278948</updated>
-    </task>
-    <task id="LOCAL-00011" summary="some working version">
-      <created>1681350840275</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1681350840275</updated>
-    </task>
-    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -144,16 +42,5 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
-  </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="create chindevs plugin" />
-    <MESSAGE value="make changes to chindevs plugin" />
-    <MESSAGE value="necessray for sending gift_course_id on delete of cart item" />
-    <MESSAGE value="rework gift course" />
-    <MESSAGE value="giftcourse delete now working (relient on changes to lms and enterprise modal)" />
-    <MESSAGE value="supposed to delete these 2 files" />
-    <MESSAGE value="add gc tag" />
-    <MESSAGE value="some working version" />
-    <option name="LAST_COMMIT_MESSAGE" value="some working version" />
   </component>
 </project>
