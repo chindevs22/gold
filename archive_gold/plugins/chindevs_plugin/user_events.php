@@ -30,7 +30,7 @@ add_filter(
 	'stm_lms_menu_items',
 	function ( $menus ) {
 		$menus[] = array(
-			'order'        => 111,
+			'order'        => 133,
 			'id'           => 'user_events',
 			'slug'         => 'user-events',
 			'lms_template' => 'stm-lms-user-events',
