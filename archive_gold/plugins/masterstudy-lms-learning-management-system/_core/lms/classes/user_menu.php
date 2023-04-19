@@ -188,6 +188,7 @@ class STM_LMS_User_Menu {
 		if ( ! is_user_logged_in() && $float_menu ) {
 			return $float_menu_guest;
 		}
+
 		return apply_filters( 'stm_lms_float_menu_enabled', $float_menu );
 	}
 
@@ -306,6 +307,7 @@ class STM_LMS_User_Menu {
 		$menus = apply_filters( 'stm_lms_menu_items', $menus );
 
 		array_multisort( array_column( $menus, 'order' ), SORT_ASC, $menus );
+
 		return $menus;
 	}
 
@@ -375,11 +377,9 @@ class STM_LMS_User_Menu {
 		$is_instructor = STM_LMS_Instructor::is_instructor();
 		$default_menu  = self::float_menu_items();
 		$settings      = get_option( 'stm_lms_settings', array() );
+
 		foreach ( $default_menu as $menu_item ) {
 			if ( isset( $menu_item['id'] ) && ! $this->search_item_in_sortable_menu( $settings, $menu_name, $menu_item['id'] ) ) {
-// 				error_log(print_r($settings, true));
-// 				error_log($menu_name);
-// 				error_log($menu_item['id']);
 				$add_element     = false;
 				$student_menu    = 'sorting_float_menu_learning' === $menu_name || 'sorting_the_menu_student' === $menu_name;
 				$instructor_menu = 'sorting_the_menu' === $menu_name || 'sorting_float_menu_main' === $menu_name;
@@ -525,19 +525,16 @@ class STM_LMS_User_Menu {
 	}
 
 	public function search_item_in_sortable_menu( $settings, $menu_name, $menu_item ) {
-		error_log(print_r($menu_item, true));
 		if ( empty( $settings[ $menu_name ] ) ) {
 			return true;
 		}
 
 		foreach ( $settings[ $menu_name ] as $menu ) {
-			error_log("the menu ");
-			error_log(print_r($menu, true));
 			if ( -1 < array_search( $menu_item, array_column( $menu['options'] ?? array(), 'id' ), true ) ) {
 				return true;
 			}
 		}
-		error_log("returning false");
+
 		return false;
 	}
 
