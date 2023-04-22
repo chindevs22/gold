@@ -164,12 +164,12 @@ class SLMS_Lite_Category {
 
         $terms  =  ( isset( $_POST['args']['terms'] ) ) ? $_POST['args']['terms'] : [];
         $show_only_lite_courses  =  ( isset( $_POST['args']['show_only_lite'] ) ) ? sanitize_text_field($_POST['args']['show_only_lite']) : '';
-
+		
 		//Chindevs code to get the lite category name from ajax call
         $lite_category_name = ( isset($_POST['args']['lite_category_name'] ) ) ? sanitize_text_field($_POST['args']['lite_category_name']) : '';
 		error_log("inside the slms lite category php 170");
 		error_log("Lite Cat Name: " . $lite_category_name);
-
+		
         /* query courses */
         $default_args = array(
             'posts_per_page' => $posts_per_page,
@@ -320,7 +320,7 @@ class SLMS_Lite_Category {
         $lite_category_name = ( isset($_POST['args']['lite_category_name'] ) ) ? sanitize_text_field($_POST['args']['lite_category_name']) : '';
 		error_log("inside the slms lite category php 321");
 		error_log($lite_category_name);
-
+		
         /* query courses */
         $default_args = array(
             'posts_per_page' => $posts_per_page,

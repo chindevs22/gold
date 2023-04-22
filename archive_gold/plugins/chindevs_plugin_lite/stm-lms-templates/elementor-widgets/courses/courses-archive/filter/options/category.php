@@ -8,7 +8,7 @@
             <?php
 //            pre_var($display_terms);
             foreach ( $option['terms'] as $term ) {
-
+			
 //                $parents[] = $term->term_id;
 // 				error_log("the parent vals");
 // 				error_log(print_r($parents, true));
@@ -18,7 +18,7 @@
 //                    }
 //                }
                 if(!empty($show_lite_courses)) {
-                    if(empty(get_term_meta($term->term_id,'is_lite_category', true))) {
+                    if(empty(get_term_meta($term->term_id,'is_lite_category', true))) { 
                         continue;
                     }
 					if(empty(get_term_meta($term->term_id, 'lite_category_name', true))){
@@ -32,7 +32,7 @@
                         continue;
                     }
                 }
-				// ChinDevs code to set parents after deciding what categories to show
+				// ChinDevs code to set parents after deciding what categories to show 
 				$parents[] = $term->term_id;
                 ?>
                 <div class="ms_lms_courses_archive__filter_options_item_category">

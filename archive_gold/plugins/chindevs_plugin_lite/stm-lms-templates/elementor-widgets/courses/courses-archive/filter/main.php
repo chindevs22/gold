@@ -11,6 +11,8 @@
                 <?php endforeach; ?>
             <?php endif; */ ?>
             <?php
+			error_log("inside courses-archive flter main");
+			error_log($lite_category_name);
             foreach ( $filter_data['filter_options'] as $option ) {
                 STM_LMS_Templates::show_lms_template(
                     "elementor-widgets/courses/courses-archive/filter/options/{$option['template']}",

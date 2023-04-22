@@ -80,7 +80,7 @@ class MsLmsCoursesChild extends Widget_Base {
                 'frontend_available' => false,
             )
         );
-
+		
 		//ChinDevs code to add a control for showing a dropdown of options on the elementor widget
         $this->add_control( 'lite_category_name',
             array(
@@ -350,7 +350,7 @@ class MsLmsCoursesChild extends Widget_Base {
 				),
 			),
 		);
-
+		
 		//Chindevs edit to query on both is_lite_category and by category name
         if(isset($settings['show_lite_courses']) && !empty($settings['show_lite_courses'])) {
             $tax_query = array(
@@ -638,12 +638,10 @@ class MsLmsCoursesChild extends Widget_Base {
 		$atts        = wp_parse_args( $widget_atts, $atts );
 
         set_query_var( 'show_lite_courses', $settings['show_lite_courses'] );
-
 		//ChinDevs code to add this variable as query var
 		set_query_var( 'lite_category_name', $settings['lite_category_name'] );
 		error_log("inside slms courses 640");
 		error_log($settings['type']);
-
 		\STM_LMS_Templates::show_lms_template( "elementor-widgets/courses/{$settings['type']}/main", $atts );
 	}
 
