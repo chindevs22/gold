@@ -20,7 +20,7 @@
 //                        'terms'  => (!empty($terms)) ? array_map('intval', $terms) : $filter_data['terms'],
                         'metas'  => $filter_data['metas'],
                         'show_lite_courses'  => $show_lite_courses,
-						'lite_category_name' => $lite_category_name // Chindevs code for passing lite_category_name var
+						'lite_category_name' => $lite_category_name
 //                        'display_terms' => (!empty($terms)) ? array_map('intval', $terms) : []
                     )
                 );

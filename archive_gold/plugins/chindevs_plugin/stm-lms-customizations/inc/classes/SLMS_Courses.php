@@ -90,8 +90,7 @@ class MsLmsCoursesChild extends Widget_Base {
                     'event' => esc_html__( 'Event', 'slms' ),
                     'shravana_mangalam' => esc_html__( 'Shravana Mangalam', 'slms' ),
                     'webinar' => esc_html__( 'Webinar', 'slms' ),
-                ),
-                'default' => 'event',
+                )
             )
         );
 
