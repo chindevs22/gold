@@ -6,7 +6,6 @@
  * Author:            Chin Devs
  * Author URI:        https://www.alecrust.com/
  * Text Domain:       chindevs
- * Depends: 		  event-tickets
  */
 
 define( 'CD_TEMP', dirname( __FILE__ ) );
@@ -161,8 +160,9 @@ add_filter( 'ms_single_course_button_text', 'ms_change_single_course_button_text
 add_shortcode( 'test-functions', 'create_course_data' );
 
 //to be moved
+
 // Add the Assignment field to the backend Admin View
- add_filter( 'stm_wpcfto_fields', 'stm_lms_assignment_field', 99, 1);
+add_filter( 'stm_wpcfto_fields', 'stm_lms_assignment_field', 99, 1);
 
 function stm_lms_assignment_field($fields) {
 	$fields['stm_student_assignment']['section_group']['fields']['assignment_grade'] = array(
@@ -170,4 +170,16 @@ function stm_lms_assignment_field($fields) {
 		'label' => esc_html__( 'Assignment Grade', 'masterstudy-lms-learning-management-system-pro' ),
 	);
 	return $fields;
+}
+
+//Add Event dates field to backend Admin View
+add_filter('stm_wpcfto_fields', 'stm_lms_event_date_field', 99, 1);
+
+function stm_lms_event_date_field($fields) {
+    $fields['stm_courses_settings']['section_settings']['fields']['event_dates'] = array(
+        'type'       => 'dates',
+        'label'      => esc_html__( 'Event Dates', 'masterstudy-lms-learning-management-system' ),
+        'sanitize'   => 'wpcfto_save_dates',
+     );
+    return $fields;
 }
