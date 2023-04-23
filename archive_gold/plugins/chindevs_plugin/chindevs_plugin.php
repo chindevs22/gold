@@ -47,11 +47,20 @@ $newMetaMapping = array (
      'gender' => 'gender'
 );
 
+//The Hardcoded ID's of the Product Main categories (created from frontend)
 $productCategoryMap = array(
     "Publications" => 95,
     "Pendrives" => 96,
     "Combo Offers" => 303
 );
+
+//The Hardcoded ID's of the Event Main categories (created from frontend)
+$eventCategoryMap = array (
+    //TODO need to fill out
+);
+
+//Hardcoded ID of a sample lesson for all events
+$templateEventSection = "Event Details 5768";
 
 use \Elementor\Plugin;
 
@@ -73,8 +82,7 @@ add_filter('stm_lms_template_file', function($path, $template_name){
     return $path;
 }, 10, 2);
 
-// register Gift Course style
-
+// register styles (gift_course and user_events
 add_action('wp_enqueue_scripts', 'user_events_style');
 function user_events_style() {
 	    wp_enqueue_style( 'user-events', GIFT_COURSE_URL . '/assets/css/enrolled-events.css', array(), 'false', false);
@@ -86,7 +94,20 @@ function gift_course_scripts() {
 }
 add_action( 'wp_enqueue_scripts', 'gift_course_scripts' );
 
-// data migration
+/// ------------------- COURSE MIGRATION -------------------------
+
+// All Course Data migration functions
+function create_course_data() {
+    read_csv("questions.csv", "question");
+    read_csv("lesson_combined.csv", "lesson");
+    read_csv("course_materials.csv", "course");
+    read_csv("users.csv", "user");
+    read_csv("user_self_assessment.csv", "userquiz");
+    read_csv("user_self_assessment_details.csv", "useranswers");
+    read_csv("enrol.csv", "enrol");
+	read_csv("publications.csv", "publications");
+}
+// Course data migration
 function read_csv($file_name, $type) {
     //file mapping from our File Manager
     $fileName = "/home/freewaydns-dev108/cd-test-docs/{$file_name}";
@@ -128,10 +149,51 @@ function read_csv($file_name, $type) {
     }
     fclose($file);
 }
+add_shortcode( 'test-functions', 'create_course_data' );
 
 
-// FEEDBACK FORM
-// based on form submission
+/// ------------------- EVENT MIGRATION -------------------------
+function create_event_data() {
+//    read_event_csv("event_lesson.csv", "event_lesson"); //event details for live events the zoom link for lesson 1
+    read_event_csv("currentevents_nolessons.csv", "event");
+//    read_event_csv("user_event.csv", "user_event");
+}
+// Course data migration
+function read_event_csv($file_name, $type) {
+    //file mapping from our File Manager
+    $fileName = "/home/freewaydns-dev108/cd-event-docs/{$file_name}";
+    $file = fopen($fileName, 'r');
+    $dataArray = array();
+    $headerLine = true;
+    while (($line = fgetcsv($file)) !== FALSE) {
+        // check header line and if so store for the column names
+        if($headerLine) {
+            $headerLine = false;
+            $mappingLine = $line;
+            continue;
+        }
+        // loop through the column values in one row
+        $count = 0;
+        $tempArray = array();
+        // create mapping based on header
+        foreach($line as $value) {
+//            $sanitized_value = preg_replace("/\\\\u([0-9abcdef]{4})/", "&#x$1;", $value);
+            $tempArray[$mappingLine[$count++]] = $value;
+        }
+        if ($type == "event_lesson") {
+            create_event_lesson_from_csv($tempArray);
+        } else if ($type == "event") {
+            create_event_from_csv($tempArray);
+        } else if ($type == "user_event") {
+            create_user_event_from_csv($tempArray);
+        }
+    }
+    fclose($file);
+}
+add_shortcode( 'test-functions-events', 'create_event_data' );
+
+
+// FEEDBACK FORM ---- based on form submission
 function submit_form_js() {
 ?>
     <script>
@@ -144,7 +206,7 @@ function submit_form_js() {
 <?php
 }
 
-// ??
+// Hides Complete button on Feedback Form
 function hide_complete_button() {
 	?>
 		<style>.stm-lms-lesson_navigation_complete {display: none;}</style>
@@ -152,14 +214,6 @@ function hide_complete_button() {
 }
 add_action('wp_head', 'submit_form_js');
 add_shortcode('shortcodefeedback', 'hide_complete_button'); // required on lesson page
-
-function ms_change_single_course_button_text( $text ) {
-    return 'New Button Text';
-}
-add_filter( 'ms_single_course_button_text', 'ms_change_single_course_button_text' );
-add_shortcode( 'test-functions', 'create_course_data' );
-
-//to be moved
 
 // Add the Assignment field to the backend Admin View
 add_filter( 'stm_wpcfto_fields', 'stm_lms_assignment_field', 99, 1);

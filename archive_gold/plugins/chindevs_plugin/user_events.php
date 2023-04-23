@@ -67,4 +67,42 @@ add_filter(
 	}
 );
 
+// // Remove the current "Start Course/Buy Course button"
+// remove_action( 'stm_lms_buy_button_end', 'stm_lms_course_buy_button', 10 );
+// add_action( 'stm_lms_buy_button_end', 'add_buy_event_button', 10, 1 );
+
+
+
+add_action( 'stm_lms_before_button_mixed', 'add_buy_event_button', 10, 1 );
+// add_filter( 'stm_lms_before_button_stop', 'is_event', 100, 2 );
+
+// function is_event($stop, $course_id){
+// 	return true;
+// }
+
+// // add event button to course page
+function add_buy_event_button( $course_id ) {
+	$price = get_price( $course_id );
+// 	if ( ! empty( $price ) ) {
+		return STM_LMS_Templates::show_lms_template( 'events/buy', compact( 'course_id', 'price' ) );
+// 	}
+}
+
+// add_action( 'wp', 'my_custom_remove_buy_button' );
+// function my_custom_remove_buy_button() {
+//     $course_id_to_hide = 123; // Replace with the ID of the course to hide the button for
+
+//     // Remove the stm_lms_buy_button action for the course ID to hide
+//     remove_action( 'stm_lms_buy_button', 'my_custom_buy_button', 10 );
+// }
+
+// // Custom function to modify the buy button
+// function my_custom_buy_button( $html, $course_id, $course_price ) {
+// //     if ( $course_id == $course_id_to_hide ) {
+//         // Don't include the "Start course" button for the course ID to hide
+//         $html = '';
+// //     }
+//     return $html;
+// }
+
 ?>
