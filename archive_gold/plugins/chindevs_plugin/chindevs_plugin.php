@@ -235,5 +235,57 @@ function stm_lms_event_date_field($fields) {
         'label'      => esc_html__( 'Event Dates', 'masterstudy-lms-learning-management-system' ),
         'sanitize'   => 'wpcfto_save_dates',
      );
+	$fields['stm_courses_settings']['section_accessibility']['fields']['price_nonac'] = array(
+		'group'		 => 'started',
+        'type'       => 'number',
+        'label'       => sprintf(esc_html__( 'Price Non AC (INR)', 'masterstudy-lms-learning-management-system' ),'INR'),
+        'placeholder' => sprintf( esc_html__( 'Leave empty if no Non AC Price', 'masterstudy-lms-learning-management-system' ), 'INR' ),
+		'sanitize'    => 'wpcfto_save_number',
+     );
+	$fields['stm_courses_settings']['section_accessibility']['fields']['price_ac'] = array(
+        'type'       => 'number',
+        'label'       => sprintf(esc_html__( 'Price AC (INR)', 'masterstudy-lms-learning-management-system' ),'INR'),
+        'placeholder' => sprintf( esc_html__( 'Leave empty if no AC Price', 'masterstudy-lms-learning-management-system' ), 'INR' ),
+		'sanitize'    => 'wpcfto_save_number',
+     );
+	$fields['stm_courses_settings']['section_accessibility']['fields']['price_online'] = array(
+        'type'       => 'number',
+        'label'       => sprintf(esc_html__( 'Price Online (INR)', 'masterstudy-lms-learning-management-system' ),'INR'),
+        'placeholder' => sprintf( esc_html__( 'Leave empty if no Online Price', 'masterstudy-lms-learning-management-system' ), 'INR' ),
+		'sanitize'    => 'wpcfto_save_number',
+     );
+	$fields['stm_courses_settings']['section_accessibility']['fields']['price_residential'] = array(
+		'group'      => 'ended',
+        'type'       => 'number',
+        'label'       => sprintf(esc_html__( 'Price Residential (INR)', 'masterstudy-lms-learning-management-system' ),'INR'),
+        'placeholder' => sprintf( esc_html__( 'Leave empty if no Residential Price', 'masterstudy-lms-learning-management-system' ), 'INR' ),
+		'sanitize'    => 'wpcfto_save_number',
+     );
+	$fields['stm_courses_settings']['section_accessibility']['fields']['price_nonac_usd'] = array(
+		'group'      => 'started',
+        'type'       => 'number',
+        'label'       => sprintf(esc_html__( 'Price Non AC (USD)', 'masterstudy-lms-learning-management-system' ),'USD'),
+        'placeholder' => sprintf( esc_html__( 'Leave empty if no Non AC Price', 'masterstudy-lms-learning-management-system' ), 'USD' ),
+		'sanitize'    => 'wpcfto_save_number',
+     );
+	$fields['stm_courses_settings']['section_accessibility']['fields']['price_ac_usd'] = array(
+        'type'       => 'number',
+        'label'       => sprintf(esc_html__( 'Price AC (USD)', 'masterstudy-lms-learning-management-system' ),'USD'),
+        'placeholder' => sprintf( esc_html__( 'Leave empty if no AC Price', 'masterstudy-lms-learning-management-system' ), 'USD' ),
+		'sanitize'    => 'wpcfto_save_number',
+     );
+	$fields['stm_courses_settings']['section_accessibility']['fields']['price_online_usd'] = array(
+        'type'       => 'number',
+        'label'       => sprintf(esc_html__( 'Price Online (USD)', 'masterstudy-lms-learning-management-system' ),'USD'),
+        'placeholder' => sprintf( esc_html__( 'Leave empty if no Online Price', 'masterstudy-lms-learning-management-system' ), 'USD' ),
+		'sanitize'    => 'wpcfto_save_number',
+     );
+	$fields['stm_courses_settings']['section_accessibility']['fields']['price_residential_usd'] = array(
+		'group'      => 'ended',
+        'type'       => 'number',
+        'label'       => sprintf(esc_html__( 'Price Residential (USD)', 'masterstudy-lms-learning-management-system' ),'USD'),
+        'placeholder' => sprintf( esc_html__( 'Leave empty if no Residential Price', 'masterstudy-lms-learning-management-system' ), 'USD' ),
+		'sanitize'    => 'wpcfto_save_number',
+     );
     return $fields;
 }
