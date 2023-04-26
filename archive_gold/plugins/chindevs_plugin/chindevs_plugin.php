@@ -56,7 +56,13 @@ $productCategoryMap = array(
 
 //The Hardcoded ID's of the Event Main categories (created from frontend)
 $eventCategoryMap = array (
-    //TODO need to fill out
+	"Vedanta Sadhaka Course" => 105,
+	"Camps and Retreats" => 106,
+	"Events" => 107,
+	"Textual Workshops" => 108,
+	"Seminars and Conferences" => 109,
+	"Puja Vidhanam Course" => 110,
+	"Upanayanam" => 111
 );
 
 //Hardcoded ID of a sample lesson for all events
@@ -177,7 +183,7 @@ function read_event_csv($file_name, $type) {
         $tempArray = array();
         // create mapping based on header
         foreach($line as $value) {
-//            $sanitized_value = preg_replace("/\\\\u([0-9abcdef]{4})/", "&#x$1;", $value);
+           $sanitized_value = preg_replace("/\\\\u([0-9abcdef]{4})/", "&#x$1;", $value);
             $tempArray[$mappingLine[$count++]] = $value;
         }
         if ($type == "event_lesson") {
