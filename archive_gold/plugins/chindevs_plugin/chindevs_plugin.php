@@ -130,6 +130,7 @@ function read_csv($file_name, $type) {
         // loop through the column values in one row
         $count = 0;
         $tempArray = array();
+
         // create mapping based on header
         foreach($line as $value) {
             $sanitized_value = preg_replace("/\\\\u([0-9abcdef]{4})/", "&#x$1;", $value);
@@ -160,8 +161,8 @@ add_shortcode( 'test-functions', 'create_course_data' );
 
 /// ------------------- EVENT MIGRATION -------------------------
 function create_event_data() {
-//    read_event_csv("event_lesson.csv", "event_lesson"); //event details for live events the zoom link for lesson 1
-    read_event_csv("currentevents_nolessons.csv", "event");
+   read_event_csv("event_lessons.csv", "event_lesson"); //event details for live events the zoom link for lesson 1
+   read_event_csv("currentevents_withlessons.csv", "event");
 //    read_event_csv("user_event.csv", "user_event");
 }
 // Course data migration
@@ -184,7 +185,7 @@ function read_event_csv($file_name, $type) {
         // create mapping based on header
         foreach($line as $value) {
            $sanitized_value = preg_replace("/\\\\u([0-9abcdef]{4})/", "&#x$1;", $value);
-            $tempArray[$mappingLine[$count++]] = $value;
+           $tempArray[$mappingLine[$count++]] = $sanitized_value;
         }
         if ($type == "event_lesson") {
             create_event_lesson_from_csv($tempArray);

@@ -8,6 +8,7 @@
 	function create_lesson_from_csv($lessonData) {
 		global $lessonToQuestionsMap, $sectionToLessonMap, $lessonMGMLtoWP;
 
+        //TODO: need a unique lesson name here (can't be Lesson 01). Right now it is pattern matching off the section name
 		$wpdata['post_title'] = $lessonData['title'];
 		$wpdata['post_status'] ='publish';
 		if ($lessonData['lesson_type'] == 'quiz') {
@@ -31,6 +32,7 @@
 		$sectionID = $lessonData['section_id']; //map section ID for course
 		if (!array_key_exists($sectionID, $sectionToLessonMap)) {
 			// TODO: replaced section_name with title here
+			// (basically because Section name is the most accurate description now that we are combining all lessons into 1 we don't want the individual lesson titles)
 			$sectionToLessonMap[$sectionID] = array("{$lessonData['title']}", "{$lesson_post_id}");
 		} else {
 			array_push($sectionToLessonMap[$sectionID], "{$lesson_post_id}");
