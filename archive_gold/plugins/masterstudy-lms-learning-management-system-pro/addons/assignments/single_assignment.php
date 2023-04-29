@@ -101,11 +101,13 @@ class STM_LMS_Single_Assignment {
 					$start_time = gmdate( 'j M Y', $start_time / 1000 );
 				}
 
+				// ChinDevs code to add assignment grade for instructor column view of assignments
 				$r['assignments'][] = array(
 					'id'          => $id,
 					'url'         => self::user_assignment_url( $id ),
 					'user'        => STM_LMS_User::get_current_user( get_post_meta( $id, 'student_id', true ) ),
 					'try_num'     => get_post_meta( $id, 'try_num', true ),
+					'assignment_grade' => get_post_meta ( $id, 'assignment_grade', true),
 					'start_time'  => $start_time,
 					'end_time'    => get_post_meta( $id, 'end_time', true ),
 					'status'      => $status,

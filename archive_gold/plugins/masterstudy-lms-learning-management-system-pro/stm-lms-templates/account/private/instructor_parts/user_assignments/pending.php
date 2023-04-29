@@ -15,7 +15,9 @@ stm_lms_register_script( 'accept_assignment' );
 		<?php wp_editor( '', 'assignment_' . $assignment_id, array( 'quicktags' => false ) ); ?>
 
 		<!-- 	ChinDevs code to add an assignment grade field	 -->
+		<h5 class="editor_comment__grade"><?php esc_html_e( 'Grade', 'masterstudy-lms-learning-management-system-pro' ); ?></h5>
         <input type="number" name="assignment_grade" id="assignment_grade" min="0" max="100" step="1">
+
 
 		<div class="user_assingment_actions">
 			<a href="#" class="btn btn-default approve">

@@ -256,10 +256,14 @@ class STM_LMS_User_Assignment {
 				$course_id     = get_post_meta( $id, 'course_id', true );
 				$assignment_id = get_post_meta( $id, 'assignment_id', true );
 				$who_view      = get_post_meta( $id, 'who_view', true );
+				//ChinDev code to grab the assignment grade and return it to JS
+				$assignment_grade = get_post_meta ($id, 'assignment_grade', true);
 
+                //ChinDev code to get assignment grade
 				$posts[] = array(
 					'assignment_title' => get_the_title( $assignment_id ),
 					'course_title'     => get_the_title( $course_id ),
+					'assignment_grade' => $assignment_grade,
 					'updated_at'       => stm_lms_time_elapsed_string( gmdate( 'Y-m-d H:i:s', get_post_timestamp() ) ),
 					'status'           => self::statuses( get_post_status(), get_post_meta( $id, 'status', true ) ),
 					'instructor'       => STM_LMS_User::get_current_user( get_post_field( 'post_author', $course_id ) ),

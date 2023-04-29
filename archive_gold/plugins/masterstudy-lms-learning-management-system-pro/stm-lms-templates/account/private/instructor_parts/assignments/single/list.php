@@ -5,7 +5,10 @@
 		<th class="course_name"><?php esc_html_e( 'Course', 'masterstudy-lms-learning-management-system-pro' ); ?></th>
 		<th class="date"><?php esc_html_e( 'Date', 'masterstudy-lms-learning-management-system-pro' ); ?></th>
 		<th class="attempts"><?php esc_html_e( 'Attempts', 'masterstudy-lms-learning-management-system-pro' ); ?></th>
+		<!--  Chindevs Code to add assignment grade column to instructor view of student assignments		 -->
+		<th class="assignment_grade"><?php esc_html_e( 'Grade', 'masterstudy-lms-learning-management-system-pro' ); ?></th>
 		<th class="status"><?php esc_html_e( 'Status', 'masterstudy-lms-learning-management-system-pro' ); ?></th>
+
 	</tr>
 	</thead>
 
@@ -18,6 +21,8 @@
 			<td class="course" data-title="<?php esc_attr_e( 'Course', 'masterstudy-lms-learning-management-system-pro' ); ?>" v-html="assignment.course_name"></td>
 			<td class="date" data-title="<?php esc_attr_e( 'Date', 'masterstudy-lms-learning-management-system-pro' ); ?>" v-html="assignment.start_time"></td>
 			<td class="attempts" data-title="<?php esc_attr_e( 'Attempts', 'masterstudy-lms-learning-management-system-pro' ); ?>" v-html="assignment.try_num"></td>
+			<!--  Chindevs Code to add grade data -->
+			<td class="attempts" data-title="<?php esc_attr_e( 'Grade', 'masterstudy-lms-learning-management-system-pro' ); ?>"  v-html="assignment.assignment_grade"></td>
 			<td class="status" data-title="<?php esc_attr_e( 'Status', 'masterstudy-lms-learning-management-system-pro' ); ?>">
 
 				<div class="unpassed" v-if="assignment.status === 'not_passed'">

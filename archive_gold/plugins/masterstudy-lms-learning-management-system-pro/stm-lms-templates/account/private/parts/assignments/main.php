@@ -63,6 +63,13 @@
 						<span class="enrolled-assignment--value" v-html="assignment.status.label"></span>
 					</div>
 
+<!-- 					ChinDevs code to add grade to each assignment card -->
+					<div class="enrolled-assignment--time">
+                        <span><?php esc_html_e( 'Grade:', 'masterstudy-lms-learning-management-system-pro' ); ?></span>
+                        <span v-if="assignment.assignment_grade !== null && assignment.assignment_grade !== ''" class="enrolled-assignment--value" v-html="assignment.assignment_grade"></span>
+                        <span v-else class="enrolled-assignment--value">Not Graded</span>
+                    </div>
+
 					<div class="enrolled-assignment--time">
 						<i class="far fa-clock"></i>
 						<span><?php esc_html_e( 'Last update:', 'masterstudy-lms-learning-management-system-pro' ); ?></span>

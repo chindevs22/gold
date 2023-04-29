@@ -697,6 +697,7 @@ class STM_LMS_Assignments {
 				wp_safe_redirect( remove_query_arg( array( 'start_assignment', 'course_id' ), self::get_current_url() ) );
 				die;
 			}
+			//ChinDevs code for creating assignment for user when they start with a default grade of 0
             $assignment_grade = 0;
 			$assignment_try = self::number_of_assignments( $item_id ) + 1;
 
@@ -708,6 +709,7 @@ class STM_LMS_Assignments {
 
 			$assignment_id = wp_insert_post( $new_assignment );
 
+            //ChinDevs code for assignment grade
             update_post_meta( $assignment_id, 'assignment_grade', $assignment_grade);
 			update_post_meta( $assignment_id, 'try_num', $assignment_try );
 			update_post_meta( $assignment_id, 'start_time', time() * 1000 );
