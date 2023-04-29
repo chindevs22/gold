@@ -4,12 +4,29 @@
 	// --------------------------------------------------------------------------------------------
 	require_once 'helpers.php';
 	function create_question_from_csv($questionData) {
+		echo "<br> inside create question <br>";
+
+		// TODO: we currently cannot handle "descriptive" type -> should actually be an assignment or fill gap?
+		if ($questionData['type'] == 'descriptive') {
+			return;
+		}
+
 		global $lessonToQuestionsMap, $questionMGMLtoWP, $wpQuestionsToAnswers;
 
+
 		$wpdata['post_title'] = $questionData['title'];
+		$wpdata['post_content'] = $questionData['instruction'];
 		$wpdata['post_status'] ='publish';
 		$wpdata['post_type'] = 'stm-questions';
 		$question_post_id = wp_insert_post( $wpdata );
+
+
+		echo "QUESTION ID: " . $questionData['id'] . "POST ID:  " . $question_post_id;
+		error_log("QUESTION ID:  ");
+		error_log($questionData['id']);
+		error_log("POST ID:  ");
+		error_log($question_post_id);
+
 		$quiz_id = $questionData['quiz_id'];
 
 		$questionMGMLtoWP[$questionData['id']] = $question_post_id; //map MGML question ID

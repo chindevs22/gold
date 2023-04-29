@@ -104,19 +104,25 @@ add_action( 'wp_enqueue_scripts', 'gift_course_scripts' );
 
 // All Course Data migration functions
 function create_course_data() {
-    read_csv("questions.csv", "question");
-    read_csv("lesson_combined.csv", "lesson");
-    read_csv("course_materials.csv", "course");
-    read_csv("users.csv", "user");
-    read_csv("user_self_assessment.csv", "userquiz");
-    read_csv("user_self_assessment_details.csv", "useranswers");
-    read_csv("enrol.csv", "enrol");
-	read_csv("publications.csv", "publications");
+	echo " <br> <br> STARTING QUESTIONS <br> <br> ";
+    read_csv("question.csv", "question");
+	echo "<br> <br>  DONE WITH QUESTIONS <br> <br> ";
+	echo " <br> <br> STARTING LESSONS <br> <br> ";
+    read_csv("All_lesson.csv", "lesson");
+	echo "<br> <br>  DONE WITH LESSONS <br> <br> ";
+	echo " <br> <br> STARTING COURSES <br> <br> ";
+    read_csv("courses_data.csv", "course");
+	echo "<br> <br>  DONE WITH COURSES <br> <br> ";
+//     read_csv("users.csv", "user");
+//     read_csv("user_self_assessment.csv", "userquiz");
+//     read_csv("user_self_assessment_details.csv", "useranswers");
+//     read_csv("enrol.csv", "enrol");
+// 	read_csv("publications.csv", "publications");
 }
 // Course data migration
 function read_csv($file_name, $type) {
     //file mapping from our File Manager
-    $fileName = "/home/freewaydns-dev108/cd-test-docs/{$file_name}";
+    $fileName = "/home/freewaydns-dev108/cd-sowmya-docs/{$file_name}"; //Ensure this is the right file location
     $file = fopen($fileName, 'r');
     $dataArray = array();
     $headerLine = true;
@@ -182,6 +188,8 @@ function read_event_csv($file_name, $type) {
         // loop through the column values in one row
         $count = 0;
         $tempArray = array();
+		error_log("mapping line");
+		error_log(print_r($mappingLine, true));
         // create mapping based on header
         foreach($line as $value) {
            $sanitized_value = preg_replace("/\\\\u([0-9abcdef]{4})/", "&#x$1;", $value);

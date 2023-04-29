@@ -8,20 +8,27 @@
 	function create_lesson_from_csv($lessonData) {
 		global $lessonToQuestionsMap, $sectionToLessonMap, $lessonMGMLtoWP;
 
-        //TODO: need a unique lesson name here (can't be Lesson 01). Right now it is pattern matching off the section name
 		$wpdata['post_title'] = $lessonData['title'];
 		$wpdata['post_status'] ='publish';
 		if ($lessonData['lesson_type'] == 'quiz') {
 			$wpdata['post_type'] = 'stm-quizzes';
 			$wpdata['post_content'] = $lessonData['summary'];
 		} else {
+			$file_content = '';
+			$embedded_audio = '';
 			//study material post meta
-			$link = 'https://dev108.freewaydns.net/wp-content/uploads/course_materials/'.$lessonData['course_id'].'/'.$lessonData['attachment'];
-			// TODO: edit this to be the PDF flipbook code
+			if (isset($lessonData['attachment']) && $lessonData['attachment'] != "NULL") {
+				$link = 'https://dev108.freewaydns.net/wp-content/uploads/course_materials/'.$lessonData['course_id'].'/'.$lessonData['attachment'];
+				// TODO: edit this to be the PDF flipbook code
 			// [3d-flip-book mode="fullscreen" pdf="https://dev108.freewaydns.net/wp-content/uploads/2023/04/shlokas.pdf"][/3d-flip-book]
 			$file_content = '<a href="https:////dev108.freewaydns.net/wp-content/plugins/pdfjs-viewer-shortcode/pdfjs/web/viewer.php?file='.$link.'&amp;dButton=false&amp;pButton=true&amp;oButton=false&amp;sButton=true#zoom=auto&amp;pagemode=none" target="_blank" rel="noopener"><img src="https://dev108.freewaydns.net/wp-content/uploads/2023/02/button_open-pdf.png" alt="PDF icon" /></a>';
-			// audio post meta
-			$embedded_audio = '[embed]'.$lessonData['audio_url'].'[/embed]';
+			}
+
+			if (isset($lessonData['audio_url']) && $lessonData['audio_url'] != "NULL") {
+				// audio post meta
+				$embedded_audio = '[embed]'.$lessonData['audio_url'].'[/embed]';
+			}
+
 			$wpdata['post_type'] = 'stm-lessons';
 			$wpdata['post_content'] = $file_content . $embedded_audio;
 		}
@@ -32,8 +39,7 @@
 		$sectionID = $lessonData['section_id']; //map section ID for course
 		if (!array_key_exists($sectionID, $sectionToLessonMap)) {
 			// TODO: replaced section_name with title here
-			// (basically because Section name is the most accurate description now that we are combining all lessons into 1 we don't want the individual lesson titles)
-			$sectionToLessonMap[$sectionID] = array("{$lessonData['title']}", "{$lesson_post_id}");
+			$sectionToLessonMap[$sectionID] = array("{$lessonData['section_name']}", "{$lesson_post_id}");
 		} else {
 			array_push($sectionToLessonMap[$sectionID], "{$lesson_post_id}");
 		}

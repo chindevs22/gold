@@ -11,10 +11,8 @@
         $faq_description;
         $new_desc = html_entity_decode($courseData['description']);
         $faq_flag = false;
+		// need to handle course types without this exact faq
         if (strpos($new_desc, "Frequently Asked Questions")) {
-			echo "<br> has faq <br>";
-			echo "course name <br>";
-			echo $courseData['title'];
             $faq_flag = true;
             $desc_arr = explode("Frequently Asked Questions", $courseData['description']);
 			$orig_description = html_entity_decode($desc_arr[0]);
@@ -23,9 +21,15 @@
             $faq_description = $desc_arr[1];
         }
 
-		echo "<br> the description being sent";
-		print_r($new_desc);
-		echo "<br>";
+// 		echo "<br> the description being sent";
+// 		print_r($new_desc);
+// 		echo "<br>";
+
+		if (!isset($new_desc) || $new_desc == "") {
+			$new_desc = "Could not parse course description. Populate from front end.";
+			echo "Could not parse course description for " . $courseData['id'];
+			error_log("Could not parse course description for ", $courseData['id']);
+		}
 
 		// Create array of Course info from CSV data
 		$wpdata['post_title'] = $courseData['title'];
@@ -35,6 +39,10 @@
 		$wpdata['post_type'] = 'stm-courses';
 		$course_post_id = wp_insert_post( $wpdata );
 
+		echo "Course ID: " . $courseData['id'] . "  Course Post Id: " . $course_post_id . " <br> <br>";
+		$courseMGMLtoWP[$courseData['id']] = $course_post_id;
+
+		// Generate Curriculum String
 		$curriculum_string = "";
 		$combinedArray = array();
 		$sectionString = $courseData['section'];
@@ -47,12 +55,12 @@
 		}
 
 		$curriculum_string = implode(",", $combinedArray);
-		$courseMGMLtoWP[$courseData['id']] = $course_post_id;
 
         if(empty($curriculum_string) || strlen($curriculum_string) == 0) {
             $curriculum_string = "Sample Section, 5552";
         }
 
+		//TODO: need to handle multiple prices
 		$price = $courseData['price_usd'];
 		update_post_meta($course_post_id, 'price', $price);
 		update_post_meta($course_post_id, 'curriculum', $curriculum_string);
