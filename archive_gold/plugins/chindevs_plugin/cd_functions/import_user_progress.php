@@ -6,6 +6,7 @@
 	function progress_users_quiz_from_csv($progressData) {
 		global $wpdb, $userMGMLtoWP, $courseMGMLtoWP, $selfAssessmentToUser, $lessonMGMLtoWP, $attemptNumberMap;
 		$mgml_user_id = $progressData['user_id'];
+
 		$wp_user_id = $userMGMLtoWP[$mgml_user_id];
 
 		$table_name = 'wp_stm_lms_user_quizzes';
@@ -137,6 +138,61 @@
 
 		$students = get_post_meta($wp_course_id, 'current_students', true);
 		update_post_meta($wp_course_id, 'current_students', $students + 1);
-
 	}
+
+	// helper functions to make queries
+	function get_quiz_id($mgml_quiz_id) {
+		$args = array(
+			'post_type'      => 'stm-quizzes',
+			'meta_key'       => 'mgml_quiz_id',
+			'meta_value'     => $mgml_quiz_id,
+			'posts_per_page' => -1, // Retrieve all matching posts
+		);
+
+		$query = new WP_Query( $args );
+
+		$posts = wp_list_pluck( $query->posts, 'ID' );
+
+		if (count($posts) > 0 ) {
+			error_log("ERROR: More than one quiz with the same MGML quiz ID");
+		}
+		return $posts[0];
+	}
+
+	function get_course_id($mgml_course_id) {
+		$args = array(
+			'post_type'      => 'stm-courses',
+			'meta_key'       => 'mgml_course_id',
+			'meta_value'     => $mgml_course_id,
+			'posts_per_page' => -1, // Retrieve all matching posts
+		);
+
+		$query = new WP_Query( $args );
+
+		$posts = wp_list_pluck( $query->posts, 'ID' );
+
+		if (count($posts) > 0 ) {
+			error_log("ERROR: More than one course with the same MGML course ID");
+		}
+		return $posts[0];
+	}
+
+	function get_user_id($mgml_user_id) {
+		$args = array(
+			'post_type'      => 'stm-courses',
+			'meta_key'       => 'mgml_user_id',
+			'meta_value'     => $mgml_user_id,
+			'posts_per_page' => -1, // Retrieve all matching posts
+		);
+
+		$query = new WP_Query( $args );
+
+		$posts = wp_list_pluck( $query->posts, 'ID' );
+
+		if (count($posts) > 0 ) {
+			error_log("ERROR: More than one user with the same MGML user ID");
+		}
+		return $posts[0];
+	}
+
 ?>

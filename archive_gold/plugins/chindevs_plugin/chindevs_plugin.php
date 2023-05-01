@@ -38,13 +38,15 @@ $existingMetaMapping = array (
         'billing_city' =>'city',
         'billing_state' => 'state',
         'billing_country' => 'country',
-        'billing_postcode' => 'pin_code',
+        'billing_postcode' => 'pincode',
         'billing_phone' => 'phone_no'
     );
 
+// Other meta keys might be needed (hear/hear_source/cm_center/)
 $newMetaMapping = array (
      'date_of_birth' => 'dob',
-     'gender' => 'gender'
+     'gender' => 'gender',
+	 'profession' => 'profession',
 );
 
 //The Hardcoded ID's of the Product Main categories (created from frontend)
@@ -104,16 +106,21 @@ add_action( 'wp_enqueue_scripts', 'gift_course_scripts' );
 
 // All Course Data migration functions
 function create_course_data() {
-	echo " <br> <br> STARTING QUESTIONS <br> <br> ";
-    read_csv("question.csv", "question");
-	echo "<br> <br>  DONE WITH QUESTIONS <br> <br> ";
-	echo " <br> <br> STARTING LESSONS <br> <br> ";
-    read_csv("All_lesson.csv", "lesson");
-	echo "<br> <br>  DONE WITH LESSONS <br> <br> ";
-	echo " <br> <br> STARTING COURSES <br> <br> ";
-    read_csv("courses_data.csv", "course");
-	echo "<br> <br>  DONE WITH COURSES <br> <br> ";
-//     read_csv("users.csv", "user");
+// 	echo " <br> <br> STARTING QUESTIONS <br> <br> ";
+//     read_csv("question.csv", "question");
+// 	echo "<br> <br>  DONE WITH QUESTIONS <br> <br> ";
+// 	echo " <br> <br> STARTING LESSONS <br> <br> ";
+//     read_csv("All_lesson.csv", "lesson");
+// // 	echo "<br> <br>  DONE WITH LESSONS <br> <br> ";
+// 	echo " <br> <br> STARTING COURSES <br> <br> ";
+
+//     read_csv("small_courses_data.csv", "course");
+
+// 	echo "<br> <br>  DONE WITH COURSES <br> <br> ";
+
+	echo " <br> <br> STARTING USERS <br> <br> ";
+    read_csv("users_1.csv", "user");
+	echo " <br> <br> ENDING USERS <br> <br> ";
 //     read_csv("user_self_assessment.csv", "userquiz");
 //     read_csv("user_self_assessment_details.csv", "useranswers");
 //     read_csv("enrol.csv", "enrol");

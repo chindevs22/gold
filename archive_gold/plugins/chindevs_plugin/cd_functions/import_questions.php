@@ -11,6 +11,7 @@
 			return;
 		}
 
+		// Not handling $wpQuestionsToAnswers
 		global $lessonToQuestionsMap, $questionMGMLtoWP, $wpQuestionsToAnswers;
 
 
@@ -29,14 +30,16 @@
 
 		$quiz_id = $questionData['quiz_id'];
 
-		$questionMGMLtoWP[$questionData['id']] = $question_post_id; //map MGML question ID
-
+		// Create metadata fields for MGML question and MGML quiz
+		update_post_meta($question_post_id, 'mgml_question_id', $questionData['id']);
+		update_post_meta($question_post_id, 'mgml_quiz_id', $quiz_id);
+// 		$questionMGMLtoWP[$questionData['id']] = $question_post_id; //map MGML question ID
 		// MAP question ID to quiz
-		if (!array_key_exists($quiz_id, $lessonToQuestionsMap)) {
-			$lessonToQuestionsMap[$quiz_id] = array($question_post_id);
-		} else {
-			array_push($lessonToQuestionsMap[$quiz_id], $question_post_id);
-		}
+// 		if (!array_key_exists($quiz_id, $lessonToQuestionsMap)) {
+// 			$lessonToQuestionsMap[$quiz_id] = array($question_post_id);
+// 		} else {
+// 			array_push($lessonToQuestionsMap[$quiz_id], $question_post_id);
+// 		}
 
 		// add metadata for question
 		if ($questionData['type'] == 'multiple_choice') {
@@ -46,6 +49,15 @@
 		} else {
 		   update_post_meta($question_post_id, 'type', $questionData['type']);
 		}
+
+		// Add points value ** Need to check if it shows at 0 or 1 or as a string????
+        if (!isset($questionData['marks']) || $questionData['marks'] == 0) {
+            echo "no points";
+        }
+        else {
+            update_post_meta($question_post_id, 'slms_points', $questionData['marks']);
+        }
+
 
 		$answers = array();
 		if ($questionData['type'] != 'matching')  {
@@ -57,7 +69,7 @@
 			foreach ($options as $option) {
 				$option = trim($option, "\"");
 				$optionArray["text"] = $option;
-				$optionArray["isTrue"] = str_contains($isCorrect, $count++) ? "1" : "0";
+				$optionArray["isTrue"] = str_contains($isCorrect, $count++) ? 1 : 0;
 				array_push($answers, $optionArray);
 			}
 		}

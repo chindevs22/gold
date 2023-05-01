@@ -35,23 +35,32 @@
 
 		$lesson_post_id = wp_insert_post( $wpdata );
 
-		$lessonMGMLtoWP[$lessonData['id']] = $lesson_post_id; //save MGML ID
+		update_post_meta($lesson_post_id, 'mgml_lesson_id', $lessonData['id']);
+		update_post_meta($lesson_post_id, 'mgml_section_id', $lessonData['section_id']);
+		update_post_meta($lesson_post_id, 'mgml_section_name', $lessonData['section_name']);
+// 		$lessonMGMLtoWP[$lessonData['id']] = $lesson_post_id; //save MGML ID
+
 		$sectionID = $lessonData['section_id']; //map section ID for course
-		if (!array_key_exists($sectionID, $sectionToLessonMap)) {
-			// TODO: replaced section_name with title here
-			$sectionToLessonMap[$sectionID] = array("{$lessonData['section_name']}", "{$lesson_post_id}");
-		} else {
-			array_push($sectionToLessonMap[$sectionID], "{$lesson_post_id}");
-		}
+// 		if (!array_key_exists($sectionID, $sectionToLessonMap)) {
+// 			// TODO: replaced section_name with title here
+// 			$sectionToLessonMap[$sectionID] = array("{$lessonData['section_name']}", "{$lesson_post_id}");
+// 		} else {
+// 			array_push($sectionToLessonMap[$sectionID], "{$lesson_post_id}");
+// 		}
 
 		if ($lessonData['lesson_type'] == 'quiz') {
 			  update_post_meta($lesson_post_id, 'correct_answer', 'on');
 			  update_post_meta($lesson_post_id, 'passing_grade', '0');
 			  update_post_meta($lesson_post_id, 're_take_cut', '0');
 			  update_post_meta($lesson_post_id, 'quiz_style', 'global');
-			  $questionArray = $lessonToQuestionsMap[$lessonData['id']];
+
+			  //assign questions
+			  $questionArray = get_questions_for_quiz($lessonData['id']);
+			  error_log(print_r($questionArray, true));
+//			  $questionArray = $lessonToQuestionsMap[$lessonData['id']];
 			  if (!empty($questionArray)) {
 				  $questionString = implode(",", $questionArray);
+				  error_log(print_r($questionString, true));
 				  update_post_meta($lesson_post_id, 'questions', $questionString);
 			  } else {
 				  echo "No questions available for Quiz <br>";
@@ -64,5 +73,33 @@
 			update_post_meta($lesson_post_id, 'video_type', $video_type);
 			update_post_meta($lesson_post_id, "lesson_{$video_type}_url", $lessonData['video_url']);
 		}
+	}
+
+	function get_questions_for_quiz($quiz_id) {
+        $args = array(
+            'post_type' => 'stm-questions',
+            'meta_query' => array(
+                   array(
+                       'key' => 'mgml_quiz_id',
+                       'value' => $quiz_id,
+                       'compare' => '='
+                   )
+               )
+        );
+
+        $the_query = new WP_Query( $args );
+
+        $post_ids = array(); // create an empty array to store post IDs
+
+        if ( $the_query->have_posts() ) {
+            while ( $the_query->have_posts() ) {
+                $the_query->the_post();
+                $post_ids[] = get_the_ID(); // add post ID to the array
+            }
+            wp_reset_postdata();
+        }
+
+        return $post_ids;
+
 	}
 ?>

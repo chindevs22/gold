@@ -8,6 +8,8 @@
 	function create_course_from_csv($courseData) {
 		global $courseMGMLtoWP, $sectionToLessonMap;
 
+		echo "IMPORTING COURSE <br> <br>";
+
         $faq_description;
         $new_desc = html_entity_decode($courseData['description']);
         $faq_flag = false;
@@ -28,7 +30,7 @@
 		if (!isset($new_desc) || $new_desc == "") {
 			$new_desc = "Could not parse course description. Populate from front end.";
 			echo "Could not parse course description for " . $courseData['id'];
-			error_log("Could not parse course description for ", $courseData['id']);
+			error_log("Could not parse course description for " . $courseData['id']);
 		}
 
 		// Create array of Course info from CSV data
@@ -40,35 +42,67 @@
 		$course_post_id = wp_insert_post( $wpdata );
 
 		echo "Course ID: " . $courseData['id'] . "  Course Post Id: " . $course_post_id . " <br> <br>";
-		$courseMGMLtoWP[$courseData['id']] = $course_post_id;
+// 		$courseMGMLtoWP[$courseData['id']] = $course_post_id;
+		update_post_meta($course_post_id, 'mgml_course_id', $courseData['id']);
 
-		// Generate Curriculum String
+// 		// Generate Curriculum String
 		$curriculum_string = "";
 		$combinedArray = array();
 		$sectionString = $courseData['section'];
 		$sectionArray = create_array_from_string($sectionString, ",");
 
 		foreach ($sectionArray as $sectionID) {
-			if ($sectionToLessonMap[$sectionID]) {
-				$combinedArray = array_merge($combinedArray, $sectionToLessonMap[$sectionID]);
+			$lessonArray = get_lessons_for_section($sectionID);
+			error_log("The lessons for the section from DB");
+			error_log(print_r($lessonArray));
+			if(count($lessonArray) > 0) {
+				$sectionName = get_post_meta($lessonArray[0], 'mgml_section_name', true);
+				$sArray = array($sectionName);
+				$combinedArray = array_merge($combinedArray, $sArray, $lessonArray);
+
 			}
 		}
 
+		error_log("Combined full array");
+		error_log(print_r($combinedArray, true));
 		$curriculum_string = implode(",", $combinedArray);
 
         if(empty($curriculum_string) || strlen($curriculum_string) == 0) {
             $curriculum_string = "Sample Section, 5552";
         }
+        update_post_meta($course_post_id, 'curriculum', $curriculum_string);
 
-		//TODO: need to handle multiple prices
-		$price = $courseData['price_usd'];
-		update_post_meta($course_post_id, 'price', $price);
-		update_post_meta($course_post_id, 'curriculum', $curriculum_string);
+		// Handling Pricing - what to do when 1 or both prices are null?
+		$us_price = $courseData['price_usd'];
+		$inr_price = $courseData['price'];
+
+		update_post_meta($course_post_id, 'price', $inr_price);
+
+        $price_arr = array();
+        if(isset($us_price) && $us_price != "NULL") {
+            array_push($price_arr, array(
+                "country" => "US",
+                "price" => $us_price
+            ));
+        }
+
+         if(isset($inr_price) && $inr_price != "NULL") {
+            array_push($price_arr, array(
+                "country" => "IN",
+                "price" => $inr_price
+            ));
+        }
+        update_post_meta($course_post_id, 'prices_list', json_encode($price_arr));
+
+
 		update_post_meta($course_post_id, 'level', $courseData['level']);
 		update_post_meta($course_post_id, 'current_students', 0);
+
+// 		Make Trial Course
 // 		if (!empty($price) || $price != 0) {
 // 			update_post_meta($course_post_id, 'shareware', 'on');
 // 		}
+//
 		//append faq
 		if($faq_flag) {
 		    $faq_string = build_faq($faq_description);
@@ -78,10 +112,10 @@
 			update_post_meta($course_post_id, '_wp_page_template', 'default');
 		}
 
-		//TODO: uncomment this when we actually have images
-		//add_course_image($course_post_id, $courseData['id']); // adds the image to the course
+// 		TODO: uncomment this when we actually have images
+// 		add_course_image($course_post_id, $courseData['id']); // adds the image to the course
 
-		// this appends the category as a term with the taxonomy relationship to the course ID
+// 		this appends the category as a term with the taxonomy relationship to the course ID
 
 		$category = $courseData['parent_category'];
 
@@ -132,5 +166,22 @@
 			wp_update_attachment_metadata( $attachment_id, $attachment_data );
 			set_post_thumbnail( $course_post_id, $attachment_id );
 		}
+	}
+
+	function get_lessons_for_section($section_id) {
+		$args = array(
+			'post_type'      => array( 'stm-lessons', 'stm-quizzes' ),
+			'meta_key'       => 'mgml_section_id',
+			'meta_value'     => $section_id,
+			'orderby'        => 'ID',
+			'order'          => 'ASC',
+			'posts_per_page' => -1, // Retrieve all matching posts
+		);
+
+		$query = new WP_Query( $args );
+
+		$posts = wp_list_pluck( $query->posts, 'ID' );
+
+		return $posts;
 	}
 ?>
