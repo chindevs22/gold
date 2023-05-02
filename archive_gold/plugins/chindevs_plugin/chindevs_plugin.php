@@ -114,14 +114,16 @@ function create_course_data() {
 // // 	echo "<br> <br>  DONE WITH LESSONS <br> <br> ";
 // 	echo " <br> <br> STARTING COURSES <br> <br> ";
 
-//     read_csv("small_courses_data.csv", "course");
+//     read_csv("courses_data.csv", "course");
 
 // 	echo "<br> <br>  DONE WITH COURSES <br> <br> ";
 
-	echo " <br> <br> STARTING USERS <br> <br> ";
-    read_csv("users_1.csv", "user");
-	echo " <br> <br> ENDING USERS <br> <br> ";
-//     read_csv("user_self_assessment.csv", "userquiz");
+// 	echo " <br> <br> STARTING USERS <br> <br> ";
+//     read_csv("validusers2.csv", "user");
+// 	echo " <br> <br> ENDING USERS <br> <br> ";
+		echo " <br> <br> STARTING USER ASSESSMENT <br> <br> ";
+    read_csv("user_assessment/file0.csv", "userquiz");
+		echo " <br> <br> ENDING USER ASSESSMENT <br> <br> ";
 //     read_csv("user_self_assessment_details.csv", "useranswers");
 //     read_csv("enrol.csv", "enrol");
 // 	read_csv("publications.csv", "publications");
@@ -311,3 +313,15 @@ function stm_lms_event_date_field($fields) {
      );
     return $fields;
 }
+
+
+
+// This creates the our version of an includes column (TODO: for any category)
+add_filter( 'stm_lms_template_name', 'includes_file', 100, 2 );
+function includes_file( $template_name, $vars ) {
+	if ( $template_name === '/stm-lms-templates/course/udemy/parts/includes.php') {
+		$template_name = '/stm-lms-templates/course/udemy/parts/includes1.php';
+	}
+	return $template_name;
+}
+

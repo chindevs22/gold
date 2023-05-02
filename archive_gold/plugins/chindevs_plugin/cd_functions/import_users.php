@@ -12,16 +12,14 @@
 			return;
 		}
 
-		$random_num = rand(1, 1000);
-
 		//  Create array of User info from CSV data
 		$wpdata['user_pass'] = "NewPassword!";
 		//Cant use trim, need to pregreplace
-		$wpdata['user_login'] = trim($userData['first_name']) . '-' . trim($userData['last_name']) . '-' . $random_num;
+		$wpdata['user_login'] = $userData['email'];
 		$wpdata['first_name'] = $userData['first_name'];
 		$wpdata['last_name'] = $userData['last_name'];
 		$wpdata['display_name'] = $userData['first_name'];
-        $wpdata['user_email'] = "chindevsRound1" . $randomEmailCounter . "@gmail.com";
+        $wpdata['user_email'] = "chindevsRound2" . $randomEmailCounter . "@gmail.com";
         $randomEmailCounter += 1;
 
 		//  $wpdata['user_email'] = $userData['email']; TODO: Add back the actual email
