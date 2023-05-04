@@ -117,13 +117,14 @@
 
 // 		this appends the category as a term with the taxonomy relationship to the course ID
 
-		$category = $courseData['parent_category'];
-
-		if ($category == 'Satsang Webinars' || $category == 'Text-based Webinars') {
-			$category_arr = array("Study Format", $category);
-		} else {
-			$category_arr = array("Subject Matter", $category);
-		}
+// 		$category = $courseData['parent_category'];
+// 		//TODO: Fix the categorization to mimic publications (create terms)
+		$category_arr  = array("Course Category");
+// 		if ($category == 'Satsang Webinars' || $category == 'Text-based Webinars') {
+// 			$category_arr = array("Study Format", $category);
+// 		} else {
+// 			$category_arr = array("Subject Matter", $category);
+// 		}
 		wp_set_object_terms($course_post_id, $category_arr, 'stm_lms_course_taxonomy', $append = true );
 	}
 

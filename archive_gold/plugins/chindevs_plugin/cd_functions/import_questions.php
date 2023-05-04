@@ -97,7 +97,8 @@
 			}
 		}
 		// map WP qusetion to WP Answers List
-		$wpQuestionsToAnswers[$question_post_id] = $options;
+//		$wpQuestionsToAnswers[$question_post_id] = $options;
+		update_post_meta($question_post_id, 'mgml_answer_options', $options);
 		update_post_meta($question_post_id, 'answers', $answers);
 	}
 ?>

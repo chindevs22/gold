@@ -107,25 +107,26 @@ add_action( 'wp_enqueue_scripts', 'gift_course_scripts' );
 // All Course Data migration functions
 function create_course_data() {
 // 	echo " <br> <br> STARTING QUESTIONS <br> <br> ";
-//     read_csv("question.csv", "question");
+//     read_csv("final_sqls/question.csv", "question");
 // 	echo "<br> <br>  DONE WITH QUESTIONS <br> <br> ";
 // 	echo " <br> <br> STARTING LESSONS <br> <br> ";
-//     read_csv("All_lesson.csv", "lesson");
-// // 	echo "<br> <br>  DONE WITH LESSONS <br> <br> ";
+//     read_csv("final_sqls/lessons.csv", "lesson");
+// 	echo "<br> <br>  DONE WITH LESSONS <br> <br> ";
 // 	echo " <br> <br> STARTING COURSES <br> <br> ";
-
-//     read_csv("courses_data.csv", "course");
-
+//     read_csv("final_sqls/courses.csv", "course");
 // 	echo "<br> <br>  DONE WITH COURSES <br> <br> ";
-
-// 	echo " <br> <br> STARTING USERS <br> <br> ";
-//     read_csv("validusers2.csv", "user");
+// 	echo " <br> <br> STARTING USERS <br> <br> "; //two user files
+//     read_csv("final_sqls/validusers2.csv", "user");
 // 	echo " <br> <br> ENDING USERS <br> <br> ";
-		echo " <br> <br> STARTING USER ASSESSMENT <br> <br> ";
-    read_csv("user_assessment/file0.csv", "userquiz");
-		echo " <br> <br> ENDING USER ASSESSMENT <br> <br> ";
-//     read_csv("user_self_assessment_details.csv", "useranswers");
-//     read_csv("enrol.csv", "enrol");
+// 	echo " <br> <br> STARTING USER ASSESSMENT <br> <br> ";
+//     read_csv("final_sqls/usa_c7.csv", "userquiz");
+// // 	echo " <br> <br> ENDING USER ASSESSMENT <br> <br> ";
+// 	echo " <br> <br> STARTING USER ASSESSMENT DETAILS <br> <br> ";
+//     read_csv("final_sqls/usad_c7.csv", "useranswers");
+// 	echo " <br> <br> ENDING USER ASSESSMENT DETAILS <br> <br> ";
+		echo " <br> <br> STARTING ENROLL <br> <br> ";
+    read_csv("final_sqls/enrol_c7.csv", "enrol");
+    	echo " <br> <br> ENDING ENROLL <br> <br> ";
 // 	read_csv("publications.csv", "publications");
 }
 // Course data migration
