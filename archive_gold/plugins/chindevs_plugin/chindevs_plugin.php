@@ -102,7 +102,7 @@ function gift_course_scripts() {
 }
 add_action( 'wp_enqueue_scripts', 'gift_course_scripts' );
 
-/// ------------------- COURSE MIGRATION -------------------------
+/// --------------------------------------------------------- COURSE MIGRATION ---------------------------------------------------------------
 
 // All Course Data migration functions
 function create_course_data() {
@@ -124,9 +124,9 @@ function create_course_data() {
 // 	echo " <br> <br> STARTING USER ASSESSMENT DETAILS <br> <br> ";
 //     read_csv("final_sqls/usad_c7.csv", "useranswers");
 // 	echo " <br> <br> ENDING USER ASSESSMENT DETAILS <br> <br> ";
-		echo " <br> <br> STARTING ENROLL <br> <br> ";
-    read_csv("final_sqls/enrol_c7.csv", "enrol");
-    	echo " <br> <br> ENDING ENROLL <br> <br> ";
+// 		echo " <br> <br> STARTING ENROLL <br> <br> ";
+//     read_csv("final_sqls/enrol_c7.csv", "enrol");
+//     	echo " <br> <br> ENDING ENROLL <br> <br> ";
 // 	read_csv("publications.csv", "publications");
 }
 // Course data migration
@@ -175,16 +175,29 @@ function read_csv($file_name, $type) {
 add_shortcode( 'test-functions', 'create_course_data' );
 
 
-/// ------------------- EVENT MIGRATION -------------------------
-function create_event_data() {
-   read_event_csv("event_lessons.csv", "event_lesson"); //event details for live events the zoom link for lesson 1
-   read_event_csv("currentevents_withlessons.csv", "event");
-//    read_event_csv("user_event.csv", "user_event");
+/// --------------------------------------------------------- LITE DATA MIGRATION ---------------------------------------------------------------
+function create_lite_data() {
+	// EVENT FILES
+//    read_event_sm_csv("cd-event-docs/event_lessons.csv", "event_lesson"); //event details for live events the zoom link for lesson 1
+//    read_event_sm_csv("cd-event-docs/currentevents_withlessons.csv", "event");
+//    read_event_csv("cd-event-docs/user_event.csv", "user_event");
+
+	// SM FILES
+// 	echo " <br> <br> STARTING SM LESSONS <br> <br> ";
+// 	read_lite_csv("cd-sm-docs/sm_lessons.csv", "sm_lesson");
+// 	echo " <br> <br> ENDING SM LESSONS <br> <br> ";
+
+	echo " <br> <br> STARTING SM <br> <br> ";
+	read_lite_csv("cd-sm-docs/sm_courses.csv", "shravana_mangalam");
+	echo " <br> <br> ENDING SM <br> <br> ";
+
+// 	read_event_sm_csv("cd-sm-docs/sm_courses_small", "shravana_mangalam");
 }
-// Course data migration
-function read_event_csv($file_name, $type) {
+
+// "Lite" Types Data migration
+function read_lite_csv($file_name, $type) {
     //file mapping from our File Manager
-    $fileName = "/home/freewaydns-dev108/cd-event-docs/{$file_name}";
+    $fileName = "/home/freewaydns-dev108/{$file_name}";
     $file = fopen($fileName, 'r');
     $dataArray = array();
     $headerLine = true;
@@ -198,8 +211,8 @@ function read_event_csv($file_name, $type) {
         // loop through the column values in one row
         $count = 0;
         $tempArray = array();
-		error_log("mapping line");
-		error_log(print_r($mappingLine, true));
+// 		error_log("mapping line");
+// 		error_log(print_r($mappingLine, true));
         // create mapping based on header
         foreach($line as $value) {
            $sanitized_value = preg_replace("/\\\\u([0-9abcdef]{4})/", "&#x$1;", $value);
@@ -211,12 +224,20 @@ function read_event_csv($file_name, $type) {
             create_event_from_csv($tempArray);
         } else if ($type == "user_event") {
             create_user_event_from_csv($tempArray);
+        } else if ($type == "sm_lesson") { //utilizes the defailt create lesson
+            create_sm_lesson_from_csv($tempArray);
+        } else if ($type == "shravana_mangalam") { //utilizes the defailt create lesson
+            create_sm_from_csv($tempArray);
         }
     }
     fclose($file);
 }
-add_shortcode( 'test-functions-events', 'create_event_data' );
 
+add_shortcode( 'test-functions-lite', 'create_lite_data' );
+
+
+
+///-------------------------------------------------------- END DATA MIGRATION CODE ------------------------------------------------------------------------------------------------
 
 // FEEDBACK FORM ---- based on form submission
 function submit_form_js() {
