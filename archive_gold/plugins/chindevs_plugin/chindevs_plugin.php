@@ -187,9 +187,15 @@ function create_lite_data() {
 // 	read_lite_csv("cd-sm-docs/sm_lessons.csv", "sm_lesson");
 // 	echo " <br> <br> ENDING SM LESSONS <br> <br> ";
 
-	echo " <br> <br> STARTING SM <br> <br> ";
-	read_lite_csv("cd-sm-docs/sm_courses.csv", "shravana_mangalam");
-	echo " <br> <br> ENDING SM <br> <br> ";
+// 	echo " <br> <br> STARTING SM <br> <br> ";
+// 	read_lite_csv("cd-sm-docs/sm_courses.csv", "shravana_mangalam");
+// 	echo " <br> <br> ENDING SM <br> <br> ";
+//
+
+	echo " <br> <br> STARTING ENROLL SM USERS <br> <br> ";
+	read_lite_csv("cd-sm-docs/sm_enrol_small.csv", "user_sm");
+	echo " <br> <br> ENDING ENROLL SM USERS <br> <br> ";
+
 
 // 	read_event_sm_csv("cd-sm-docs/sm_courses_small", "shravana_mangalam");
 }
@@ -228,6 +234,8 @@ function read_lite_csv($file_name, $type) {
             create_sm_lesson_from_csv($tempArray);
         } else if ($type == "shravana_mangalam") { //utilizes the defailt create lesson
             create_sm_from_csv($tempArray);
+        } else if ($type == "user_sm") { //utilizes the defailt create lesson
+            enrol_sm_users_from_csv($tempArray);
         }
     }
     fclose($file);

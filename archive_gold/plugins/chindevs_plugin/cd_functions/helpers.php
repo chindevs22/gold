@@ -70,25 +70,29 @@ function add_course_image($course_post_id, $course_id) {
 
 // Get all posts matching post_type and meta_key / meta_value pair
 function cd_get_posts($post_type, $key, $value) {
-    error_log("Finding if " . $post_type . " exists for this value: " . $value);
+    error_log("Finding if " . $post_type . " exists at " . $key . " for this value: " . $value);
     $args = array(
         'post_type'      => $post_type,
         'meta_key'       => $key,
         'meta_value'     => $value,
-		'orderby'        => 'ID',
-        'order'          => 'ASC',
+// 		'orderby'        => 'ID',
+//         'order'          => 'ASC',
         'posts_per_page' => -1, // Retrieve all matching posts
     );
     $query = new WP_Query( $args );
     $posts = wp_list_pluck( $query->posts, 'ID' );
+	error_log(print_r($args, true));
+	error_log(print_r($posts, true));
+
     return $posts;
 }
 
 // Get single post matching post_type and meta_key / meta_value pair or error if more than 1 found
 function get_from_post($post_type, $key, $value) {
 
-    $posts = get_posts($post_type, $key, $value);
-
+    $posts = cd_get_posts($post_type, $key, $value);
+	error_log("in get from post");
+	error_log(print_r($posts, true));
     if (count($posts) > 1 ) {
         error_log("ERROR: More than one " . $post_type . " with the same MGML ID: " . $value);
         error_log(print_r($posts, true));
