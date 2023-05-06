@@ -125,64 +125,37 @@
 // 		} else {
 // 			$category_arr = array("Subject Matter", $category);
 // 		}
-		wp_set_object_terms($course_post_id, $category_arr, 'stm_lms_course_taxonomy', $append = true );
-	}
 
-	// build faq
-    function build_faq($faq) {
-        $faq_string = "[";
-        $qna = explode("panel-title", $faq);
+        // Handle Category  TODO: wont work for same category name as sub/main -----------------------------------------------------------------
+        $taxonomy = 'stm_lms_course_taxonomy';
+        $parent_cat_name =  $courseData['category_name'];
+        $parentTerm = get_term_by( 'name', $parent_cat_name , $taxonomy );
 
-        foreach($qna as $qa) {
-            $arr = explode("panel-body", $qa);
-            $question = trim(substr(strip_tags(html_entity_decode($arr[0])),3));
-            $answer = trim(substr(strip_tags(html_entity_decode($arr[1])),3));
-
-            if (empty($question) || empty($answer)) {
-            	continue;
-            }
-            $faq_string .= '{"question":"'.$question.'","answer":"'.$answer.'"},';
+        // Create or Find Parent Category ID
+        if ( $parentTerm ) { // Parent Term Exists
+            $parent_category_id = $parentTerm->term_id;
+            echo "The ID of the term " . $parent_cat_name. " is: " . $parent_category_id;
+        } else { // Create the Parent Term
+            $new_term = wp_insert_term($parent_cat_name, $taxonomy, array('parent'=> 0));
+            $parent_category_id = intval($new_term['term_id']);
+            echo "The resulting id: " . $parent_category_id;
+            echo "Created category " . $parent_cat_name;
+            error_log("Created category " . $parent_cat_name);
         }
-        $faq_string = trim($faq_string, ",") . "]";
-    	return $faq_string;
-    }
 
-	// add course image
-	function add_course_image($course_post_id, $course_id) {
-		$upload_dir = wp_upload_dir();
-		$upload_path = "course_materials/{$course_id}/thumbnail.jpg";
-		$filename = "thumbnail.jpg";
-		$wp_filetype = wp_check_filetype(basename($filename), null );
-		$attachment = array(
-			'post_mime_type' => $wp_filetype['type'],
-			'post_title' => sanitize_file_name($filename),
-			'post_content' => '',
-			'post_status' => 'inherit'
-		);
+        // Create or Find Sub Category ID
+        $sub_cat_name =  $courseData['subcategory_name'];
+        $subCatTerm = get_term_by( 'name', $sub_cat_name , $taxonomy );
+        if ( $subCatTerm ) { // if Sub Category Exists already
+             $sub_category_id = $subCatTerm->term_id;
+             echo "The ID of the term " . $sub_cat_name . " is: " . $sub_category_id;
+        } else {
+            $new_sub_term = wp_insert_term($sub_cat_name, $taxonomy, array('parent'=> $parent_category_id));
+            $sub_category_id = intval($new_sub_term['term_id']);
+            echo "Created category " . $sub_cat_name;
+            error_log("Created category " . $sub_cat_name);
+        }
+        wp_set_object_terms($course_post_id, $sub_category_id,  $taxonomy, $append = true );
 
-		$attachment_id = wp_insert_attachment( $attachment, $upload_path, $course_post_id );
-		if ( ! is_wp_error( $attachment_id ) ) {
-			require_once(ABSPATH . 'wp-admin/includes/image.php');
-			$attachment_data = wp_generate_attachment_metadata( $attachment_id, $upload_path );
-			wp_update_attachment_metadata( $attachment_id, $attachment_data );
-			set_post_thumbnail( $course_post_id, $attachment_id );
-		}
-	}
-
-	function get_lessons_for_section($section_id) {
-		$args = array(
-			'post_type'      => array( 'stm-lessons', 'stm-quizzes' ),
-			'meta_key'       => 'mgml_section_id',
-			'meta_value'     => $section_id,
-			'orderby'        => 'ID',
-			'order'          => 'ASC',
-			'posts_per_page' => -1, // Retrieve all matching posts
-		);
-
-		$query = new WP_Query( $args );
-
-		$posts = wp_list_pluck( $query->posts, 'ID' );
-
-		return $posts;
 	}
 ?>
