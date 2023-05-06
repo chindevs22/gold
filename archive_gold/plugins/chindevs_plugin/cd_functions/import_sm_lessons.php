@@ -19,7 +19,6 @@
 
 		update_post_meta($lesson_post_id, 'mgml_lesson_id', $smLessonData['id']);
 		update_post_meta($lesson_post_id, 'mgml_sm_id', $smLessonData['course_id']); //
-		update_post_meta($lesson_post_id, 'mgml_section_name', $smLessonData['title']);
 		update_post_meta($lesson_post_id, 'lite_type', 'shravana_mangalam');
 
         //video post meta

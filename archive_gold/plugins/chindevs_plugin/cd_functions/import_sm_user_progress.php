@@ -1,15 +1,17 @@
 <?php
-    function enrol_sm_users_from_csv($enrolData) {
+    function enrol_sm_users_from_csv($enrolData, $type) {
         global $wpdb;
-        // $userMGMLtoWP, $courseMGMLtoWP, $lessonMGMLtoWP, $selfAssessmentToUser, $questionMGMLtoWP;
         $table_name = 'wp_stm_lms_user_courses';
-        // TODO: Hardcoding since we didn't make that lesson - $enrolData['current_lesson_id']
-        // $wp_course_id = $courseMGMLtoWP[$enrolData['course_id']];
+		echo print_r($enrolData);
+		echo $type;
 
-		error_log($enrolData['course_id']);
-		$wp_course_id = get_sm($enrolData['course_id']);
-//         $wp_course_id = get_from_post('stm-courses', 'mgml_course_id', $enrolData['course_id']);
-        if (!isset($wp_course_id) || $wp_course_id === 0) {
+		if ($type === "sm") {
+			$wp_course_id = get_sm($enrolData['course_id']);
+		} else {
+			$wp_course_id = get_sm($enrolData['event_id']);
+		}
+
+		if (!isset($wp_course_id) || $wp_course_id === 0) {
             error_log("No data for this course: ");
             return;
         }

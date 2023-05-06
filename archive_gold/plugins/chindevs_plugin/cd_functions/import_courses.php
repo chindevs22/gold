@@ -126,7 +126,7 @@
 // 			$category_arr = array("Subject Matter", $category);
 // 		}
 
-        // Handle Category  TODO: wont work for same category name as sub/main -----------------------------------------------------------------
+        // Handle Category -----------------------------------------------------------------
         $taxonomy = 'stm_lms_course_taxonomy';
         $parent_cat_name =  $courseData['category_name'];
         $parentTerm = get_term_by( 'name', $parent_cat_name , $taxonomy );

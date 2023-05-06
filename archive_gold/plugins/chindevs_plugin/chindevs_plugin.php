@@ -107,32 +107,35 @@ add_action( 'wp_enqueue_scripts', 'gift_course_scripts' );
 // All Course Data migration functions
 function create_course_data() {
 // 	echo " <br> <br> STARTING QUESTIONS <br> <br> ";
-//     read_csv("final_sqls/question.csv", "question");
+//     read_csv("question.csv", "question");
 // 	echo "<br> <br>  DONE WITH QUESTIONS <br> <br> ";
 // 	echo " <br> <br> STARTING LESSONS <br> <br> ";
-//     read_csv("final_sqls/lessons.csv", "lesson");
-// 	echo "<br> <br>  DONE WITH LESSONS <br> <br> ";
+//     read_csv("lessons.csv", "lesson");
+// // 	echo "<br> <br>  DONE WITH LESSONS <br> <br> ";
 // 	echo " <br> <br> STARTING COURSES <br> <br> ";
-//     read_csv("final_sqls/courses.csv", "course");
+//     read_csv("courses.csv", "course");
+// 	echo "<br> <br>  DONE WITH COURSES <br> <br> ";
+// 	echo " <br> <br> STARTING COURSES <br> <br> ";
+//     read_csv("courses.csv", "course");
 // 	echo "<br> <br>  DONE WITH COURSES <br> <br> ";
 // 	echo " <br> <br> STARTING USERS <br> <br> "; //two user files
-//     read_csv("final_sqls/validusers2.csv", "user");
+//     read_csv("validusers2.csv", "user");
 // 	echo " <br> <br> ENDING USERS <br> <br> ";
 // 	echo " <br> <br> STARTING USER ASSESSMENT <br> <br> ";
-//     read_csv("final_sqls/usa_c7.csv", "userquiz");
+//     read_csv("usa_c7.csv", "userquiz");
 // // 	echo " <br> <br> ENDING USER ASSESSMENT <br> <br> ";
 // 	echo " <br> <br> STARTING USER ASSESSMENT DETAILS <br> <br> ";
-//     read_csv("final_sqls/usad_c7.csv", "useranswers");
+//     read_csv("usad_c7.csv", "useranswers");
 // 	echo " <br> <br> ENDING USER ASSESSMENT DETAILS <br> <br> ";
 // 		echo " <br> <br> STARTING ENROLL <br> <br> ";
-//     read_csv("final_sqls/enrol_c7.csv", "enrol");
+//     read_csv("enrol_c7.csv", "enrol");
 //     	echo " <br> <br> ENDING ENROLL <br> <br> ";
 // 	read_csv("publications.csv", "publications");
 }
 // Course data migration
 function read_csv($file_name, $type) {
     //file mapping from our File Manager
-    $fileName = "/home/freewaydns-dev108/cd-sowmya-docs/{$file_name}"; //Ensure this is the right file location
+    $fileName = "/home/freewaydns-dev108/cd-courses-docs/{$file_name}"; //Ensure this is the right file location
     $file = fopen($fileName, 'r');
     $dataArray = array();
     $headerLine = true;
@@ -177,10 +180,19 @@ add_shortcode( 'test-functions', 'create_course_data' );
 
 /// --------------------------------------------------------- LITE DATA MIGRATION ---------------------------------------------------------------
 function create_lite_data() {
-	// EVENT FILES
-//    read_event_sm_csv("cd-event-docs/event_lessons.csv", "event_lesson"); //event details for live events the zoom link for lesson 1
-//    read_event_sm_csv("cd-event-docs/currentevents_withlessons.csv", "event");
-//    read_event_csv("cd-event-docs/user_event.csv", "user_event");
+// 	EVENT FILES
+// 	echo " <br> <br> STARTING EVENT LESSON<br> <br> ";
+// 	read_lite_csv("cd-event-docs/event_lesson.csv", "event_lesson");
+// 	echo " <br> <br> ENDING EVENT LESSON<br> <br> ";
+
+// 	echo " <br> <br> STARTING EVENT<br> <br> ";
+// 	read_lite_csv("cd-event-docs/event_courses.csv", "event");
+// 	echo " <br> <br> ENDING EVENT <br> <br> ";
+
+	echo " <br> <br> STARTING ENROLL EVENT<br> <br> ";
+	read_lite_csv("cd-event-docs/enrol_event.csv", "user_event");
+	echo " <br> <br> ENDING ENROLL EVENT<br> <br> ";
+//    read_lite_csv("cd-event-docs/user_event.csv", "user_event");
 
 	// SM FILES
 // 	echo " <br> <br> STARTING SM LESSONS <br> <br> ";
@@ -228,13 +240,13 @@ function read_lite_csv($file_name, $type) {
         } else if ($type == "event") {
             create_event_from_csv($tempArray);
         } else if ($type == "user_event") {
-            create_user_event_from_csv($tempArray);
+            enrol_sm_users_from_csv($tempArray, "event");
         } else if ($type == "sm_lesson") { //utilizes the defailt create lesson
             create_sm_lesson_from_csv($tempArray);
         } else if ($type == "shravana_mangalam") { //utilizes the defailt create lesson
             create_sm_from_csv($tempArray);
         } else if ($type == "user_sm") { //utilizes the defailt create lesson
-            enrol_sm_users_from_csv($tempArray);
+            enrol_sm_users_from_csv($tempArray, "sm");
         }
     }
     fclose($file);
