@@ -60,15 +60,18 @@
 
 
 		$answers = array();
+
+		$isCorrect = $questionData['correct_answers'];
+
 		if ($questionData['type'] != 'matching')  {
 			// if not matching
 			$count = 1;
 			$options = create_array_from_string($questionData['options'], '","');
-			//print_r($options);
-			$isCorrect = $questionData['correct_answers'];
+
 			foreach ($options as $option) {
 				$option = trim($option, "\"");
-				$optionArray["text"] = $option;
+				$saniOption = html_entity_decode($option, ENT_COMPAT, 'UTF-8');
+				$optionArray["text"] = $saniOption;
 				$optionArray["isTrue"] = str_contains($isCorrect, $count++) ? 1 : 0;
 				array_push($answers, $optionArray);
 			}
@@ -86,12 +89,12 @@
 			$options = create_array_from_string($optionString, '","');
 
 			$arrLength = count($questions);
-			$correctAnswers = create_array_from_string($questionData['correct_answers'], '","');
+			$correctAnswers = create_array_from_string($isCorrect, '","');
 
 			for($x = 0; $x < $arrLength; $x++) {
 				$correctAnswer = $correctAnswers[$x];
-				$optionArray["question"] = $questions[$x];
-				$optionArray["text"] = $options[$correctAnswer - 1];
+				$optionArray["question"] = html_entity_decode($questions[$x], ENT_COMPAT, 'UTF-8');
+				$optionArray["text"] =  html_entity_decode($options[$correctAnswer - 1], ENT_COMPAT, 'UTF-8');
 				$optionArray["isTrue"] = 0;
 				array_push($answers, $optionArray);
 			}
