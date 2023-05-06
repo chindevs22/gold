@@ -190,11 +190,10 @@ function create_lite_data() {
 // 	echo " <br> <br> STARTING SM <br> <br> ";
 // 	read_lite_csv("cd-sm-docs/sm_courses.csv", "shravana_mangalam");
 // 	echo " <br> <br> ENDING SM <br> <br> ";
-//
 
-	echo " <br> <br> STARTING ENROLL SM USERS <br> <br> ";
-	read_lite_csv("cd-sm-docs/sm_enrol_small.csv", "user_sm");
-	echo " <br> <br> ENDING ENROLL SM USERS <br> <br> ";
+// 	echo " <br> <br> STARTING ENROLL SM USERS <br> <br> ";
+// 	read_lite_csv("cd-sm-docs/sm_enrol.csv", "user_sm");
+// 	echo " <br> <br> ENDING ENROLL SM USERS <br> <br> ";
 
 
 // 	read_event_sm_csv("cd-sm-docs/sm_courses_small", "shravana_mangalam");

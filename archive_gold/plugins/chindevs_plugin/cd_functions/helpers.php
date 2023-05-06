@@ -68,6 +68,37 @@ function add_course_image($course_post_id, $course_id) {
 }
 // QUERY HELPERS
 
+//Unique Case for Shravana Mangalam because it uses UIDs which is funky
+function get_sm($value) {
+	global $wpdb;
+
+	$post_type = 'stm-courses';
+	$meta_key = 'mgml_course_id';
+	$meta_value = $value;
+	$query = "SELECT $wpdb->posts.*
+			  FROM $wpdb->posts
+			  INNER JOIN $wpdb->postmeta ON ($wpdb->posts.ID = $wpdb->postmeta.post_id)
+			  WHERE 1=1
+				AND $wpdb->posts.post_type = %s
+				AND ($wpdb->postmeta.meta_key = %s AND $wpdb->postmeta.meta_value = %s)
+			  ORDER BY $wpdb->posts.ID ASC";
+
+	$results = $wpdb->get_results( $wpdb->prepare( $query, $post_type, $meta_key, $meta_value ) );
+	error_log("getting result from sm for " . $value);
+
+	 if (count($results) > 1 ) {
+        error_log("ERROR: More than one " . $post_type . " with the same MGML ID: " . $value);
+        error_log(print_r($results, true));
+        return null;
+    }
+    if ( count($results) == 0) {
+        error_log("ERROR: No " . $post_type . " with this MGML ID: " . $value);
+        return null;
+    }
+    return $results[0]->ID;
+// 	error_log(print_r($results[0], true));
+}
+
 // Get all posts matching post_type and meta_key / meta_value pair
 function cd_get_posts($post_type, $key, $value) {
     error_log("Finding if " . $post_type . " exists at " . $key . " for this value: " . $value);
@@ -75,8 +106,8 @@ function cd_get_posts($post_type, $key, $value) {
         'post_type'      => $post_type,
         'meta_key'       => $key,
         'meta_value'     => $value,
-// 		'orderby'        => 'ID',
-//         'order'          => 'ASC',
+		'orderby'        => 'ID',
+        'order'          => 'ASC',
         'posts_per_page' => -1, // Retrieve all matching posts
     );
     $query = new WP_Query( $args );
@@ -91,7 +122,7 @@ function cd_get_posts($post_type, $key, $value) {
 function get_from_post($post_type, $key, $value) {
 
     $posts = cd_get_posts($post_type, $key, $value);
-	error_log("in get from post");
+	error_log("In get_from_post call");
 	error_log(print_r($posts, true));
     if (count($posts) > 1 ) {
         error_log("ERROR: More than one " . $post_type . " with the same MGML ID: " . $value);

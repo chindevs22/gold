@@ -83,7 +83,7 @@
             ));
         }
         update_post_meta($sm_post_id, 'prices_list', json_encode($price_arr));
-
+		update_post_meta($sm_post_id, 'lite_type', 'shravana_mangalam');
 
 		update_post_meta($sm_post_id, 'level', $smData['level']);
 		update_post_meta($sm_post_id, 'current_students', 0);
