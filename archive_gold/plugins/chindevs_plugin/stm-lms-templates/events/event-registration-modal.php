@@ -20,52 +20,38 @@ $user_id = $user['id'];
 <div class="course_name">
 	<?php
 	printf(
-		/* translators: %s Bundle price */
 		esc_html__( '%s', 'masterstudy-lms-learning-management-system-pro' ), // phpcs:ignore WordPress.WP.I18n.NoEmptyStrings
 		esc_html( get_the_title( $course_id ) )
 	);
 	?>
 </div>
 
-<div class="actions has-groups">
+<div class="stm_lms_select_price">
 
-	<div class="stm_lms_popup_add_users">
+	  <div class="row">
+		  <div class="col-sm-12">
+			  <?php foreach ( $event_price_options as $key => $value ) : ?>
+			  <div class="radio">
+				  <label><b><?php echo esc_html( $key ); ?></b> - <?php echo STM_LMS_Helpers::display_price( $value ); ?>
+                  	<input type="radio" name="price" value="<?php echo esc_attr( $value ); ?>" data-price="<?php echo esc_attr( $value ); ?>">
+				  </label>
+			  </div>
+			  <?php endforeach; ?>
+		  </div>
+		</div>
 
-	<div class="stm_lms_popup_add_users__inner">
-
-        <div class="row">
-            <div class="col-sm-6">
-                <label>
-                    <span class="heading_font">
-                        <?php esc_html_e( 'Your Name:', 'masterstudy-lms-learning-management-system-pro' ); ?>
-                    </span>
-                    <input type="text" placeholder="<?php esc_attr_e( 'Enter your name...', 'masterstudy-lms-learning-management-system-pro' ); ?>" class="form-control" name="gc_name" id="gc_name"/>
-                </label>
-            </div>
-            <div class="col-sm-6">
-                <label>
-                    <span class="heading_font">
-                        <?php esc_html_e( 'Your Email:', 'masterstudy-lms-learning-management-system-pro' ); ?>
-                    </span>
-                    <input type="email" placeholder="<?php esc_attr_e( 'Enter your email...', 'masterstudy-lms-learning-management-system-pro' ); ?>" class="form-control" name="gc_email" id="gc_email"/>
-                </label>
-            </div>
-        </div>
-
-		<a href="#"
-            data-course-id="<?php echo intval( $course_id ); ?>"
-            class="btn btn-default add-to-cart disabled"
-            data-price="<?php echo esc_attr( $price ); ?>">
-            <?php
-            printf(
-                /* translators: %s Price */
-                esc_html__( 'Add to cart %s', 'masterstudy-lms-learning-management-system-pro' ),
-                '<span>' . STM_LMS_Helpers::display_price( '0' ) . '</span>' // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-            );
-            ?>
-	    </a>
-	</div>
-
+	<a href="#"
+	   data-course-id="<?php echo intval( $course_id ); ?>"
+	   class="btn btn-default event-add-to-cart disabled"
+	   data-price="<?php echo esc_attr( $price ); ?>">
+		<?php
+		printf(
+			/* translators: %s Price */
+			esc_html__( 'Add to cart %s', 'masterstudy-lms-learning-management-system-pro' ),
+			'<span>' . STM_LMS_Helpers::display_price( '0' ) . '</span>' // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		);
+		?>
+	</a>
 </div>
-</div>
+
 

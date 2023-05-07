@@ -1,8 +1,87 @@
 <?php
 
-// Add the Events Tab
-//
 
+//
+// -------------------------------------------------------- Code Related to Registering User for Event
+//
+add_action( 'wp_ajax_stm_lms_add_to_cart_reg_event', 'add_to_cart_reg_event' );
+
+function add_to_cart_reg_event() {
+	error_log("adding to cart reg e ");
+	if ( ! is_user_logged_in() || empty( $_GET['course_id'] ) ) {
+		die;
+	}
+	$r = array();
+
+	$user     = STM_LMS_User::get_current_user();
+	$user_id  = $user['id'];
+	$item_id  = intval( $_GET['course_id'] );
+	// Set the price
+	$price = intval( $_GET['price'] );
+	$quantity  = 1;
+	$is_woocommerce = STM_LMS_Cart::woocommerce_checkout_enabled();
+	$item_added = count( stm_lms_get_item_in_cart( $user_id, $item_id, array( 'user_cart_id' ) ) );
+	if ( ! $item_added ) {
+		error_log("adding item ");
+		stm_lms_add_user_cart( compact( 'user_id', 'item_id', 'quantity', 'price' ) );
+	}
+
+	if ( ! $is_woocommerce ) {
+		error_log("not woocomerce");
+		$r['text']     = esc_html__( 'Go to Cart', 'masterstudy-lms-learning-management-system' );
+		$r['cart_url'] = esc_url( STM_LMS_Cart::checkout_url() );
+	} else {
+
+		$product_id = STM_LMS_Woocommerce::create_product( $item_id );
+		update_post_meta( $product_id, '_regular_price', $price );
+		update_post_meta( $product_id, '_price', $price );
+
+		// Load cart functions which are loaded only on the front-end.
+		include_once WC_ABSPATH . 'includes/wc-cart-functions.php';
+		include_once WC_ABSPATH . 'includes/class-wc-cart.php';
+
+		if ( is_null( WC()->cart ) ) {
+			wc_load_cart();
+		}
+
+		WC()->cart->add_to_cart( $product_id );
+
+		$r['text']     = esc_html__( 'Go to Cart', 'masterstudy-lms-learning-management-system-pro' );
+		$r['cart_url'] = esc_url( wc_get_cart_url() );
+	}
+
+
+	$r['redirect'] = STM_LMS_Options::get_option( 'redirect_after_purchase', false );
+	wp_send_json( $r );
+}
+
+// Get the different price options for an Event from database
+function get_event_prices($event_id) {
+	error_log("Getting prices for this event" . $event_id);
+	error_log(get_post_meta($event_id, 'price_nonac', true));
+	$prices = array (
+		'Non AC Price (INR)' => get_post_meta($event_id, 'price_nonac', true),
+		'AC Price (INR)' => get_post_meta($event_id, 'price_ac', true),
+		'Online Price (INR)' => get_post_meta($event_id, 'price_online', true),
+		'Residential Price (INR)' => get_post_meta($event_id, 'price_residential', true),
+		'Non AC Price (USD)' => get_post_meta($event_id, 'price_nonac_usd', true),
+		'AC Price (USD)' => get_post_meta($event_id, 'price_ac_usd', true),
+		'Online Price (USD)' => get_post_meta($event_id, 'price_online_usd', true),
+		'Residential Price (USD)' => get_post_meta($event_id, 'price_residential_usd', true)
+	);
+
+	foreach ($prices as $key => $value) {
+		if ($value === null || $value === 0 || $value === "0") {
+			unset($prices[$key]);
+		}
+	}
+	return $prices;
+}
+
+
+//
+// -------------------------------------------------------- Code Related to adding Enrolled Events for User Dashboard
+//
 /*ACTIONS*/
 function user_events_url() {
 	$settings = get_option( 'stm_lms_settings', array() );
@@ -23,7 +102,7 @@ add_filter( 'stm_lms_custom_routes_config', function( $routes ) {
     			'url'       => 'user-events',
     		);
     return $routes;
-    } 
+    }
 );
 
 // SOME VERSION OF CHANGING THE STM_LMS_SETTINGS for a specific sorting menu worked
@@ -90,26 +169,4 @@ function event_button( $template_name, $vars ) {
 	return $template_name;
 }
 
-// Get the different price options for an Event from database
-function get_event_prices($event_id) {
-	error_log("Getting prices for this event" . $event_id);
-	error_log(get_post_meta($event_id, 'price_nonac', true));
-	$prices = array (
-		'price_nonac' => get_post_meta($event_id, 'price_nonac', true),
-		'price_ac' => get_post_meta($event_id, 'price_ac', true),
-		'price_online' => get_post_meta($event_id, 'price_online', true),
-		'price_residential' => get_post_meta($event_id, 'price_residential', true),
-		'price_nonac_usd' => get_post_meta($event_id, 'price_nonac_usd', true),
-		'price_ac_usd' => get_post_meta($event_id, 'price_ac_usd', true),
-		'price_online_usd' => get_post_meta($event_id, 'price_online_usd', true),
-		'price_residential_usd' => get_post_meta($event_id, 'price_residential_usd', true)
-	);
-
-	foreach ($prices as $key => $value) {
-		if ($value === null) {
-			unset($prices[$key]);
-		}
-	}
-	return $prices;
-}
 ?>

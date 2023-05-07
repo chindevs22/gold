@@ -95,17 +95,20 @@ if ( ! $is_affiliate ) :
 
 			$btn_class[] = 'btn_big heading_font';
 
-// 			$course_id_jsoned = wp_json_encode(compact('course_id'));
-// 			error_log(print_r($course_id_jsoned, true));
-// 			error_log("cjsoned");
+			$data_params = array(
+				'course_id' => $course_id
+			);
 
 			if ( is_user_logged_in() ) {
 				$attributes = array();
 				// THIS ISN'T WORKING
+				error_log("inside mixed 1");
+				error_log($course_id);
 				if ( ! $not_salebale ) {
 					$attributes = array(
 						'data-target=".stm-lms-modal-event-registration"',
 						'data-lms-modal="event-registration"',
+    					'data-lms-params="' . esc_attr( wp_json_encode( $data_params ) ) . '"'
 					);
 				}
 			} else {

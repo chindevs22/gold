@@ -102,6 +102,13 @@ function gift_course_scripts() {
 }
 add_action( 'wp_enqueue_scripts', 'gift_course_scripts' );
 
+
+function event_registration_scripts() {
+	wp_enqueue_script( 'event-registration-scripts', plugins_url( '/assets/js/event-registration.js', __FILE__ ), array(), false, true );
+    wp_enqueue_style( 'event-registration', GIFT_COURSE_URL . '/assets/css/event-registration.css', array(), 'false', false);
+}
+add_action( 'wp_enqueue_scripts', 'event_registration_scripts' );
+
 /// --------------------------------------------------------- COURSE MIGRATION ---------------------------------------------------------------
 
 // All Course Data migration functions
