@@ -32,9 +32,9 @@
 		$lesson_post_id = wp_insert_post( $wpdata );
 
 		update_post_meta($lesson_post_id, 'mgml_lesson_id', $eventLessonData['id']);
-		update_post_meta($lesson_post_id, 'mgml_event_id', $eventLessonData['event_id']); //change to webinar
+		update_post_meta($lesson_post_id, 'mgml_webinar_id', $eventLessonData['event_id']); //change to webinar
 
-		update_post_meta($lesson_post_id, 'lite_type', 'event'); //change to webinar
+		update_post_meta($lesson_post_id, 'lite_type', 'webinar'); //change to webinar
 
         //video post meta
 

@@ -75,11 +75,13 @@
         }
 
         // Generate Curriculum String
-        $eventLessons = cd_get_posts('stm-lessons', 'mgml_event_id', $eventData['id']);
+        $isWebinar = false;
+        $eventLessons = cd_get_posts('stm-lessons', 'mgml_webinar_id', $eventData['id']);
         $curriculum_string = "";
         if ( !isset($eventLessons) ||  count($eventLessons) == 0 ) {
             error_log("No lessons for this Event: " .  $eventData['id']);
         } else {
+             $isWebinar = true;
              $eSection = array($eventData['event_name']);
              $combinedArray = array_merge($eSection, $eventLessons);
              $curriculum_string = implode(",", $combinedArray);
@@ -108,7 +110,11 @@
             $new_term = wp_insert_term($parent_cat_name, $taxonomy, array('parent'=> 0));
             $parent_category_id = intval($new_term['term_id']);
             update_term_meta($parent_category_id, 'is_lite_category', 1);
-            update_term_meta($parent_category_id, 'lite_category_name', 'event');
+            if ($isWebinar) {
+                update_term_meta($parent_category_id, 'lite_category_name', 'webinar');
+            } else {
+                update_term_meta($parent_category_id, 'lite_category_name', 'event');
+            }
 
             echo "The resulting id: " . $parent_category_id;
             echo "Created category " . $parent_cat_name;

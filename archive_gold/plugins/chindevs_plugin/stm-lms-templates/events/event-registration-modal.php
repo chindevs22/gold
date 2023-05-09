@@ -40,6 +40,8 @@ $user_id = $user['id'];
 		  </div>
 		</div>
 
+<!--   	If we end up using a form. <?php echo do_shortcode('[contact-form-7 id="216194" title="Registration Form" class="wpcf7-form ajax-form"]'); ?> -->
+
 	<a href="#"
 	   data-course-id="<?php echo intval( $course_id ); ?>"
 	   class="btn btn-default event-add-to-cart disabled"

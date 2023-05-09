@@ -118,10 +118,7 @@ function create_course_data() {
 // 	echo "<br> <br>  DONE WITH QUESTIONS <br> <br> ";
 // 	echo " <br> <br> STARTING LESSONS <br> <br> ";
 //     read_csv("lessons.csv", "lesson");
-// // 	echo "<br> <br>  DONE WITH LESSONS <br> <br> ";
-// 	echo " <br> <br> STARTING COURSES <br> <br> ";
-//     read_csv("courses.csv", "course");
-// 	echo "<br> <br>  DONE WITH COURSES <br> <br> ";
+// 	echo "<br> <br>  DONE WITH LESSONS <br> <br> ";
 // 	echo " <br> <br> STARTING COURSES <br> <br> ";
 //     read_csv("courses.csv", "course");
 // 	echo "<br> <br>  DONE WITH COURSES <br> <br> ";
@@ -130,13 +127,13 @@ function create_course_data() {
 // 	echo " <br> <br> ENDING USERS <br> <br> ";
 // 	echo " <br> <br> STARTING USER ASSESSMENT <br> <br> ";
 //     read_csv("usa_c7.csv", "userquiz");
-// // 	echo " <br> <br> ENDING USER ASSESSMENT <br> <br> ";
+// 	echo " <br> <br> ENDING USER ASSESSMENT <br> <br> ";
 // 	echo " <br> <br> STARTING USER ASSESSMENT DETAILS <br> <br> ";
-//     read_csv("usad_c7.csv", "useranswers");
+//     read_csv("usad_c7_small2.csv", "useranswers");
 // 	echo " <br> <br> ENDING USER ASSESSMENT DETAILS <br> <br> ";
-// 		echo " <br> <br> STARTING ENROLL <br> <br> ";
-//     read_csv("enrol_c7.csv", "enrol");
-//     	echo " <br> <br> ENDING ENROLL <br> <br> ";
+		echo " <br> <br> STARTING ENROLL <br> <br> ";
+    read_csv("enrol_c7.csv", "enrol");
+    	echo " <br> <br> ENDING ENROLL <br> <br> ";
 // 	read_csv("publications.csv", "publications");
 }
 // Course data migration
@@ -196,9 +193,9 @@ function create_lite_data() {
 // 	read_lite_csv("cd-event-docs/event_courses.csv", "event");
 // 	echo " <br> <br> ENDING EVENT <br> <br> ";
 
-	echo " <br> <br> STARTING ENROLL EVENT<br> <br> ";
-	read_lite_csv("cd-event-docs/enrol_event.csv", "user_event");
-	echo " <br> <br> ENDING ENROLL EVENT<br> <br> ";
+// 	echo " <br> <br> STARTING ENROLL EVENT<br> <br> ";
+// 	read_lite_csv("cd-event-docs/enrol_event.csv", "user_event");
+// 	echo " <br> <br> ENDING ENROLL EVENT<br> <br> ";
 //    read_lite_csv("cd-event-docs/user_event.csv", "user_event");
 
 	// SM FILES
@@ -273,7 +270,6 @@ function submit_form_js() {
           button = document.getElementsByClassName("stm-lms-lesson_navigation_complete")[0];
           button.style.display = "inline";
         }, false );
-
     </script>
 <?php
 }

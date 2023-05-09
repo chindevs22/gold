@@ -2,9 +2,15 @@
 
 (function ($) {
   var selectedPrice = 0;
+  var selectedLabel = '';
   var $body = $('body');
   $(document).ready(function () {
     var $price_btn = $('.event-add-to-cart');
+
+	  $body.on('click', '.wpcf7-form', function(event) {
+		  event.preventDefault(); // prevent default form submission behavior
+		  console.log("im coming from the form!");
+	  });
 
 	$body.on('click', '.event-add-to-cart', function (e) {
 	  console.log("hiiii");
@@ -18,6 +24,7 @@
           action: 'stm_lms_add_to_cart_reg_event',
           course_id: $this.data('course-id'),
 		  price: selectedPrice,
+		  label: selectedLabel
         },
         beforeSend: function beforeSend() {
           $this.addClass('loading');
@@ -42,6 +49,7 @@
 		  // Get the selected radio button and its price data
 		  var selectedRadioButton = $(this);
 		  selectedPrice = selectedRadioButton.data('price');
+		  selectedLabel = selectedRadioButton.closest('.radio').find('label').text().trim();
 
 		  // Update the Add to Cart button price and enable it
 		  addToCartButton.attr('data-price', selectedPrice);
