@@ -29,7 +29,10 @@ if ( apply_filters( 'stm_lms_before_button_stop', false, $course_id ) && false =
 
 $is_affiliate = STM_LMS_Courses_Pro::is_external_course( $course_id );
 $not_salebale = get_post_meta( $course_id, 'not_single_sale', true );
-
+$close_date = get_event_deadline_date($course_id);
+$current_date = new DateTime( 'now', new DateTimeZone( 'UTC' ) );
+$has_other_prices = count(get_event_prices($course_id)) > 0;
+$past_deadline = isset($close_date) && $close_date <=  $current_date->format('Y-m-d H:i:s');
 
 if ( ! $is_affiliate ) :
 	?>
@@ -39,7 +42,14 @@ if ( ! $is_affiliate ) :
 
 			<?php
 			$user = STM_LMS_User::get_current_user();
-			if ( empty( $user['id'] ) ) :
+
+			if ( $past_deadline ) :
+				?>
+				<a href="#" class="btn btn-default disabled">
+					<span><?php esc_html_e( 'Registration Closed', 'masterstudy-lms-learning-management-system-pro' ); ?></span>
+				</a>
+				<?php
+			elseif ( empty( $user['id'] ) ) :
 				?>
 				<?php
 				stm_lms_register_style( 'login' );
@@ -49,7 +59,7 @@ if ( ! $is_affiliate ) :
 				?>
 
 				<a href="#" class="btn btn-default" data-target=".stm-lms-modal-login" data-lms-modal="login">
-					<span><?php esc_html_e( 'Register for Event', 'masterstudy-lms-learning-management-system-pro' ); ?></span>
+					<span><?php esc_html_e( 'Register for Event!', 'masterstudy-lms-learning-management-system-pro' ); ?></span>
 				</a>
 				<?php
 			else :
@@ -58,7 +68,7 @@ if ( ! $is_affiliate ) :
 				$current_lesson = ( ! empty( $course['current_lesson_id'] ) ) ? $course['current_lesson_id'] : '0';
 				$progress       = ( ! empty( $course['progress_percent'] ) ) ? intval( $course['progress_percent'] ) : 0;
 				$lesson_url     = STM_LMS_Course::item_url( $course_id, $current_lesson );
-				$btn_label      = esc_html__( 'View Event', 'masterstudy-lms-learning-management-system-pro' );
+				$btn_label      = esc_html__( 'View Event!', 'masterstudy-lms-learning-management-system-pro' );
 
 				if ( $progress > 0 ) {
 					$btn_label = esc_html__( 'Continue', 'masterstudy-lms-learning-management-system-pro' );
@@ -101,16 +111,17 @@ if ( ! $is_affiliate ) :
 
 			if ( is_user_logged_in() ) {
 				$attributes = array();
-				// THIS ISN'T WORKING
-				error_log("inside mixed 1");
-				error_log($course_id);
-				if ( ! $not_salebale ) {
-					$attributes = array(
-						'data-target=".stm-lms-modal-event-registration"',
-						'data-lms-modal="event-registration"',
-    					'data-lms-params="' . esc_attr( wp_json_encode( $data_params ) ) . '"'
-					);
-				}
+                if ( ! $not_salebale && ! $past_deadline ) {
+                    if ( $has_other_prices  ) {
+                        $attributes = array(
+                            'data-target=".stm-lms-modal-event-registration"',
+                            'data-lms-modal="event-registration"',
+                            'data-lms-params="' . esc_attr( wp_json_encode( $data_params ) ) . '"'
+                        );
+                    } else {
+                        $attributes[] = 'data-buy-course="' . intval( $course_id ) . '"';
+                    }
+                }
 			} else {
 				stm_lms_register_style( 'login' );
 				stm_lms_register_style( 'register' );
@@ -148,12 +159,18 @@ if ( ! $is_affiliate ) :
 						}
 						?>
 				>
-
+				<?php
+					if ( $past_deadline ) :
+					?>
+						<span><?php esc_html_e( 'Registration Closed', 'masterstudy-lms-learning-management-system-pro' ); ?></span>
+				<?php
+					else :
+				?>
 					<span>
 						<?php esc_html_e( 'Register for Event', 'masterstudy-lms-learning-management-system-pro' ); ?>
 					</span>
-
-					<?php if ( ! empty( $price ) || ! empty( $sale_price ) ) : ?>
+				<?php endif; ?>
+					<?php if ( ! $past_deadline && (! empty( $price ) || ! empty( $sale_price ) ) ) : ?>
 						<div class="btn-prices btn-prices-price">
 
 							<?php if ( ! empty( $sale_price ) ) : ?>

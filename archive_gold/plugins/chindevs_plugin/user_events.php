@@ -78,6 +78,22 @@ function get_event_prices($event_id) {
 	return $prices;
 }
 
+function get_event_deadline_date($event_id) {
+	error_log("inside event end date");
+    // Get the event dates metadata for the post
+    $close_date = get_post_meta( $event_id, 'registration_close_date', true );
+
+	error_log("close date " . $close_date);
+
+    if ( $close_date ) {
+		$date = new DateTime('@' . floor($close_date / 1000)); // create DateTime object using the floor value of the epoch date divided by 1000 to get seconds
+		$date->setTimeZone(new DateTimeZone('UTC')); // set timezone to UTC
+		$utc_time = $date->format('Y-m-d H:i:s'); // format date as UTC timestamp
+		return $utc_time;
+    } else {
+      return null;
+    }
+}
 
 //
 // -------------------------------------------------------- Code Related to adding Enrolled Events for User Dashboard

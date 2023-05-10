@@ -152,7 +152,7 @@
         $registrationCloseDate = strtotime($eventData['registration_close_date']);
 
         update_post_meta($event_post_id, 'event_dates', $totalDate);
-        update_post_meta($event_post_id, 'registration_close', $registrationCloseDate);
+        update_post_meta($event_post_id, 'registration_close_date', $registrationCloseDate);
 
 	}
 ?>
