@@ -45,16 +45,47 @@ class STM_LMS_Certificates {
         // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
         $quiz_grades = $wpdb->get_results( $request, ARRAY_A );
 
+        // get grade for quizzes
 		$total_quizzes = count($quiz_grades);
-		$grade = 0;
+		$quiz_grade = 0;
 		foreach($quiz_grades as $quiz_row) {
-			$grade += $quiz_row['progress'];
+			$quiz_grade += $quiz_row['progress'];
 		}
-		if ($total_quizzes == 0) {
-			return 100;
-		} else {
-			return $grade/$total_quizzes;
-		}
+
+        //assignments.posts TODO: this is prob wrong, figure out how to actually get the data from it!
+        $user_assignments = STM_LMS_User_Assignment::my_assignments($user_id);
+        $assignment_grade = 0;
+        $total_assignments = 0;
+
+        foreach($user_assignments as $assignment) {
+            if ($assignment.course_id == $course_id) {
+               $assignment_grade += $assignment.assignment_grade;'
+               $total_assignments += 1;
+            }
+        }
+
+        //calculate totals
+		$total_grade = $assignment_grade + $quiz_grade;
+		$total_lessons = $total_assignments + $total_quizzes;
+
+		$final_percent = $total_grade/$total_lessons;
+
+        //what to show on a course with only lessons that has certificate?
+        if ($total_lessons == 0) {
+            return "P";
+        }
+        if ($final_percent >= 80) {
+            return "O+";
+        }
+        if ($final_percent >= 60) {
+            return "A+";
+        }
+        if ($final_percent >= 50) {
+            return "A";
+        }
+        if ($final_percent > 80) {
+            return "B";
+        }
 	}
 
 
