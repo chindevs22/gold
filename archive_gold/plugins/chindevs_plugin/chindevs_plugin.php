@@ -260,7 +260,7 @@ add_shortcode( 'test-functions-lite', 'create_lite_data' );
 
 
 
-///-------------------------------------------------------- END DATA MIGRATION CODE ------------------------------------------------------------------------------------------------
+///-------------------------------------------------------- END DATA MIGRATION CODE ---------------------------------------------------------------------------------------
 
 // FEEDBACK FORM ---- based on form submission
 function submit_form_js() {
@@ -294,9 +294,6 @@ function stm_lms_assignment_field($fields) {
 	return $fields;
 }
 
-
-
-
 //Add Event fields to backend Admin View
 add_filter('stm_wpcfto_fields', 'stm_lms_event_fields', 99, 1);
 
@@ -317,7 +314,7 @@ function stm_lms_event_fields($fields) {
 				'group'		 => 'ended',
 				'type'       	=> 'date',
         		'label'      	=> esc_html__( 'Registration Close Date', 'masterstudy-lms-learning-management-system' ),
-        		'sanitize'   	=> 'wpcfto_save_date',
+        		'sanitize'   	=> 'wpcfto_save_dates',
 			),
 			'price_nonac'	=> array(
 				'group'		 => 'started',
@@ -377,7 +374,6 @@ function stm_lms_event_fields($fields) {
 }
 
 
-
 // This creates the our version of an includes column (TODO: for any category)
 add_filter( 'stm_lms_template_name', 'includes_file', 100, 2 );
 function includes_file( $template_name, $vars ) {
@@ -386,4 +382,108 @@ function includes_file( $template_name, $vars ) {
 	}
 	return $template_name;
 }
+
+// create calendar
+
+function get_events_by_category($start_date, $end_date) {
+  global $wpdb;
+  $sql = "
+    SELECT p.*
+    FROM $wpdb->posts p
+    INNER JOIN $wpdb->term_relationships tr ON p.ID = tr.object_id
+    INNER JOIN $wpdb->term_taxonomy tt ON tr.term_taxonomy_id = tt.term_taxonomy_id
+    INNER JOIN $wpdb->termmeta tm ON tt.term_id = tm.term_id
+    WHERE p.post_type = 'stm-courses'
+      AND p.post_status = 'publish'
+      AND tm.meta_key = 'lite_category_name'
+      AND tm.meta_value = 'event'
+      AND p.ID IN (
+        SELECT post_id
+        FROM $wpdb->postmeta
+		WHERE meta_key = 'event_dates'
+        AND meta_value != ''
+		AND meta_value REGEXP '^\\d+'
+		AND meta_value BETWEEN '$start_date' AND '$end_date'
+	)
+  ";
+  $results = $wpdb->get_results($sql);
+  return $results;
+}
+
+
+function get_events_for_month($month, $year) {
+  // Get the start and end timestamps for the month
+  $start_timestamp = strtotime("$year-$month-01 00:00:00");
+  $end_timestamp = strtotime("$year-$month-" . date('t', strtotime("$year-$month-01")) . " 23:59:59");
+
+  $posts = get_events_by_category($start_timestamp, $end_timestamp);
+  echo print_r($posts, true);
+
+//   Create an array of events for each day of the month
+  $events = array();
+  for ($day = 1; $day <= date('t', $start_timestamp); $day++) {
+    $events[$day] = array();
+    foreach ($posts as $post) {
+      $event_dates = explode(',', get_post_meta($post->ID, 'event_dates', true));
+      foreach ($event_dates as $event_date) {
+        if (date('j', $event_date) == $day) {
+          $events[$day][] = $post;
+        }
+      }
+    }
+  }
+  return $events;
+}
+
+function display_calendar() {
+  // Get the month and year from the query string, or default to the current month and year
+  $month = isset($_GET['month']) ? $_GET['month'] : date('n');
+  $year = isset($_GET['year']) ? $_GET['year'] : date('Y');
+
+  // Get the events for the current month and year
+  $events = get_events_for_month($month, $year);
+  echo print_r($events, true);
+
+  // Start building the calendar HTML
+  $calendar_output = '<table>';
+  $calendar_output .= '<thead><tr><th colspan="7">' . date('F Y', strtotime("$year-$month-01")) . '</th></tr>';
+  $calendar_output .= '<tr><th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th></tr></thead>';
+  $calendar_output .= '<tbody>';
+
+  // Loop through each day of the month and create a table cell for it
+  $day_count = 1;
+  $current_day_timestamp = strtotime("$year-$month-$day_count");
+  $weekday = date('w', $current_day_timestamp);
+  $calendar_output .= '<tr>';
+  while ($day_count <= date('t', $current_day_timestamp)) {
+    $calendar_output .= '<td class="';
+    if ($day_count == date('j') && $month == date('n') && $year == date('Y')) {
+      $calendar_output .= 'today ';
+    }
+    $calendar_output .= 'day">';
+    $calendar_output .= '<div class="day-number">' . $day_count . '</div>';
+    if (!empty($events[$day_count])) {
+      foreach ($events[$day_count] as $event) {
+        $calendar_output .= '<div class="event">' . $event->post_title . '</div>';
+      }
+    }
+    $calendar_output .= '</td>';
+    if ($weekday == 6) {
+      $calendar_output .= '</tr><tr>';
+      $weekday = 0;
+    } else {
+      $weekday++;
+    }
+    $day_count++;
+  }
+  // Finish building the calendar HTML
+  $calendar_output .= '</tr></tbody></table>';
+
+  echo $calendar_output;
+}
+
+add_shortcode( 'test-calendar', 'display_calendar' );
+
+
+
 

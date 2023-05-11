@@ -18,6 +18,7 @@ function add_to_cart_reg_event() {
 	$item_id  = intval( $_GET['course_id'] );
 	// Set the price
 	$price = intval( $_GET['price'] );
+	$priceLabel = intval( $_GET['label'] );
 	$quantity  = 1;
 	$is_woocommerce = STM_LMS_Cart::woocommerce_checkout_enabled();
 	$item_added = count( stm_lms_get_item_in_cart( $user_id, $item_id, array( 'user_cart_id' ) ) );
@@ -35,6 +36,7 @@ function add_to_cart_reg_event() {
 		$product_id = STM_LMS_Woocommerce::create_product( $item_id );
 		update_post_meta( $product_id, '_regular_price', $price );
 		update_post_meta( $product_id, '_price', $price );
+		update_post_meta( $product_id, 'price_option_label', "abc" );
 
 		// Load cart functions which are loaded only on the front-end.
 		include_once WC_ABSPATH . 'includes/wc-cart-functions.php';
@@ -78,21 +80,30 @@ function get_event_prices($event_id) {
 	return $prices;
 }
 
+function convert_to_utc_date($date) {
+	$new_date = new DateTime('@' . floor($date / 1000)); // create DateTime object using the floor value of the epoch date divided by 1000 to get seconds
+	$new_date->setTimeZone(new DateTimeZone('UTC')); // set timezone to UTC
+	$utc_time = $new_date->format('Y-m-d H:i:s'); // format date as UTC timestamp
+	return $utc_time;
+}
+
 function get_event_deadline_date($event_id) {
 	error_log("inside event end date");
     // Get the event dates metadata for the post
     $close_date = get_post_meta( $event_id, 'registration_close_date', true );
 
-	error_log("close date " . $close_date);
-
-    if ( $close_date ) {
-		$date = new DateTime('@' . floor($close_date / 1000)); // create DateTime object using the floor value of the epoch date divided by 1000 to get seconds
-		$date->setTimeZone(new DateTimeZone('UTC')); // set timezone to UTC
-		$utc_time = $date->format('Y-m-d H:i:s'); // format date as UTC timestamp
-		return $utc_time;
-    } else {
-      return null;
+    if ( !empty($close_date) && intval($close_date) ) {
+		return convert_to_utc_date($close_date);
     }
+	// check if there is an event end date
+	$event_date_meta = get_post_meta( $event_id, 'event_dates', true );
+	if( isset($event_date_meta) ) {
+		list( $start_date, $end_date ) = explode( ',', $event_date_meta );
+		if ( !empty($end_date) && intval($end_date) ) {
+			return convert_to_utc_date(intval($end_date));
+		}
+	}
+	return null;
 }
 
 //
