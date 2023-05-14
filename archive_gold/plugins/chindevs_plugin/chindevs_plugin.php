@@ -93,7 +93,7 @@ add_filter('stm_lms_template_file', function($path, $template_name){
 // register styles (gift_course and user_events
 add_action('wp_enqueue_scripts', 'user_events_style');
 function user_events_style() {
-	    wp_enqueue_style( 'user-events', GIFT_COURSE_URL . '/assets/css/enrolled-events.css', array(), 'false', false);
+    wp_enqueue_style( 'user-events', GIFT_COURSE_URL . '/assets/css/enrolled-events.css', array(), 'false', false);
 }
 
 function gift_course_scripts() {
@@ -486,4 +486,28 @@ add_shortcode( 'test-calendar', 'display_calendar' );
 
 
 
+// Add the Payment FAQ field to the backend Admin View
+add_filter( 'stm_wpcfto_fields', 'stm_lms_faq_tab', 99, 1);
 
+function stm_lms_faq_tab($fields) {
+	$fields['stm_courses_settings']['section_payment_faq'] = array(
+        'name'   => esc_html__( 'Payment FAQ', 'masterstudy-lms-learning-management-system' ),
+        'icon'   => 'fas fa-question',
+        'fields' => array(
+            'payment_faq' => array(
+                'type'  => 'faq',
+                'label' => esc_html__( 'FAQ', 'masterstudy-lms-learning-management-system' ),
+            ),
+        ),
+    ),
+	return $fields;
+}
+
+// Add ChinDevs tabs to Instructor view
+add_filter( 'stm_lms_template_name', 'new_faq', 100, 2 );
+function new_faq( $template_name, $vars ) {
+	if ( $template_name === '/stm-lms-templates/course/udemy/parts/tabs/faq.php') {
+		$template_name = '/stm-lms-templates/course/udemy/parts/all_faq.php';
+	}
+	return $template_name;
+}
