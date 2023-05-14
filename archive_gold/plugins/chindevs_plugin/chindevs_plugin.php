@@ -511,3 +511,39 @@ function new_faq( $template_name, $vars ) {
 	}
 	return $template_name;
 }
+
+// Reroute Tab to User Profile Page
+//add_filter( 'stm_lms_login', 'my_plugin_redirect', 10, 1 );
+//
+//function my_plugin_redirect( $r ) {
+//    error_log("inside my plugin redirect");
+//    error_log(print_r($r, true));
+//
+//    if ( true) {
+//        wp_redirect( 'https://example.com/new-page' );
+//        exit();
+//    }
+//    return $r;
+//}
+add_filter( 'stm_lms_menu_items', 'my_plugin_modify_menu_item', 10, 1 );
+function my_plugin_modify_menu_item( $menus ) {
+	$current_user = wp_get_current_user();
+// 	error_log("current user");
+// 	error_log(print_r($current_user, true));
+
+	if ($current_user->ID === 27 ) {
+		foreach ( $menus as $key => $menu ) {
+			// Find the menu item you want to modify based on its id or slug
+			if ( $menu['id'] === 'enrolled_courses') {
+				unset($menus[$key]['is_active']);
+			}
+			if ( $menu['id'] === 'settings' && $menu['slug'] === 'settings' ) {
+				// Add the 'active' field to the menu item
+				$menus[ $key ]['is_active'] = true;
+				break; // Stop the loop once the menu item is modified
+			}
+		}
+	}
+// 	error_log(print_r($menus, true));
+    return $menus;
+}
