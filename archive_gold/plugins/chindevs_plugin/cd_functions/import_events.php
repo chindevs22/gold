@@ -59,7 +59,7 @@
             'price_ac'=> $eventData['price_with_ac_accomodation'],
             'price_online' => $eventData['price_with_online'],
             'price_nonac'=> $eventData['price_with_non_ac_accomodation']
-         )
+         );
 
         $lowestINRPrice = null;
 
@@ -178,16 +178,24 @@
         }
 
         //Set Event Dates
+        // only set these dates for events not webinars
+        $registrationCloseDate = $eventData['registration_close_date'];
 
-        $startDate = strtotime($eventData['start_date'] . "06:00:00") * 1000;
-        $endDate = strtotime($eventData['end_date'] . "06:00:00") * 1000;
-        $totalDate = "" . $startDate . "," . $endDate;
-        error_log("Total Dat: " . $totalDate);
+		if (!empty( $eventData['start_date']) &&  $eventData['start_date'] != "NULL") {
+			update_post_meta($event_post_id, 'start_event_date',  $eventData['start_date']); // Ensure format is YYYY-MM-DD
+		}
+		// set end date and registration close date to the same so it doesn't show up on the calendar
+		if (!empty( $registrationCloseDate ) &&  $registrationCloseDate != "NULL") {
+		    update_post_meta($event_post_id, 'end_event_date', $registrationCloseDate);
+        	update_post_meta($event_post_id, 'registration_close_date', $registrationCloseDate);
+		} else {
+		    update_post_meta($event_post_id, 'end_event_date', $eventData['start_date']);
+            update_post_meta($event_post_id, 'registration_close_date', $eventData['start_date']);
+		}
 
-        $registrationCloseDate = strtotime($eventData['registration_close_date']);
-
-        update_post_meta($event_post_id, 'event_dates', $totalDate);
-        update_post_meta($event_post_id, 'registration_close_date', $registrationCloseDate);
+		// Set Event Permalinking to Calendar
+		update_post_meta($event_post_id, 'codemine_event_stm-courses_url_new_window', 'true');
+		update_post_meta($event_post_id, 'codemine_event_stm-courses_action_on_click', 'goto_permalink');
 
 	}
 ?>

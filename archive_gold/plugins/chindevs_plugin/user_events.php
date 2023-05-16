@@ -80,28 +80,26 @@ function get_event_prices($event_id) {
 	return $prices;
 }
 
-function convert_to_utc_date($date) {
-	$new_date = new DateTime('@' . floor($date / 1000)); // create DateTime object using the floor value of the epoch date divided by 1000 to get seconds
-	$new_date->setTimeZone(new DateTimeZone('UTC')); // set timezone to UTC
-	$utc_time = $new_date->format('Y-m-d H:i:s'); // format date as UTC timestamp
-	return $utc_time;
-}
+// function convert_to_utc_date($date) {
+// 	$new_date = new DateTime('@' . floor($date / 1000)); // create DateTime object using the floor value of the epoch date divided by 1000 to get seconds
+// 	$new_date->setTimeZone(new DateTimeZone('UTC')); // set timezone to UTC
+// 	$utc_time = $new_date->format('Y-m-d H:i:s'); // format date as UTC timestamp
+// 	return $utc_time;
+// }
 
 function get_event_deadline_date($event_id) {
 	error_log("inside event end date");
     // Get the event dates metadata for the post
     $close_date = get_post_meta( $event_id, 'registration_close_date', true );
 
-    if ( !empty($close_date) && intval($close_date) ) {
-		return convert_to_utc_date($close_date);
+    if ( !empty($close_date) ) {
+		return $close_date;
     }
 	// check if there is an event end date
-	$event_date_meta = get_post_meta( $event_id, 'event_dates', true );
-	if( isset($event_date_meta) ) {
-		list( $start_date, $end_date ) = explode( ',', $event_date_meta );
-		if ( !empty($end_date) && intval($end_date) ) {
-			return convert_to_utc_date(intval($end_date));
-		}
+	$end_event_date = get_post_meta( $event_id, 'end_event_date', true );
+
+	if( ! empty($end_event_date) ) {
+		return $end_event_date;
 	}
 	return null;
 }

@@ -439,9 +439,9 @@ function new_faq( $template_name, $vars ) {
 }
 
 
-add_action( 'stm_lms_template_main', 'my_custom_banner', 10 );
-function my_custom_banner() {
-    echo '<div class="my-custom-banner">';
-    echo 'HELLOOOOOO';
-    echo '</div>';
-}
+//add_action( 'stm_lms_template_main', 'my_custom_banner', 10 );
+//function my_custom_banner() {
+//    echo '<div class="my-custom-banner">';
+//    echo 'HELLOOOOOO';
+//    echo '</div>';
+//}
