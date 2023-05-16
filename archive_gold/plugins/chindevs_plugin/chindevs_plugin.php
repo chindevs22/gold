@@ -114,6 +114,16 @@ function payment_faq_style() {
 }
 add_action('wp_enqueue_scripts', 'payment_faq_style');
 
+function reg_form_address_script() {
+
+	 if (is_page('user-account')) {
+		 error_log("registering script");
+        wp_enqueue_script('chindevs', plugins_url( '/assets/js/registration-address-api.js', __FILE__ ), array('jquery'), '1.0', true);
+    }
+}
+add_action( 'wp_enqueue_scripts', 'reg_form_address_script' );
+
+
 
 /// --------------------------------------------------------- COURSE MIGRATION ---------------------------------------------------------------
 
@@ -303,6 +313,7 @@ function stm_lms_assignment_field($fields) {
 //Add Event fields to backend Admin View
 add_filter('stm_wpcfto_fields', 'stm_lms_event_fields', 99, 1);
 
+
 function stm_lms_event_fields($fields) {
 
 	$fields['stm_courses_settings']['event_settings']= array(
@@ -310,12 +321,23 @@ function stm_lms_event_fields($fields) {
 		'label'  => esc_html__( 'General Events', 'masterstudy-lms-learning-management-system' ),
 		'icon'   => 'fa fa-cog',
 		'fields' => array(
-			'event_dates'	=> array(
-				'group'		 => 'started',
-				'type'       	=> 'dates',
-        		'label'      	=> esc_html__( 'Event Dates', 'masterstudy-lms-learning-management-system' ),
-        		'sanitize'   	=> 'wpcfto_save_dates',
-			),
+//			'event_dates'	=> array(
+//				'group'		 => 'started',
+//				'type'       	=> 'dates',
+//        		'label'      	=> esc_html__( 'Event Dates', 'masterstudy-lms-learning-management-system' ),
+//        		'sanitize'   	=> 'save_event_dates',
+//			),
+            'start_event_date' => array(
+                'group'		 => 'started',
+                'type'       	=> 'text',
+                'label'      	=> esc_html__( 'Event Start Date', 'masterstudy-lms-learning-management-system' ),
+                'placeholder'    => esc_html__( 'Format as YYYY-MM-DD', 'masterstudy-lms-learning-management-system' ),
+            ),
+            'end_event_date' => array(
+                'type'       	=> 'text',
+                'label'      	=> esc_html__( 'Event End Date', 'masterstudy-lms-learning-management-system' ),
+                'placeholder'    => esc_html__( 'Format as YYYY-MM-DD', 'masterstudy-lms-learning-management-system' ),
+            ),
 			'registration_close_date'	=> array(
 				'group'		 => 'ended',
 				'type'       	=> 'date',
@@ -389,108 +411,6 @@ function includes_file( $template_name, $vars ) {
 	return $template_name;
 }
 
-// create calendar
-
-function get_events_by_category($start_date, $end_date) {
-  global $wpdb;
-  $sql = "
-    SELECT p.*
-    FROM $wpdb->posts p
-    INNER JOIN $wpdb->term_relationships tr ON p.ID = tr.object_id
-    INNER JOIN $wpdb->term_taxonomy tt ON tr.term_taxonomy_id = tt.term_taxonomy_id
-    INNER JOIN $wpdb->termmeta tm ON tt.term_id = tm.term_id
-    WHERE p.post_type = 'stm-courses'
-      AND p.post_status = 'publish'
-      AND tm.meta_key = 'lite_category_name'
-      AND tm.meta_value = 'event'
-      AND p.ID IN (
-        SELECT post_id
-        FROM $wpdb->postmeta
-		WHERE meta_key = 'event_dates'
-        AND meta_value != ''
-		AND meta_value REGEXP '^\\d+'
-		AND meta_value BETWEEN '$start_date' AND '$end_date'
-	)
-  ";
-  $results = $wpdb->get_results($sql);
-  return $results;
-}
-
-
-function get_events_for_month($month, $year) {
-  // Get the start and end timestamps for the month
-  $start_timestamp = strtotime("$year-$month-01 00:00:00");
-  $end_timestamp = strtotime("$year-$month-" . date('t', strtotime("$year-$month-01")) . " 23:59:59");
-
-  $posts = get_events_by_category($start_timestamp, $end_timestamp);
-  echo print_r($posts, true);
-
-//   Create an array of events for each day of the month
-  $events = array();
-  for ($day = 1; $day <= date('t', $start_timestamp); $day++) {
-    $events[$day] = array();
-    foreach ($posts as $post) {
-      $event_dates = explode(',', get_post_meta($post->ID, 'event_dates', true));
-      foreach ($event_dates as $event_date) {
-        if (date('j', $event_date) == $day) {
-          $events[$day][] = $post;
-        }
-      }
-    }
-  }
-  return $events;
-}
-
-function display_calendar() {
-  // Get the month and year from the query string, or default to the current month and year
-  $month = isset($_GET['month']) ? $_GET['month'] : date('n');
-  $year = isset($_GET['year']) ? $_GET['year'] : date('Y');
-
-  // Get the events for the current month and year
-  $events = get_events_for_month($month, $year);
-  echo print_r($events, true);
-
-  // Start building the calendar HTML
-  $calendar_output = '<table>';
-  $calendar_output .= '<thead><tr><th colspan="7">' . date('F Y', strtotime("$year-$month-01")) . '</th></tr>';
-  $calendar_output .= '<tr><th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th></tr></thead>';
-  $calendar_output .= '<tbody>';
-
-  // Loop through each day of the month and create a table cell for it
-  $day_count = 1;
-  $current_day_timestamp = strtotime("$year-$month-$day_count");
-  $weekday = date('w', $current_day_timestamp);
-  $calendar_output .= '<tr>';
-  while ($day_count <= date('t', $current_day_timestamp)) {
-    $calendar_output .= '<td class="';
-    if ($day_count == date('j') && $month == date('n') && $year == date('Y')) {
-      $calendar_output .= 'today ';
-    }
-    $calendar_output .= 'day">';
-    $calendar_output .= '<div class="day-number">' . $day_count . '</div>';
-    if (!empty($events[$day_count])) {
-      foreach ($events[$day_count] as $event) {
-        $calendar_output .= '<div class="event">' . $event->post_title . '</div>';
-      }
-    }
-    $calendar_output .= '</td>';
-    if ($weekday == 6) {
-      $calendar_output .= '</tr><tr>';
-      $weekday = 0;
-    } else {
-      $weekday++;
-    }
-    $day_count++;
-  }
-  // Finish building the calendar HTML
-  $calendar_output .= '</tr></tbody></table>';
-
-  echo $calendar_output;
-}
-
-add_shortcode( 'test-calendar', 'display_calendar' );
-
-
 
 // Add the Payment FAQ field to the backend Admin View
 add_filter( 'stm_wpcfto_fields', 'stm_lms_faq_tab', 99, 1);
@@ -518,10 +438,10 @@ function new_faq( $template_name, $vars ) {
 	return $template_name;
 }
 
-// Potentially add this banner at the top of the student home page
-// add_action( 'stm_lms_template_main', 'my_custom_banner', 10 );
-// function my_custom_banner() {
-//     echo '<div class="my-custom-banner">';
-//     echo 'HELLOOOOOO';
-//     echo '</div>';
-// }
+
+add_action( 'stm_lms_template_main', 'my_custom_banner', 10 );
+function my_custom_banner() {
+    echo '<div class="my-custom-banner">';
+    echo 'HELLOOOOOO';
+    echo '</div>';
+}

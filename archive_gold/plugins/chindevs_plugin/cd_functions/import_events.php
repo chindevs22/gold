@@ -31,9 +31,61 @@
         update_post_meta($event_post_id, 'mgml_course_id', $eventData['id']);
 		echo "post id: " . $event_post_id;
 
-		// Handling Pricing - what to do when 1 or both prices are null?
-        $us_price = $eventData['price_usd'];
-        $inr_price = $eventData['price'];
+
+
+
+        //Price metadata fields
+         $usPrices = array (
+            'price_residential_usd'=> $eventData['price_with_resedential_without_accomodation_usd'],
+            'price_online_usd' => $eventData['price_with_online_usd'],
+            'price_ac_usd' => $eventData['price_with_ac_accomodation_usd'],
+            'price_nonac_usd'=> $eventData['price_with_non_ac_accomodation_usd'],
+
+        );
+
+        $lowestUSPrice = null;
+
+        foreach ($usPrices as $priceKey => $priceValue) {
+            if (isset($priceValue) && $priceValue !== "NULL" && $priceValue != 0) {
+                update_post_meta($event_post_id, $priceKey, $priceValue);
+                 if (!isset($lowestUSPrice) || $priceValue < $lowestUSPrice) {
+                    $lowestUSPrice = $priceValue;
+                 }
+            }
+        }
+
+        $inrPrices = array (
+            'price_residential'=> $eventData['price_with_resedential_without_accomodation'],
+            'price_ac'=> $eventData['price_with_ac_accomodation'],
+            'price_online' => $eventData['price_with_online'],
+            'price_nonac'=> $eventData['price_with_non_ac_accomodation']
+         )
+
+        $lowestINRPrice = null;
+
+        foreach ($inrPrices as $priceKey => $priceValue) {
+            if (isset($priceValue) && $priceValue !== "NULL" && $priceValue != 0) {
+                update_post_meta($event_post_id, $priceKey, $priceValue);
+                 if (!isset($lowestINRPrice) || $priceValue < $lowestINRPrice) {
+                    $lowestINRPrice = $priceValue;
+                 }
+            }
+        }
+
+        // Handling Pricing - what to do when 1 or both prices are null?
+        // TODO: Update this code with additional prices list fields (Currency etc)
+
+        if ( !empty($eventData['price_usd']) && $eventData['price_usd'] != "NULL" ) {
+         $us_price = $eventData['price_usd'];
+        } else {
+         $us_price = isset($lowestUSPrice) ? $lowestUSPrice : 0;
+        }
+
+        if ( !empty($eventData['price']) && $eventData['price'] != "NULL" ) {
+            $inr_price = $eventData['price'];
+        } else {
+            $inr_price = isset($lowestINRPrice) ? $lowestINRPrice : 0;
+        }
 
         update_post_meta($event_post_id, 'price', $inr_price);
 
@@ -44,35 +96,18 @@
                 "price" => $us_price
             ));
         }
-
          if(isset($inr_price) && $inr_price != "NULL") {
             array_push($price_arr, array(
                 "country" => "IN",
                 "price" => $inr_price
             ));
         }
-        update_post_meta($event_post_id, 'prices_list', json_encode($price_arr));
 
+        update_post_meta($event_post_id, 'prices_list', json_encode($price_arr));
         update_post_meta($event_post_id, 'level', $eventData['level']);
         update_post_meta($event_post_id, 'current_students', 0);
 
-		//Price metadata fields
-		 $typesOfPricesArray = array (
-            'price_residential_usd'=> $eventData['price_with_resedential_without_accomodation_usd'],
-            'price_online_usd' => $eventData['price_with_online_usd'],
-            'price_ac_usd' => $eventData['price_with_ac_accomodation_usd'],
-            'price_nonac_usd'=> $eventData['price_with_non_ac_accomodation_usd'],
-            'price_residential'=> $eventData['price_with_resedential_without_accomodation'],
-            'price_ac'=> $eventData['price_with_ac_accomodation'],
-            'price_online' => $eventData['price_with_online'],
-            'price_nonac'=> $eventData['price_with_non_ac_accomodation']
-        );
 
-		foreach ($typesOfPricesArray as $priceKey => $priceValue) {
-            if (isset($priceValue) && $priceValue !== "NULL") {
-                update_post_meta($event_post_id, $priceKey, $priceValue);
-            }
-        }
 
         // Generate Curriculum String
         $isWebinar = false;

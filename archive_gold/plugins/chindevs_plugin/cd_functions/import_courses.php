@@ -53,6 +53,12 @@
 
 		foreach ($sectionArray as $sectionID) {
 			$lessonArray = get_lessons_for_section($sectionID);
+
+			// add the donation form into each lesson array
+            // Determine the index where the new element should be inserted
+            $insert_index = count($lessonArray) - 1;
+            array_splice($lessonArray, $insert_index, 0, 232704); // TODO: Make sure this lesson exists
+
 			error_log("The lessons for the section from DB");
 			error_log(print_r($lessonArray));
 			if(count($lessonArray) > 0) {

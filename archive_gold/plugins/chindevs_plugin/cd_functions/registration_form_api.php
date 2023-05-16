@@ -17,14 +17,6 @@
 		update_option('stm_lms_form_builder_forms', $form_options);
 	}
 
-	// call the javascript
-	function my_enqueue_script() {
-		if (is_page('user-account')) {
-			wp_enqueue_script('chindevs', get_template_directory_uri() . '/assets/js/chindevs.js', array('jquery'), '1.0', true);
-		}
-	}
-	add_action('wp_enqueue_scripts', 'my_enqueue_script');
-
 	function get_auth_token() {
 	  $response = wp_remote_get("https://www.universal-tutorial.com/api/getaccesstoken", array(
 		  'headers' => array(
@@ -58,6 +50,7 @@
 
 	//populate states dropdown
 	function get_states() {
+	  error_log("trying to get states");
 	  $country = $_POST['country'];
 	  $states = get_states_by_country_new($country);
 	  $options = '';
