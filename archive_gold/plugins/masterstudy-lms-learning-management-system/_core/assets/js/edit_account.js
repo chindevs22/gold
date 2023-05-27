@@ -116,9 +116,23 @@
         };
       },
       mounted: function mounted() {
+		var _this = this;
         if (typeof window.profileForm !== 'undefined') {
           this.additionalFields = window.profileForm;
-        }
+
+			// Perform AJAX request on page load
+			$.ajax({
+				type: 'POST',
+				url: '/wp-admin/admin-ajax.php',
+				data: {
+					action: 'get_states_for_profile',
+					country: _this.data.meta['cigbecl89n'] // Replace with the desired default country value
+				},
+				success: function(response) {
+					_this.additionalFields[1]['choices'] = JSON.parse(response);
+				}
+			});
+		}
       },
       methods: {
         isChecked: function isChecked(choice, index, id) {
@@ -136,6 +150,25 @@
           }
 
           return false;
+        },
+         selectChange: function selectChange(event, field, index) {
+			var _this = this;
+			if (field['label'] == "Country") {
+				_this.additionalFields[1]['choices'] = [];
+				var country = event.target.value;
+                $.ajax({
+                    type: 'POST',
+                    url: '/wp-admin/admin-ajax.php',
+                    data: {
+                        action: 'get_states_for_profile',
+                        country: country
+                    },
+                    success: function(response) {
+						_this.additionalFields[1]['choices'] = JSON.parse(response);
+					}
+                });
+
+			}
         },
         checkboxChange: function checkboxChange(event, index, choice) {
           var _this = this;

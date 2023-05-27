@@ -12,6 +12,7 @@ if ( ! empty( $user_fields ) && isset( $user_fields['register'] ) ) {
 			<?php
 			$value = ! empty( $user_meta[ $field['id'] ][0] ) ? $user_meta[ $field['id'] ][0] : '';
 			$label = ! empty( $field['label'] ) ? $field['label'] : $field['field_name'];
+			$stateName = get_user_meta( $user_id, 'ijl5c9zv6lp', true ) ? get_user_meta( $user_id, 'ijl5c9zv6lp', true ) : "No State Name" ;
 			?>
 			<tr>
 				<th>
@@ -23,6 +24,12 @@ if ( ! empty( $user_fields ) && isset( $user_fields['register'] ) ) {
 					<?php if ( 'text' === $field['type'] || 'email' === $field['type'] || 'tel' === $field['type'] ) : ?>
 						<input type="<?php echo esc_attr( $field['type'] ); ?>"
 							name="<?php echo esc_attr( $field['id'] ); ?>" value="<?php echo esc_attr( $value ); ?>">
+
+					<?php elseif ( $label === 'State (Options Loading)') : ?>
+						<input type="<?php echo esc_attr( $field['type'] ); ?>"
+							name="<?php echo esc_attr( $field['id'] ); ?>" value="<?php echo esc_attr( $stateName ); ?>">
+
+
 					<?php elseif ( 'select' === $field['type'] && ! empty( $field['choices'] ) ) : ?>
 						<select name="<?php echo esc_attr( $field['id'] ); ?>">
 							<?php foreach ( $field['choices'] as $choice ) : ?>

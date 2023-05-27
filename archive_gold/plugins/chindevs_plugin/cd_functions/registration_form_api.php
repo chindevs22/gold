@@ -48,6 +48,17 @@
 	}
 
 
+	//populate states dropdown for profile
+	function get_states_for_profile() {
+	  $country = $_POST['country'];
+	  $states = get_states_by_country_new($country);
+	  echo json_encode($states);
+	  wp_die();
+	}
+	add_action('wp_ajax_get_states_for_profile', 'get_states_for_profile');
+	add_action('wp_ajax_nopriv_get_states_for_profile', 'get_states_for_profile');
+
+
 	//populate states dropdown
 	function get_states() {
 	  error_log("trying to get states");
