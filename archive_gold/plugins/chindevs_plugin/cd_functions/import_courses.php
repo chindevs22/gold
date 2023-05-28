@@ -6,7 +6,7 @@
 	// create the course
 	require_once 'helpers.php';
 	function create_course_from_csv($courseData) {
-		global $courseMGMLtoWP, $sectionToLessonMap;
+		global $courseMGMLtoWP, $sectionToLessonMap, $wpdb;
 
 		echo "IMPORTING COURSE <br> <br>";
 
@@ -19,13 +19,14 @@
             $desc_arr = explode("Frequently Asked Questions", $courseData['description']);
 			$orig_description = html_entity_decode($desc_arr[0]);
 			$new_desc = substr($orig_description, 0, strrpos($orig_description, "<br>") );
-//             $orig_description = $desc_arr[0];
             $faq_description = $desc_arr[1];
         }
 
-// 		echo "<br> the description being sent";
-// 		print_r($new_desc);
-// 		echo "<br>";
+        // Search Course Description for these 4 sections
+//         replace_section($new_desc, 'Home Study Course Scholarship Initiative', 'Director: homestudycourses@chinfo.org.', '[homestudy_text]');
+//         replace_section($new_desc, 'For Queries', 'E-mail: vedantacourses@chinfo.org', '[for_queries_text]');
+//         replace_section($new_desc, 'Course Access, Query Resolution Process', 'The digital copy of the same will be sent to your registered email ID.', '[course_access_text]');
+//         replace_section($new_desc, 'A) Question No 1', '4-5: Match the following.', '[question_format_text]');
 
 		if (!isset($new_desc) || $new_desc == "") {
 			$new_desc = "Could not parse course description. Populate from front end.";
@@ -45,38 +46,41 @@
 // 		$courseMGMLtoWP[$courseData['id']] = $course_post_id;
 		update_post_meta($course_post_id, 'mgml_course_id', $courseData['id']);
 
-// 		// Generate Curriculum String
+		// Generate Curriculum
+
 		$curriculum_string = "";
 		$combinedArray = array();
 		$sectionString = $courseData['section'];
 		$sectionArray = create_array_from_string($sectionString, ",");
-
+        $sectionCount = 1;
 		foreach ($sectionArray as $sectionID) {
 			$lessonArray = get_lessons_for_section($sectionID);
-
-			// add the donation form into each lesson array
-            // Determine the index where the new element should be inserted
             $insert_index = count($lessonArray) - 1;
             array_splice($lessonArray, $insert_index, 0, 232704); // TODO: Make sure this lesson exists
 
-			error_log("The lessons for the section from DB");
-			error_log(print_r($lessonArray));
-			if(count($lessonArray) > 0) {
-				$sectionName = get_post_meta($lessonArray[0], 'mgml_section_name', true);
-				$sArray = array($sectionName);
-				$combinedArray = array_merge($combinedArray, $sArray, $lessonArray);
+            //Create a Section Record
+            $sectionName = get_post_meta($lessonArray[0], 'mgml_section_name', true);
+            $section_table_name = 'wp_stm_lms_curriculum_sections';
+            $wpdb->insert($section_table_name, array(
+                'title' => $sectionName,
+                'course_id' => $course_post_id,
+                'order' => $sectionCount++,
+            ));
+            $wp_section_id = $wpdb->insert_id;
 
-			}
+            //Create a Curriculum Materials Record
+            $curr_materials_table_name = 'wp_stm_lms_curriculum_materials';
+            $lessonCount = 1;
+            foreach($lessonArray as $lessonID) {
+                $post_type = get_post_type($lessonID);
+                $wpdb->insert($curr_materials_table_name, array(
+                    'post_id' => $lessonID,
+                    'post_type' => $post_type,
+                    'section_id' => $wp_section_id,
+                    'order' => $lessonCount++
+                ));
+            }
 		}
-
-		error_log("Combined full array");
-		error_log(print_r($combinedArray, true));
-		$curriculum_string = implode(",", $combinedArray);
-
-        if(empty($curriculum_string) || strlen($curriculum_string) == 0) {
-            $curriculum_string = "Sample Section, 5552";
-        }
-        update_post_meta($course_post_id, 'curriculum', $curriculum_string);
 
 		// Handling Pricing - what to do when 1 or both prices are null?
 		$us_price = $courseData['price_usd'];
