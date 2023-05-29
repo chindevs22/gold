@@ -23,10 +23,10 @@
         }
 
         // Search Course Description for these 4 sections
-//         replace_section($new_desc, 'Home Study Course Scholarship Initiative', 'Director: homestudycourses@chinfo.org.', '[homestudy_text]');
-//         replace_section($new_desc, 'For Queries', 'E-mail: vedantacourses@chinfo.org', '[for_queries_text]');
-//         replace_section($new_desc, 'Course Access, Query Resolution Process', 'The digital copy of the same will be sent to your registered email ID.', '[course_access_text]');
-//         replace_section($new_desc, 'A) Question No 1', '4-5: Match the following.', '[question_format_text]');
+        $new_desc = replace_section($new_desc, 'Home Study Course Scholarship Initiative', 'Director: homestudycourses@chinfo.org.', '[homestudy_text]');
+        $new_desc =   replace_section($new_desc, 'For Queries', 'E-mail: vedantacourses@chinfo.org', '[for_queries_text]');
+        $new_desc =  replace_section($new_desc, 'Course Access, Query Resolution Process', 'The digital copy of the same will be sent to your registered email ID.', '[course_access_text]');
+        $new_desc =  replace_section($new_desc, 'A) Question No 1', '4-5: Match the following.', '[question_format_text]');
 
 		if (!isset($new_desc) || $new_desc == "") {
 			$new_desc = "Could not parse course description. Populate from front end.";

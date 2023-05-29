@@ -34,13 +34,18 @@ $userMGMLtoWP = array();
 $randomEmailCounter = 50;
 $selfAssessmentToUser = array(); // self assessment id in mgml to user in mgml
 $existingMetaMapping = array (
-        'billing_address_1' => 'address',
-        'billing_city' =>'city',
-        'billing_state' => 'state',
-        'billing_country' => 'country',
-        'billing_postcode' => 'pincode',
-        'billing_phone' => 'phone_no'
-    );
+    'billing_address_1' => 'address',
+    'billing_city' =>'city',
+    'billing_state' => 'state',
+    'billing_country' => 'country',
+    'billing_postcode' => 'pincode',
+    'billing_phone' => 'phone_no',
+    'ijl5c9zv6lp' => 'state',
+    'cigbecl89n' => 'country',
+    '0hrgnga1qhp5' => 'city',
+    'l3pqlc3elr' => 'address',
+    'rgcxegzsmy' => 'pincode'
+);
 
 // Other meta keys might be needed (hear/hear_source/cm_center/)
 $newMetaMapping = array (
