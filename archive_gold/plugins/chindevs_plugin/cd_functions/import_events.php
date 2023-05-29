@@ -194,6 +194,16 @@
 		// Set Event Permalinking to Calendar
 		update_post_meta($event_post_id, 'codemine_event_stm-courses_url_new_window', 'true');
 		update_post_meta($event_post_id, 'codemine_event_stm-courses_action_on_click', 'goto_permalink');
+        update_post_meta($event_post_id, 'event_start_time', "00:00");
+        update_post_meta($event_post_id, 'event_end_time', "23:59");
+
+		if (isWebinar) {
+		    update_post_meta($event_post_id, 'end_event_date', $eventData['start_date']);
+		    update_post_meta($event_post_id, 'codemine_event_stm-courses_repeatable_end_date', $eventData['end_date']); // Ensure format is YYYY-MM-DD
+            update_post_meta($event_post_id, 'codemine_event_stm-courses_repetition', 'weekly');
+		    update_post_meta($event_post_id, 'codemine_event_stm-courses_repeatable', "yes");
+            update_post_meta($event_post_id, 'codemine_event_stm-courses_repetition_weekly_n', 1);
+        }
 
 	}
 ?>
