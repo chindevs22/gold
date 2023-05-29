@@ -36,10 +36,6 @@ function progress_users_quiz_from_csv($progressData) {
         return;
     }
 
-    $attempt_key = "" . $wp_user_id . $wp_course_id . $wp_quiz_id;
-    $attempt_number = $progressData['running_total'];
-    // 		$attemptNumberMap[$attempt_key] = $attempt_number;
-
     $grade = $progressData['marks']/$progressData['quiz_marks'] * 100; //aka progress
 
 
@@ -54,7 +50,6 @@ function progress_users_quiz_from_csv($progressData) {
 // 			$users_assessments = array($progressData['id']);
 // 			update_user_meta($wp_user_id, 'mgml_self_assessment_id', $users_assessments);
 // 		}
-    update_user_meta($wp_user_id, $attempt_key, $attempt_number);
 
     $wpdb->insert($table_name, array(
         'user_quiz_id' => NULL,
@@ -123,8 +118,6 @@ function progress_users_answers_from_csv($answerData) {
 
     $answerString = implode(",", $chosenAnswers); // comma seperated string of answers
     $isCorrect = ($answerData['question_marks'] == $answerData['marks_obtained']) ? "1" : "0";
-    $attempt_key = "" . $wp_user_id . $wp_course_id . $wp_quiz_id;
-    $attempt_number = get_post_meta($wp_user_id, $attempt_key, true);
 
     $wpdb->insert($table_name, array(
         'user_answer_id' => NULL,
@@ -134,7 +127,7 @@ function progress_users_answers_from_csv($answerData) {
         'question_id' => $wp_question_id,
         'user_answer' => $answerString,
         'correct_answer' => $isCorrect,
-        'attempt_number' => $attempt_number,
+        'attempt_number' => 1, //TODO: fix to use the answerData of running total
     ));
 }
 
