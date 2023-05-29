@@ -366,12 +366,27 @@ function stm_lms_event_fields($fields) {
                 'group'		 => 'started',
                 'type'       	=> 'text',
                 'label'      	=> esc_html__( 'Event Start Date', 'masterstudy-lms-learning-management-system' ),
-                'placeholder'    => esc_html__( 'Format as YYYY-MM-DD', 'masterstudy-lms-learning-management-system' ),
+                'placeholder'    => esc_html__( 'Format as YYYY-MM-DD (IST)', 'masterstudy-lms-learning-management-system' ),
             ),
             'end_event_date' => array(
                 'type'       	=> 'text',
                 'label'      	=> esc_html__( 'Event End Date', 'masterstudy-lms-learning-management-system' ),
-                'placeholder'    => esc_html__( 'Format as YYYY-MM-DD', 'masterstudy-lms-learning-management-system' ),
+                'placeholder'    => esc_html__( 'Format as YYYY-MM-DD (IST)', 'masterstudy-lms-learning-management-system' ),
+            ),
+			'start_event_time' => array(
+                'type'       	=> 'text',
+                'label'      	=> esc_html__( 'Event Start Time', 'masterstudy-lms-learning-management-system' ),
+                'placeholder'    => esc_html__( 'Format as 24 hours: HH:MM', 'masterstudy-lms-learning-management-system' ),
+            ),
+            'end_event_time' => array(
+                'type'       	=> 'text',
+                'label'      	=> esc_html__( 'Event End Time', 'masterstudy-lms-learning-management-system' ),
+                'placeholder'    => esc_html__( 'Format as 24 hours: HH:MM', 'masterstudy-lms-learning-management-system' ),
+            ),
+			'event_repetition_days' => array(
+                'type'       	=> 'text',
+                'label'      	=> esc_html__( 'Repetition Days', 'masterstudy-lms-learning-management-system' ),
+                'placeholder'    => esc_html__( 'Format as list ex: MO, TU, WE, TH, FR, SA, SU', 'masterstudy-lms-learning-management-system' ),
             ),
 			'registration_close_date'	=> array(
 				'group'		 => 'ended',
@@ -434,6 +449,23 @@ function stm_lms_event_fields($fields) {
 		)
 	);
 	    return $fields;
+}
+
+//Add Includes fields to backend Admin View
+add_filter('stm_wpcfto_fields', 'stm_lms_includes_fields', 99, 1);
+
+function stm_lms_includes_fields($fields) {
+	$fields['stm_courses_settings']['section_certificate']['fields']['free_lesson']= array(
+		'type'       	=> 'text',
+		'label'      	=> esc_html__( 'Free Lesson URL', 'masterstudy-lms-learning-management-system' ),
+		'placeholder'    => esc_html__( 'lessonID ex: 123456', 'masterstudy-lms-learning-management-system' ),
+	);
+	$fields['stm_courses_settings']['section_certificate']['fields']['discussion_forum']= array(
+		'type'       	=> 'text',
+		'label'      	=> esc_html__( 'Discussion Forum Name', 'masterstudy-lms-learning-management-system' ),
+		'placeholder'    => esc_html__( 'Forum Name (from url) ex: aparokshanubhuti', 'masterstudy-lms-learning-management-system' ),
+	);
+	return $fields;
 }
 
 
