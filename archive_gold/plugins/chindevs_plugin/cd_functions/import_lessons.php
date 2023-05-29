@@ -38,15 +38,8 @@
 		update_post_meta($lesson_post_id, 'mgml_lesson_id', $lessonData['id']);
 		update_post_meta($lesson_post_id, 'mgml_section_id', $lessonData['section_id']);
 		update_post_meta($lesson_post_id, 'mgml_section_name', $lessonData['section_name']);
-// 		$lessonMGMLtoWP[$lessonData['id']] = $lesson_post_id; //save MGML ID
 
 		$sectionID = $lessonData['section_id']; //map section ID for course
-// 		if (!array_key_exists($sectionID, $sectionToLessonMap)) {
-// 			// TODO: replaced section_name with title here
-// 			$sectionToLessonMap[$sectionID] = array("{$lessonData['section_name']}", "{$lesson_post_id}");
-// 		} else {
-// 			array_push($sectionToLessonMap[$sectionID], "{$lesson_post_id}");
-// 		}
 
 		if ($lessonData['lesson_type'] == 'quiz') {
 			  update_post_meta($lesson_post_id, 'correct_answer', 'on');

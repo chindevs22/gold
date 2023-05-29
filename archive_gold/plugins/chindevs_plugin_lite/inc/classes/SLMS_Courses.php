@@ -640,8 +640,6 @@ class MsLmsCoursesChild extends Widget_Base {
         set_query_var( 'show_lite_courses', $settings['show_lite_courses'] );
 		//ChinDevs code to add this variable as query var
 		set_query_var( 'lite_category_name', $settings['lite_category_name'] );
-		error_log("inside slms courses 640");
-		error_log($settings['type']);
 		\STM_LMS_Templates::show_lms_template( "elementor-widgets/courses/{$settings['type']}/main", $atts );
 	}
 

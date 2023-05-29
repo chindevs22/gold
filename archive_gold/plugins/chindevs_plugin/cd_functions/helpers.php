@@ -25,6 +25,55 @@ function build_attr_array($attr, $count) {
     return $data_arr;
 }
 
+
+function progress_user_lessons($wp_course_id, $wp_quiz_id, $wp_user_id) {
+    global $wpdb;
+
+    $curriculum_string = get_post_meta($wp_course_id, 'curriculum', true);
+    $ca = create_array_from_string($curriculum_string, ',');
+    $arrLength = count($ca);
+    $quizIndex = 0;
+    for($x = 0; $x < $arrLength; $x++) {
+        if ($wp_quiz_id == $ca[$x]) {
+            $quizIndex = $x;
+            break;
+        }
+    }
+    error_log("Course ID: " . $wp_course_id . " Quiz ID: " . $wp_quiz_id . " Index found: " . $quizIndex);
+
+    $isLeft = false;
+    $isRight = false;
+    $lessonsCompleted = array();
+    $indexLeft = $quizIndex - 1;
+    $indexRight = $quizIndex + 1;
+    // Go through curriculum array searching for the Lessons surrounding the quiz
+    // When you hit a Section Name (intval will be false) or the ends of the array stop.
+    // TODO: This code cant handle 2 quizzes in a section
+    // Solution: Go Left Only, Check if I've hit a Quiz or Section
+    while (!$isLeft) {
+        if( $indexLeft < 0 || intval($ca[$indexLeft]) == 0 || 'stm-quizzes' === get_post_type( $ca[$indexLeft] ) ) {
+            $isLeft = true;
+        } else {
+            array_push($lessonsCompleted, $ca[$indexLeft--]);
+        }
+    }
+
+    echo "COMPLETING LESSONS FOR QUIZ <br>";
+    error_log("# of LESSONS COMPLETED : " . count($lessonsCompleted));
+    // Insert Each Completed Lesson Based on Completed Quiz
+    foreach($lessonsCompleted as $lesson_id) {
+        echo "lesson completed: " . $lesson_id . " <br>";
+        $table_name = 'wp_stm_lms_user_lessons';
+        $wpdb->insert($table_name, array(
+            'user_lesson_id' => NULL,
+            'user_id' => $wp_user_id,
+            'course_id' => $wp_course_id,
+            'lesson_id' => $lesson_id
+        ));
+    }
+}
+
+
 // Builds FAQ Block from a string
 function build_faq($faq) {
     $faq_string = "[";
@@ -44,6 +93,27 @@ function build_faq($faq) {
     return $faq_string;
 }
 
+// Original String = full text
+// Start = starting phrase to look for
+// Ending phrase to look for
+// Replacement = shortcoded string '[shortcode]'
+function replace_section($original_string, $start, $end, $replacement) {
+    $start_pos = strrpos($original_string, $start);
+    $end_pos = strpos($original_string, $end, $start + strlen($start));
+
+    if ($start_pos !== false && $end_pos !== false && $start < $end) {
+        $start_pos += strlen($start);
+        $text_before = substr($original_string, 0, $start_pos - strlen($start));
+        $text_after = substr($original_string, $end_pos + strlen($end));
+
+        $new_text_blob = $text_before . $replacement . $text_after;
+        return do_shortcode($text_blob);
+    } else {
+        // The start and end markers were not found in the expected order
+        echo 'Start and/or end markers not found for ' . $replacement;
+        return null;
+    }
+}
 
 // Add image (Currently only for course path)
 function add_course_image($course_post_id, $course_id) {
@@ -141,7 +211,7 @@ function get_from_post($post_type, $key, $value) {
 // Gets lessons for the section
 function get_lessons_for_section($section_id) {
     $args = array(
-        'post_type'      => array( 'stm-lessons', 'stm-quizzes' ),
+        'post_type'      => array( 'stm-lessons', 'stm-quizzes', 'stm-assignments' ),
         'meta_key'       => 'mgml_section_id',
         'meta_value'     => $section_id,
         'orderby'        => 'ID',

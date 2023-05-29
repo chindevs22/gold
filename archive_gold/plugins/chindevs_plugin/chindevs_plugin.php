@@ -74,7 +74,6 @@ use \Elementor\Plugin;
 
 require_once  plugin_dir_path(__FILE__) . 'gift_courses.php';
 require_once  plugin_dir_path(__FILE__) . 'user_events.php';
-require_once  plugin_dir_path(__FILE__) . 'classes/user-event-class.php';
 
 // load all files in functions.php
 $cd_functions_dir = plugin_dir_path(__FILE__) . 'cd_functions/';
@@ -130,32 +129,55 @@ add_action( 'wp_enqueue_scripts', 'reg_form_address_script' );
 // All Course Data migration functions
 function create_course_data() {
 // 	echo " <br> <br> STARTING QUESTIONS <br> <br> ";
-//     read_csv("question.csv", "question");
+//     read_csv("split_questions.csv", "question");
 // 	echo "<br> <br>  DONE WITH QUESTIONS <br> <br> ";
+
 // 	echo " <br> <br> STARTING LESSONS <br> <br> ";
-//     read_csv("lessons.csv", "lesson");
+//     read_csv("split_lessons.csv", "lesson");
 // 	echo "<br> <br>  DONE WITH LESSONS <br> <br> ";
+
+// 	echo " <br> <br> STARTING ASSIGNMENT <br> <br> ";
+//     read_csv("split_assignments.csv", "assignment");
+// 	echo "<br> <br>  DONE WITH ASSIGNMENT <br> <br> ";
+
+//    echo " <br> <br> STARTING POSTAL <br> <br> ";
+//    read_csv("postal.csv", "postal");
+//    echo "<br> <br>  STARTING WITH POSTAL <br> <br> ";
+
 // 	echo " <br> <br> STARTING COURSES <br> <br> ";
-//     read_csv("courses.csv", "course");
+//     read_csv("split_courses.csv", "course");
 // 	echo "<br> <br>  DONE WITH COURSES <br> <br> ";
+
 // 	echo " <br> <br> STARTING USERS <br> <br> "; //two user files
 //     read_csv("validusers2.csv", "user");
 // 	echo " <br> <br> ENDING USERS <br> <br> ";
+
 // 	echo " <br> <br> STARTING USER ASSESSMENT <br> <br> ";
 //     read_csv("usa_c7.csv", "userquiz");
 // 	echo " <br> <br> ENDING USER ASSESSMENT <br> <br> ";
+
+// 	echo " <br> <br> STARTING USER ASSESSMENT FOR ASSIGNMENTS <br> <br> ";
+//    read_csv("split_usa.csv", "userassignment");
+// 	echo " <br> <br> ENDING USER  ASSESSMENT FOR ASSIGNMENTS <br> <br> ";
+
+// 	echo " <br> <br> STARTING USER ASSESSMENT DETAILS FOR ASSIGNMENTS <br> <br> ";
+//     read_csv("split_usad_subj.csv", "userassignmentanswers");
+// 	echo " <br> <br> ENDING USER ASSESSMENT DETAILS  FOR ASSIGNMENTS <br> <br> ";
+
 // 	echo " <br> <br> STARTING USER ASSESSMENT DETAILS <br> <br> ";
-//     read_csv("usad_c7_small2.csv", "useranswers");
+//     read_csv("split_usad_obj.csv", "useranswers");
 // 	echo " <br> <br> ENDING USER ASSESSMENT DETAILS <br> <br> ";
-		echo " <br> <br> STARTING ENROLL <br> <br> ";
-    read_csv("enrol_c7.csv", "enrol");
-    	echo " <br> <br> ENDING ENROLL <br> <br> ";
+
+	echo " <br> <br> STARTING ENROLL <br> <br> ";
+   read_csv("split_enrol.csv", "enrol");
+   echo " <br> <br> ENDING ENROLL <br> <br> ";
+
 // 	read_csv("publications.csv", "publications");
 }
 // Course data migration
 function read_csv($file_name, $type) {
     //file mapping from our File Manager
-    $fileName = "/home/freewaydns-dev108/cd-courses-docs/{$file_name}"; //Ensure this is the right file location
+    $fileName = "/home/freewaydns-dev108/cd-split/{$file_name}"; //Ensure this is the right file location
     $file = fopen($fileName, 'r');
     $dataArray = array();
     $headerLine = true;
@@ -179,6 +201,10 @@ function read_csv($file_name, $type) {
             create_lesson_from_csv($tempArray);
         } else if ($type == "course") {
             create_course_from_csv($tempArray);
+        } else if ($type == "assignment") {
+            create_assignment_from_csv($tempArray);
+        } else if ($type == "postal") {
+            create_assignment_from_csv($tempArray);
         } else if ($type == "question") {
             create_question_from_csv($tempArray);
         } else if ($type == "user") {
@@ -187,6 +213,10 @@ function read_csv($file_name, $type) {
             progress_users_quiz_from_csv($tempArray);
         } else if ($type == "useranswers") {
             progress_users_answers_from_csv($tempArray);
+        } else if ($type == "userassignment") {
+            progress_users_assignment_from_csv($tempArray);
+        } else if ($type == "userassignmentanswers") {
+            progress_user_assignment_answers_from_csv($tempArray);
         } else if ($type == "enrol") {
             enrol_users_from_csv($tempArray);
         } else if ($type == "publications") {

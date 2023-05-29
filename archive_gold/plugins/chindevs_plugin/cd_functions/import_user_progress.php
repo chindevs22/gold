@@ -68,59 +68,6 @@ function progress_users_quiz_from_csv($progressData) {
     progress_user_lessons($wp_course_id, $wp_quiz_id, $wp_user_id);
 }
 
-function progress_user_lessons($wp_course_id, $wp_quiz_id, $wp_user_id) {
-    global $wpdb;
-
-    $curriculum_string = get_post_meta($wp_course_id, 'curriculum', true);
-    $ca = create_array_from_string($curriculum_string, ',');
-    $arrLength = count($ca);
-    $quizIndex = 0;
-    for($x = 0; $x < $arrLength; $x++) {
-        if ($wp_quiz_id == $ca[$x]) {
-            $quizIndex = $x;
-            break;
-        }
-    }
-    error_log("Course ID: " . $wp_course_id . " Quiz ID: " . $wp_quiz_id . " Index found: " . $quizIndex);
-
-    $isLeft = false;
-    $isRight = false;
-    $lessonsCompleted = array();
-    $indexLeft = $quizIndex - 1;
-    $indexRight = $quizIndex + 1;
-    // Go through curriculum array searching for the Lessons surrounding the quiz
-    // When you hit a Section Name (intval will be false) or the ends of the array stop.
-    // TODO: This code cant handle 2 quizzes in a section
-    // Solution: Go Left Only, Check if I've hit a Quiz or Section
-    while (!$isLeft) {
-// 			if ($indexRight == $arrLength || intval($ca[$indexRight]) == 0) {
-// 				$isRight = true;
-// 			} else {
-// 				array_push($lessonsCompleted, $ca[$indexRight++]);
-// 			}
-// 			// if im at the front, or im a section name or my id returns a quiz type post
-        if( $indexLeft < 0 || intval($ca[$indexLeft]) == 0 || 'stm-quizzes' === get_post_type( $ca[$indexLeft] ) ) {
-            $isLeft = true;
-        } else {
-            array_push($lessonsCompleted, $ca[$indexLeft--]);
-        }
-    }
-
-    echo "COMPLETING LESSONS FOR QUIZ <br>";
-    error_log("# of LESSONS COMPLETED : " . count($lessonsCompleted));
-    // Insert Each Completed Lesson Based on Completed Quiz
-    foreach($lessonsCompleted as $lesson_id) {
-        echo "lesson completed: " . $lesson_id . " <br>";
-        $table_name = 'wp_stm_lms_user_lessons';
-        $wpdb->insert($table_name, array(
-            'user_lesson_id' => NULL,
-            'user_id' => $wp_user_id,
-            'course_id' => $wp_course_id,
-            'lesson_id' => $lesson_id
-        ));
-    }
-}
-
 function progress_users_answers_from_csv($answerData) {
     global $wpdb;
     //, $userMGMLtoWP, $attemptNumberMap, $courseMGMLtoWP, $lessonMGMLtoWP, $selfAssessmentToUser, $questionMGMLtoWP, $wpQuestionsToAnswers;

@@ -60,6 +60,7 @@
 
             //Create a Section Record
             $sectionName = get_post_meta($lessonArray[0], 'mgml_section_name', true);
+            $sArray = array($sectionName);
             $section_table_name = 'wp_stm_lms_curriculum_sections';
             $wpdb->insert($section_table_name, array(
                 'title' => $sectionName,
@@ -80,8 +81,12 @@
                     'order' => $lessonCount++
                 ));
             }
-		}
 
+            $combinedArray = array_merge($combinedArray, $sArray, $lessonArray);
+
+		}
+        $curriculum_string = implode(",", $combinedArray);
+        update_post_meta($course_post_id, 'curriculum', $curriculum_string);
 		// Handling Pricing - what to do when 1 or both prices are null?
 		$us_price = $courseData['price_usd'];
 		$inr_price = $courseData['price'];
