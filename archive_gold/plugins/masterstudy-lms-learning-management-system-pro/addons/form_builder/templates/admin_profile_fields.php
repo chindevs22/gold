@@ -25,7 +25,7 @@ if ( ! empty( $user_fields ) && isset( $user_fields['register'] ) ) {
 						<input type="<?php echo esc_attr( $field['type'] ); ?>"
 							name="<?php echo esc_attr( $field['id'] ); ?>" value="<?php echo esc_attr( $value ); ?>">
 
-					<?php elseif ( $label === 'State (Options Loading)') : ?>
+					<?php elseif ( $label === 'State') : ?>
 						<input type="<?php echo esc_attr( $field['type'] ); ?>"
 							name="<?php echo esc_attr( $field['id'] ); ?>" value="<?php echo esc_attr( $stateName ); ?>">
 

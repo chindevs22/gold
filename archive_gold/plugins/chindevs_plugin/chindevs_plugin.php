@@ -114,20 +114,9 @@ function event_registration_scripts() {
 add_action( 'wp_enqueue_scripts', 'event_registration_scripts' );
 
 function payment_faq_style() {
-    wp_enqueue_style( 'payment-faq', GIFT_COURSE_URL . '/assets/css/payment-faq.css', array(), 'false', false);
+    wp_enqueue_style( 'payment-faq', GIFT_COURSE_URL . '/assets/css/profile-fields.css', array(), 'false', false);
 }
 add_action('wp_enqueue_scripts', 'payment_faq_style');
-
-function reg_form_address_script() {
-
-	 if (is_page('user-account')) {
-		 error_log("registering script");
-        wp_enqueue_script('chindevs', plugins_url( '/assets/js/registration-address-api.js', __FILE__ ), array('jquery'), '1.0', true);
-    }
-}
-add_action( 'wp_enqueue_scripts', 'reg_form_address_script' );
-
-
 
 /// --------------------------------------------------------- COURSE MIGRATION ---------------------------------------------------------------
 
@@ -145,13 +134,13 @@ function create_course_data() {
 //     read_csv("split_assignments.csv", "assignment");
 // 	echo "<br> <br>  DONE WITH ASSIGNMENT <br> <br> ";
 
-//    echo " <br> <br> STARTING POSTAL <br> <br> ";
-//    read_csv("postal.csv", "postal");
-//    echo "<br> <br>  STARTING WITH POSTAL <br> <br> ";
+//    echo " <br> <br> STARTING POSTAL ASSIGNMENT<br> <br> ";
+//    read_csv("postal_lessons.csv", "postal");
+//    echo "<br> <br>  DONE WITH POSTAL ASSIGNMENT<br> <br> ";
 
-// 	echo " <br> <br> STARTING COURSES <br> <br> ";
-//     read_csv("split_courses.csv", "course");
-// 	echo "<br> <br>  DONE WITH COURSES <br> <br> ";
+	echo " <br> <br> STARTING COURSES <br> <br> ";
+    read_csv("postal_courses.csv", "course");
+	echo "<br> <br>  DONE WITH COURSES <br> <br> ";
 
 // 	echo " <br> <br> STARTING USERS <br> <br> "; //two user files
 //     read_csv("validusers2.csv", "user");
@@ -173,9 +162,9 @@ function create_course_data() {
 //     read_csv("split_usad_obj.csv", "useranswers");
 // 	echo " <br> <br> ENDING USER ASSESSMENT DETAILS <br> <br> ";
 
-	echo " <br> <br> STARTING ENROLL <br> <br> ";
-   read_csv("split_enrol.csv", "enrol");
-   echo " <br> <br> ENDING ENROLL <br> <br> ";
+// 	echo " <br> <br> STARTING ENROLL <br> <br> ";
+//    read_csv("split_enrol.csv", "enrol");
+//    echo " <br> <br> ENDING ENROLL <br> <br> ";
 
 // 	read_csv("publications.csv", "publications");
 }
@@ -505,10 +494,36 @@ function new_faq( $template_name, $vars ) {
 	return $template_name;
 }
 
+// Add Fill Profile Fields banner
+function user_missing_profile_fields($user) {
+    $displayName = $user->display_name;  // User's display name
+    $firstName = $user->first_name;      // User's first name
+    $lastName = $user->last_name;        // User's last name
+    $user_profile_meta_values = array($displayName, $firstName, $lastName);
 
-//add_action( 'stm_lms_template_main', 'my_custom_banner', 10 );
-//function my_custom_banner() {
-//    echo '<div class="my-custom-banner">';
-//    echo 'HELLOOOOOO';
-//    echo '</div>';
-//}
+    $profile_address_meta_keys = array('ijl5c9zv6lp', 'cigbecl89n', '0hrgnga1qhp5', 'l3pqlc3elr', 'rgcxegzsmy');
+
+    foreach ($profile_address_meta_keys as $meta_key) {
+        if (metadata_exists('user', $user->ID, $meta_key)) {
+            $meta_value = get_user_meta($user->ID, $meta_key, true);
+           // error_log("the meta val " . $meta_value);
+        } else {
+          //  error_log("the meta key that doesn't exist " . $meta_key);
+            return true;
+        }
+    }
+}
+
+add_action( 'stm_lms_template_main', 'my_custom_banner', 10 );
+function my_custom_banner() {
+    $user = wp_get_current_user();
+    if (user_missing_profile_fields($user)) {
+    ?>
+        <div class="profile-fields-banner">
+          <p>Looks like you have fields to fill out</p>
+          <button id="fill-now-btn">Fill Now</button>
+        </div>
+    <?php
+    }
+
+}

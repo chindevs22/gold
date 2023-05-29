@@ -72,6 +72,28 @@ function stm_lms_register(redirect) {
 
         return false;
       },
+	  selectChange: function selectChange(event, field) {
+		console.log("inside select change asdfljasdkfjsa");
+		console.log(this.additionalRegisterFields);
+		console.log(event);
+        var _this = this;
+        if (field['label'] == "Country") {
+			_this.additionalRegisterFields[1]['choices'] = [];
+			var country = event.target.value;
+			console.log(country);
+			jQuery.ajax({
+				type: 'POST',
+				url: '/wp-admin/admin-ajax.php',
+				data: {
+					action: 'get_states_for_profile',
+					country: country
+				},
+				success: function(response) {
+					_this.additionalRegisterFields[1]['choices'] = JSON.parse(response);
+				}
+			});
+        }
+      },
       checkboxChange: function checkboxChange(event, index, choice) {
         var register = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
 
@@ -185,7 +207,7 @@ function stm_lms_register(redirect) {
             if (typeof vm.additionalRegisterFields[index] !== 'undefined') {
               extensions = typeof vm.additionalRegisterFields[index].extensions !== 'undefined' ? vm.additionalRegisterFields[index].extensions : '';
             }
-
+          } else {
             if (typeof vm.additionalInstructorsFields[index] !== 'undefined') {
               extensions = typeof vm.additionalInstructorsFields[index].extensions !== 'undefined' ? vm.additionalInstructorsFields[index].extensions : '';
             }
@@ -205,7 +227,7 @@ function stm_lms_register(redirect) {
                   if (typeof vm.additionalRegisterFields[index] !== 'undefined') {
                     vm.$set(vm.additionalRegisterFields[index], 'value', res['body'].url);
                   }
-
+                } else {
                   if (typeof vm.additionalInstructorsFields[index] !== 'undefined') {
                     vm.$set(vm.additionalInstructorsFields[index], 'value', res['body'].url);
                   }

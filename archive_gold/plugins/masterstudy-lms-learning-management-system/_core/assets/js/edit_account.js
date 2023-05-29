@@ -151,7 +151,7 @@
 
           return false;
         },
-         selectChange: function selectChange(event, field, index) {
+         selectChange: function selectChange(event, field) {
 			var _this = this;
 			if (field['label'] == "Country") {
 				_this.additionalFields[1]['choices'] = [];
