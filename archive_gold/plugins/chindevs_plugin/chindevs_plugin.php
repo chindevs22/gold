@@ -138,25 +138,29 @@ function create_course_data() {
 //    read_csv("postal_lessons.csv", "postal");
 //    echo "<br> <br>  DONE WITH POSTAL ASSIGNMENT<br> <br> ";
 
-	echo " <br> <br> STARTING COURSES <br> <br> ";
-    read_csv("postal_courses.csv", "course");
-	echo "<br> <br>  DONE WITH COURSES <br> <br> ";
+// 	echo " <br> <br> STARTING COURSES <br> <br> ";
+//     read_csv("postal_courses.csv", "course");
+// 	echo "<br> <br>  DONE WITH COURSES <br> <br> ";
 
 // 	echo " <br> <br> STARTING USERS <br> <br> "; //two user files
-//     read_csv("validusers2.csv", "user");
+//     read_csv("validusers1.csv", "user");
 // 	echo " <br> <br> ENDING USERS <br> <br> ";
 
 // 	echo " <br> <br> STARTING USER ASSESSMENT <br> <br> ";
 //     read_csv("usa_c7.csv", "userquiz");
 // 	echo " <br> <br> ENDING USER ASSESSMENT <br> <br> ";
 
-// 	echo " <br> <br> STARTING USER ASSESSMENT FOR ASSIGNMENTS <br> <br> ";
-//    read_csv("split_usa.csv", "userassignment");
+// 	echo " <br> <br> STARTING USER ASSESSMENT FOR ASSIGNMENTS/POSTAL <br> <br> ";
+//    read_csv("postal_usa.csv", "userassignment");
 // 	echo " <br> <br> ENDING USER  ASSESSMENT FOR ASSIGNMENTS <br> <br> ";
 
-// 	echo " <br> <br> STARTING USER ASSESSMENT DETAILS FOR ASSIGNMENTS <br> <br> ";
-//     read_csv("split_usad_subj.csv", "userassignmentanswers");
-// 	echo " <br> <br> ENDING USER ASSESSMENT DETAILS  FOR ASSIGNMENTS <br> <br> ";
+// 		echo " <br> <br> STARTING USER ASSESSMENT FOR POSTAL <br> <br> ";
+//    read_csv("postal_usa.csv", "userassignmentpostal");
+// 	echo " <br> <br> ENDING USER  ASSESSMENT FOR POSTAL <br> <br> ";
+
+	echo " <br> <br> STARTING USER ASSESSMENT DETAILS FOR ASSIGNMENTS <br> <br> ";
+    read_csv("postal_usad.csv", "userassignmentanswers");
+	echo " <br> <br> ENDING USER ASSESSMENT DETAILS  FOR ASSIGNMENTS <br> <br> ";
 
 // 	echo " <br> <br> STARTING USER ASSESSMENT DETAILS <br> <br> ";
 //     read_csv("split_usad_obj.csv", "useranswers");
@@ -208,7 +212,9 @@ function read_csv($file_name, $type) {
         } else if ($type == "useranswers") {
             progress_users_answers_from_csv($tempArray);
         } else if ($type == "userassignment") {
-            progress_users_assignment_from_csv($tempArray);
+            progress_users_assignment_from_csv($tempArray, false);
+        } else if ($type == "userassignmentpostal") {
+            progress_users_assignment_from_csv($tempArray, true);
         } else if ($type == "userassignmentanswers") {
             progress_user_assignment_answers_from_csv($tempArray);
         } else if ($type == "enrol") {

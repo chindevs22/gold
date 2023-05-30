@@ -4,7 +4,7 @@
 	// --------------------------------------------------------------------------------------------
     require_once 'helpers.php';
 
-    function progress_users_assignment_from_csv($progressData) {
+    function progress_users_assignment_from_csv($progressData, $isPostal) {
         global $wpdb;
 
         if ($progressData['quiz_marks'] == 0) {
@@ -29,11 +29,9 @@
 
         // Is this a Split Assignment??
         $hasDot = str_contains($progressData['quiz_id'], '.');
-        if ($hasDot) {
+        if ($hasDot || $isPostal) {
 			error_log("is a split assignment");
 
-            $ids = explode( '.', $progressData['quiz_id']); //quizID.questionID
-            $questionID = $ids[1];
             $wp_assignment_id = get_from_post('stm-assignments', 'mgml_assignment_id', $progressData['quiz_id']);
 			error_log($wp_assignment_id);
             //Student Name
