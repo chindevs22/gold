@@ -93,28 +93,40 @@ function build_faq($faq) {
     return $faq_string;
 }
 
+
+function replace_section_2($original_string, $start, $end, $replacement) {
+	$startPosition = strpos($original_string, $start);
+	$endPosition = strrpos($original_string, $end);
+
+	if ($startPosition && $endPosition) {
+		$startTagPosition = strrpos(substr($original_string, 0, $startPosition), '<p');
+		$endTagPosition = strpos($original_string, '</p>', $endPosition) + 4;
+		$modifiedText = substr_replace($original_string, $replacement, $startTagPosition, ($endTagPosition - $startTagPosition));
+		return $modifiedText;
+	}
+	return $original_string;
+}
 // Original String = full text
 // Start = starting phrase to look for
 // Ending phrase to look for
 // Replacement = shortcoded string '[shortcode]'
 function replace_section($original_string, $start, $end, $replacement) {
     $start_pos = strrpos($original_string, $start);
-    $end_pos = strpos($original_string, $end, $start + strlen($start));
+    $end_pos = strpos($original_string, $end, $start_pos + strlen($start));
 
-    if ($start_pos !== false && $end_pos !== false && $start < $end) {
+    if ($start_pos !== false && $end_pos !== false && $start_pos < $end_pos) {
         $start_pos += strlen($start);
         $text_before = substr($original_string, 0, $start_pos - strlen($start));
         $text_after = substr($original_string, $end_pos + strlen($end));
 
         $new_text_blob = $text_before . $replacement . $text_after;
-        return do_shortcode($text_blob);
+        return $new_text_blob;
     } else {
         // The start and end markers were not found in the expected order
         echo 'Start and/or end markers not found for ' . $replacement;
-        return null;
+        return $original_string;
     }
 }
-
 // Add image (Currently only for course path)
 function add_course_image($course_post_id, $course_id) {
   $upload_dir = wp_upload_dir();
@@ -192,8 +204,7 @@ function cd_get_posts($post_type, $key, $value) {
 function get_from_post($post_type, $key, $value) {
 
     $posts = cd_get_posts($post_type, $key, $value);
-	error_log("In get_from_post call");
-	error_log(print_r($posts, true));
+
     if (count($posts) > 1 ) {
         error_log("ERROR: More than one " . $post_type . " with the same MGML ID: " . $value);
         error_log(print_r($posts, true));
@@ -222,7 +233,6 @@ function get_lessons_for_section($section_id) {
     $query = new WP_Query( $args );
 
     $posts = wp_list_pluck( $query->posts, 'ID' );
-
     return $posts;
 }
 
