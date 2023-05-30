@@ -1,0 +1,20 @@
+.profile-fields-banner {
+  background-color: #1a237e;
+  color: #ffffff;
+  text-align: center;
+  padding: 20px;
+}
+
+.profile-fields-banner p {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.profile-fields-banner button {
+  background-color: #ffffff;
+  color: #1a237e;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}

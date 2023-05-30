@@ -55,17 +55,22 @@ class STM_LMS_Pro_Announcements {
 			$users = stm_lms_get_course_users( $post_id, array( 'user_id' ) );
 
 			foreach ( $users as $user ) {
-				$user_id   = $user['user_id'];
+				$user_id = $user['user_id'];
+				 // ChinDevs code to send different email to instructor vs students
+				if ( $user_id == $post_author_id) {
+					$email_key = 'stm_lms_announcement_from_instructor';
+				} else {
+					$email_key = 'stm_lms_announcement_from_instructor_to_user';
+				}
 				$user_info = get_userdata( $user_id );
 				STM_LMS_Helpers::send_email(
 					$user_info->user_email,
 					esc_html__( 'Announcement from the Instructor', 'masterstudy-lms-learning-management-system-pro' ),
 					$mail,
-					'stm_lms_announcement_from_instructor',
+					$email_key,
 					compact( 'mail' )
 				);
 			}
-
 			wp_send_json( $response );
 		}
 	}

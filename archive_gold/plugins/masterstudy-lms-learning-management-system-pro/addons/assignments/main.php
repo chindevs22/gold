@@ -1039,6 +1039,20 @@ class STM_LMS_Assignments {
 				compact( 'user_login', 'course_title', 'assignment_title' )
 			);
 
+			//ChinDevs code to also send email to Student
+            $message = sprintf(
+            /* translators: %1$s Assignment Title, %2$s Course Title */
+                esc_html__( 'Your assignment, %1$s for course %2$s has been submitted.', 'masterstudy-lms-learning-management-system' ),
+                $assignment_title,
+                $course_title,
+            );
+            STM_LMS_Helpers::send_email(
+                $user['email'],
+                esc_html__('Assignment Submitted and Pending Review', 'masterstudy-lms-learning-management-system-pro' ),
+                $message,
+                'stm_lms_assignment_submitted',
+                compact('course_title', 'assignment_title' )
+            );
 		}
 
 		return 'OK';

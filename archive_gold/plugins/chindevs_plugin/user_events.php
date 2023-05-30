@@ -171,6 +171,21 @@ add_filter(
 	}
 );
 
+function is_course_event($course_id) {
+    $terms = get_the_terms( $course_id, 'stm_lms_course_taxonomy' );
+    if ( !$terms || is_wp_error( $terms ) ) {
+        return false;
+    }
+    $category = $terms[0];
+    $category_id = $category->term_id;
+    $cat_lite =  get_term_meta( $category_id, 'is_lite_category', true );
+    $cat_name = get_term_meta( $category_id, 'lite_category_name', true );
+
+    if ($cat_lite == 1 && $cat_name == 'event') {
+        return true;
+    }
+    return false;
+}
 // This creates the event button for a course where the first category is of type event (TODO: for any category)
 add_filter( 'stm_lms_template_name', 'event_button', 100, 2 );
 function event_button( $template_name, $vars ) {
@@ -179,16 +194,7 @@ function event_button( $template_name, $vars ) {
 		return $template_name;
 	}
 
-	$terms = get_the_terms( $vars['course_id'], 'stm_lms_course_taxonomy' );
-	if ( !$terms || is_wp_error( $terms ) ) {
-		return $template_name;
-	}
-	$category = $terms[0];
-	$category_id = $category->term_id;
-	$cat_lite =  get_term_meta( $category_id, 'is_lite_category', true );
-	$cat_name = get_term_meta( $category_id, 'lite_category_name', true );
-
-	if ( $template_name === '/stm-lms-templates/global/buy-button.php' && $cat_name == 'event' && $cat_lite == 1 ) {
+	if ( $template_name === '/stm-lms-templates/global/buy-button.php' && is_course_event($vars['course_id']) ) {
 		$template_name = '/stm-lms-templates/global/buy-button/mixed1.php';
 	}
 	return $template_name;

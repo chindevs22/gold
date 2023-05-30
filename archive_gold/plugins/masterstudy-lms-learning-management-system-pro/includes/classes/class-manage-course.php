@@ -575,26 +575,78 @@ class STM_LMS_Manage_Course {
 		kses_init_filters();
 
 		$action  = ( $is_updated ) ? esc_html__( 'updated', 'masterstudy-lms-learning-management-system-pro' ) : esc_html__( 'created', 'masterstudy-lms-learning-management-system-pro' );
-		$subject = esc_html__( 'Course added', 'masterstudy-lms-learning-management-system-pro' );
+
+		// By ChinDevs: update this to only send course added on create
+		if (!$is_updated) {
+			$subject = esc_html__( 'Course added', 'masterstudy-lms-learning-management-system-pro' );
+			$message = sprintf(
+				/* translators: %s: course info */
+				esc_html__( 'Course %1$s added by instructor, your (%3$s). Please review this information from the admin Dashboard.', 'masterstudy-lms-learning-management-system-pro' ),
+				$data['title'],
+				$user['login']
+			);
+			STM_LMS_Mails::send_email(
+				$subject,
+				$message,
+				get_option( 'admin_email' ),
+				array(),
+				'stm_lms_course_added',
+				array(
+					'course_title' => $data['title'],
+					'user_login'   => $user['login'],
+				)
+			);
+		}
+
+
+		//By:ChinDevs add send email to instructor as well
+		$subject = esc_html__( 'Your Course has been Created', 'masterstudy-lms-learning-management-system-pro' );
 		$message = sprintf(
 			/* translators: %s: course info */
-			esc_html__( 'Course %1$s %2$s added by instructor, your (%3$s). Please review this information from the admin Dashboard.', 'masterstudy-lms-learning-management-system-pro' ),
-			$data['title'],
-			$action,
-			$user['login']
+			esc_html__( 'Course %1$s was added.', 'masterstudy-lms-learning-management-system-pro' ),
+			$data['title']
 		);
-		STM_LMS_Mails::send_email(
-			$subject,
-			$message,
-			get_option( 'admin_email' ),
-			array(),
-			'stm_lms_course_added',
-			array(
-				'course_title' => $data['title'],
-				'user_login'   => $user['login'],
-				'action'       => $action,
-			)
-		);
+		if (!$is_updated) {
+			STM_LMS_Mails::send_email(
+				$subject,
+				$message,
+				$user['email'],
+				array(),
+				'stm_lms_course_created_for_instructor',
+				array('course_title' => $data['title'])
+			);
+		} else {
+			//send email to instructor
+			STM_LMS_Mails::send_email(
+				$subject,
+				$message,
+				$user['email'],
+				array(),
+				'stm_lms_course_updated_for_instructor',
+				array('course_title' => $data['title'])
+			);
+
+			//send email to all students
+			$student_users = stm_lms_get_course_users( $data['post_id'], array( 'user_id' ) );
+
+			foreach ( $student_users as $suser ) {
+				$student_user_id = $suser['user_id'];
+				if ( $student_user_id == $user['id']) { //skip sending to instructor
+					continue;
+				}
+				$student_user_info = get_userdata( $student_user_id );
+				STM_LMS_Mails::send_email(
+					$subject,
+					$message,
+					$student_user_info->user_email,
+					array(),
+					'stm_lms_course_updated_for_user',
+					array('course_title' => $data['title'])
+				);
+			}
+		}
+
+		//End ChinDevs code
 		STM_LMS_Mails::remove_wp_mail_text_html();
 
 		return $r;
