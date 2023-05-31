@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0b28451b-193c-4fe6-bef1-355e03e956b5" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/archive_gold/plugins/country-state-city-auto-dropdown" beforeDir="false" afterPath="$PROJECT_DIR$/archive_gold/plugins/country-state-city-auto-dropdown" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/archive_gold/plugins/country-state-city-auto-dropdown/readme.txt" beforeDir="false" afterPath="$PROJECT_DIR$/archive_gold/plugins/country-state-city-auto-dropdown/readme.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
