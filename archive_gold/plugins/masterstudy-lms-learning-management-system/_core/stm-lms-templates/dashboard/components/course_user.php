@@ -25,11 +25,11 @@
 				</div>
 			</div>
 			<div class="sections">
-				<div class="section" v-for="section in data.sections">
-					<h3 v-html="section.number"></h3>
+				<div class="section" v-for="(section, index) in data.sections">
+					<h3 v-html="`Section ${index + 1}`"></h3>
 					<h2 v-html="decodeURIComponent(section.title)"></h2>
 					<div class="section_items">
-						<div class="section_item" v-for="item in section.section_items"
+						<div class="section_item" v-for="item in data.materials.filter(item => item.section_id === section.id)"
 							v-bind:class="[item.loading ? 'loading' : '', item.type, 'opened_' + item.opened]">
 							<h4 class="section_item__title">
 								<i class="far fa-file-alt" v-if="item.type==='lesson'"></i>
@@ -72,12 +72,12 @@
 									<student_assignments v-if="item.type==='assignment'"
 														:course_id="id"
 														:student_id="user_id"
-														:assignment_id="item.item_id">
+														:assignment_id="item.post_id">
 									</student_assignments>
 									<student_quiz v-if="item.type==='quiz'"
 												:course_id="id"
 												:student_id="user_id"
-												:quiz_id="item.item_id">
+												:quiz_id="item.post_id">
 									</student_quiz>
 								</div>
 							</div>

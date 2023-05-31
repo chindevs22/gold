@@ -6,7 +6,8 @@
   $(document).ready(function () {
     var _stm_lms_addons;
 
-    var addons = JSON.parse((_stm_lms_addons = stm_lms_addons) === null || _stm_lms_addons === void 0 ? void 0 : _stm_lms_addons.enabled_addons);
+    var addons = JSON.parse((_stm_lms_addons = stm_lms_addons) === null || _stm_lms_addons === void 0 ? void 0 : _stm_lms_addons.enabled_addons),
+        $addons_search = $('#addons-search');
     $('.addon-install .toggle-addon').on('click', function () {
       var addon = $(this).data('key');
       var addon_item = $(this);
@@ -31,5 +32,19 @@
         }
       });
     });
+    $addons_search.on('input', function (e) {
+      filter_addons(e.target.value.toLowerCase());
+    });
+
+    if ($addons_search.val().length > 0) {
+      filter_addons($addons_search.val().toLowerCase());
+    }
+
+    function filter_addons(search) {
+      $('.stm-lms-addon').each(function (i, item) {
+        $(item).toggle($(item).find('.addon-name').text().toLowerCase().indexOf(search) !== -1);
+      });
+      $('#wpbody').resize();
+    }
   });
 })(jQuery);

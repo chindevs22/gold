@@ -92,9 +92,11 @@
     });
     $body.on('click', '.add_email', function () {
       var email = $group_email.val();
+      var maxGroup = $('.stm_lms_popup_create_group__inner').data('max-group') - 1;
+      maxGroup = maxGroup > 0 ? maxGroup : 4;
       if (!validEmail(email) || emails.includes(email)) return true;
 
-      if ($(this).parents('.stm_lms_popup_create_group__inner').find('.group-emails').children().length > 1) {
+      if ($(this).parents('.stm_lms_popup_create_group__inner').find('.group-emails').children().length > maxGroup) {
         $(this).parents('.stm_lms_popup_create_group__inner').find('.heading_font').children().addClass('warning');
         return true;
       } else {

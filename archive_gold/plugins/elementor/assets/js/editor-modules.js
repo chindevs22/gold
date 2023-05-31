@@ -1,4 +1,4 @@
-/*! elementor - v3.10.2 - 29-01-2023 */
+/*! elementor - v3.13.2 - 11-05-2023 */
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
@@ -47,104 +47,6 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 var Container = /*#__PURE__*/function (_ArgsObject) {
   (0, _inherits2.default)(Container, _ArgsObject);
   var _super = _createSuper(Container);
-  // TODO: Swap those backwards compatibility is required.
-
-  /**
-   * Container type.
-   *
-   * @type {string}
-   */
-
-  /**
-   * Container id.
-   *
-   * @type {string}
-   */
-
-  /**
-   * Document Object.
-   *
-   * @type  {{}}
-   */
-
-  /**
-   * Container model.
-   *
-   * @type {(Backbone.Model|BaseElementModel)}
-   */
-
-  /**
-   * Container settings.
-   *
-   * @type {Backbone.Model}
-   */
-
-  /**
-   * Container view.
-   *
-   * @type {ViewsOptions}
-   */
-
-  /**
-   * Container parent.
-   *
-   * @type {Container}
-   */
-
-  /**
-   * Container children(s).
-   *
-   * @type {ChildrenArray}
-   */
-
-  /**
-   * Container dynamic.
-   *
-   * @type {Backbone.Model}
-   */
-
-  /**
-   * Container globals.
-   *
-   * @type {Backbone.Model}
-   */
-
-  /**
-   * Container label.
-   *
-   * @type {string}
-   */
-
-  /**
-   * Container controls.
-   *
-   * @type {{}}
-   */
-
-  /**
-   * Repeaters containers
-   *
-   * @type {{}}
-   */
-
-  /**
-   * Container renderer (The one who render).
-   *
-   * @type {Container}
-   */
-
-  /**
-   * Container panel.
-   *
-   * @type {Panel}
-   */
-
-  /**
-   * Controls placeholders.
-   *
-   * @type {{}}
-   */
-
   /**
    * Function constructor().
    *
@@ -160,21 +62,101 @@ var Container = /*#__PURE__*/function (_ArgsObject) {
     _this = _super.call(this, args);
 
     // Validate args.
+    /**
+     * Container type.
+     *
+     * @type {string}
+     */
     (0, _defineProperty2.default)((0, _assertThisInitialized2.default)(_this), "type", void 0);
+    /**
+     * Container id.
+     *
+     * @type {string}
+     */
     (0, _defineProperty2.default)((0, _assertThisInitialized2.default)(_this), "id", void 0);
+    /**
+     * Document Object.
+     *
+     * @type  {{}}
+     */
     (0, _defineProperty2.default)((0, _assertThisInitialized2.default)(_this), "document", void 0);
+    /**
+     * Container model.
+     *
+     * @type {(Backbone.Model|BaseElementModel)}
+     */
     (0, _defineProperty2.default)((0, _assertThisInitialized2.default)(_this), "model", void 0);
+    /**
+     * Container settings.
+     *
+     * @type {Backbone.Model}
+     */
     (0, _defineProperty2.default)((0, _assertThisInitialized2.default)(_this), "settings", void 0);
+    /**
+     * Container view.
+     *
+     * @type {ViewsOptions}
+     */
     (0, _defineProperty2.default)((0, _assertThisInitialized2.default)(_this), "view", void 0);
+    /**
+     * Container parent.
+     *
+     * @type {Container}
+     */
     (0, _defineProperty2.default)((0, _assertThisInitialized2.default)(_this), "parent", void 0);
+    /**
+     * Container children(s).
+     *
+     * @type {ChildrenArray}
+     */
     (0, _defineProperty2.default)((0, _assertThisInitialized2.default)(_this), "children", new _childrenArray.default());
+    /**
+     * Container dynamic.
+     *
+     * @type {Backbone.Model}
+     */
     (0, _defineProperty2.default)((0, _assertThisInitialized2.default)(_this), "dynamic", void 0);
+    /**
+     * Container globals.
+     *
+     * @type {Backbone.Model}
+     */
     (0, _defineProperty2.default)((0, _assertThisInitialized2.default)(_this), "globals", void 0);
+    /**
+     * Container label.
+     *
+     * @type {string}
+     */
     (0, _defineProperty2.default)((0, _assertThisInitialized2.default)(_this), "label", void 0);
+    /**
+     * Container controls.
+     *
+     * @type {{}}
+     */
     (0, _defineProperty2.default)((0, _assertThisInitialized2.default)(_this), "controls", {});
+    /**
+     * Repeaters containers
+     *
+     * @type {{}}
+     */
     (0, _defineProperty2.default)((0, _assertThisInitialized2.default)(_this), "repeaters", {});
+    /**
+     * Container renderer (The one who render).
+     *
+     * @type {Container}
+     */
     (0, _defineProperty2.default)((0, _assertThisInitialized2.default)(_this), "renderer", void 0);
+    /**
+     * Container panel.
+     *
+     * @type {Panel}
+     */
     (0, _defineProperty2.default)((0, _assertThisInitialized2.default)(_this), "panel", void 0);
+    /**
+     * Controls placeholders.
+     *
+     * @type {{}}
+     */
     (0, _defineProperty2.default)((0, _assertThisInitialized2.default)(_this), "placeholders", {});
     _this.validateArgs(args);
     args = Object.entries(args);
@@ -544,6 +526,11 @@ var Container = /*#__PURE__*/function (_ArgsObject) {
     value: function isDesignable() {
       return elementor.userCan('design') && this.isEditable();
     }
+  }, {
+    key: "isGridContainer",
+    value: function isGridContainer() {
+      return 'grid' === this.parent.settings.get('container_type');
+    }
 
     /**
      * @return {boolean}
@@ -664,6 +651,7 @@ var Container = /*#__PURE__*/function (_ArgsObject) {
   return Container;
 }(_argsObject.default);
 exports["default"] = Container;
+// TODO: Swap those backwards compatibility is required.
 (0, _defineProperty2.default)(Container, "TYPE_REPEATER", 'repeater-control');
 (0, _defineProperty2.default)(Container, "TYPE_REPEATER_ITEM", 'repeater');
 
@@ -691,7 +679,7 @@ var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(/*! @babel/run
 var _wrapNativeSuper2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/wrapNativeSuper */ "../node_modules/@babel/runtime/helpers/wrapNativeSuper.js"));
 function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = (0, _getPrototypeOf2.default)(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = (0, _getPrototypeOf2.default)(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return (0, _possibleConstructorReturn2.default)(this, result); }; }
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 /**
@@ -1241,8 +1229,8 @@ InnerTabsBehavior = Marionette.Behavior.extend({
     this.handleInnerTabs(this.view);
   },
   handleInnerTabs: function handleInnerTabs(parent) {
-    var closedClass = 'elementor-tab-close',
-      activeClass = 'elementor-tab-active',
+    var closedClass = 'e-tab-close',
+      activeClass = 'e-tab-active',
       tabsWrappers = parent.children.filter(function (view) {
         return 'tabs' === view.model.get('type');
       });
@@ -1269,8 +1257,8 @@ InnerTabsBehavior = Marionette.Behavior.extend({
     });
   },
   onChildviewControlTabClicked: function onChildviewControlTabClicked(childView) {
-    var closedClass = 'elementor-tab-close',
-      activeClass = 'elementor-tab-active',
+    var closedClass = 'e-tab-close',
+      activeClass = 'e-tab-active',
       tabClicked = childView.model.get('name'),
       childrenUnderTab = this.view.children.filter(function (view) {
         return 'tab' !== view.model.get('type') && childView.model.get('tabs_wrapper') === view.model.get('tabs_wrapper');
@@ -1377,6 +1365,16 @@ var _default = /*#__PURE__*/function (_elementorModules$Mod) {
       dialog.show();
     }
   }, {
+    key: "introductionViewed",
+    get: function get() {
+      var introductionKey = this.getSettings('introductionKey');
+      return elementor.config.user.introduction[introductionKey];
+    },
+    set: function set(isViewed) {
+      var introductionKey = this.getSettings('introductionKey');
+      elementor.config.user.introduction[introductionKey] = true;
+    }
+  }, {
     key: "setViewed",
     value: function setViewed() {
       this.introductionViewed = true;
@@ -1408,7 +1406,7 @@ Object.defineProperty(exports, "__esModule", ({
 exports["default"] = void 0;
 function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 /**
  * Some FileAPI objects such as FileList, DataTransferItem and DataTransferItemList has inconsistency with the retrieved
  * object (from events, etc.) and the actual JavaScript object so a regular instanceof doesn't work. This function can
@@ -1744,7 +1742,7 @@ ControlsStack = Marionette.CompositeView.extend({
         return activeSection === view.model.get('name');
       });
     if (activeSectionView[0]) {
-      activeSectionView[0].$el.addClass('elementor-open');
+      activeSectionView[0].$el.addClass('e-open');
       var eventNamespace = this.getNamespaceArray();
       eventNamespace.push(activeSection, 'activated');
       elementor.channels.editor.trigger(eventNamespace.join(':'), this);
@@ -1766,7 +1764,7 @@ ControlsStack = Marionette.CompositeView.extend({
     }
   },
   onChildviewControlSectionClicked: function onChildviewControlSectionClicked(childView) {
-    var isSectionOpen = childView.$el.hasClass('elementor-open');
+    var isSectionOpen = childView.$el.hasClass('e-open');
     this.activateSection(isSectionOpen ? null : childView.model.get('name'));
     this._renderChildren();
   },
@@ -2050,9 +2048,7 @@ module.exports = wp.i18n;
 
 function _arrayLikeToArray(arr, len) {
   if (len == null || len > arr.length) len = arr.length;
-  for (var i = 0, arr2 = new Array(len); i < len; i++) {
-    arr2[i] = arr[i];
-  }
+  for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
   return arr2;
 }
 module.exports = _arrayLikeToArray, module.exports.__esModule = true, module.exports["default"] = module.exports;
@@ -2134,15 +2130,16 @@ module.exports = _construct, module.exports.__esModule = true, module.exports["d
 /*!*************************************************************!*\
   !*** ../node_modules/@babel/runtime/helpers/createClass.js ***!
   \*************************************************************/
-/***/ ((module) => {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
+var toPropertyKey = __webpack_require__(/*! ./toPropertyKey.js */ "../node_modules/@babel/runtime/helpers/toPropertyKey.js");
 function _defineProperties(target, props) {
   for (var i = 0; i < props.length; i++) {
     var descriptor = props[i];
     descriptor.enumerable = descriptor.enumerable || false;
     descriptor.configurable = true;
     if ("value" in descriptor) descriptor.writable = true;
-    Object.defineProperty(target, descriptor.key, descriptor);
+    Object.defineProperty(target, toPropertyKey(descriptor.key), descriptor);
   }
 }
 function _createClass(Constructor, protoProps, staticProps) {
@@ -2161,9 +2158,11 @@ module.exports = _createClass, module.exports.__esModule = true, module.exports[
 /*!****************************************************************!*\
   !*** ../node_modules/@babel/runtime/helpers/defineProperty.js ***!
   \****************************************************************/
-/***/ ((module) => {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
+var toPropertyKey = __webpack_require__(/*! ./toPropertyKey.js */ "../node_modules/@babel/runtime/helpers/toPropertyKey.js");
 function _defineProperty(obj, key, value) {
+  key = toPropertyKey(key);
   if (key in obj) {
     Object.defineProperty(obj, key, {
       value: value,
@@ -2306,28 +2305,31 @@ module.exports = _isNativeReflectConstruct, module.exports.__esModule = true, mo
 /***/ ((module) => {
 
 function _iterableToArrayLimit(arr, i) {
-  var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"];
-  if (_i == null) return;
-  var _arr = [];
-  var _n = true;
-  var _d = false;
-  var _s, _e;
-  try {
-    for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) {
-      _arr.push(_s.value);
-      if (i && _arr.length === i) break;
-    }
-  } catch (err) {
-    _d = true;
-    _e = err;
-  } finally {
+  var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"];
+  if (null != _i) {
+    var _s,
+      _e,
+      _x,
+      _r,
+      _arr = [],
+      _n = !0,
+      _d = !1;
     try {
-      if (!_n && _i["return"] != null) _i["return"]();
+      if (_x = (_i = _i.call(arr)).next, 0 === i) {
+        if (Object(_i) !== _i) return;
+        _n = !1;
+      } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0);
+    } catch (err) {
+      _d = !0, _e = err;
     } finally {
-      if (_d) throw _e;
+      try {
+        if (!_n && null != _i["return"] && (_r = _i["return"](), Object(_r) !== _r)) return;
+      } finally {
+        if (_d) throw _e;
+      }
     }
+    return _arr;
   }
-  return _arr;
 }
 module.exports = _iterableToArrayLimit, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
@@ -2415,6 +2417,43 @@ function _superPropBase(object, property) {
   return object;
 }
 module.exports = _superPropBase, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ "../node_modules/@babel/runtime/helpers/toPrimitive.js":
+/*!*************************************************************!*\
+  !*** ../node_modules/@babel/runtime/helpers/toPrimitive.js ***!
+  \*************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var _typeof = (__webpack_require__(/*! ./typeof.js */ "../node_modules/@babel/runtime/helpers/typeof.js")["default"]);
+function _toPrimitive(input, hint) {
+  if (_typeof(input) !== "object" || input === null) return input;
+  var prim = input[Symbol.toPrimitive];
+  if (prim !== undefined) {
+    var res = prim.call(input, hint || "default");
+    if (_typeof(res) !== "object") return res;
+    throw new TypeError("@@toPrimitive must return a primitive value.");
+  }
+  return (hint === "string" ? String : Number)(input);
+}
+module.exports = _toPrimitive, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ "../node_modules/@babel/runtime/helpers/toPropertyKey.js":
+/*!***************************************************************!*\
+  !*** ../node_modules/@babel/runtime/helpers/toPropertyKey.js ***!
+  \***************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var _typeof = (__webpack_require__(/*! ./typeof.js */ "../node_modules/@babel/runtime/helpers/typeof.js")["default"]);
+var toPrimitive = __webpack_require__(/*! ./toPrimitive.js */ "../node_modules/@babel/runtime/helpers/toPrimitive.js");
+function _toPropertyKey(arg) {
+  var key = toPrimitive(arg, "string");
+  return _typeof(key) === "symbol" ? key : String(key);
+}
+module.exports = _toPropertyKey, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
 

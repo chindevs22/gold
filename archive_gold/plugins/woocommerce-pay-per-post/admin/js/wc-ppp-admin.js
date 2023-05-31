@@ -8,6 +8,11 @@
             $(".current-post-types").toggle("fast");
         });
 
+        $('.wc_pay_per_post_display_on_my_account').click(function(e){
+           $('.my-account-shortcode-container').toggle("fast");
+        });
+
+
         $(".wc_pay_per_post_delete_settings").change(function () {
 
             if ($(this).prop('checked')) {

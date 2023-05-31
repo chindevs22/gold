@@ -5,11 +5,11 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=mattp
 Requires at least: 3.8
 Requires PHP: 7.2
 Tested up to: 6.1.0
-Stable tag: 3.1.5
+Stable tag: 3.1.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Sell Pages/Posts through WooCommerce 2.6+ quickly and easily. Tested up to WooCommerce Version 7.0.x
+Sell Pages/Posts through WooCommerce 2.6+ quickly and easily. Tested up to WooCommerce Version 7.4.x
 
 == Description ==
 Quickly and easily sell access to pages, posts and custom post types through WooCommerce with Pay For Post with WooCommerce.  I originally created this plugin because I looked everywhere, and I couldn't find a plugin already out there, free or premium, that would do the simple fact of selling access to a particular page or post through WooCommerce.  So I decided to write my own.
@@ -115,7 +115,7 @@ Use the premium version. :) The premium version handles this for you.  However, 
 
 So for instance, I have a Vimeo video that I embed in a page, on the Vimeo Product in WooCommerce I add the Password and notes on how to view the video, they gets transmitted via email and on the thank you page for the user.
 
-**For PREMIUM users, there is a built in option to include the post links in the order email, confirmation screen and on the users My Account page.**
+**For PREMIUM users, there is a built-in option to include the post links in the order email, confirmation screen and on the users My Account page.**
 
 = Do I need to have user accounts turned on? =
 
@@ -136,16 +136,42 @@ Yes, I do the absolute best I can to support the free version of the plugin.  If
 
 
 == Changelog ==
+
+= 3.1.8 =
+* UPDATE - Block editor integration now follows post type and roles set in settings and filters.
+* UPDATE - Added in warning for when utilizing block editor on custom post types that do not support custom fields
+* BUG FIX - Fixed issue with inline shortcode protecting entire page.
+
+= 3.1.7 =
+* UPDATE - Set defaults for new checkboxes in settings screen.
+* UPDATE - Added in notice on admin page for Custom Post Types, that any Custom Post type needs to support custom fields in order to save from the Block Editor.
+* UPDATE - Added in CSS classes to be able to target shortcode h3 tags  class="wc-ppp-my-account-shortcode-heading"
+* UPDATE - Added in setting to disable new Block Editor integration.
+
+= 3.1.6 =
+* FEATURE - Fully integrated Block Editor metabox.  The metabox is now in the sidebar rather than at the bottom of the page.
+* FEATURE - Added in filter wc_pay_for_post_the_content_priority which you can set the priority of when the protection check on the_content filter is fired.
+* FEATURE - Added in filter wc_pay_for_post_is_frontend_edit that allows you to define if the post is being edited in frontend, instead of backend.  This is to assist with other page builders.
+* UPDATE - Updated the filter priority for the_content filter from 10 to 99
+* UPDATE - Updated logic for detecting protected posts.  This should help with other page builder integrations.
+* UPDATE - Updated third-party libraries to the latest versions.
+* UPDATE - Updated Debug Log, now requires you to add ?wc-ppp-debug=true to your URL to log to debug file.  This will make it much easier to debug on a live site.
+* UPDATE - Transients for shortcodes will automatically clear after post edit.  Can be disabled using filter wc_pay_per_post_clear_transients_on_post_edit
+* BUGFIX - Fix for entire page priority protection over elementor widget protection.
+* BUGFIX - Fix for paywall in Elementor protected widgets.
+* BUGFIX - Fix for DIVI builder integration.
+* BUGFIX - Fix for Beaver builder integration.
+
 = 3.1.5 =
 * FEATURE - Added new filter wc_pay_for_post_show_paywall_in_archives which allows you to control if content get protected in archives showing full post content.  Defaults to true;
 * BUG FIX - Fixed bug in premium version which viewing protected content from admin and only showing the admin user as the customer.
-* BUG FIX - Fixed bug which was causing some page builders not to render protected content correcly.
+* BUG FIX - Fixed bug which was causing some page builders not to render protected content correctly.
 * UPDATE - Updated Elementor integration to now clearly show which elements are protected by outlining them in red.
 * UPDATE - Added Filter wc_pay_for_post_show_paywall_in_archives to indicate if paywall should show in archives or not, default is true
 
 
 = 3.1.4 =
-* HOTFIX - Bug with is_protected protected check returning false in some instances when it should be true.
+* HOTFIX - Bug with is_protected protection check returning false in some instances when it should be true.
 
 = 3.1.3 =
 * BUG FIX - Fixed PHP notices in error_log for when no products associated with post.
@@ -652,3 +678,4 @@ Yes, I do the absolute best I can to support the free version of the plugin.  If
 * Initial Release
 
 == Upgrade Notice ==
+Bug fixes for shortcodes and Block Editor updates

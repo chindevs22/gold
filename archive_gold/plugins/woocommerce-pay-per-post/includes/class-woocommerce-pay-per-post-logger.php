@@ -18,13 +18,13 @@
 		public function __construct() {
 
 			$this->debug = get_option( WC_PPP_SLUG . '_enable_debugging' );
+			$uploads_dir             = wp_upload_dir();
+			$this->log_directory     = $uploads_dir['basedir'] . '/woocommerce-pay-per-post-logs';
+			$this->log_directory_url = $uploads_dir['baseurl'] . '/woocommerce-pay-per-post-logs';
+			$this->log_file_uri      = $this->log_directory . '/' . $this->log_file_name;
+			$this->log_file_url      = $this->log_directory_url . '/' . $this->log_file_name;
 
 			if ( $this->debug ) {
-				$uploads_dir             = wp_upload_dir();
-				$this->log_directory     = $uploads_dir['basedir'] . '/woocommerce-pay-per-post-logs';
-				$this->log_directory_url = $uploads_dir['baseurl'] . '/woocommerce-pay-per-post-logs';
-				$this->log_file_uri      = $this->log_directory . '/' . $this->log_file_name;
-				$this->log_file_url      = $this->log_directory_url . '/' . $this->log_file_name;
 
 				$this->log = new Logger( WC_PPP_SLUG );
 				$this->create_log_file();
@@ -41,7 +41,7 @@
 		}
 
 		public function log( $message, $context = [] ) {
-			if ( $this->debug ) {
+			if ( $this->debug && isset($_GET['wc-ppp-debug']) ) {
 				$this->log->debug( $message, $context );
 			}
 		}

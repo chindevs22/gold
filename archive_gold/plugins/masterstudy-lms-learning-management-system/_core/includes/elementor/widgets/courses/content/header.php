@@ -6,7 +6,7 @@ $this->start_controls_section(
 	array(
 		'label'      => esc_html__( 'Header', 'masterstudy-lms-learning-management-system' ),
 		'tab'        => Controls_Manager::TAB_CONTENT,
-		'conditions' => $this->add_widget_type_conditions( 'courses-archive' ),
+		'conditions' => $this->add_widget_type_conditions( array( 'courses-archive', 'courses-grid', 'courses-carousel' ) ),
 	)
 );
 $this->add_subswitcher_control(
@@ -25,7 +25,20 @@ $this->add_control(
 			'style_1' => esc_html__( 'Column Direction', 'masterstudy-lms-learning-management-system' ),
 			'style_2' => esc_html__( 'Row Direction', 'masterstudy-lms-learning-management-system' ),
 		),
-		'conditions' => $this->add_visible_conditions( 'show_header' ),
+		'conditions'  => array(
+			'terms' => array(
+				array(
+					'name'     => 'show_header',
+					'operator' => '===',
+					'value'    => 'yes',
+				),
+				array(
+					'name'     => 'type',
+					'operator' => 'in',
+					'value'    => array( 'courses-archive', 'courses-grid', 'courses-carousel' ),
+				),
+			),
+		),
 	)
 );
 $this->add_control(

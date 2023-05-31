@@ -4,6 +4,7 @@ namespace StmLmsElementor\Widgets;
 
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
+use Elementor\Plugin;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
@@ -18,16 +19,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class StmLmsRecentCourses extends Widget_Base {
 
+	use \MsLmsAddOverlay;
 
-	/**
-	 * Retrieve the widget name.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @access public
-	 *
-	 * @return string Widget name.
-	 */
 	public function get_name() {
 		return 'stm_lms_recent_courses';
 	}
@@ -55,7 +48,7 @@ class StmLmsRecentCourses extends Widget_Base {
 	 * @return string Widget icon.
 	 */
 	public function get_icon() {
-		return 'eicon-post lms-icon';
+		return 'stmlms-recent-courses-old lms-icon';
 	}
 
 	/**
@@ -193,6 +186,9 @@ class StmLmsRecentCourses extends Widget_Base {
 			'per_row'        => ! empty( $settings['per_row'] ) ? $settings['per_row'] : '6',
 			'style'          => ! empty( $settings['style'] ) ? $settings['style'] : 'style_1',
 		);
+		if ( Plugin::$instance->editor->is_edit_mode() ) {
+			$this->add_courses_widget_overlay();
+		}
 		\STM_LMS_Templates::show_lms_template( 'shortcodes/stm_lms_recent_courses', $atts );
 	}
 

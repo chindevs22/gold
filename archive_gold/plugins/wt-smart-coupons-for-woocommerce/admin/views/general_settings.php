@@ -17,7 +17,7 @@ $wt_sc_admin_view_path=plugin_dir_path(WT_SMARTCOUPON_FILE_NAME).'admin/views/';
 <div class="wrap">
     <h2 class="wp-heading-inline">
     <?php _e('Settings', 'wt-smart-coupons-for-woocommerce');?>: 
-    <?php _e('Smart Coupons for WooCommerce  Pro', 'wt-smart-coupons-for-woocommerce');?>
+    <?php _e('Smart Coupons for WooCommerce', 'wt-smart-coupons-for-woocommerce');?>
     <a href="<?php echo esc_attr(admin_url('edit.php?post_type=shop_coupon'));?>" class="page-title-action" target="_blank"><?php _e('All coupons', 'wt-smart-coupons-for-woocommerce');?></a>
     <a href="<?php echo esc_attr(admin_url('post-new.php?post_type=shop_coupon'));?>" class="page-title-action" target="_blank"><?php _e('Add coupon', 'wt-smart-coupons-for-woocommerce');?></a>
     </h2>

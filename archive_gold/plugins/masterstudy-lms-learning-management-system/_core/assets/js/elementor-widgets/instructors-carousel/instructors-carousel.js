@@ -38,11 +38,7 @@ var MsLmsInstructorsCarousel = /*#__PURE__*/function (_elementorModules$fro) {
     value: function getDefaultSettings() {
       return {
         selectors: {
-          container: '.ms_lms_instructors_carousel',
-          carousel: '.ms_lms_instructors_carousel__content',
-          slideContent: '.swiper-slide',
-          prevButton: '.ms_lms_instructors_carousel__navigation_prev',
-          nextButton: '.ms_lms_instructors_carousel__navigation_next'
+          carousel: '.ms_lms_instructors_carousel__content'
         }
       };
     }
@@ -50,101 +46,70 @@ var MsLmsInstructorsCarousel = /*#__PURE__*/function (_elementorModules$fro) {
     key: "getDefaultElements",
     value: function getDefaultElements() {
       var selectors = this.getSettings('selectors');
-      var elements = {
-        $WidgetContainer: this.$element.find(selectors.container),
-        $swiperContainer: this.$element.find(selectors.carousel)
-      };
-      elements.$slides = elements.$swiperContainer.find(selectors.slideContent);
-      return elements;
-    }
-  }, {
-    key: "getSwiperSettings",
-    value: function getSwiperSettings() {
-      var selectors = this.getSettings('selectors');
       var elementSettings = this.getElementSettings();
-      var settings = {
-        slidesPerView: elementSettings['slides_per_view'],
-        slidesPerGroup: elementSettings['slides_to_scroll'],
-        breakpoints: {
-          1025: {
-            slidesPerView: elementSettings['slides_per_view'],
-            slidesPerGroup: elementSettings['slides_to_scroll']
-          },
-          768: {
-            slidesPerView: elementSettings['slides_per_view_tablet'],
-            slidesPerGroup: elementSettings['slides_to_scroll_tablet']
-          },
-          360: {
-            slidesPerView: elementSettings['slides_per_view_mobile'],
-            slidesPerGroup: elementSettings['slides_to_scroll_mobile']
-          }
+      return {
+        $sliderContainer: this.$element.find(selectors.carousel),
+        $slidesOptions: {
+          '100%': 1,
+          '50%': 2,
+          '33.333333%': 3,
+          '25%': 4,
+          '20%': 5,
+          '16.666666%': 6
         },
-        loop: elementSettings['loop'],
-        navigation: {
-          nextEl: this.elements.$WidgetContainer.find(selectors.nextButton),
-          prevEl: this.elements.$WidgetContainer.find(selectors.prevButton)
+        $sliderData: {
+          'slides_per_view': elementSettings['slides_per_view'],
+          'slides_per_view_tablet': elementSettings['slides_per_view_tablet'],
+          'slides_per_view_mobile': elementSettings['slides_per_view_mobile'],
+          'autoplay': elementSettings['autoplay'],
+          'loop': elementSettings['loop']
         }
       };
+    }
+  }, {
+    key: "bindEvents",
+    value: function bindEvents() {
+      jQuery(document).ready(this.sliderInit.bind(this));
+    }
+  }, {
+    key: "sliderInit",
+    value: function sliderInit() {
+      var _this = this,
+          autoplayData = false,
+          widgetID = _this.elements.$sliderContainer.closest('.elementor-widget-ms_lms_instructors_carousel').data('id'),
+          sliderContainer = document.querySelector("[data-id=\"".concat(widgetID, "\"] .ms_lms_instructors_carousel__content")),
+          sliderButtonNext = document.querySelector("[data-id=\"".concat(widgetID, "\"] .ms_lms_instructors_carousel__navigation_next")),
+          sliderButtonPrev = document.querySelector("[data-id=\"".concat(widgetID, "\"] .ms_lms_instructors_carousel__navigation_prev"));
 
-      if (elementSettings['autoplay'] && elementSettings['autoplay'].length > 0) {
-        settings.autoplay = {
-          delay: elementSettings['autoplay'],
-          disableOnInteraction: true,
-          pauseOnMouseEnter: true
+      if (_this.elements.$sliderData['autoplay']) {
+        autoplayData = {
+          delay: 2000
         };
-      } else {
-        delete settings.autoplay;
       }
 
-      return settings;
-    }
-  }, {
-    key: "onInit",
-    value: function onInit() {
-      var _this = this;
-
-      elementorModules.frontend.handlers.Base.prototype.onInit.apply(this, arguments);
-      var asyncSwiper = elementorFrontend.utils.swiper;
-      new asyncSwiper(this.elements.$swiperContainer, this.getSwiperSettings()).then(function (newSwiperInstance) {
-        _this.swiper = newSwiperInstance;
-      });
-      this.elements.$swiperContainer.data('swiper', this.swiper);
-    }
-  }, {
-    key: "onElementChange",
-    value: function onElementChange(propertyName) {
-      var elementSettings = this.getElementSettings(),
-          newSettingValue = elementSettings[propertyName],
-          params = this.swiper.params;
-
-      switch (propertyName) {
-        case 'slides_per_view':
-          params.breakpoints[1025][slidesPerView] = newSettingValue;
-          break;
-
-        case 'slides_per_view_tablet':
-          params.breakpoints[768][slidesPerView] = newSettingValue;
-          break;
-
-        case 'slides_per_view_mobile':
-          params.breakpoints[360][slidesPerView] = newSettingValue;
-          break;
-
-        case 'autoplay':
-          if (newSettingValue.length > 0) {
-            params.autoplay.delay = newSettingValue;
-          } else {
-            delete params.autoplay;
+      if (_this.elements.$sliderContainer.length !== 0 && typeof edit_mode === 'undefined') {
+        var mySwiper = new Swiper(sliderContainer, {
+          slidesPerView: _this.elements.$slidesOptions[_this.elements.$sliderData['slides_per_view']],
+          watchSlidesProgress: true,
+          breakpoints: {
+            360: {
+              slidesPerView: _this.elements.$slidesOptions[_this.elements.$sliderData['slides_per_view_mobile']]
+            },
+            768: {
+              slidesPerView: _this.elements.$slidesOptions[_this.elements.$sliderData['slides_per_view_tablet']]
+            },
+            1025: {
+              slidesPerView: _this.elements.$slidesOptions[_this.elements.$sliderData['slides_per_view']]
+            }
+          },
+          loop: _this.elements.$sliderData['loop'],
+          autoplay: autoplayData,
+          navigation: {
+            nextEl: sliderButtonNext,
+            prevEl: sliderButtonPrev
           }
-
-          break;
-
-        case 'loop':
-          params.loop = newSettingValue;
-          break;
+        });
       }
-
-      this.swiper.update();
     }
   }]);
 

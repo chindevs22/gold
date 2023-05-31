@@ -54,6 +54,7 @@ if( ! class_exists('Wt_Smart_Coupon_Public') ) {
             'coupon_restriction',
             'auto_coupon',
             'url_coupon',
+            'checkout_options', /** @since 1.4.6 */
         );
 
         public static $existing_modules=array();
@@ -144,101 +145,6 @@ if( ! class_exists('Wt_Smart_Coupon_Public') ) {
 
             wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/wt-smart-coupon-public.js', array('jquery'), $this->version, false);
             wp_localize_script($this->plugin_name,'WTSmartCouponOBJ', $params);
-        }
-    
-        /**
-         * Filter Function updating woocommcerce coupon validation.
-         * @param $valid
-         * @param $coupon - Coupon code
-         * @since 1.0.0
-         */
-        public function wt_woocommerce_coupon_is_valid($valid, $coupon) {
-    
-            if (!$valid) {
-                return false;
-            }
-    
-            $coupon_id                   = $coupon->get_id();
-            $coupon_shipping_method_ids = get_post_meta($coupon_id, '_wt_sc_shipping_methods',true);
-    
-            if( ''!=$coupon_shipping_method_ids && ! is_array( $coupon_shipping_method_ids ) ) {
-                $coupon_shipping_method_ids = explode(',',$coupon_shipping_method_ids);
-            } else {
-                $coupon_shipping_method_ids = array();
-            }
-            
-            $coupon_payment_method_ids  = get_post_meta($coupon_id, '_wt_sc_payment_methods',true);
-            if( ''!= $coupon_payment_method_ids && ! is_array( $coupon_payment_method_ids ) ) {
-                $coupon_payment_method_ids = explode(',',$coupon_payment_method_ids);
-            } else {
-                $coupon_payment_method_ids = array();
-            }
-           
-            $_wt_sc_user_roles         = get_post_meta($coupon_id, '_wt_sc_user_roles',true);
-            if( ''!= $_wt_sc_user_roles && ! is_array( $_wt_sc_user_roles ) ) {
-                $_wt_sc_user_roles = explode(',',$_wt_sc_user_roles);
-            } else {
-                $_wt_sc_user_roles = array();
-            }
-            
-            // shipping method check
-            if(sizeof($coupon_shipping_method_ids)>0)
-            { 
-                $chosen_shipping_methods = WC()->session->get('chosen_shipping_methods');
-               
-                /**
-                 * @since 1.3.7
-                 * [Bug fix] Shows a warning when `Hide shipping costs until an address is entered` option enabled.
-                 */
-                if($chosen_shipping_methods)
-                {
-                    $chosen_shipping = $chosen_shipping_methods[0];
-                    $chosen_shipping = substr($chosen_shipping, 0, strpos($chosen_shipping, ":"));
-                    if (!in_array($chosen_shipping, $coupon_shipping_method_ids)) {
-                        $valid = false;
-                    }
-        
-                    if (!$valid) {
-                        throw new Exception( __( 'Sorry, this coupon is not applicable to selected shipping method', 'wt-smart-coupons-for-woocommerce' ), 109 );
-                    } 
-                }
-                
-            }
-    
-            // payment method check
-            if (sizeof($coupon_payment_method_ids) > 0) {
-    
-                $chosen_payment_method = isset(WC()->session->chosen_payment_method) ? WC()->session->chosen_payment_method : array();
-                
-                if (!in_array($chosen_payment_method, $coupon_payment_method_ids)) {
-                    $valid = false;
-                }
-    
-                if ( ! $valid ) {
-                    throw new Exception( __( 'Sorry, this coupon is not applicable to selected Payment method', 'wt-smart-coupons-for-woocommerce' ), 109 );
-                }
-            }
-    
-            // user role check
-            if (sizeof($_wt_sc_user_roles) > 0) {
-    
-                $user = wp_get_current_user();
-                $user_roles = (array) $user->roles;
-    
-                if (!array_intersect($_wt_sc_user_roles, $user_roles)) {
-                    $valid = false;
-                }
-    
-                if ( ! $valid ) {
-                    
-                    $message=apply_filters('wt_sc_alter_user_role_validation_message', __('Sorry, this coupon is not applicable for your Role', 'wt-smart-coupons-for-woocommerce'));
-
-                    throw new Exception($message, 109);
-                }
-            }
-            
-    
-            return $valid;
         }
     
         /**
@@ -334,7 +240,7 @@ if( ! class_exists('Wt_Smart_Coupon_Public') ) {
          *  @param      bool            $timestamp     return timestamp or date string. (Optional) Default: false
          *  @return     string|int      timestamp or date string
          */
-        public static function get_coupon_start_date($coupon_id, $timestamp = false)
+        public static function get_coupon_start_date($coupon_id, $timestamp = false, $offset_timestamp=false)
         {
             if(!metadata_exists('post', $coupon_id, '_wt_coupon_start_date'))
             {
@@ -343,7 +249,7 @@ if( ! class_exists('Wt_Smart_Coupon_Public') ) {
 
             $start_date = get_post_meta($coupon_id, '_wt_coupon_start_date', true);
 
-            return ($timestamp ? Wt_Smart_Coupon_Common::get_date_timestamp($start_date, false) : $start_date);           
+            return ($timestamp ? Wt_Smart_Coupon_Common::get_date_timestamp($start_date, $offset_timestamp) : $start_date);           
         }
 
         /**
@@ -705,8 +611,14 @@ if( ! class_exists('Wt_Smart_Coupon_Public') ) {
             $used_by_meta_sql = "(SELECT COUNT(pm.meta_id) FROM {$wpdb->postmeta} AS pm WHERE pm.post_id = coupon_id AND pm.meta_key = '_used_by' AND pm.meta_value = %d)";
 
             //email restriction
-            $sql .= " AND (email_restriction = 'a:0:{}' OR email_restriction LIKE %s OR email_restriction LIKE '%*%')";
-            $sql_placeholder[] = '%'.$wpdb->esc_like($email).'%';
+            if("" !== trim($email))
+            {
+                $sql .= " AND (email_restriction = 'a:0:{}' OR email_restriction LIKE %s OR email_restriction LIKE '%*%')";
+                $sql_placeholder[] = '%'.$wpdb->esc_like($email).'%';
+            }else
+            {
+                $sql .= " AND (email_restriction = 'a:0:{}' OR email_restriction = '')";
+            }
 
 
             //user roles

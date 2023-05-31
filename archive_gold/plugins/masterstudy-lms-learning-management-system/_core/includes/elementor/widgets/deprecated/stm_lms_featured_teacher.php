@@ -6,6 +6,7 @@ use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Typography;
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
+use Elementor\Plugin;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
@@ -47,17 +48,10 @@ class StmLmsFeaturedTeacher extends Widget_Base {
 		return __( 'Featured Teacher', 'masterstudy-lms-learning-management-system' );
 	}
 
-	/**
-	 * Retrieve the widget icon.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @access public
-	 *
-	 * @return string Widget icon.
-	 */
+	use \MsLmsAddOverlay;
+
 	public function get_icon() {
-		return 'eicon-user-circle-o lms-icon';
+		return 'stmlms-featured-teacher-old lms-icon';
 	}
 
 	/**
@@ -258,6 +252,9 @@ class StmLmsFeaturedTeacher extends Widget_Base {
 			'posts_per_row'       => ! empty( $settings['posts_per_row'] ) ? $settings['posts_per_row'] : 4,
 			'instructor_btn_text' => ! empty( $settings['instructor_btn_text'] ) ? $settings['instructor_btn_text'] : '',
 		);
+		if ( Plugin::$instance->editor->is_edit_mode() ) {
+			$this->add_courses_widget_overlay();
+		}
 		\STM_LMS_Templates::show_lms_template( 'shortcodes/stm_lms_featured_teacher', $atts );
 	}
 

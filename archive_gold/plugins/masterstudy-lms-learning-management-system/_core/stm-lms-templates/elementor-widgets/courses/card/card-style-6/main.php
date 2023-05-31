@@ -2,7 +2,7 @@
 foreach ( $courses as $course ) {
 	$course = STM_LMS_Courses::get_course_submetas( $course );
 	?>
-	<div class="ms_lms_courses_card_item">
+	<div class="ms_lms_courses_card_item <?php echo esc_attr( $featured ?? '' ); ?> <?php echo esc_attr( ( 'courses-carousel' === $widget_type ) ? 'swiper-slide' : '' ); ?>">
 		<div class="ms_lms_courses_card_item_wrapper">
 			<?php if ( ! empty( $course['featured'] ) ) { ?>
 				<div class="ms_lms_courses_card_item_featured <?php echo esc_attr( ( ! empty( $card_data['featured_position'] ) ) ? $card_data['featured_position'] : '' ); ?>">
@@ -20,8 +20,12 @@ foreach ( $courses as $course ) {
 				<img src="<?php echo esc_url( $course['image'] ); ?>" class="ms_lms_courses_card_item_image">
 			</a>
 			<div class="ms_lms_courses_card_item_info">
-				<?php if ( ! empty( $card_data['show_category'] ) ) { ?>
-					<span class="ms_lms_courses_card_item_info_category"><?php echo wp_kses_post( $course['terms'] ); ?></span>
+				<?php if ( ! empty( $card_data['show_category'] ) && ! empty( $course['terms'] ) ) { ?>
+					<span class="ms_lms_courses_card_item_info_category">
+						<a href="<?php echo esc_url( STM_LMS_Course::courses_page_url() . '?terms[]=' . $course['terms']->term_id . '&category[]=' . $course['terms']->term_id ); ?>">
+							<?php echo esc_html( $course['terms']->name ); ?>
+						</a>
+					</span>
 				<?php } ?>
 					<a href="<?php echo esc_url( $course['url'] ); ?>" class="ms_lms_courses_card_item_info_title">
 						<h3><?php echo esc_html( $course['post_title'] ); ?></h3>

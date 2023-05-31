@@ -1,0 +1,71 @@
+.ui-datepicker {
+    font-size:12px;
+}
+.ui-datepicker .ui-datepicker-header {
+    padding: 10px;
+    position: relative;
+    border: unset;
+    background-color: rgb(238, 238, 238);
+}
+.ui-datepicker .ui-datepicker-prev, .ui-datepicker .ui-datepicker-next {
+    height: 1.8em;
+    position: absolute;
+    top: 2px;
+    width: 1.8em;
+}
+
+.ui-datepicker .ui-datepicker-prev-hover, .ui-datepicker .ui-datepicker-next-hover { top: 1px; }
+
+.ui-datepicker .ui-datepicker-prev { left: 2px;cursor: pointer; position: absolute;
+    top: 1em;}
+
+.ui-datepicker .ui-datepicker-next { right: 8px; cursor: pointer; position: absolute;
+    top: 1em;}
+
+.ui-datepicker .ui-datepicker-prev span, .ui-datepicker .ui-datepicker-next span {
+    display: block;
+    left: 50%;
+    margin-left: -8px;
+    margin-top: -8px;
+    position: absolute;
+    top: 50%;
+}
+
+.ui-datepicker .ui-datepicker-title {
+    line-height: 1.8em;
+    margin: 0 2.3em;
+    text-align: center;
+}
+
+.ui-datepicker .ui-datepicker-title select {
+    font-size: 1em;
+    margin: 1px 0;
+}
+
+.ui-datepicker select.ui-datepicker-month-year { width: 100%; }
+
+.ui-datepicker select.ui-datepicker-month,
+.ui-datepicker select.ui-datepicker-year { width: 49%; }
+
+.ui-datepicker table {
+    border-collapse: collapse;
+    font-size: .9em;
+    margin: 0 0 .4em;
+    width: 100%;
+}
+
+.ui-datepicker th {
+    border: 0;
+    font-weight: bold;
+    text-align: center;
+}
+
+
+.woocommerce-checkout p.woocommerce-invalid-required-field span.error {
+   color: #e2401c;
+   display: block !important;
+   font-weight: bold;
+}
+.select2{
+    width: 100% !important;
+}

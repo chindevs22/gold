@@ -7,14 +7,6 @@
  * @var $lms_page_path
  */
 
-global $wp;
-$user = STM_LMS_User::get_current_user();
-
-if ( empty( $user['id'] ) ) {
-	setcookie( 'redirect_trial_lesson', home_url( $wp->request ), time() + ( 3600 ), '/' );
-	wp_safe_redirect( STM_LMS_USER::user_page_url() );
-}
-
 $course = get_page_by_path( $lms_page_path, OBJECT, 'stm-courses' );
 
 $post_id = intval( $course->ID );
@@ -56,10 +48,35 @@ $custom_css = get_post_meta( $item_id, '_wpb_shortcodes_custom_css', true );
 stm_lms_register_style( 'lesson', array(), $custom_css );
 do_action( 'stm_lms_template_main' );
 
-$has_access   = STM_LMS_User::has_course_access( $post_id, $item_id );
-$has_preview  = STM_LMS_Lesson::lesson_has_preview( $item_id );
-$is_previewed = STM_LMS_Lesson::is_previewed( $post_id, $item_id );
-$lesson_style = STM_LMS_Options::get_option( 'lesson_style', 'default' );
+$user            = STM_LMS_User::get_current_user();
+$has_access      = STM_LMS_User::has_course_access( $post_id, $item_id );
+$has_preview     = STM_LMS_Lesson::lesson_has_preview( $item_id );
+$is_previewed    = STM_LMS_Lesson::is_previewed( $post_id, $item_id );
+$lesson_style    = STM_LMS_Options::get_option( 'lesson_style', 'default' );
+$is_trial_course = get_post_meta( $post_id, 'shareware', true );
+
+//trial course logic with pre-access
+if ( ! empty( $is_trial_course ) && 'on' == $is_trial_course && ( empty( $user['id'] ) ) ) {
+	$has_access         = false;
+	$has_preview        = false;
+	$is_previewed       = false;
+	$curriculum_lessons = STM_LMS_Curriculum::get_items( $post_id );
+	$shareware_settings = get_option( 'stm_lms_shareware_settings' );
+	$trial_lesson_count = $shareware_settings['shareware_count'] ?? 0;
+
+	$trial_lessons = array_filter(
+		$curriculum_lessons,
+		function ( $lesson ) use ( $trial_lesson_count, $item_id ) {
+			return ( $trial_lesson_count >= $lesson['bind_id'] && $lesson['item_id'] == $item_id );
+		}
+	);
+
+	if ( ! empty( $trial_lessons ) ) {
+		$has_preview  = true;
+		$is_previewed = true;
+	}
+}
+
 if ( $has_access || $has_preview ) :
 
 	if ( apply_filters( 'stm_lms_stop_item_output', false, $post_id ) ) {

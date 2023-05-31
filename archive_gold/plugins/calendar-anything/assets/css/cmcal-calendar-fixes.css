@@ -1,0 +1,402 @@
+.cmcal-calendar a.fc-event {
+    white-space: normal;
+}
+
+.cmcal-calendar-container table,
+.cmcal-calendar-container table td{
+    border-top-width: 0px;
+    border-right-width: 0px;
+    border-bottom-width: 0px;
+    border-left-width: 0px;
+}
+
+.cmcal-calendar-container .fc-unthemed .fc-today{
+    background:none;
+}
+.cmcal-calendar-container .fc-more-popover .fc-event-container{
+    padding:0px;
+}
+.cmcal-calendar-container .fc-unthemed .fc-popover .fc-header .fc-close {
+    color:inherit;
+}
+
+.cmcal-calendar-container .fc-unthemed .fc-divider, 
+.cmcal-calendar-container .fc-unthemed .fc-list-heading td, 
+.cmcal-calendar-container .fc-unthemed .fc-popover .fc-header{
+    background:inherit;
+}
+.cmcal-calendar-container a {
+    color:inherit;
+}
+
+/*
+ Basic Fixes
+--------------------------------------------------------------------------------------------------*/
+
+.cmcal-calendar-container .fc-time-grid .fc-slats td {
+    height:0px; 
+}
+
+.cmcal-calendar-container .fc-other-month .fc-day-number{
+    display:initial;
+}
+
+.cmcal-calendar-container a.fc-day-number{
+    line-height:inherit;
+    width:auto; 
+}
+
+.cmcal-calendar-container .fc a.fc-more,
+.cmcal-calendar-container .fc .fc-popover .fc-header,
+.cmcal-calendar-container .fc .fc-popover .fc-body,
+.cmcal-calendar-container .fc a.fc-event,
+.cmcal-calendar-container .fc .fc-body td,
+.cmcal-calendar-container .fc-unthemed .fc-list-item td,
+.cmcal-calendar-container .fc .fc-head td,
+.cmcal-calendar-container .fc-unthemed .fc-list-heading td,
+.cmcal-calendar-container .fc .fc-head-container th,
+.cmcal-calendar-container .fc-button,
+.cmcal-calendar-container .fc-state-default.fc-corner-right,
+.cmcal-calendar-container .fc-state-default.fc-corner-left,
+.cmcal-calendar-container .fc-toolbar{
+    border:0px;
+    border-radius:0px; 
+}
+
+.cmcal-calendar-container .fc a.fc-more,
+.cmcal-calendar-container .fc .fc-popover .fc-header,
+.cmcal-calendar-container .fc .fc-popover .fc-body,
+.cmcal-calendar-container .fc-event,
+.cmcal-calendar-container .fc-toolbar,
+.cmcal-calendar-container .fc button,
+.cmcal-calendar-container .fc-button.fc-button-active,
+.cmcal-calendar-container .fc-center h2,
+.cmcal-calendar-container .fc .fc-row td,
+.cmcal-calendar-container .fc td.fc-axis,
+.cmcal-calendar-container .fc .fc-row th.fc-widget-header{
+    padding:0px; 
+}
+
+.cmcal-calendar-container .fc-toolbar,
+/*.cmcal-calendar-container .fc button,
+.cmcal-calendar-container .fc-button.fc-button-active,*/
+.cmcal-calendar-container .fc .fc-button-group>*,
+.cmcal-calendar-container .fc-center h2 ,
+.cmcal-calendar-container .fc .fc-more-cell div,
+.cmcal-calendar-container .fc-event{
+    margin:0px; 
+}
+
+
+.cmcal-calendar-container .fc-toolbar h2{
+    clear: none;
+}
+
+/* Basic Fixes END
+--------------------------------------------------------------------------------------------------
+
+***************************************************************************************/
+
+/* Fixes
+--------------------------------------------------------------------------------------------------
+ Border-fixes
+--------------------------------------------------------------------------------------------------*/
+.cmcal-calendar-container .fc .fc-row{
+    border-width: 0 !important;
+}
+
+.cmcal-calendar-container .fc-unthemed .fc-list-table td{
+    border-left-width: 0 !important;
+    border-right-width: 0 !important;
+    padding: 0;
+}
+
+.cmcal-calendar-container .fc-unthemed .fc-list-view{
+    border-width: 0px;
+}
+
+.cmcal-calendar-container .fc .fc-head-container th{
+    border-top-width: 0 !important;
+    border-bottom-width: 0 !important;
+}
+
+.cmcal-calendar-container .fc-row .fc-content-skeleton td{
+    border-bottom-width: 0 !important;
+}
+
+.cmcal-calendar-container .fc .fc-head-container th:first-child { 
+    border-left-width: 0 !important;
+}
+
+.cmcal-calendar-container .fc .fc-head-container th:last-child { 
+    border-right-width: 0 !important;
+}
+.cmcal-calendar-container .fc .fc-dayGridMonth-view .fc-row td.fc-day-top {
+    border-bottom-width: 0 !important;
+}
+
+.cmcal-calendar-container .fc .fc-body .fc-content-skeleton tbody td,
+.cmcal-calendar-container .fc-row td.fc-event-container {
+    border-bottom-width: 0 !important;
+    border-top-width: 0 !important;
+}
+.cmcal-calendar-container .fc-row td.fc-more-cell {
+    border-bottom-width: 0 !important;
+}
+
+/* month padding fix
+--------------------------------------------------------------------------------------------------*/
+.cmcal-calendar-container .fc .fc-dayGridMonth-view .fc-row .fc-content-skeleton td.fc-day-top {
+    padding-bottom: 0px;  
+}
+.cmcal-calendar-container .fc .fc-dayGridMonth-view .fc-row .fc-content-skeleton tbody td {
+    padding-top: 0px;  
+}
+.cmcal-calendar-container .fc .fc-dayGridMonth-view .fc-row .fc-content-skeleton tbody tr:not(:last-child) td {
+    padding-bottom: 0px;  
+}
+
+/* month disabled-day
+--------------------------------------------------------------------------------------------------*/
+.cmcal-calendar-container .fc-unthemed .fc-disabled-day {
+    opacity: 1;  
+    background: initial;
+}
+
+
+/* month disabled-day
+--------------------------------------------------------------------------------------------------*/
+.cmcal-calendar-container .fc-unthemed .fc-nonbusiness {
+    opacity: 1;  
+}
+.cmcal-calendar-container .fc-unthemed .fc-bgevent-skeleton td {
+    border: 0px !important;  
+}
+/* month circle day
+--------------------------------------------------------------------------------------------------*/
+.cmcal-calendar-container .fc-day-number {
+    border-radius: 50%;  
+    text-align: center;
+}
+
+/* event-dot
+--------------------------------------------------------------------------------------------------*/
+.cmcal-calendar-container .fc a.fc-event.fc-event-dot {
+    display: inline-block;
+    border-radius: 50%;  
+    margin: 1px;
+}
+
+/* navigate To Other Calendar
+--------------------------------------------------------------------------------------------------*/
+
+.cmcal-calendar-container .cmcal-navToOtherCalendar .fc-day,
+.cmcal-calendar-container .cmcal-navToOtherCalendar .fc-day-top{
+    cursor: pointer;
+}
+
+/* month hidden events
+--------------------------------------------------------------------------------------------------*/
+
+.cmcal-calendar-container .fc.cmcal-month-hidden-events .fc-content-skeleton tbody td{
+    padding: 0px;
+}
+
+/*Middle align*/
+.cmcal-calendar-container .fc.cmcal-month-hidden-events.vertical-middle-days .fc-content-skeleton td {
+    border-top-width: 0 !important;
+    border-bottom-width: 0 !important;
+}
+.cmcal-calendar-container .fc.cmcal-month-hidden-events.vertical-middle-days .fc-content-skeleton {
+    top: 50%;
+    -webkit-transform: translate(0%,-50%); 
+    transform: translate(0%,-50%);
+    position: absolute;
+    padding-bottom: 0px; 
+}
+/* Fixes
+--------------------------------------------------------------------------------------------------*/
+.cmcal-calendar-container .fc.fc-unthemed,
+.cmcal-calendar-container .cmcal-calendar-container{
+    position:static;    
+}
+.cmcal-calendar-container .fc table{
+    margin:0px;    
+}
+.cmcal-calendar-container .fc a{
+    border:0px;
+    box-shadow: none;
+    text-decoration:none;
+}
+
+.cmcal-calendar-container .fc-ltr .fc-day-top .fc-day-number {
+    float: none;
+}
+
+.cmcal-calendar-container .fc-button,
+.cmcal-calendar-container .fc-button.fc-state-default {
+    background-image:none;
+}
+.cmcal-calendar-container .fc button {
+    height:auto;
+}
+
+.cmcal-calendar-container .fc-state-disabled {
+    cursor: default;
+}
+
+.cmcal-calendar-container .fc-day-top.fc-other-month {
+    opacity: 1;
+}
+.cmcal-calendar-container .fc-day-number:not([data-goto]):hover{
+    color:inherit;
+}
+
+.cmcal-calendar-container .fc-state-default,
+.cmcal-calendar-container .fc-button-active, .fc-state-down {
+    box-shadow: none;
+    text-shadow: none;
+    outline: none;
+}
+.cmcal-calendar-container a[data-goto]:hover {
+    text-decoration: none;
+}
+
+.cmcal-calendar-container .fc-dayGridWeek-view .fc-content-skeleton,
+.cmcal-calendar-container .fc-dayGridDay-view .fc-content-skeleton{
+    padding-bottom:0px;
+}
+.cmcal-calendar-container .fc-unthemed .fc-popover{
+    border:0px;
+}
+.cmcal-calendar-container .fc-unthemed .fc-popover {
+    background-color: transparent;
+}
+
+.cmcal-calendar-container .cmcal-fc-button-hidden {
+    display: none;
+}
+/* Month height auto
+--------------------------------------------------------------------------------------------------*/
+.cmcal-calendar-container .fc-dayGridMonth-view .fc-scroller {
+    overflow:hidden!important;
+}
+/* tooltip
+--------------------------------------------------------------------------------------------------*/
+.cmcal-tooltip
+{
+    border:0;
+}
+/* Colors
+--------------------------------------------------------------------------------------------------*/
+
+.cmcal-calendar-container .fc-highlight {  
+    /*    when user is selecting cells */
+    background: #bce8f1;
+    opacity: .3;
+}
+
+
+
+.cmcal-calendar-container .fc-nonbusiness {  
+    /*    default look for non-business-hours areas 
+                                                will inherit .fc-bgevent's styles */
+    background: #d7d7d7;
+}
+
+.cmcal-loading {
+    background: url('../img/spinner.gif') no-repeat;
+    background-size: 16px 16px;
+    width: 16px;
+    height: 16px;
+    margin: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;    
+    z-index: 99999999999999999;
+}
+
+.cmcal-container-disabled-on-loading {
+    position: relative;
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* FILTERING
+--------------------------------------------------------------------------------------------------*/
+
+.cmcal-calendar-filter-area {
+    text-align: left;
+}
+
+.cmcal-calendar-filter-area input,
+.cmcal-calendar-filter-area select {
+    margin: 0;
+    box-shadow: none;
+    width: auto;
+    height: auto;
+    vertical-align: top;
+}
+
+/* AGENDA VIEW
+--------------------------------------------------------------------------------------------------*/
+
+.fc-time-grid .fc-event-container {
+    margin: 0 !important;
+}
+
+.fc-axis,
+.fc-axis > span {
+    box-sizing: content-box;
+}
+
+/* LIST VIEW
+--------------------------------------------------------------------------------------------------*/
+
+.fc-list-item .fc-widget-content {
+    display: block;
+    border: none;
+}
+
+.fc-unthemed .fc-list-empty {
+    background: none;
+}
+
+tr:first-child>td>.fc-day-grid-event {
+    margin-top: 0;
+}
+
+.fc-rtl .fc-day-top .fc-day-number {
+    float: none;
+}
+
+.fc-view-container .fc-event-container img {
+    max-width: 100%;
+    height: auto;
+}
+
+.fc-day-number {
+    white-space: nowrap;
+}
+
+/* FIXES FOR THEMES OR PLUGINS THAT ARE MESSING WITH TABLES
+--------------------------------------------------------------------------------------------------*/
+
+.cmcal-calendar-container .fc-list-table,
+.fc-content-skeleton table tbody tr, 
+.fc-content-skeleton table thead tr,
+.fc-view tbody.fc-body,
+.fc-bg tbody,
+.fc-content-skeleton tbody {
+    border: none !important;
+}
+
+/* Version 4.3.1 fixes
+--------------------------------------------------------------------------------------------------*/
+
+.cmcal-calendar-container .fc-toolbar .fc-center,
+.cmcal-calendar-container .fc-toolbar .fc-right,
+.cmcal-calendar-container .fc-toolbar .fc-left {
+    display: flex;
+    align-items: center;
+}

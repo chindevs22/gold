@@ -1,5 +1,7 @@
 <?php
 
+use \MasterStudy\Lms\Repositories\CurriculumMaterialRepository;
+
 STM_LMS_Instructor::init();
 
 class STM_LMS_Instructor extends STM_LMS_User {
@@ -81,13 +83,13 @@ class STM_LMS_Instructor extends STM_LMS_User {
 			$course_title = get_the_title( $post_id );
 			$author_id    = intval( get_post_field( 'post_author', $post_id ) );
 
+			$user    = STM_LMS_User::get_current_user( $author_id );
 			$subject = esc_html__( 'Course published', 'masterstudy-lms-learning-management-system' );
 			$message = sprintf(
-			/* translators: %1$s Course Title, %2$s User Login */
+				/* translators: %1$s Course Title, %2$s User Login */
 				esc_html__( 'Your course - %1$s was approved, and is now live on the website', 'masterstudy-lms-learning-management-system' ),
 				$course_title,
 			);
-			$user    = STM_LMS_User::get_current_user( $author_id );
 
 			STM_LMS_Mails::send_email( $subject, $message, $user['email'], array(), 'stm_lms_course_published', compact( 'course_title' ) );
 			STM_LMS_Mails::remove_wp_mail_text_html();
@@ -162,34 +164,21 @@ class STM_LMS_Instructor extends STM_LMS_User {
 
 		wp_update_post( $arg );
 
-		$curriculum = STM_LMS_Course::get_course_curriculum( $course_id );
-
-		$new_author_id = get_post_field( 'post_author', $course_id );
+		$material_ids = ( new CurriculumMaterialRepository() )->get_course_materials( $course_id );
 
 		/*Change all authors of curriculum*/
-		if ( ! empty( $curriculum['curriculum'] ) ) {
-			$curriculum = $curriculum['curriculum'];
-			if ( empty( $curriculum ) ) {
-				wp_send_json( $new_author_id );
-			}
-
-			foreach ( $curriculum as $item_id ) {
-				if ( ! is_numeric( $item_id ) ) {
-					continue;
-				}
-
+		if ( ! empty( $material_ids ) ) {
+			foreach ( $material_ids as $material_id ) {
 				wp_update_post(
 					array(
-						'ID'          => $item_id,
+						'ID'          => $material_id,
 						'post_author' => $author_id,
 					)
 				);
-
 			}
 		}
 
-		wp_send_json( $new_author_id );
-
+		wp_send_json( $author_id );
 	}
 
 	public static function columns( $columns ) {
@@ -376,11 +365,20 @@ class STM_LMS_Instructor extends STM_LMS_User {
 		return in_array( self::role(), $user['roles'], true );
 	}
 
+	public static function has_instructor_role( $user_id = null ) {
+		$user = parent::get_current_user( $user_id, true, false, true );
+		if ( empty( $user['id'] ) ) {
+			return false;
+		}
+
+		return in_array( self::role(), $user['roles'], true );
+	}
+
 	public static function instructor_links() {
 		return apply_filters(
 			'stm_lms_instructor_links',
 			array(
-				'add_new' => admin_url( '/post-new.php?post_type=stm-courses' ),
+				'add_new' => ms_plugin_manage_course_url(),
 			)
 		);
 	}
@@ -493,7 +491,7 @@ class STM_LMS_Instructor extends STM_LMS_User {
 					'link'         => get_the_permalink(),
 					'image'        => $image,
 					'image_small'  => $image_small,
-					'terms'        => stm_lms_get_terms_array( $id, 'stm_lms_course_taxonomy', false, true ),
+					'terms'        => wp_get_post_terms( $id, 'stm_lms_course_taxonomy' ),
 					'status'       => $status,
 					'status_label' => $status_label,
 					'percent'      => $percent,
@@ -503,7 +501,7 @@ class STM_LMS_Instructor extends STM_LMS_User {
 					'views'        => STM_LMS_Course::get_course_views( $id ),
 					'simple_price' => $price,
 					'price'        => STM_LMS_Helpers::display_price( $price ),
-					'edit_link'    => apply_filters( 'stm_lms_course_edit_link', admin_url( "post.php?post={$id}&action=edit" ), $id ),
+					'edit_link'    => ms_plugin_manage_course_url() . "/$id",
 					'post_status'  => $post_status,
 				);
 
@@ -532,7 +530,6 @@ class STM_LMS_Instructor extends STM_LMS_User {
 
 		$sum_rating_key    = 'sum_rating';
 		$total_reviews_key = 'total_reviews';
-
 		$sum_rating    = ( ! empty( get_user_meta( $user_id, $sum_rating_key, true ) ) ) ? get_user_meta( $user_id, $sum_rating_key, true ) : 0;
 		$total_reviews = ( ! empty( get_user_meta( $user_id, $total_reviews_key, true ) ) ) ? get_user_meta( $user_id, $total_reviews_key, true ) : 0;
 
@@ -757,10 +754,9 @@ class STM_LMS_Instructor extends STM_LMS_User {
 
 		$sum_rating    = ( ! empty( get_user_meta( $user_id, $sum_rating_key, true ) ) ) ? get_user_meta( $user_id, $sum_rating_key, true ) : 0;
 		$total_reviews = ( ! empty( get_user_meta( $user_id, $total_reviews_key, true ) ) ) ? get_user_meta( $user_id, $total_reviews_key, true ) : 0;
-
 		update_user_meta( $user_id, $sum_rating_key, $sum_rating + $mark );
 		update_user_meta( $user_id, $total_reviews_key, $total_reviews + 1 );
-		update_user_meta( $user_id, $average_key, round( $sum_rating + $mark / $total_reviews + 1, 2 ) );
+		update_user_meta( $user_id, $average_key, round( ( $sum_rating + $mark ) / ( $total_reviews + 1 ), 2 ) );
 	}
 
 	public static function get_instructors_url() {
@@ -777,8 +773,7 @@ class STM_LMS_Instructor extends STM_LMS_User {
 		return STM_LMS_User::user_page_url() . 'add-students';
 	}
 
-	public static function _add_student_to_course( $raw_courses, $raw_emails ) {
-
+	public static function add_student_to_course( $raw_courses, $raw_emails ) {
 		$courses = array();
 		$emails  = array();
 
@@ -820,7 +815,7 @@ class STM_LMS_Instructor extends STM_LMS_User {
 				STM_LMS_Course::add_user_course(
 					$course_id,
 					$user_id,
-					STM_LMS_Course::get_first_lesson( $course_id ),
+					STM_LMS_Lesson::get_first_lesson( $course_id ),
 					0,
 					false,
 					false,
@@ -847,7 +842,7 @@ class STM_LMS_Instructor extends STM_LMS_User {
 		$raw_courses = $_POST['courses'];
 		$raw_emails  = $_POST['emails'];
 
-		$data = self::_add_student_to_course( $raw_courses, $raw_emails );
+		$data = self::add_student_to_course( $raw_courses, $raw_emails );
 
 		wp_send_json( $data );
 
@@ -1067,9 +1062,9 @@ class STM_LMS_Instructor extends STM_LMS_User {
 	public static function ban_user() {
 		check_ajax_referer( 'stm_lms_ban_user', 'nonce' );
 		if ( ! empty( $_GET['user_id'] ) ) {
-			$user_id = intval( $_GET['user_id'] );
-			$banned  = ( ! empty( $_GET['banned'] ) && 'true' == $_GET['banned'] ) ? true : false;
-			update_user_meta( $user_id, 'stm_lms_user_banned', $banned );
+			// phpcs:ignore WordPress.PHP.StrictComparisons.LooseComparison
+			$banned = ! empty( $_GET['banned'] ) && 'true' == $_GET['banned'];
+			update_user_meta( intval( $_GET['user_id'] ), 'stm_lms_user_banned', $banned );
 		}
 		wp_send_json( 'saved' );
 	}

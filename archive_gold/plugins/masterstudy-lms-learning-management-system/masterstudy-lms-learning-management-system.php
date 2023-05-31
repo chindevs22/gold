@@ -7,15 +7,19 @@ As the ultimate LMS WordPress Plugin, MasterStudy makes it simple and hassle-fre
 Author: StylemixThemes
 Author URI: https://stylemixthemes.com/
 Text Domain: masterstudy-lms-learning-management-system
-Version: 2.9.29
+Version: 3.0.0
 */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
+define( 'MS_LMS_VERSION', '3.0.0' );
 define( 'MS_LMS_FILE', __FILE__ );
 define( 'MS_LMS_PATH', dirname( MS_LMS_FILE ) );
+define( 'MS_LMS_URL', plugin_dir_url( MS_LMS_FILE ) );
 
+require_once MS_LMS_PATH . '/vendor/autoload.php';
+require_once MS_LMS_PATH . '/includes/init.php';
 /* Load Core version */
 require_once MS_LMS_PATH . '/_core/init.php';

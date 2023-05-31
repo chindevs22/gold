@@ -62,6 +62,9 @@ class Woocommerce_Pay_Per_Post_Shortcodes
             case 'purchased':
                 self::shortcode_purchased( $template, $ppp_posts );
                 break;
+            case 'purchased-datatables':
+                self::shortcode_purchased_datatables( $template, $ppp_posts );
+                break;
             case 'remaining':
                 self::shortcode_remaining( $template, $ppp_posts );
                 break;
@@ -92,6 +95,43 @@ class Woocommerce_Pay_Per_Post_Shortcodes
                     Woocommerce_Pay_Per_Post_Helper::logger( 'Post ID: ' . $post_id . ' - SHORTCODE: Woocommerce_Pay_Per_Post_Shortcodes/shortcode_purchased() checking if ' . $post->ID . ' HAS NOT BEEN PURCHASED' );
                 }
             
+            }
+            require Woocommerce_Pay_Per_Post_Helper::locate_template( self::available_templates()[$template], '', WC_PPP_PATH . 'public/partials/' );
+        }
+    
+    }
+    
+    /**
+     * @param $template
+     * @param $ppp_posts
+     */
+    protected static function shortcode_purchased_datatables( $template, $ppp_posts )
+    {
+        $post_id = get_the_ID();
+        Woocommerce_Pay_Per_Post_Helper::logger( 'Post ID: ' . $post_id . ' - SHORTCODE: Woocommerce_Pay_Per_Post_Shortcodes/shortcode_purchased_datatables() called. - BACKTRACE - Called From - ' . print_r( debug_backtrace()[1]['function'], true ) );
+        $purchased = [];
+        
+        if ( is_user_logged_in() ) {
+            foreach ( $ppp_posts as $post ) {
+                
+                if ( Woocommerce_Pay_Per_Post_Helper::has_purchased( $post->ID, false ) ) {
+                    Woocommerce_Pay_Per_Post_Helper::logger( 'Post ID: ' . $post_id . ' - SHORTCODE: Woocommerce_Pay_Per_Post_Shortcodes/shortcode_purchased_datatables() checking if ' . $post->ID . ' has been purchased.  HAS BEEN PURCHASED' );
+                    $purchased[] = $post;
+                } else {
+                    Woocommerce_Pay_Per_Post_Helper::logger( 'Post ID: ' . $post_id . ' - SHORTCODE: Woocommerce_Pay_Per_Post_Shortcodes/shortcode_purchased_datatables() checking if ' . $post->ID . ' HAS NOT BEEN PURCHASED' );
+                }
+            
+            }
+            foreach ( $purchased as $key => $post ) {
+                $products = Woocommerce_Pay_Per_Post_Helper::get_product_ids_by_post_id( $post->ID );
+                foreach ( $products['product_ids'] as $product ) {
+                    $get_product_terms = get_the_terms( $product, 'product_cat' );
+                    $product_terms = [];
+                    foreach ( $get_product_terms as $product_term ) {
+                        $product_terms[] = $product_term->name;
+                    }
+                    $purchased[$key]->product_terms = $product_terms;
+                }
             }
             require Woocommerce_Pay_Per_Post_Helper::locate_template( self::available_templates()[$template], '', WC_PPP_PATH . 'public/partials/' );
         }
@@ -201,10 +241,11 @@ class Woocommerce_Pay_Per_Post_Shortcodes
     private static function available_templates() : array
     {
         return [
-            'purchased'  => 'shortcode-purchased.php',
-            'has_access' => 'shortcode-has_access.php',
-            'all'        => 'shortcode-all.php',
-            'remaining'  => 'shortcode-remaining.php',
+            'purchased'            => 'shortcode-purchased.php',
+            'purchased-datatables' => 'shortcode-purchased-datatables.php',
+            'has_access'           => 'shortcode-has_access.php',
+            'all'                  => 'shortcode-all.php',
+            'remaining'            => 'shortcode-remaining.php',
         ];
     }
 

@@ -43,7 +43,7 @@ $this->add_control(
 	array(
 		'label'              => esc_html__( 'Quantity', 'masterstudy-lms-learning-management-system' ),
 		'type'               => Controls_Manager::NUMBER,
-		'min'                => 1,
+		'min'                => 0,
 		'max'                => 100,
 		'step'               => 1,
 		'default'            => 8,
@@ -65,6 +65,14 @@ $this->add_control(
 		'type' => Controls_Manager::DIVIDER,
 	)
 );
+$this->add_switcher_control(
+	'show_featured_block',
+	array(
+		'label'      => esc_html__( 'Featured Block', 'masterstudy-lms-learning-management-system' ),
+		'default'    => 'yes',
+		'conditions' => $this->add_widget_type_conditions( array( 'courses-archive' ) ),
+	)
+);
 $this->add_control(
 	'cards_to_show_choice_featured',
 	array(
@@ -76,6 +84,7 @@ $this->add_control(
 			'all'    => esc_html__( 'All', 'masterstudy-lms-learning-management-system' ),
 			'number' => esc_html__( 'Select Quantity', 'masterstudy-lms-learning-management-system' ),
 		),
+		'conditions'         => $this->add_widget_type_conditions( array( 'courses-archive', 'courses-grid', 'courses-carousel' ) ),
 	)
 );
 $this->add_control(
@@ -83,7 +92,7 @@ $this->add_control(
 	array(
 		'label'              => esc_html__( 'Featured Quantity', 'masterstudy-lms-learning-management-system' ),
 		'type'               => Controls_Manager::NUMBER,
-		'min'                => 1,
+		'min'                => 0,
 		'max'                => 100,
 		'step'               => 1,
 		'default'            => 4,
@@ -95,6 +104,11 @@ $this->add_control(
 					'operator' => '===',
 					'value'    => 'number',
 				),
+				array(
+					'name'     => 'type',
+					'operator' => 'in',
+					'value'    => array( 'courses-archive', 'courses-grid', 'courses-carousel' ),
+				),
 			),
 		),
 	)
@@ -102,7 +116,8 @@ $this->add_control(
 $this->add_control(
 	'cards_featured_divider_second',
 	array(
-		'type' => Controls_Manager::DIVIDER,
+		'type'       => Controls_Manager::DIVIDER,
+		'conditions' => $this->add_widget_type_conditions( array( 'courses-archive', 'courses-grid' ) ),
 	)
 );
 $this->add_control(
@@ -143,6 +158,7 @@ $this->add_responsive_control(
 		'selectors'       => array(
 			'{{WRAPPER}} .ms_lms_courses_card_item' => 'width: {{VALUE}};',
 		),
+		'conditions'      => $this->add_widget_type_conditions( array( 'courses-archive', 'courses-grid' ) ),
 	)
 );
 $this->add_switcher_control(

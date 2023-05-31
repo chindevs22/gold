@@ -15,14 +15,14 @@
  * Plugin Name:       Smart Coupons For WooCommerce Coupons 
  * Plugin URI:        
  * Description:       Smart Coupons For WooCommerce Coupons plugin adds advanced coupon features to your store to strengthen your marketing efforts and boost sales.
- * Version:           1.4.4
+ * Version:           1.4.6
  * Author:            WebToffee
  * Author URI:        https://www.webtoffee.com/
  * License:           GPLv3
  * License URI:       https://www.gnu.org/licenses/gpl-3.0.html
  * Text Domain:       wt-smart-coupons-for-woocommerce
  * Domain Path:       /languages
- * WC tested up to:   7.1
+ * WC tested up to:   7.5
  */
 // If this file is called directly, abort.
 if (!defined('WPINC')) {
@@ -46,7 +46,7 @@ if(is_plugin_active('wt-smart-coupon-pro/wt-smart-coupon-pro.php'))
  */
 
 if (!defined('WEBTOFFEE_SMARTCOUPON_VERSION')) {
-    define('WEBTOFFEE_SMARTCOUPON_VERSION', '1.4.4');
+    define('WEBTOFFEE_SMARTCOUPON_VERSION', '1.4.6');
 }
 
 if (!defined('WT_SMARTCOUPON_FILE_NAME')) {
@@ -188,5 +188,19 @@ include 'admin/coupon-start-date/class-wt-smart-coupon-start-date.php';
 include 'public/class-myaccount-smart-coupon.php';
 
 
+/**
+ *  Declare compatibility with custom order tables for WooCommerce.
+ * 
+ *  @since 1.4.5
+ *  
+ */
+add_action(
+	'before_woocommerce_init',
+	function () {
+		if ( class_exists( '\Automattic\WooCommerce\Utilities\FeaturesUtil' ) ) {
+			\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', __FILE__, true );
+		}
+	}
+);
 
 run_wt_smart_coupon();

@@ -1,0 +1,152 @@
+@import url(https://fonts.googleapis.com/css?family=Ubuntu:300,400,700);
+
+.qcc-calendar-container { font-family: "Ubuntu"; position: relative; }
+.qcc-calendar-container * { box-sizing: border-box; }
+.qcc-calendar-container a { text-decoration: none; }
+.qcc-calendar-container h2 { font-size: 24px; margin: 4px 0; font-weight: 300; }
+.qcc-calendar-container h3 { font-size: 24px; line-height: 24px; margin: 5px 0; }
+.qcc-calendar-container table { border-spacing: 0; width: 100%; }
+
+.qcc-calendar-container .qcc-calendar tbody td:hover,
+.qcc-calendar-container .qcc-current-day {
+    border-radius: 3px;
+}
+.qcc-calendar { text-align: center; }
+.qcc-calendar .hd { position: relative; }
+.qcc-calendar h2 { text-transform: uppercase; }
+.qcc-calendar td { height: 64px; line-height: 64px; text-align: center; width: 64px; font-size: 20px; }
+.qcc-calendar thead td { text-transform: uppercase; font-size: 16px; font-weight: 700; }
+
+.qcc-event { cursor: pointer; position: relative; font-weight: 400; }
+.qcc-event:after { border-radius: 50%; bottom: 8px; display: block; content: ''; height: 8px; left: 50%; margin: -4px 0 0 -4px; position: absolute; width: 8px; }
+
+.qcc-btn-prev, .qcc-btn-next { font-size: 22px; line-height: 1; margin: -16px; position: absolute; top: 50%; padding: 8px; }
+.qcc-btn-prev:hover, .qcc-btn-next:hover { text-decoration: none !important; }
+.qcc-btn-prev { left: 30px; }
+.qcc-btn-next { right: 35px; }
+
+.qcc-list { margin-top: 20px; }
+
+.qcc-close { float: right; margin: -16px -16px 0 0; }
+
+.qcc-day-event { width: 100%; padding: 24px; margin-bottom: 24px; display: none; text-align: left; border-radius: 3px; }
+.qcc-day-event p { padding: 0 0 16px 0; }
+.qcc-day-event-date { margin: 10px 0; font-size: smaller; }
+
+.qcc-calendar-container .qcc-calendar tbody td.active,
+.qcc-calendar-container .qcc-day-event {
+    background-color: rgba(0, 0, 0, 0.15);
+}
+.qcc-calendar-container .qcc-current-day,
+.qcc-calendar-container .qcc-btn-prev:hover,
+.qcc-calendar-container .qcc-btn-next:hover {
+    color: #f9f9f9;
+}
+.qcc-calendar-container .qcc-event.qcc-current-day:after {
+    background-color: #f9f9f9;
+}
+.qcc-calendar-container .qcc-btn-prev:hover,
+.qcc-calendar-container .qcc-btn-next:hover {
+    background-color: #cbd1d2;
+}
+
+.qcc-form input[type="text"],
+.qcc-form input[type="date"],
+.qcc-form input[type="submit"],
+.qcc-form input[type="datetime"],
+.qcc-form textarea {
+    max-width: 100%;
+    font-family: inherit;
+    font-size: inherit;
+    padding: 8px;
+    border: 1px solid lightgray;
+    border-radius: 3px;
+}
+.qcc-form input[type="submit"] {
+    padding: 8px 16px;
+}
+.qcc-form input[type="submit"]:hover {
+    padding: 8px 16px;
+    border: 1px solid gray;
+}
+.qcc-form fieldset {
+    margin: 2px 0;
+    padding: 0;
+}
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen
+and (min-device-width : 320px)
+and (max-device-width : 480px) {
+/* STYLES GO HERE */
+}
+
+/* Smartphones (landscape) ----------- */
+@media only screen
+and (min-width : 321px) {
+/* STYLES GO HERE */
+}
+
+/* Smartphones (portrait) ----------- */
+@media only screen
+and (max-width : 320px) {
+/* STYLES GO HERE */
+}
+
+/* iPads (portrait and landscape) ----------- */
+@media only screen
+and (min-device-width : 768px)
+and (max-device-width : 1024px) {
+/* STYLES GO HERE */
+}
+
+/* iPads (landscape) ----------- */
+@media only screen
+and (min-device-width : 768px)
+and (max-device-width : 1024px)
+and (orientation : landscape) {
+/* STYLES GO HERE */
+}
+
+/* iPads (portrait) ----------- */
+@media only screen
+and (min-device-width : 768px)
+and (max-device-width : 1024px)
+and (orientation : portrait) {
+/* STYLES GO HERE */
+}
+
+/* Desktops and laptops ----------- */
+@media only screen
+and (min-width : 1224px) {
+/* STYLES GO HERE */
+}
+
+/* Large screens ----------- */
+@media only screen
+and (min-width : 1824px) {
+/* STYLES GO HERE */
+}
+
+/* iPhone 5 (portrait & landscape)----------- */
+@media only screen
+and (min-device-width : 320px)
+and (max-device-width : 568px) {
+/* STYLES GO HERE */
+}
+
+/* iPhone 5 (landscape)----------- */
+@media only screen
+and (min-device-width : 320px)
+and (max-device-width : 568px)
+and (orientation : landscape) {
+/* STYLES GO HERE */
+}
+
+/* iPhone 5 (portrait)----------- */
+@media only screen
+and (min-device-width : 320px)
+and (max-device-width : 568px)
+and (orientation : portrait) {
+/* STYLES GO HERE */
+}

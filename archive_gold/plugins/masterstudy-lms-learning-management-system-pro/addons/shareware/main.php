@@ -1,5 +1,7 @@
 <?php
 
+use \MasterStudy\Lms\Repositories\CurriculumMaterialRepository;
+
 new STM_LMS_Shareware();
 
 class STM_LMS_Shareware {
@@ -88,21 +90,9 @@ class STM_LMS_Shareware {
 			$shareware         = self::is_shareware( $course_id );
 
 			if ( $shareware && ! empty( $item_id ) ) {
-				$curriculum = get_post_meta( $course_id, 'curriculum', true );
+				$course_materials = ( new CurriculumMaterialRepository() )->get_course_materials( $course_id );
 
-				if ( ! empty( $curriculum ) ) {
-					$curriculum = explode( ',', $curriculum );
-					$curriculum = array_values(
-						array_filter(
-							$curriculum,
-							function ( $value ) {
-								return is_numeric( $value );
-							}
-						)
-					);
-				}
-
-				$item_order = array_search( $item_id, $curriculum ); // phpcs:ignore WordPress.PHP.StrictInArray.MissingTrueStrict
+				$item_order = array_search( intval( $item_id ), $course_materials, true );
 
 				if ( isset( $item_order ) && $item_order < $shareware_count ) {
 					return true;

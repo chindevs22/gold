@@ -44,6 +44,7 @@ if( ! class_exists('Wt_Smart_Coupon_Admin') ) {
             'auto_coupon',
             'premium_upgrade',
             'other_solutions',
+            'checkout_options', /** @since 1.4.6 */
         );
 
         public static $existing_modules=array();
@@ -144,28 +145,7 @@ if( ! class_exists('Wt_Smart_Coupon_Admin') ) {
             {
                 wp_die(__('You do not have sufficient permission to perform this operation', 'wt-smart-coupons-for-woocommerce'));
             }
-            if (!empty($_POST['_wt_sc_shipping_methods'])) {
-                $wt_sc_shipping_methods = Wt_Smart_Coupon_Security_Helper::sanitize_item($_POST['_wt_sc_shipping_methods'],'text_arr');
-                update_post_meta($post_id, '_wt_sc_shipping_methods', implode(',', $wt_sc_shipping_methods ) );
-            } else {
-                update_post_meta($post_id, '_wt_sc_shipping_methods', '');
-            }
-    
-            if (!empty($_POST['_wt_sc_payment_methods'])) {
-                $wt_sc_payment_methods = Wt_Smart_Coupon_Security_Helper::sanitize_item($_POST['_wt_sc_payment_methods'],'text_arr');
-                update_post_meta($post_id, '_wt_sc_payment_methods', implode(',', $wt_sc_payment_methods ));
-            } else {
-                update_post_meta($post_id, '_wt_sc_payment_methods', '' );
-            }
-    
-            if (!empty($_POST['_wt_sc_user_roles'])) {
-                $wt_sc_user_roles = Wt_Smart_Coupon_Security_Helper::sanitize_item($_POST['_wt_sc_user_roles'],'text_arr');
-                update_post_meta($post_id, '_wt_sc_user_roles', implode(',',$wt_sc_user_roles ) );
-            } else {
-                update_post_meta($post_id, '_wt_sc_user_roles', '');
-            }
 
-    
             if( isset($_POST['_wt_valid_for_number']) ) {
                 $wt_valid_for_number = Wt_Smart_Coupon_Security_Helper::sanitize_item($_POST['_wt_valid_for_number']);
                 if($wt_valid_for_number != '') {
@@ -189,7 +169,6 @@ if( ! class_exists('Wt_Smart_Coupon_Admin') ) {
                 update_post_meta($post_id, '_wc_make_coupon_available',  '');
             }
     
-            
         }
     
         /**
@@ -223,11 +202,11 @@ if( ! class_exists('Wt_Smart_Coupon_Admin') ) {
             $screen_id = $screen ? $screen->id : '';
             
             if ( 
-                (function_exists('wc_get_screen_ids') && in_array( $screen_id, wc_get_screen_ids())) || 
+                (function_exists('wc_get_screen_ids') && in_array($screen_id, wc_get_screen_ids())) || 
                 (isset($_GET['page']) && ($_GET['page']==WT_SC_PLUGIN_NAME || strpos($_GET['page'], WT_SC_PLUGIN_NAME)===0))
             ) 
             {
-                wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/wt-smart-coupon-admin.js', array('jquery','wp-color-picker'), $this->version, false);               
+                wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/wt-smart-coupon-admin.js', array('jquery', 'wp-color-picker'), $this->version, false);               
                 
                 $script_parameters=array(
                     'msgs'=>array(
@@ -250,141 +229,7 @@ if( ! class_exists('Wt_Smart_Coupon_Admin') ) {
             }
     
         }
-    
-        /**
-         * Add tabs to the coupon option page.
-         * @since 1.0.0
-         */
-        public function admin_coupon_options_tabs($tabs) {
-    
-            $tabs['wt_coupon_checkout_options'] = array(
-                'label' => __('Checkout options', 'wt-smart-coupons-for-woocommerce'),
-                'target' => 'webtoffee_coupondata_checkout1',
-                'class' => 'webtoffee_coupondata_checkout1',
-            );
-
-            return $tabs;
-        }
-    
-        /**
-         * wt_coupon_checkout_options Page content
-         * @since 1.0.0
-         */
-        public function admin_coupon_options_panels() {
-    
-            global $thepostid, $post;
-            $thepostid = empty($thepostid) ? $post->ID : $thepostid;
-            ?>
-            <div id="webtoffee_coupondata_checkout1" class="panel woocommerce_options_panel">
-            <?php
-            do_action('webtoffee_coupon_metabox_checkout', $thepostid, $post);
-            ?>
-            </div>
-    
-            <?php
-        }
-    
-        /**
-         * Checkout tab form elements
-         * @since 1.0.0
-         * @since 1.4.3 Takeway payment gateway payment method is not listing in dropdown 
-         */
-        public function admin_coupon_metabox_checkout2($thepostid, $post) {
-    
-    
-            $wc_help_icon_uri = WC()->plugin_url() . "/assets/images/help.png";
-    
-            $coupon_shipping_method_id_s = get_post_meta($thepostid, '_wt_sc_shipping_methods',true);
-            if( '' !=  $coupon_shipping_method_id_s &&  !is_array( $coupon_shipping_method_id_s ) ) {
-                $coupon_shipping_method_id_s = explode(',',$coupon_shipping_method_id_s);
-            }
-    
-            // $coupon_shipping_method_ids = isset($coupon_shipping_method_id_s[0]) ? $coupon_shipping_method_id_s[0] : array();
-            ?>
-    
-            <!-- Shipping methods -->
-            <p class="form-field">
-                <label for="_wt_sc_shipping_methods"><?php _e('Shipping methods', 'wt-smart-coupons-for-woocommerce'); ?></label>
-                <select id="_wt_sc_shipping_methods" name="_wt_sc_shipping_methods[]" style="width: 50%;"  class="wc-enhanced-select" multiple="multiple" data-placeholder="<?php _e('Any shipping method', 'wt-smart-coupons-for-woocommerce'); ?>">
-                    <?php
-                    $shipping_methods = WC()->shipping->load_shipping_methods();
-    
-                    if (!empty($shipping_methods)) {
-    
-                        foreach ($shipping_methods as $shipping_method) {
-    
-                            if ( !empty( $coupon_shipping_method_id_s ) && in_array($shipping_method->id, $coupon_shipping_method_id_s)) {
-                                echo '<option value="' . esc_attr($shipping_method->id) . '" selected>' . esc_html($shipping_method->method_title) . '</option>';
-                            } else {
-                                echo '<option value="' . esc_attr($shipping_method->id) . '">' . esc_html($shipping_method->method_title) . '</option>';
-                            }
-                        }
-                    }
-                    ?>
-                </select>
-               <?php echo wc_help_tip( __('Coupon will be applicable if any of these shipping methods are selected.', 'wt-smart-coupons-for-woocommerce') ); ?>
-    
-            </p>
-    
-            <!-- Payment methods -->
-            <p class="form-field"><label for="_wt_sc_payment_methods"><?php _e('Payment methods', 'wt-smart-coupons-for-woocommerce'); ?></label>
-    
-                <select id="webtoffee_payment_methods" name="_wt_sc_payment_methods[]" style="width: 50%;"  class="wc-enhanced-select" multiple="multiple" data-placeholder="<?php _e('Any payment method', 'wt-smart-coupons-for-woocommerce'); ?>">
-                    <?php
-                    $coupon_payment_method_id_s = get_post_meta($thepostid, '_wt_sc_payment_methods',true);
-                    if( '' !=  $coupon_payment_method_id_s && !is_array( $coupon_payment_method_id_s ) ) {
-                        $coupon_payment_method_id_s = explode(',',$coupon_payment_method_id_s);
-                    }
-                    // $coupon_payment_method_ids = isset($coupon_payment_method_id_s[0]) ? $coupon_payment_method_id_s[0] : array();
-    
-                    $payment_methods = WC()->payment_gateways->payment_gateways();
-    
-                    if (!empty($payment_methods)) {
-    
-                        foreach ($payment_methods as $payment_method) {
-    
-                            if ('yes' === $payment_method->enabled || true === $payment_method->enabled) {
-                                if ( !empty( $coupon_payment_method_id_s ) && in_array($payment_method->id, $coupon_payment_method_id_s)) {
-                                    echo '<option value="' . esc_attr($payment_method->id) . '" selected>' . esc_html($payment_method->title) . '</option>';
-                                } else {
-                                    echo '<option value="' . esc_attr($payment_method->id) . '">' . esc_html($payment_method->title) . '</option>';
-                                }
-                            }
-                        }
-                    }
-                    ?>
-                </select>
-                <?php echo wc_help_tip( __('Coupon will be applicable if any of these payment methods are selected.', 'wt-smart-coupons-for-woocommerce') ); ?>
-            </p>
-    
-    
-            <p class="form-field"><label for="_wt_sc_user_roles"><?php _e('Applicable Roles', 'wt-smart-coupons-for-woocommerce'); ?></label>
-                <?php
-                     $_wt_sc_user_roles_s = get_post_meta($thepostid, '_wt_sc_user_roles',true);
-                     if( !is_array( $_wt_sc_user_roles_s ) &&  '' != $_wt_sc_user_roles_s  ) {
-                         $_wt_sc_user_roles_s = explode(',',$_wt_sc_user_roles_s);
-                     }
-                     $available_roles = array_reverse(get_editable_roles());
-    
-                ?>
-                <select id="_wt_sc_user_roles" name="_wt_sc_user_roles[]" style="width: 50%;"  class="wc-enhanced-select" multiple="multiple" data-placeholder="<?php _e('Any role', 'wt-smart-coupons-for-woocommerce'); ?>">
-                    <?php
-                    $available_roles = ( isset( $available_roles ) && is_array( $available_roles ) ) ? $available_roles : array();
-                    foreach ($available_roles as $role_id => $role) {
-                        $role_name = translate_user_role($role['name']);
-    
-                        echo '<option value="' . esc_attr($role_id) . '"'
-                        . selected( !empty( $_wt_sc_user_roles_s ) && in_array($role_id, $_wt_sc_user_roles_s), true, false) . '>'
-                        . esc_html($role_name) . '</option>';
-                    }
-                    ?>
-                </select> 
-                <?php echo wc_help_tip( __('Coupon will be applicable if customer belongs to any of these User Roles.', 'wt-smart-coupons-for-woocommerce') ); ?>
-            </p>
-    
-            <?php
-        }
-        
+            
     
         /**
          * Plugin action link.
@@ -872,6 +717,108 @@ if( ! class_exists('Wt_Smart_Coupon_Admin') ) {
                 });
             </script>
             <?php
+        }
+
+
+        /**
+        *   To save debug settings
+        *   
+        *   @since 1.4.5
+        */
+        protected function debug_save_sub($option_name)
+        {
+            $wt_sc_modules = get_option($option_name);
+            
+            if(false === $wt_sc_modules)
+            {
+                $wt_sc_modules = array();
+            }
+
+            if(isset($_POST[$option_name]))
+            {
+                $wt_sc_post = Wt_Smart_Coupon_Security_Helper::sanitize_item($_POST[$option_name], 'text_arr');
+                
+                foreach($wt_sc_modules as $k => $v)
+                {
+                    if(isset($wt_sc_post[$k]) && 1 == $wt_sc_post[$k])
+                    {
+                        $wt_sc_modules[$k] = 1;
+                    }else
+                    {
+                        $wt_sc_modules[$k] = 0;
+                    }
+                }
+            }else
+            {
+                foreach($wt_sc_modules as $k => $v)
+                {
+                    $wt_sc_modules[$k] = 0;
+                }
+            }
+
+            update_option($option_name, $wt_sc_modules);
+        }
+
+        
+        /**
+        *   Form action for debug settings tab
+        *   
+        *   @since 1.4.5
+        */
+        public function debug_save()
+        {   
+            if(isset($_POST['wt_sc_admin_modules_btn']))
+            {
+                if(Wt_Smart_Coupon_Security_Helper::check_write_access('smart_coupons', 'wt_smart_coupons_admin_nonce')) 
+                {
+                    return;
+                }
+                
+                $this->debug_save_sub('wt_sc_public_modules');
+                $this->debug_save_sub('wt_sc_common_modules');
+                $this->debug_save_sub('wt_sc_admin_modules');
+                
+                wp_redirect($_SERVER['REQUEST_URI']); exit();
+            }
+
+            if(Wt_Smart_Coupon_Security_Helper::check_role_access('smart_coupons')) //Check access
+            {
+                //module debug settings saving hook
+                do_action('wt_sc_module_save_debug_settings');
+            }
+        }
+
+        /**
+         *  Shows a progress message while migrating data from post table to lookup table
+         *  
+         *  @since 1.4.5
+         */
+        public function lookup_table_migration_message()
+        {
+            $migration_status = absint(get_option('wt_sc_coupon_lookup_updated', 0));
+            $last_updated_id = absint(get_option('wt_sc_coupon_lookup_migration_last_id', 0));
+
+            if(0 === $migration_status || 0 < $last_updated_id) //migration not started or in progress
+            {
+                ?>
+                <div class="notice notice-info">
+                    <p>
+                        <h3><?php _e('Smart coupon database update in progress', 'wt-smart-coupons-for-woocommerce');?></h3>
+                        <p><?php _e('The site may experience a slow response for few minutes.', 'wt-smart-coupons-for-woocommerce');?>
+                        </p>
+                        <p style="font-weight:bold;">
+                            <?php
+                            global $wpdb;
+                            $row = $wpdb->get_row("SELECT COUNT(p.ID) AS total_records FROM {$wpdb->posts} AS p WHERE p.post_type = 'shop_coupon'", ARRAY_A);
+                            $total = absint(!empty($row) && isset($row['total_records']) ? $row['total_records'] : 0);
+                            $migrated = Wt_Smart_Coupon_Common::get_lookup_table_record_count();
+                            echo sprintf(__('Progress: %d out of %d', 'wt-smart-coupons-for-woocommerce'), $migrated, $total); ?>
+                        </p>
+                    </p>
+                </div>
+                <?php
+            }
+
         }
     }
 }

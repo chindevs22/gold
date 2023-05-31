@@ -19,9 +19,16 @@ function stm_set_lms_options( $layout ) {
 		);
 
 		foreach ( $courses_page as $courses_page_name ) {
-			$course_page = get_page_by_title( $courses_page_name );
-			if ( isset( $course_page->ID ) ) {
-				$import_options['courses_page'] = $course_page->ID;
+			$course_page = get_posts(
+				array(
+					'title'          => $courses_page_name,
+					'post_type'      => 'page',
+					'posts_per_page' => 1,
+					'fields'         => 'ids',
+				)
+			);
+			if ( ! empty( $course_page ) ) {
+				$import_options['courses_page'] = $course_page[0];
 			}
 		}
 
@@ -30,9 +37,16 @@ function stm_set_lms_options( $layout ) {
 		);
 
 		foreach ( $courses_page as $courses_page_name ) {
-			$course_page = get_page_by_title( $courses_page_name );
-			if ( isset( $course_page->ID ) ) {
-				$import_options['instructors_page'] = $course_page->ID;
+			$course_page = get_posts(
+				array(
+					'title'          => $courses_page_name,
+					'post_type'      => 'page',
+					'posts_per_page' => 1,
+					'fields'         => 'ids',
+				)
+			);
+			if ( ! empty( $course_page ) ) {
+				$import_options['instructors_page'] = $course_page[0];
 			}
 		}
 
@@ -56,7 +70,7 @@ function stm_set_lms_options( $layout ) {
 	if ( 'udemy' === $layout ) {
 		/*Update Header 2 categories*/
 		$courses_categories = array( 'business', 'design', 'development', 'health-fitness' );
-		$courses_terms = array();
+		$courses_terms      = array();
 		foreach ( $courses_categories as $courses_category ) {
 			$term = get_term_by( 'slug', $courses_category, 'stm_lms_course_taxonomy' );
 			if ( ! empty( $term ) && ! is_wp_error( $term ) ) {
@@ -89,15 +103,16 @@ function stm_set_lms_options( $layout ) {
 					continue;
 				}
 				if ( ! empty( $meta_value[0] ) ) {
-					$value = ( in_array( $meta_key, $serialized ) ) ? unserialize( $meta_value[0] ) : $meta_value[0];
+					// phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.serialize_unserialize
+					$value = ( in_array( $meta_key, $serialized, true ) ) ? unserialize( $meta_value[0] ) : $meta_value[0];
 
 					if ( 'price' === $meta_key ) {
-						if ( rand( 0, 1 ) ) {
-							update_post_meta( $post, $meta_key, rand( 60, 80 ) );
+						if ( wp_rand( 0, 1 ) ) {
+							update_post_meta( $post, $meta_key, wp_rand( 60, 80 ) );
 						}
 					} elseif ( 'sale_price' === $meta_key ) {
-						if ( rand( 0, 1 ) ) {
-							update_post_meta( $post, $meta_key, rand( 20, 50 ) );
+						if ( wp_rand( 0, 1 ) ) {
+							update_post_meta( $post, $meta_key, wp_rand( 20, 50 ) );
 						}
 					} else {
 						update_post_meta( $post, $meta_key, $value );
@@ -108,6 +123,11 @@ function stm_set_lms_options( $layout ) {
 	}
 
 	wp_reset_postdata();
+
+	/* Import Curriculum */
+	if ( function_exists( 'stm_lms_update_curriculum' ) ) {
+		stm_lms_update_curriculum();
+	}
 
 	/*Get Questions*/
 
@@ -175,9 +195,16 @@ function stm_set_lms_options( $layout ) {
 	);
 
 	foreach ( $pmpro_pages as $option_id => $pmpro_page ) {
-		$pmpro_page = get_page_by_title( $pmpro_page );
-		if ( isset( $pmpro_page->ID ) ) {
-			update_option( 'pmpro_' . $option_id, $pmpro_page->ID );
+		$pmpro_page = get_posts(
+			array(
+				'title'          => $pmpro_page,
+				'post_type'      => 'page',
+				'posts_per_page' => 1,
+				'fields'         => 'ids',
+			)
+		);
+		if ( ! empty( $pmpro_page ) ) {
+			update_option( 'pmpro_' . $option_id, $pmpro_page[0] );
 		}
 	}
 }

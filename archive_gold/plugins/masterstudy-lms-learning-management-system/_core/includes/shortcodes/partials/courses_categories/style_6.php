@@ -40,7 +40,7 @@ if ( ! empty( $taxonomy ) ) :
 				$term_color = get_term_meta( $term->term_id, 'course_color', true );
 				$term_color = ( ! empty( $term_color ) ) ? $term_color : '#1ec1d9';
 				?>
-				<a href="<?php echo esc_url( get_term_link( $term, 'stm_lms_course_taxonomy' ) ); ?>" title="<?php echo esc_attr( $term->name ); ?>" class="stm_lms_courses_category no_deco" style="background-color: <?php echo esc_attr( $term_color ); ?>">
+				<a href="<?php echo esc_url( STM_LMS_Course::courses_page_url() . '?terms[]=' . $term->term_id . '&category[]=' . $term->term_id ); ?>>" title="<?php echo esc_attr( $term->name ); ?>" class="stm_lms_courses_category no_deco" style="background-color: <?php echo esc_attr( $term_color ); ?>">
 					<i class="<?php echo esc_html( $term_icon ); ?>"></i>
 					<h4><?php echo esc_html( $term->name ); ?></h4>
 				</a>

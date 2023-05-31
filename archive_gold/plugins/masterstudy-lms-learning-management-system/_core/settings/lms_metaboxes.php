@@ -49,22 +49,16 @@ add_filter(
 add_filter(
 	'stm_wpcfto_fields',
 	function ( $fields ) {
-
-		$decimals_num = STM_LMS_Options::get_option( 'decimals_num', 2 );
-		$zeros        = str_repeat( '0', intval( $decimals_num ) - 1 );
-		$step         = "0.{$zeros}1";
-
-		$currency = STM_LMS_Helpers::get_currency();
-
-		$course_levels = array(
+		$decimals_num   = STM_LMS_Options::get_option( 'decimals_num', 2 );
+		$zeros          = str_repeat( '0', intval( $decimals_num ) - 1 );
+		$step           = "0.{$zeros}1";
+		$currency       = STM_LMS_Helpers::get_currency();
+		$course_levels  = array(
 			'' => esc_html__( 'Select level', 'masterstudy-lms-learning-management-system' ),
 		);
-
 		$course_levels += STM_LMS_Helpers::get_course_levels();
-
-		$courses = ( class_exists( 'WPCFTO_Settings' ) ) ? WPCFTO_Settings::stm_get_post_type_array( 'stm-courses' ) : array();
-
-		$certificates = ( class_exists( 'WPCFTO_Settings' ) ) ? WPCFTO_Settings::stm_get_post_type_array( 'stm-certificates' ) : array();
+		$courses        = ( class_exists( 'WPCFTO_Settings' ) ) ? WPCFTO_Settings::stm_get_post_type_array( 'stm-courses' ) : array();
+		$certificates   = ( class_exists( 'WPCFTO_Settings' ) ) ? WPCFTO_Settings::stm_get_post_type_array( 'stm-certificates' ) : array();
 
 		$data_fields = array(
 			'stm_courses_curriculum' => array(
@@ -86,9 +80,10 @@ add_filter(
 					'icon'   => 'fa fa-cog',
 					'fields' => array(
 						'featured'         => array(
-							'type'  => 'checkbox',
-							'label' => esc_html__( 'Featured Course', 'masterstudy-lms-learning-management-system' ),
-							'hint'  => esc_html__( 'Mark this checkbox to add badge to course "Featured".', 'masterstudy-lms-learning-management-system' ),
+							'type'    => 'checkbox',
+							'disable' => true,
+							'label'   => esc_html__( 'Featured Course', 'masterstudy-lms-learning-management-system' ),
+							'hint'    => esc_html__( 'Mark this checkbox to add badge to course "Featured".', 'masterstudy-lms-learning-management-system' ),
 						),
 						'views'            => array(
 							'type'     => 'number',
@@ -215,7 +210,7 @@ add_filter(
 						'affiliate_course'      => array(
 							'group'   => 'started',
 							'type'    => 'checkbox',
-							'label'   => esc_html__( 'Affiliate course', 'masterstudy-lms-learning-management-system' ),
+// 							'label'   => esc_html__( 'Affiliate course', 'masterstudy-lms-learning-management-system' ),
 							'pro'     => true,
 							'pro_url' => 'https://stylemixthemes.com/wordpress-lms-plugin/?utm_source=wpadmin&utm_medium=ms-udemy&utm_campaign=masterstudy-plugin',
 						),
@@ -318,13 +313,6 @@ add_filter(
 						),
 					),
 				),
-				'section_files'         => array(
-					'name'   => esc_html__( 'Course files', 'masterstudy-lms-learning-management-system' ),
-					'icon'   => 'fas fa-download',
-					'fields' => array(
-						'course_files_pack' => stm_lms_course_files_data(),
-					),
-				),
 				'section_certificate'   => array(
 					'name'   => esc_html__( 'Certificate', 'masterstudy-lms-learning-management-system' ),
 					'icon'   => 'fas fa-certificate',
@@ -351,7 +339,6 @@ add_filter(
 							'options' => array(
 								'text'  => esc_html__( 'Text', 'masterstudy-lms-learning-management-system' ),
 								'video' => esc_html__( 'Video', 'masterstudy-lms-learning-management-system' ),
-								'slide' => esc_html__( 'Slide', 'masterstudy-lms-learning-management-system' ),
 							),
 							'value'   => 'text',
 						),
@@ -526,7 +513,6 @@ add_filter(
 							'label'    => esc_html__( 'Lesson Frontend description', 'masterstudy-lms-learning-management-system' ),
 							'sanitize' => 'wpcfto_sanitize_editor',
 						),
-						'lesson_files_pack'   => stm_lms_lesson_files_data(),
 					),
 				),
 			),

@@ -9,6 +9,12 @@ function stm_lms_generate_pages_list() {
 	);
 }
 
+function stm_lms_elementor_page_list() {
+	return array(
+		'courses_page_elementor' => esc_html__( 'Courses page (for Elementor)', 'masterstudy-lms-learning-management-system' ),
+	);
+}
+
 function stm_lms_display_post_states( $states, $post ) {
 	$pages = array(
 		'user_url'         => esc_html__( 'MasterStudy Private Account', 'masterstudy-lms-learning-management-system' ),
@@ -30,6 +36,28 @@ function stm_lms_display_post_states( $states, $post ) {
 }
 
 add_filter( 'display_post_states', 'stm_lms_display_post_states', 10, 2 );
+
+function stm_lms_get_generated_elementor_pages() {
+	$page = get_pages(
+		array(
+			'post_status' => 'publish',
+			'meta_key'    => 'elementor_courses_page',
+			'meta_value'  => 'yes',
+			'number'      => 1,
+		)
+	);
+	return ! empty( $page[0] )
+	? array(
+		'id'    => $page[0]->ID,
+		'title' => $page[0]->post_title,
+	)
+	: array();
+}
+function stm_lms_has_generated_elementor_pages( $pages ) {
+	$generated_pages = stm_lms_get_generated_elementor_pages( $pages );
+
+	return ! empty( $generated_pages );
+}
 
 function stm_lms_get_generated_pages( $pages ) {
 
@@ -109,8 +137,9 @@ function stm_lms_generate_pages( $pages ) {
 		$page_opt[ $page_option ] = $page_id;
 
 	}
-
-	stm_lms_generate_elementor_pages();
+	if ( ! stm_lms_has_generated_elementor_pages( stm_lms_elementor_page_list() ) ) {
+		stm_lms_generate_elementor_pages();
+	}
 
 	if ( ! empty( $page_opt ) ) {
 

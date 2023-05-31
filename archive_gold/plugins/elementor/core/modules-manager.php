@@ -86,10 +86,12 @@ class Modules_Manager {
 			'gutenberg',
 			'wp-cli',
 			'safe-mode',
+			'ai',
 			'usage',
 			'dev-tools',
 			'landing-pages',
 			'compatibility-tag',
+			'generator-tag',
 			'elements-color-picker',
 			'shapes',
 			'favorites',
@@ -104,6 +106,8 @@ class Modules_Manager {
 			'performance-lab',
 			'lazyload',
 			'kit-elements-defaults',
+			'announcements',
+			'site-navigation',
 		];
 	}
 

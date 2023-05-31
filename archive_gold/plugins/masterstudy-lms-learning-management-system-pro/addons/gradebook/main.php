@@ -56,7 +56,7 @@ class STM_LMS_The_Gradebook {
 
 		$course_passed_lessons = stm_lms_get_user_lessons( $course_id );
 		$course_passed_quizzes = stm_lms_get_course_passed_quizzes( $course_id );
-		$course_curriculum     = STM_LMS_Course::curriculum_info( get_post_meta( $course_id, 'curriculum', true ) );
+		$course_curriculum     = STM_LMS_Course::curriculum_info( $course_id );
 		$course_students       = count( $course_users );
 
 		$cqp = ( ! empty( $course_curriculum['quizzes'] ) ) ? round( count( $course_passed_quizzes ) / ( $course_students * $course_curriculum['quizzes'] ) * 100, 2 ) : 0;
@@ -119,7 +119,7 @@ class STM_LMS_The_Gradebook {
 		}
 
 		$course_users      = stm_lms_get_course_users( $course_id );
-		$course_curriculum = STM_LMS_Course::curriculum_info( get_post_meta( $course_id, 'curriculum', true ) );
+		$course_curriculum = STM_LMS_Course::curriculum_info( $course_id );
 
 		foreach ( $course_users as $course_user_count => $course_user ) {
 

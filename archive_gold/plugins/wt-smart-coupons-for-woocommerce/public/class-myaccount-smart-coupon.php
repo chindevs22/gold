@@ -56,15 +56,28 @@ if( ! class_exists('WT_MyAccount_SmartCoupon') ) {
             return $title;
         }
     
-        public function wt_smartcoupon_menu($items) {
-    
-            $logout = $items['customer-logout'];
-            unset($items['customer-logout']);
+
+        public function wt_smartcoupon_menu($items)
+        {
+            $logout = null;
+
+            if(isset($items['customer-logout']))
+            {
+                $logout = $items['customer-logout'];
+                unset($items['customer-logout']);
+            }
+           
             $items[self::$endpoint] = __('My Coupons', 'wt-smart-coupons-for-woocommerce');
-            $items['customer-logout'] = $logout;
+
+            if(!is_null($logout))
+            {
+                $items['customer-logout'] = $logout;
+            }
+
             return $items;
         }
     
+        
         public function endpoint_content() {
             
             // require_once ('partials/my-account/my-account-coupon-view.php');

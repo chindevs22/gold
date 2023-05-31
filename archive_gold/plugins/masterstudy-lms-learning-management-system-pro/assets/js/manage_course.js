@@ -4,7 +4,6 @@
 
     var stm_lms_i18n = stm_lms_manage_course['i18n'];
     var stm_lms_post_id = stm_lms_manage_course['post_id'];
-    var stm_lms_course_file_pack_data = stm_lms_manage_course['course_file_pack_data'];
 
     $(document).ready(function () {
 
@@ -44,8 +43,7 @@
                     status: '',
                     message: '',
                     wizard: {},
-                    new_category : '',
-                    course_file_pack_data : stm_lms_course_file_pack_data
+                    new_category : ''
                 }
             },
             mounted: function(){

@@ -39,17 +39,26 @@ class Mixpanel_General extends Mixpanel {
 	);
 
 	public static function register_data() {
+		if ( ! function_exists( 'is_plugin_active' ) ) {
+			include_once ABSPATH . 'wp-admin/includes/plugin.php';
+		}
+
 		foreach ( get_option( 'active_plugins', array() ) as $plugin ) {
 			self::add_data( strstr( $plugin, '/', true ), true );
 		}
 
+		self::add_data( 'Admin Email', get_bloginfo( 'admin_email' ) );
 		self::add_data( 'Business type', self::get_business_type() );
 		self::add_data( 'Active theme', self::get_active_theme() );
 		self::add_data( 'MS LMS FREE Version', STM_LMS_VERSION );
+
 		if ( defined( 'STM_LMS_PRO_VERSION' ) ) {
 			self::add_data( 'MS LMS PRO PLUS Used', defined( 'STM_LMS_PLUS_ENABLED' ) );
 			self::add_data( 'MS LMS PRO Version', STM_LMS_PRO_VERSION );
 			self::add_data( 'Instructors Count', self::get_instructors_count() );
+			if ( 'not-exist' !== get_option( 'fs_accounts', 'not-exist' ) ) {
+				self::add_data( 'Freemius Email', self::get_freemius_email() );
+			}
 		}
 
 		foreach ( self::$options_array as $slug => $label ) {
@@ -172,5 +181,10 @@ class Mixpanel_General extends Mixpanel {
 		$wc_gateway = get_option( $method );
 
 		return ! empty( $wc_gateway['enabled'] ) && 'yes' === $wc_gateway['enabled'];
+	}
+
+	public static function get_freemius_email() {
+		$fs_user_object = get_option( 'fs_accounts' )['users'];
+		return ! empty( $fs_user_object ) ? current( $fs_user_object )->email : null;
 	}
 }

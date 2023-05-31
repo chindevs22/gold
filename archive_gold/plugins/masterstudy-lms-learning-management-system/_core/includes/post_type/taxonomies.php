@@ -8,6 +8,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 class STM_Lms_Taxonomies {
 	public function __construct() {
 		add_action( 'init', array( $this, 'taxonomies_init' ), - 1 );
+		add_filter( 'manage_edit-stm_lms_question_taxonomy_columns', array( $this, 'add_stm_taxonomy_count_column' ) );
+		add_filter( 'manage_edit-stm_lms_question_taxonomy_sortable_columns', array( $this, 'add_stm_taxonomy_count_column' ) );
+		add_filter( 'manage_edit-stm_lms_course_taxonomy_columns', array( $this, 'add_stm_taxonomy_count_column' ) );
+		add_filter( 'manage_edit-stm_lms_course_taxonomy_sortable_columns', array( $this, 'add_stm_taxonomy_count_column' ) );
+		add_filter( 'manage_stm_lms_question_taxonomy_custom_column', array( $this, 'display_stm_taxonomy_count_column' ), 10, 3 );
+		add_filter( 'manage_stm_lms_course_taxonomy_custom_column', array( $this, 'display_stm_taxonomy_count_column' ), 10, 3 );
 	}
 
 	public function taxonomies_init() {
@@ -70,6 +76,32 @@ class STM_Lms_Taxonomies {
 				),
 			)
 		);
+	}
+
+	public function add_stm_taxonomy_count_column( $columns ) {
+		unset( $columns['posts'] );
+		$columns['stm_taxonomy_count'] = esc_html__( 'Count', 'masterstudy-lms-learning-management-system' );
+
+		return $columns;
+	}
+
+	public function display_stm_taxonomy_count_column( $content, $column_name, $term_id ) {
+		if ( 'stm_taxonomy_count' === $column_name ) {
+			$taxonomy   = get_current_screen()->taxonomy;
+			$post_types = array(
+				'stm_lms_question_taxonomy' => 'stm-questions',
+				'stm_lms_course_taxonomy'   => 'stm-courses',
+			);
+			$new_url    = add_query_arg(
+				array(
+					'post_type' => $post_types[ $taxonomy ],
+					$taxonomy   => get_term_by( 'id', $term_id, $taxonomy )->slug,
+				),
+				admin_url( 'edit.php' ),
+			);
+			return sprintf( '<a href="%s">%d</a>', esc_url( $new_url ), get_term_by( 'id', $term_id, $taxonomy )->count );
+		}
+		return $content;
 	}
 
 }

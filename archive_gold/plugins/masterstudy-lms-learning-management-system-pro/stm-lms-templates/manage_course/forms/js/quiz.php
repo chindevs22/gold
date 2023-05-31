@@ -22,7 +22,7 @@
 		mounted () {
 			var _this = this;
 			WPCFTO_EventBus.$on('STM_LMS_Curriculum_item', function (item) {
-				_this.id = item.id;
+				_this.id = item.post_id;
 				_this.title = item.title;
 				_this.opened = true;
 				_this.loading = true;

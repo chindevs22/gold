@@ -37,7 +37,7 @@
 
 		<wp:author><wp:author_id>1</wp:author_id><wp:author_login><![CDATA[admin]]></wp:author_login><wp:author_email><![CDATA[ruslankabaev@gmail.com]]></wp:author_email><wp:author_display_name><![CDATA[admin]]></wp:author_display_name><wp:author_first_name><![CDATA[John]]></wp:author_first_name><wp:author_last_name><![CDATA[Doe]]></wp:author_last_name></wp:author>
 
-				
+
 	<generator>https://wordpress.org/?v=5.4.2</generator>
 
 		<item>
@@ -92,10 +92,6 @@ I have spent a lot of time deconstructing what it takes to learn a game engine f
 		<wp:meta_value><![CDATA[.vc_custom_1529409897157{margin-bottom: 0px !important;}.vc_custom_1529409901131{margin-bottom: 0px !important;}]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
-		<wp:meta_key><![CDATA[curriculum]]></wp:meta_key>
-		<wp:meta_value><![CDATA[Starting Course,13,19,18,After Intro,16,53,15]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
 		<wp:meta_key><![CDATA[views]]></wp:meta_key>
 		<wp:meta_value><![CDATA[238]]></wp:meta_value>
 		</wp:postmeta>
@@ -140,7 +136,7 @@ I have spent a lot of time deconstructing what it takes to learn a game engine f
 		<wp:meta_value><![CDATA[]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
-		<wp:meta_key><![CDATA[not_single_sale]]></wp:meta_key>
+		<wp:meta_key><![CDATA[single_sale]]></wp:meta_key>
 		<wp:meta_value><![CDATA[]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
@@ -340,10 +336,6 @@ I have spent a lot of time deconstructing what it takes to learn a game engine f
 		<wp:meta_value><![CDATA[.vc_custom_1529409897157{margin-bottom: 0px !important;}.vc_custom_1529409901131{margin-bottom: 0px !important;}]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
-		<wp:meta_key><![CDATA[curriculum]]></wp:meta_key>
-		<wp:meta_value><![CDATA[Starting Course,13,19,18,After Intro,16,53,15]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
 		<wp:meta_key><![CDATA[views]]></wp:meta_key>
 		<wp:meta_value><![CDATA[238]]></wp:meta_value>
 		</wp:postmeta>
@@ -388,7 +380,7 @@ I have spent a lot of time deconstructing what it takes to learn a game engine f
 		<wp:meta_value><![CDATA[]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-		<wp:meta_key><![CDATA[not_single_sale]]></wp:meta_key>
+		<wp:meta_key><![CDATA[single_sale]]></wp:meta_key>
 		<wp:meta_value><![CDATA[]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
@@ -588,10 +580,6 @@ I have spent a lot of time deconstructing what it takes to learn a game engine f
 		<wp:meta_value><![CDATA[.vc_custom_1529409897157{margin-bottom: 0px !important;}.vc_custom_1529409901131{margin-bottom: 0px !important;}]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
-		<wp:meta_key><![CDATA[curriculum]]></wp:meta_key>
-		<wp:meta_value><![CDATA[Starting Course,13,19,18,After Intro,16,53,15]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
 		<wp:meta_key><![CDATA[views]]></wp:meta_key>
 		<wp:meta_value><![CDATA[238]]></wp:meta_value>
 		</wp:postmeta>
@@ -636,7 +624,7 @@ I have spent a lot of time deconstructing what it takes to learn a game engine f
 		<wp:meta_value><![CDATA[]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-		<wp:meta_key><![CDATA[not_single_sale]]></wp:meta_key>
+		<wp:meta_key><![CDATA[single_sale]]></wp:meta_key>
 		<wp:meta_value><![CDATA[]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
@@ -840,10 +828,6 @@ I have spent a lot of time deconstructing what it takes to learn a game engine f
 		<wp:meta_value><![CDATA[math-course-with-start-generate-enterprise]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
-		<wp:meta_key><![CDATA[curriculum]]></wp:meta_key>
-		<wp:meta_value><![CDATA[Starting Course,13,19,18,After Intro,16,53,15]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
 		<wp:meta_key><![CDATA[views]]></wp:meta_key>
 		<wp:meta_value><![CDATA[238]]></wp:meta_value>
 		</wp:postmeta>
@@ -888,7 +872,7 @@ I have spent a lot of time deconstructing what it takes to learn a game engine f
 		<wp:meta_value><![CDATA[]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-		<wp:meta_key><![CDATA[not_single_sale]]></wp:meta_key>
+		<wp:meta_key><![CDATA[single_sale]]></wp:meta_key>
 		<wp:meta_value><![CDATA[]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
@@ -1088,10 +1072,6 @@ I have spent a lot of time deconstructing what it takes to learn a game engine f
 		<wp:meta_value><![CDATA[course-with-start-lesson-premium-and]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
-		<wp:meta_key><![CDATA[curriculum]]></wp:meta_key>
-		<wp:meta_value><![CDATA[Starting Course,13,19,18,After Intro,16,53,15]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
 		<wp:meta_key><![CDATA[views]]></wp:meta_key>
 		<wp:meta_value><![CDATA[238]]></wp:meta_value>
 		</wp:postmeta>
@@ -1136,7 +1116,7 @@ I have spent a lot of time deconstructing what it takes to learn a game engine f
 		<wp:meta_value><![CDATA[]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
-		<wp:meta_key><![CDATA[not_single_sale]]></wp:meta_key>
+		<wp:meta_key><![CDATA[single_sale]]></wp:meta_key>
 		<wp:meta_value><![CDATA[]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
@@ -1336,10 +1316,6 @@ I have spent a lot of time deconstructing what it takes to learn a game engine f
 		<wp:meta_value><![CDATA[math-bio-start-lesson-premium-instructor]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
-		<wp:meta_key><![CDATA[curriculum]]></wp:meta_key>
-		<wp:meta_value><![CDATA[Starting Course,13,19,18,After Intro,16,53,15]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
 		<wp:meta_key><![CDATA[views]]></wp:meta_key>
 		<wp:meta_value><![CDATA[238]]></wp:meta_value>
 		</wp:postmeta>
@@ -1384,7 +1360,7 @@ I have spent a lot of time deconstructing what it takes to learn a game engine f
 		<wp:meta_value><![CDATA[]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
-		<wp:meta_key><![CDATA[not_single_sale]]></wp:meta_key>
+		<wp:meta_key><![CDATA[single_sale]]></wp:meta_key>
 		<wp:meta_value><![CDATA[]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
@@ -1580,10 +1556,6 @@ I have spent a lot of time deconstructing what it takes to learn a game engine f
 		<wp:meta_value><![CDATA[.vc_custom_1529409897157{margin-bottom: 0px !important;}.vc_custom_1529409901131{margin-bottom: 0px !important;}]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
-		<wp:meta_key><![CDATA[curriculum]]></wp:meta_key>
-		<wp:meta_value><![CDATA[Starting Course,13,19,18,After Intro,16,53,15]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
 		<wp:meta_key><![CDATA[views]]></wp:meta_key>
 		<wp:meta_value><![CDATA[238]]></wp:meta_value>
 		</wp:postmeta>
@@ -1628,7 +1600,7 @@ I have spent a lot of time deconstructing what it takes to learn a game engine f
 		<wp:meta_value><![CDATA[]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
-		<wp:meta_key><![CDATA[not_single_sale]]></wp:meta_key>
+		<wp:meta_key><![CDATA[single_sale]]></wp:meta_key>
 		<wp:meta_value><![CDATA[]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
@@ -1832,10 +1804,6 @@ I have spent a lot of time deconstructing what it takes to learn a game engine f
 		<wp:meta_value><![CDATA[course-creating-with-generate-premium-spark]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
-		<wp:meta_key><![CDATA[curriculum]]></wp:meta_key>
-		<wp:meta_value><![CDATA[Starting Course,13,19,18,After Intro,16,53,15]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
 		<wp:meta_key><![CDATA[views]]></wp:meta_key>
 		<wp:meta_value><![CDATA[238]]></wp:meta_value>
 		</wp:postmeta>
@@ -1880,7 +1848,7 @@ I have spent a lot of time deconstructing what it takes to learn a game engine f
 		<wp:meta_value><![CDATA[]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
-		<wp:meta_key><![CDATA[not_single_sale]]></wp:meta_key>
+		<wp:meta_key><![CDATA[single_sale]]></wp:meta_key>
 		<wp:meta_value><![CDATA[]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
@@ -2026,4 +1994,3 @@ I have spent a lot of time deconstructing what it takes to learn a game engine f
 							</item>
 				</channel>
 </rss>
-	

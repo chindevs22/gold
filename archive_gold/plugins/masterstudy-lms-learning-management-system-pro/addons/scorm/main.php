@@ -17,7 +17,7 @@ class STM_LMS_Scorm_Packages {
 			}
 		);
 
-		add_filter( 'wpcfto_modified_scorm_package', array( $this, 'unzip_scorm_file' ), 10, 2 );
+		add_filter( 'wpcfto_modified_scorm_package', array( self::class, 'unzip_scorm_file' ), 10, 2 );
 
 		add_action( 'stm_lms_before_item_lesson_start', array( $this, 'redirect_to_scorm' ), 10, 2 );
 
@@ -186,7 +186,13 @@ class STM_LMS_Scorm_Packages {
 		return $fields;
 	}
 
-	public function unzip_scorm_file( $r, $archive_name ) {
+	/**
+	 * @param array{path: string} $r
+	 * @param string $archive_name filepath
+	 *
+	 * @return array{path: string, url: string, scorm_version: string, error?: string}
+	 */
+	public static function unzip_scorm_file( $r, $archive_name ) {
 		$archive = $r['path'];
 
 		$upload_dir = STM_WPCFTO_FILE_UPLOAD::upload_dir();
@@ -240,7 +246,7 @@ class STM_LMS_Scorm_Packages {
 		if ( true === $res ) {
 			// extract it to the path we determined above
 
-			for ( $i = 0; $i < $zip->numFiles; $i ++ ) {
+			for ( $i = 0; $i < $zip->numFiles; $i ++ ) { // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
 				$file = $zip->statIndex( $i );
 
 				$item_name = $file['name'];
@@ -282,7 +288,7 @@ class STM_LMS_Scorm_Packages {
 			}
 
 			if ( ! empty( $inappropriate_files ) ) {
-				$inappropriate_files = '<ul><li>' . implode( '</li><li>', $inappropriate_files ) . '</li></ul>';
+				$inappropriate_files = implode( ', ', $inappropriate_files );
 
 				unlink( $archive );
 
@@ -486,6 +492,7 @@ class STM_LMS_Scorm_Packages {
 		return get_option( 'stm_lms_scorm_settings', array() );
 	}
 
+	// phpcs:disable
 	public static function deleteDir( $dirPath ) {
 		if ( ! is_dir( $dirPath ) ) {
 			throw new InvalidArgumentException( "$dirPath must be a directory" );
@@ -507,5 +514,5 @@ class STM_LMS_Scorm_Packages {
 
 		rmdir( $dirPath );
 	}
-
+	// phpcs:enable
 }

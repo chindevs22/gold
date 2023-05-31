@@ -27,8 +27,6 @@ require_once STM_LMS_PATH . '/lms/classes/chat.php';
 require_once STM_LMS_PATH . '/lms/classes/mails.php';
 require_once STM_LMS_PATH . '/lms/classes/guest_checkout.php';
 require_once STM_LMS_PATH . '/lms/classes/admin_menu.php';
-require_once STM_LMS_PATH . '/lms/classes/curriculum.php';
-require_once STM_LMS_PATH . '/lms/classes/curriculum_log.php';
 require_once STM_LMS_PATH . '/lms/classes/user_menu.php';
 
 if ( is_admin() ) {

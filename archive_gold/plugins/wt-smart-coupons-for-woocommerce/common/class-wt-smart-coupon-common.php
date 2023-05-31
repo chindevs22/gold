@@ -44,6 +44,7 @@ if( ! class_exists ( 'Wt_Smart_Coupon_Common' ) ) {
             'coupon_shortcode',
             'giveaway_product',
             'coupon_restriction',
+            'checkout_options', /** @since 1.4.6 */
         );
 
         public static $existing_modules=array();
@@ -197,6 +198,7 @@ if( ! class_exists ( 'Wt_Smart_Coupon_Common' ) ) {
          *  @since 1.4.3
          *  @since 1.4.4    Code updated to handle slow sites
          *                  New filter: wt_sc_lookup_table_migration_batch_limit
+         *   @since 1.4.5   Duplicate removal added
          */
         public function update_existing_coupon_data_to_lookup_table()
         {
@@ -231,6 +233,9 @@ if( ! class_exists ( 'Wt_Smart_Coupon_Common' ) ) {
                 $this->update_data_to_lookup_table($result, true);
                 $last_updated_id = $result['ID'];
             }
+
+            //remove duplicates
+            $wpdb->query("DELETE t1 FROM {$lookup_tb} t1 INNER JOIN {$lookup_tb} t2 WHERE t1.id < t2.id AND t1.coupon_id = t2.coupon_id");
 
             $results = $wpdb->get_results($wpdb->prepare("SELECT p.ID, p.post_status, p.post_date_gmt FROM {$wpdb->posts} AS p WHERE p.post_type = 'shop_coupon' AND p.ID > %d ORDER BY p.ID ASC LIMIT 1", $last_updated_id), ARRAY_A);
 
@@ -613,6 +618,27 @@ if( ! class_exists ( 'Wt_Smart_Coupon_Common' ) ) {
             }
 
             return apply_filters('wt_sc_alter_converted_order_items', $new_cart_items, $order_items);
+        }
+
+        /**
+         *  To get total records in lookup table. Using in lookup table migration message.
+         *  
+         *  @since 1.4.5
+         *  @return int Total records in lookup table
+         */
+        public static function get_lookup_table_record_count()
+        {
+            global $wpdb;
+            $lookup_tb = Wt_Smart_Coupon::get_lookup_table_name();
+
+            if(!Wt_Smart_Coupon::is_table_exists($lookup_tb))  //table not created so return zero.
+            {
+                return 0;
+            }
+
+            $row = $wpdb->get_row("SELECT COUNT(DISTINCT coupon_id) AS total_records FROM {$lookup_tb}", ARRAY_A);
+
+            return absint(!empty($row) && isset($row['total_records']) ? $row['total_records'] : 0);
         }
     }
 }

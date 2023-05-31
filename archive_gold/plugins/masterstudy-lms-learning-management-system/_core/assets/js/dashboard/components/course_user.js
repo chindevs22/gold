@@ -68,7 +68,7 @@ stm_lms_components['course_user'] = {
       _this.$http.post(url, {
         course_id: _this.id,
         user_id: _this.user_id,
-        item_id: item.item_id,
+        item_id: item.post_id,
         completed: item.completed
       }).then(function (data) {
         data = data.body;

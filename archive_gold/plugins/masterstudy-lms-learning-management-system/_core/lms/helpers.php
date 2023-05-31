@@ -178,6 +178,7 @@ function stm_lms_instructors() {
 			'edit_stm_lms_post'           => true,
 			'delete_stm_lms_post'         => true,
 			'read_stm_lms_posts'          => true,
+			'list_users'                  => true,
 			'delete_others_stm_lms_posts' => false,
 			'edit_others_stm_lms_posts'   => false,
 			'read_private_stm_lms_posts'  => false,
@@ -435,127 +436,18 @@ add_filter(
 	}
 );
 
+/**
+ * @deprecated deprecated since version 3.0.0
+ */
 function stm_lms_course_files_data() {
-	return array(
-		'type'        => 'repeater',
-		'label'       => esc_html__( 'Course materials', 'masterstudy-lms-learning-management-system' ),
-		'hint'        => esc_html__( 'Add Course materials available for all users. Lesson specified materials you can add directly to lesson.', 'masterstudy-lms-learning-management-system' ),
-		'fields'      => array(
-			'course_files_label' => array(
-				'type'  => 'text',
-				'label' => esc_html__( 'Course file title', 'masterstudy-lms-learning-management-system' ),
-			),
-			'course_files'       => array(
-				'label'       => esc_html__( 'Upload Course File', 'masterstudy-lms-learning-management-system' ),
-				'type'        => 'file',
-				'load_labels' => array(
-					'label'   => esc_html__( 'Choose file', 'masterstudy-lms-learning-management-system' ),
-					'loading' => esc_html__( 'Uploading file', 'masterstudy-lms-learning-management-system' ),
-					'loaded'  => esc_html__( 'View file', 'masterstudy-lms-learning-management-system' ),
-					'delete'  => esc_html__( 'Delete file', 'masterstudy-lms-learning-management-system' ),
-				),
-				'accept'      => array(
-					'.zip',
-					'.pdf',
-					'.doc',
-					'.docx',
-					'.mp3',
-					'.mp4',
-					'.mov',
-					'.jpg',
-					'.jpeg',
-					'.png',
-					'.psd',
-					'.xls',
-					'.xlsx',
-					'.ppt',
-					'.pptx',
-				),
-				'mimes'       => array(
-					'zip',
-					'pdf',
-					'doc',
-					'docx',
-					'mp3',
-					'mp4',
-					'mov',
-					'jpg',
-					'jpeg',
-					'png',
-					'psd',
-					'xls',
-					'xlsx',
-					'ppt',
-					'pptx',
-				),
-			),
-		),
-		'load_labels' => array(
-			'add_label' => esc_html__( 'Add Course materials', 'masterstudy-lms-learning-management-system' ),
-		),
-	);
+	return array();
 }
 
+/**
+ * @deprecated deprecated since version 3.0.0
+ */
 function stm_lms_lesson_files_data() {
-	return array(
-		'type'           => 'repeater',
-		'label'          => esc_html__( 'Lesson materials', 'masterstudy-lms-learning-management-system' ),
-		'fields'         => array(
-			'lesson_files'       => array(
-				'label'          => esc_html__( 'Upload Lesson File', 'masterstudy-lms-learning-management-system' ),
-				'type'           => 'file',
-				'load_labels'    => array(
-					'label'   => esc_html__( 'Choose file', 'masterstudy-lms-learning-management-system' ),
-					'loading' => esc_html__( 'Uploading file', 'masterstudy-lms-learning-management-system' ),
-					'loaded'  => esc_html__( 'View file', 'masterstudy-lms-learning-management-system' ),
-					'delete'  => esc_html__( 'Delete file', 'masterstudy-lms-learning-management-system' ),
-				),
-				'accept'         => array(
-					'.zip',
-					'.pdf',
-					'.doc',
-					'.docx',
-					'.mp3',
-					'.mp4',
-					'.mov',
-					'.jpg',
-					'.jpeg',
-					'.png',
-					'.psd',
-					'.xls',
-					'.xlsx',
-					'.ppt',
-					'.pptx',
-				),
-				'mimes'          => array(
-					'zip',
-					'pdf',
-					'doc',
-					'docx',
-					'mp3',
-					'mp4',
-					'mov',
-					'jpg',
-					'jpeg',
-					'png',
-					'psd',
-					'xls',
-					'xlsx',
-					'ppt',
-					'pptx',
-				),
-				'disable_scroll' => true,
-			),
-			'lesson_files_label' => array(
-				'type'  => 'text',
-				'label' => esc_html__( 'Lesson file title', 'masterstudy-lms-learning-management-system' ),
-			),
-		),
-		'load_labels'    => array(
-			'add_label' => esc_html__( 'Add lesson materials', 'masterstudy-lms-learning-management-system' ),
-		),
-		'disable_scroll' => true,
-	);
+	return array();
 }
 
 function stm_lms_get_image_url( $id, $size = 'full' ) {
@@ -655,7 +547,7 @@ function stm_lms_elementor_autocomplete_terms( $taxonomy = '' ) {
 }
 
 function stm_lms_create_unique_id( $atts ) {
-	return 'module__' . md5( serialize( $atts ) );
+	return 'module__' . md5( serialize( $atts ) ); // phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.serialize_serialize
 }
 
 function stm_lms_get_VC_attachment_img_safe( $attachment_id, $size_1, $size_2 = 'large', $url = false, $retina = true ) {
@@ -1066,7 +958,7 @@ function ms_plugin_presto_player_post_data( $assoc = false ) {
 			} else {
 				$posts[] = array(
 					'id'    => $presto_player->ID,
-					'title' => $presto_player->post_title,
+					'label' => $presto_player->post_title,
 				);
 			}
 		}
@@ -1089,6 +981,25 @@ function ms_plugin_presto_player_default() {
 
 	return null;
 }
+
+/**
+ * @return bool
+ */
+function ms_plugin_presto_player_allowed() {
+	if ( is_user_logged_in() ) {
+		$user                 = wp_get_current_user();
+		$roles                = $user->roles;
+		$enable_presto_player = STM_LMS_Options::get_option( 'course_allow_presto_player', false );
+
+		if ( ( $enable_presto_player && in_array( 'stm_lms_instructor', $roles, true ) ) || in_array( 'administrator', $roles, true ) ) {
+			return true;
+		}
+	}
+
+	return false;
+}
+
+add_filter( 'ms_plugin_presto_player_allowed', 'ms_plugin_presto_player_allowed' );
 
 /**
  * @return array
@@ -1122,18 +1033,7 @@ function ms_plugin_video_sources() {
 		),
 	);
 
-	$instructors_allowed = false;
-	if ( is_user_logged_in() ) {
-		$user                 = wp_get_current_user();
-		$roles                = $user->roles;
-		$enable_presto_player = STM_LMS_Options::get_option( 'course_allow_presto_player', false );
-
-		if ( ( $enable_presto_player && in_array( 'stm_lms_instructor', $roles, true ) ) || in_array( 'administrator', $roles, true ) ) {
-			$instructors_allowed = true;
-		}
-	}
-
-	if ( defined( 'PRESTO_PLAYER_PLUGIN_FILE' ) && $instructors_allowed ) {
+	if ( defined( 'PRESTO_PLAYER_PLUGIN_FILE' ) && apply_filters( 'ms_plugin_presto_player_allowed', false ) ) {
 		$ms_plugins_video_sources['course_lesson_video_type_pp'] = array(
 			'key'   => 'presto_player',
 			'label' => esc_html__( 'Presto Player', 'masterstudy-lms-learning-management-system' ),
@@ -1141,12 +1041,15 @@ function ms_plugin_video_sources() {
 	}
 
 	$allow_types = STM_LMS_Options::get_option( 'course_lesson_video_types' );
+
 	foreach ( $ms_plugins_video_sources as $source_key => $source_value ) {
 		$source_data = STM_LMS_Options::get_option( $source_key, false );
+
 		if ( ( empty( $allow_types ) || ! empty( $source_data ) ) || 'presto_player' === $source_value['key'] ) {
 			$options[ $source_value['key'] ] = $source_value['label'];
 		}
 	}
+
 	return $options;
 }
 
@@ -1205,4 +1108,46 @@ add_filter( 'ms_plugin_get_default_value', 'ms_plugin_get_default_source' );
 function is_ms_lms_addon_enabled( $addon ) {
 	$enabled_addons = get_option( 'stm_lms_addons' );
 	return defined( 'STM_LMS_PRO_PATH' ) && isset( $enabled_addons[ $addon ] ) && 'on' === $enabled_addons[ $addon ];
+}
+
+function ms_plugin_manage_course_url( $sub_page = 'edit-course' ) {
+	$settings = get_option( 'stm_lms_settings', array() );
+
+	if ( empty( $settings['user_url'] ) || ! did_action( 'init' ) ) {
+		return home_url( '/' );
+	}
+
+	return get_the_permalink( $settings['user_url'] ) . $sub_page;
+}
+
+function ms_plugin_edit_course_builder_url( $post_type ) {
+	switch ( $post_type ) {
+		case 'stm-courses':
+			return ms_plugin_manage_course_url();
+		case 'stm-lessons':
+			return ms_plugin_manage_course_url( 'edit-lesson' );
+		case 'stm-quizzes':
+			return ms_plugin_manage_course_url( 'edit-quiz' );
+		case 'stm-assignments':
+			return ms_plugin_manage_course_url( 'edit-assignment' );
+	}
+
+	return false;
+}
+
+function ms_plugin_edit_item_url( $id, $post_type ) {
+	return ms_plugin_edit_course_builder_url( $post_type ) . '/' . $id;
+}
+
+function ms_plugin_favicon_url() {
+	$stm_options = get_option( 'stm_option', array() );
+	$favicon     = $stm_options['favicon']['url'] ?? false;
+
+	if ( empty( $favicon ) ) {
+		$favicon = file_exists( get_template_directory() . '/favicon.ico' )
+			? get_template_directory_uri() . '/favicon.ico'
+			: get_site_icon_url();
+	}
+
+	return apply_filters( 'masterstudy_lms_favicon_url', $favicon );
 }

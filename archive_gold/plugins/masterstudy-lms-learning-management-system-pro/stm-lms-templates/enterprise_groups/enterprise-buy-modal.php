@@ -88,9 +88,10 @@ $user_id = $user['id'];
 
 <div class="stm_lms_popup_create_group">
 
-	<div class="stm_lms_popup_create_group__inner">
+	<div class="stm_lms_popup_create_group__inner"
+		data-max-group="<?php echo esc_attr( STM_LMS_Enterprise_Courses::get_group_common_limit() ); ?>">
 
-		<div class="row">
+	<div class="row">
 			<div class="col-sm-6">
 				<label>
 					<span class="heading_font"><?php esc_html_e( 'Group name:', 'masterstudy-lms-learning-management-system-pro' ); ?></span>

@@ -188,9 +188,9 @@ class StmLmsProfileAuthLinks extends Widget_Base {
 				'dynamic'     => array(
 					'active' => true,
 				),
-				'placeholder' => esc_html__( 'https://your-link.com', 'masterstudy-lms-learning-management-system' ),
+				'placeholder' => site_url() . '/user-account',
 				'default'     => array(
-					'url' => 'https://your-login-page.com',
+					'url' => site_url() . '/user-account',
 				),
 			)
 		);

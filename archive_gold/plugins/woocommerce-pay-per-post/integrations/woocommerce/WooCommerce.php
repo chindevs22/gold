@@ -8,9 +8,9 @@ class WooCommerce
     private  $available_templates ;
     public function __construct()
     {
-        $this->available_templates = array(
+        $this->available_templates = [
             'woocommerce-order-receipt' => 'woocommerce-order-receipt.php',
-        );
+        ];
     }
     
     /**
