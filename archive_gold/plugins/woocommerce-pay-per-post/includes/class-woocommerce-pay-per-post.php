@@ -1,7 +1,5 @@
 <?php
 
-/** @noinspection PhpIncludeInspection */
-/** @noinspection ALL */
 class Woocommerce_Pay_Per_Post
 {
     protected  $loader ;
@@ -29,8 +27,8 @@ class Woocommerce_Pay_Per_Post
     private function define_admin_hooks()
     {
         $plugin_admin = new Woocommerce_Pay_Per_Post_Admin();
+        $this->loader->add_action( 'init', $plugin_admin, 'admin_init' );
         $this->loader->add_action( 'admin_menu', $plugin_admin, 'add_plugin_options' );
-        $this->loader->add_action( 'admin_init', $plugin_admin, 'options_init' );
         $this->loader->add_action( 'admin_notices', $plugin_admin, 'admin_notices' );
         $this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
         $this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
@@ -71,13 +69,17 @@ class Woocommerce_Pay_Per_Post
         $this->loader->add_action( 'init', $plugin_public, 'init' );
         $this->loader->add_action( 'template_redirect', $plugin_public, 'set_product_ids' );
         $this->loader->add_action( 'template_redirect', $plugin_public, 'should_disable_comments' );
-        $this->loader->add_filter( 'the_content', $plugin_public, 'restrict_content' );
+        $this->loader->add_filter(
+            'the_content',
+            $plugin_public,
+            'restrict_content',
+            apply_filters( 'wc_pay_for_post_the_content_priority', 99 )
+        );
     }
     
     private function load_dependencies()
     {
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-woocommerce-pay-per-post-loader.php';
-        /** @noinspection PhpIncludeInspection */
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-woocommerce-pay-per-post-i18n.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-woocommerce-pay-per-post-helper.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-woocommerce-pay-per-post-protection-checks.php';

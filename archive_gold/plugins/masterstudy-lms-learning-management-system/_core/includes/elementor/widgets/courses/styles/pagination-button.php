@@ -14,8 +14,8 @@ $this->start_controls_section(
 			'terms' => array(
 				array(
 					'name'     => 'type',
-					'operator' => '===',
-					'value'    => 'courses-archive',
+					'operator' => 'in',
+					'value'    => array( 'courses-archive', 'courses-grid' ),
 				),
 				array(
 					'name'     => 'show_pagination',
@@ -35,7 +35,7 @@ $this->add_group_control(
 	Group_Control_Typography::get_type(),
 	array(
 		'name'     => 'style_pagination_button_typography',
-		'selector' => '{{WRAPPER}} .ms_lms_courses_archive__load-more-button',
+		'selector' => '{{WRAPPER}} .ms_lms_courses_archive__load-more-button, {{WRAPPER}} .ms_lms_courses_grid__load-more-button',
 	)
 );
 $this->add_responsive_control(
@@ -46,6 +46,7 @@ $this->add_responsive_control(
 		'size_units' => array( 'px', '%' ),
 		'selectors'  => array(
 			'{{WRAPPER}} .ms_lms_courses_archive__load-more-button' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			'{{WRAPPER}} .ms_lms_courses_grid__load-more-button' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 		),
 	)
 );
@@ -71,6 +72,7 @@ $this->add_control(
 		'type'      => Controls_Manager::COLOR,
 		'selectors' => array(
 			'{{WRAPPER}} .ms_lms_courses_archive__load-more-button' => 'color: {{VALUE}}',
+			'{{WRAPPER}} .ms_lms_courses_grid__load-more-button' => 'color: {{VALUE}}',
 		),
 	)
 );
@@ -79,14 +81,14 @@ $this->add_group_control(
 	array(
 		'name'     => 'pagination_button_background',
 		'types'    => array( 'classic', 'gradient' ),
-		'selector' => '{{WRAPPER}} .ms_lms_courses_archive__load-more-button',
+		'selector' => '{{WRAPPER}} .ms_lms_courses_archive__load-more-button, {{WRAPPER}} .ms_lms_courses_grid__load-more-button',
 	)
 );
 $this->add_group_control(
 	Group_Control_Border::get_type(),
 	array(
 		'name'     => 'pagination_button_border',
-		'selector' => '{{WRAPPER}} .ms_lms_courses_archive__load-more-button',
+		'selector' => '{{WRAPPER}} .ms_lms_courses_archive__load-more-button, {{WRAPPER}} .ms_lms_courses_grid__load-more-button',
 	)
 );
 $this->add_control(
@@ -97,6 +99,7 @@ $this->add_control(
 		'size_units' => array( 'px', '%' ),
 		'selectors'  => array(
 			'{{WRAPPER}} .ms_lms_courses_archive__load-more-button' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			'{{WRAPPER}} .ms_lms_courses_grid__load-more-button' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 		),
 	)
 );
@@ -114,6 +117,7 @@ $this->add_control(
 		'type'      => Controls_Manager::COLOR,
 		'selectors' => array(
 			'{{WRAPPER}} .ms_lms_courses_archive__load-more-button:hover' => 'color: {{VALUE}}',
+			'{{WRAPPER}} .ms_lms_courses_grid__load-more-button:hover' => 'color: {{VALUE}}',
 		),
 	)
 );
@@ -122,14 +126,14 @@ $this->add_group_control(
 	array(
 		'name'     => 'pagination_button_background_hover',
 		'types'    => array( 'classic', 'gradient' ),
-		'selector' => '{{WRAPPER}} .ms_lms_courses_archive__load-more-button:hover',
+		'selector' => '{{WRAPPER}} .ms_lms_courses_archive__load-more-button:hover, {{WRAPPER}} .ms_lms_courses_grid__load-more-button:hover',
 	)
 );
 $this->add_group_control(
 	Group_Control_Border::get_type(),
 	array(
 		'name'     => 'pagination_button_border_hover',
-		'selector' => '{{WRAPPER}} .ms_lms_courses_archive__load-more-button:hover',
+		'selector' => '{{WRAPPER}} .ms_lms_courses_archive__load-more-button:hover, {{WRAPPER}} .ms_lms_courses_grid__load-more-button:hover',
 	)
 );
 $this->add_control(
@@ -140,6 +144,7 @@ $this->add_control(
 		'size_units' => array( 'px', '%' ),
 		'selectors'  => array(
 			'{{WRAPPER}} .ms_lms_courses_archive__load-more-button:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			'{{WRAPPER}} .ms_lms_courses_grid__load-more-button:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 		),
 	)
 );

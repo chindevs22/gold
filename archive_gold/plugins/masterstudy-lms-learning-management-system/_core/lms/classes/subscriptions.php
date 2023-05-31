@@ -106,6 +106,7 @@ class STM_LMS_Subscriptions {
 					$r['next'] = 'going_next';
 
 					update_post_meta( $id, 'not_single_sale', ( 'disable' === $method ) ? 'on' : '' );
+					update_post_meta( $id, 'single_sale', ( 'disable' === $method ) ? '' : 'on' );
 				}
 				wp_reset_postdata();
 			}

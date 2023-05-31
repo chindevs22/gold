@@ -324,13 +324,8 @@ class STM_LMS_User {
 
 				self::_register_user( $user, $data, $user_email );
 
-				if ( isset( $_COOKIE['redirect_trial_lesson'] ) ) {
-					$last_visit = $_COOKIE['redirect_trial_lesson'];
-					unset( $_COOKIE['redirect_trial_lesson'] );
-				}
-
 				$r['status']    = 'success';
-				$r['user_page'] = ( ! empty( $last_visit ) ) ? $last_visit : self::user_page_url( $user, true );
+				$r['user_page'] = self::user_page_url( $user, true );
 				$r['message']   = esc_html__( 'Registration completed successfully.', 'masterstudy-lms-learning-management-system' );
 				do_action( 'stm_lms_after_user_register', $user, $data );
 			}
@@ -697,7 +692,7 @@ class STM_LMS_User {
 					'title'               => get_the_title( $id ),
 					'link'                => get_the_permalink( $id ),
 					'image'               => $image,
-					'terms'               => stm_lms_get_terms_array( $id, 'stm_lms_course_taxonomy', false, true ),
+					'terms'               => wp_get_post_terms( $id, 'stm_lms_course_taxonomy' ),
 					'terms_list'          => stm_lms_get_terms_array( $id, 'stm_lms_course_taxonomy', 'name' ),
 					'views'               => STM_LMS_Course::get_course_views( $id ),
 					'price'               => STM_LMS_Helpers::display_price( $price ),

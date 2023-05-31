@@ -1,3 +1,8 @@
+## 4.0.0 - 2022-05-08
+- **NEW**: Course Builder with new design and a range of enhancements released.
+- **UPD**: Add a search box to the page with the add-ons list.
+- **FIXED**: Group leaders could not add more than 2 users to the Enterprise groups.
+
 ## 3.9.8 - 2022-02-08
 - **FIXED**: Trial Lessons are not loaded for Guest users.
 - **FIXED**: Drip Content is not linked with Assignments.

@@ -239,7 +239,7 @@ class Woocommerce_Pay_Per_Post_Restrict_Content
         Woocommerce_Pay_Per_Post_Helper::logger( 'Post ID: ' . get_the_ID() . ' - Woocommerce_Pay_Per_Post_Restrict_Content/check_if_protected  - BACKTRACE - Called From - ' . print_r( debug_backtrace()[1]['function'], true ) );
         Woocommerce_Pay_Per_Post_Helper::logger( 'Post ID: ' . get_the_ID() . ' - Woocommerce_Pay_Per_Post_Restrict_Content/check_if_protected  - product_ids - ' . var_export( $this->product_ids, true ) );
         
-        if ( !$this->protection_type ) {
+        if ( !$this->protection_type || !is_array( $this->product_ids['product_ids'] ) || empty($this->product_ids['product_ids']) ) {
             Woocommerce_Pay_Per_Post_Helper::logger( 'Post ID: ' . get_the_ID() . ' - Woocommerce_Pay_Per_Post_Restrict_Content/check_if_protected  - Page is NOT protected.' );
             return false;
         }
@@ -291,9 +291,12 @@ class Woocommerce_Pay_Per_Post_Restrict_Content
             $check_results[$check] = $this->{$check}();
         }
         Woocommerce_Pay_Per_Post_Helper::logger( 'Post ID: ' . get_the_ID() . ' - Woocommerce_Pay_Per_Post_Restrict_Content/can_user_view_content  Check Results ' . var_export( $check_results, true ) );
+        
         if ( $check_results['check_if_admin_call'] || !$check_results['check_if_protected'] || !$check_results['check_if_should_show_paywall'] || $check_results['check_if_admin_user_have_access'] || $check_results['check_if_user_role_has_access'] || $check_results['check_if_has_access'] ) {
+            Woocommerce_Pay_Per_Post_Helper::logger( 'Post ID: ' . get_the_ID() . ' - Woocommerce_Pay_Per_Post_Restrict_Content/can_user_view_content  Check Results FAILED returning FALSE' );
             return false;
         }
+        
         
         if ( isset( $_GET['wc_ppp_debug'] ) && "true" === $_GET['wc_ppp_debug'] ) {
             echo  '<pre>' ;
@@ -302,6 +305,7 @@ class Woocommerce_Pay_Per_Post_Restrict_Content
             echo  '</pre>' ;
         }
         
+        Woocommerce_Pay_Per_Post_Helper::logger( 'Post ID: ' . get_the_ID() . ' - Woocommerce_Pay_Per_Post_Restrict_Content/can_user_view_content  Check Results PASSED returning TRUE' );
         return true;
     }
     
@@ -313,6 +317,7 @@ class Woocommerce_Pay_Per_Post_Restrict_Content
     public function show_paywall( $unfiltered_content ) : string
     {
         //TODO document 3.1.2
+        Woocommerce_Pay_Per_Post_Helper::logger( 'Post ID: ' . get_the_ID() . ' - Woocommerce_Pay_Per_Post_Restrict_Content/show_paywall()  Called.' );
         return '<div class="wc_ppp_paywall wc_ppp_paywall_' . get_the_ID() . '">' . $this->get_paywall_content( $unfiltered_content ) . '</div>';
     }
     
@@ -387,9 +392,27 @@ class Woocommerce_Pay_Per_Post_Restrict_Content
     protected function get_paywall_content( $unfiltered_content ) : string
     {
         global  $product_ids ;
-        if ( !is_array( $product_ids['product_ids'] ) || empty($product_ids['product_ids']) ) {
-            return $unfiltered_content;
+        Woocommerce_Pay_Per_Post_Helper::logger( 'Post ID: ' . get_the_ID() . ' - Woocommerce_Pay_Per_Post_Restrict_Content/get_paywall_content  - has been called.' );
+        // Checks if Divi or Beaver are on edit mode
+        $is_frontend_edit = !empty($_GET['et_fb']) || isset( $_GET['fl_builder'] );
+        // This filter should check for plugins that edit the content in the frontend!!!
+        $is_frontend_edit = apply_filters(
+            'wc_pay_for_post_is_frontend_edit',
+            $is_frontend_edit,
+            10,
+            1
+        );
+        
+        if ( is_user_logged_in() && $is_frontend_edit ) {
+            $user = wp_get_current_user();
+            
+            if ( in_array( 'administrator', (array) $user->roles ) || in_array( 'author', (array) $user->roles ) ) {
+                Woocommerce_Pay_Per_Post_Helper::logger( 'Post ID: ' . get_the_ID() . ' - Woocommerce_Pay_Per_Post_Restrict_Content/get_paywall_content  - DIVI is on edit mode. Returning unfiltered content.' );
+                return $unfiltered_content;
+            }
+        
         }
+        
         $default_paywall_content = get_option( WC_PPP_SLUG . '_restricted_content_default', _x( self::RESTRICT_CONTENT_DEFAULT_MESSAGE, 'wc_pay_per_post' ) );
         $override_paywall_content = get_post_meta( $this->post_id, WC_PPP_SLUG . '_restricted_content_override', true );
         $override_paywall_content = apply_filters(
@@ -399,8 +422,10 @@ class Woocommerce_Pay_Per_Post_Restrict_Content
             1
         );
         $paywall_content = ( empty($override_paywall_content) ? $default_paywall_content : $override_paywall_content );
-        $return_content = Woocommerce_Pay_Per_Post_Helper::replace_tokens( $paywall_content, $product_ids['product_ids'], $unfiltered_content );
-        return wpautop( do_shortcode( $return_content ) );
+        if ( isset( $product_ids['product_ids'] ) ) {
+            return wpautop( do_shortcode( Woocommerce_Pay_Per_Post_Helper::replace_tokens( $paywall_content, $product_ids['product_ids'], $unfiltered_content ) ) );
+        }
+        return wpautop( do_shortcode( $paywall_content ) );
     }
     
     /**
@@ -421,21 +446,21 @@ class Woocommerce_Pay_Per_Post_Restrict_Content
         
         if ( !empty($this->user_post_info['expiration_date']) ) {
             ?>
-                <script>
-                    const countDownDate = new Date('<?php 
+            <script>
+                const countDownDate = new Date('<?php 
             echo  $this->user_post_info['expiration_date']->format( Woocommerce_Pay_Per_Post_Helper::date_time_format() ) ;
             ?>').getTime();
-                    const x = setInterval(function () {
-                        const now = new Date().getTime();
-                        const distance = countDownDate - now;
-                        //console.log('remaining', Math.floor(distance / 1000 / 60));
-                        if (distance < 0) {
-                            clearInterval(x)
-                            location.reload()
-                        }
-                    }, 1000);
-                </script>
-			<?php 
+                const x = setInterval(function () {
+                    const now = new Date().getTime();
+                    const distance = countDownDate - now;
+                    //console.log('remaining', Math.floor(distance / 1000 / 60));
+                    if (distance < 0) {
+                        clearInterval(x)
+                        location.reload()
+                    }
+                }, 1000);
+            </script>
+		<?php 
         }
     
     }

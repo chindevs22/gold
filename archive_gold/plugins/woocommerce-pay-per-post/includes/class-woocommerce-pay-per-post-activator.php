@@ -1,6 +1,5 @@
 <?php
 
-/** @noinspection ALL */
 class Woocommerce_Pay_Per_Post_Activator
 {
     /**
@@ -14,26 +13,24 @@ class Woocommerce_Pay_Per_Post_Activator
         
         if ( !class_exists( 'WooCommerce' ) ) {
             deactivate_plugins( plugin_basename( __FILE__ ) );
-            wp_die( esc_html__( 'Please install and Activate WooCommerce.', 'wc_pay_per_post' ), 'Plugin dependency check', array(
+            wp_die( esc_html__( 'Please install and Activate WooCommerce.', 'wc_pay_per_post' ), 'Plugin dependency check', [
                 'back_link' => true,
-            ) );
+            ] );
         }
         
         self::defaults();
     }
     
-    /** @noinspection PhpUnnecessaryCurlyVarSyntaxInspection */
     private static function defaults()
     {
         global  $wpdb ;
         $post_types = get_option( 'wc_pay_per_post_custom_post_types' );
         // We check to see if we have any options set already, if we do not then we set our defaults.
-        // We do this so we do not overwrite existing custom posts if user deactivated / reactivated.
+        // We do this, so we do not overwrite existing custom posts if user deactivated / reactivated.
         if ( !$post_types || count( $post_types ) === 0 ) {
-            update_option( 'wc_pay_per_post_custom_post_types', array( 'post', 'page' ), false );
+            update_option( 'wc_pay_per_post_custom_post_types', [ 'post', 'page' ], false );
         }
         // Needs to upgrade?
-        /** @noinspection PhpUnnecessaryCurlyVarSyntaxInspection */
         $sql = "SELECT count((1)) as `ct` FROM {$wpdb->postmeta} where meta_key ='woocommerce_ppp_product_id'";
         $exists = (bool) $wpdb->get_var( $sql );
         $db_version = get_option( 'wc_pay_per_post_db_version' );

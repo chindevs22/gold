@@ -66,8 +66,10 @@ class MsLmsCourses extends Widget_Base {
 		require STM_LMS_ELEMENTOR_WIDGETS . '/courses/content/filter.php';
 		require STM_LMS_ELEMENTOR_WIDGETS . '/courses/content/sorting.php';
 		require STM_LMS_ELEMENTOR_WIDGETS . '/courses/content/pagination.php';
+		require STM_LMS_ELEMENTOR_WIDGETS . '/courses/content/carousel.php';
 		require STM_LMS_ELEMENTOR_WIDGETS . '/courses/content/card.php';
 		require STM_LMS_ELEMENTOR_WIDGETS . '/courses/content/popup.php';
+		require STM_LMS_ELEMENTOR_WIDGETS . '/courses/content/instructor.php';
 		require STM_LMS_ELEMENTOR_WIDGETS . '/courses/styles/title.php';
 		require STM_LMS_ELEMENTOR_WIDGETS . '/courses/styles/filter.php';
 		require STM_LMS_ELEMENTOR_WIDGETS . '/courses/styles/filter-toggle.php';
@@ -75,6 +77,7 @@ class MsLmsCourses extends Widget_Base {
 		require STM_LMS_ELEMENTOR_WIDGETS . '/courses/styles/sorting-style-two.php';
 		require STM_LMS_ELEMENTOR_WIDGETS . '/courses/styles/pagination-button.php';
 		require STM_LMS_ELEMENTOR_WIDGETS . '/courses/styles/pagination-pages.php';
+		require STM_LMS_ELEMENTOR_WIDGETS . '/courses/styles/navigation.php';
 		require STM_LMS_ELEMENTOR_WIDGETS . '/courses/styles/card.php';
 		require STM_LMS_ELEMENTOR_WIDGETS . '/courses/styles/card-excerpt.php';
 		require STM_LMS_ELEMENTOR_WIDGETS . '/courses/styles/card-infoblock.php';
@@ -98,6 +101,13 @@ class MsLmsCourses extends Widget_Base {
 		require STM_LMS_ELEMENTOR_WIDGETS . '/courses/styles/popup-wishlist.php';
 		require STM_LMS_ELEMENTOR_WIDGETS . '/courses/styles/popup-price.php';
 		require STM_LMS_ELEMENTOR_WIDGETS . '/courses/styles/no-courses-find.php';
+		require STM_LMS_ELEMENTOR_WIDGETS . '/courses/styles/instructor-background.php';
+		require STM_LMS_ELEMENTOR_WIDGETS . '/courses/styles/instructor-label.php';
+		require STM_LMS_ELEMENTOR_WIDGETS . '/courses/styles/instructor-view-all.php';
+		require STM_LMS_ELEMENTOR_WIDGETS . '/courses/styles/instructor-name.php';
+		require STM_LMS_ELEMENTOR_WIDGETS . '/courses/styles/instructor-position.php';
+		require STM_LMS_ELEMENTOR_WIDGETS . '/courses/styles/instructor-bio.php';
+		require STM_LMS_ELEMENTOR_WIDGETS . '/courses/styles/instructor-courses-title.php';
 	}
 
 	public function sorting_options( $value ) {
@@ -207,13 +217,217 @@ class MsLmsCourses extends Widget_Base {
 		);
 	}
 
+	public function sorting_term_options( $value ) {
+		$terms           = get_terms(
+			'stm_lms_course_taxonomy',
+			array(
+				'orderby'    => 'count',
+				'order'      => 'DESC',
+				'hide_empty' => true,
+			)
+		);
+		$sorting_options = array();
+		foreach ( $terms as $term ) {
+			$sorting_options[ $term->term_id ] = $term->name;
+		}
+		if ( ! empty( $value ) ) {
+			$array = array_filter(
+				$sorting_options,
+				function( $a ) use ( $value ) {
+					return $a === $value;
+				},
+				ARRAY_FILTER_USE_KEY
+			);
+			return $array[ $value ];
+		}
+	}
+
 	protected function get_widget_data( $type ) {
 		if ( ! empty( $type ) ) {
 			$widgets_data = array(
-				'courses-archive' => $this->courses_archive_data(),
+				'courses-archive'  => $this->courses_archive_data(),
+				'courses-grid'     => $this->courses_grid_data(),
+				'courses-carousel' => $this->courses_carousel_data(),
+				'featured-teacher' => $this->featured_teacher_data(),
 			);
 			return $widgets_data[ $type ];
 		}
+	}
+
+	protected function courses_carousel_data() {
+
+		$settings = $this->get_settings_for_display();
+
+		/* sorting options */
+		$sort_options = array();
+		if ( ! empty( $settings['sort_by_cat'] ) ) {
+			if ( ! empty( $settings['sort_options_by_cat'] ) ) {
+				foreach ( $settings['sort_options_by_cat'] as $option ) {
+					$sort_options[ intval( $option ) ] = $this->sorting_term_options( intval( $option ) );
+				}
+			}
+		} else {
+			if ( ! empty( $settings['sort_options'] ) ) {
+				foreach ( $settings['sort_options'] as $option ) {
+					$sort_options[ $option ] = $this->sorting_options( $option );
+				}
+			}
+		}
+		/* courses query */
+		$posts_per_page = ( empty( $settings['cards_to_show_choice'] ) || 'all' === $settings['cards_to_show_choice'] ) ? -1 : intval( $settings['cards_to_show'] );
+		$pp_featured    = ( empty( $settings['cards_to_show_choice_featured'] ) || 'all' === $settings['cards_to_show_choice_featured'] ) ? -1 : intval( $settings['cards_to_show_featured'] );
+		$default_args   = array(
+			'posts_per_page' => $posts_per_page,
+			'meta_query'     => array(
+				'relation' => 'AND',
+				'featured' => array(
+					'relation' => 'OR',
+					array(
+						'key'     => 'featured',
+						'value'   => 'on',
+						'compare' => '!=',
+					),
+					array(
+						'key'     => 'featured',
+						'compare' => 'NOT EXISTS',
+					),
+				),
+			),
+		);
+		if ( 'hide' !== $settings['cards_to_show_choice_featured'] ) {
+			$featured_args = array(
+				'posts_per_page' => $pp_featured,
+				'meta_query'     => array(
+					array(
+						'key'     => 'featured',
+						'value'   => 'on',
+						'compare' => '=',
+					),
+				),
+			);
+			$featured_args = apply_filters( 'stm_lms_filter_courses', $featured_args, array(), array(), $settings['sort_by'] );
+			if ( 0 !== $pp_featured ) {
+				$featured_courses = \STM_LMS_Courses::get_all_courses( $featured_args );
+			}
+		}
+		$default_args = apply_filters( 'stm_lms_filter_courses', $default_args, array(), array(), $settings['sort_by'] );
+		if ( 0 !== $posts_per_page ) {
+			$courses = \STM_LMS_Courses::get_all_courses( $default_args );
+		}
+		/* all options for templates */
+		$atts = array(
+			'show_header'         => $settings['show_header'],
+			'header_presets'      => $settings['header_presets'],
+			'title_text'          => $settings['title_text'],
+			'show_sorting'        => $settings['show_sorting'],
+			'sort_presets'        => $settings['sort_presets'],
+			'show_navigation'     => $settings['show_navigation'],
+			'navigation_presets'  => $settings['navigation_presets'],
+			'navigation_position' => $settings['navigation_position'],
+			'courses'             => $courses['posts'] ?? array(),
+			'featured_courses'    => $featured_courses['posts'] ?? array(),
+			'sorting_data'        => array(
+				'sort_options'        => $sort_options,
+				'sort_by'             => $settings['sort_by'],
+				'sort_options_by_cat' => $settings['sort_options_by_cat'] ?? '',
+			),
+		);
+
+		return $atts;
+	}
+
+	protected function courses_grid_data() {
+
+		$settings = $this->get_settings_for_display();
+
+		/* sorting options */
+		$sort_options = array();
+		if ( ! empty( $settings['sort_by_cat'] ) ) {
+			if ( ! empty( $settings['sort_options_by_cat'] ) ) {
+				foreach ( $settings['sort_options_by_cat'] as $option ) {
+					$sort_options[ intval( $option ) ] = $this->sorting_term_options( intval( $option ) );
+				}
+			}
+		} else {
+			if ( ! empty( $settings['sort_options'] ) ) {
+				foreach ( $settings['sort_options'] as $option ) {
+					$sort_options[ $option ] = $this->sorting_options( $option );
+				}
+			}
+		}
+		/* courses query */
+		$posts_per_page = ( empty( $settings['cards_to_show_choice'] ) || 'all' === $settings['cards_to_show_choice'] ) ? -1 : intval( $settings['cards_to_show'] );
+		$pp_featured    = ( empty( $settings['cards_to_show_choice_featured'] ) || 'all' === $settings['cards_to_show_choice_featured'] ) ? -1 : intval( $settings['cards_to_show_featured'] );
+		$default_args   = array(
+			'posts_per_page' => $posts_per_page,
+			'meta_query'     => array(
+				'relation' => 'AND',
+				'featured' => array(
+					'relation' => 'OR',
+					array(
+						'key'     => 'featured',
+						'value'   => 'on',
+						'compare' => '!=',
+					),
+					array(
+						'key'     => 'featured',
+						'compare' => 'NOT EXISTS',
+					),
+				),
+			),
+		);
+		$featured_args  = array(
+			'posts_per_page' => $pp_featured,
+			'meta_query'     => array(
+				array(
+					'key'     => 'featured',
+					'value'   => 'on',
+					'compare' => '=',
+				),
+			),
+		);
+		$featured_args  = apply_filters( 'stm_lms_filter_courses', $featured_args, array(), array(), $settings['sort_by'] );
+		if ( 0 !== $pp_featured ) {
+			$featured_courses = \STM_LMS_Courses::get_all_courses( $featured_args );
+		}
+		$default_args = apply_filters( 'stm_lms_filter_courses', $default_args, array(), array(), $settings['sort_by'] );
+		if ( 0 !== $posts_per_page ) {
+			$courses = \STM_LMS_Courses::get_all_courses( $default_args );
+		}
+		$total_pages = 1;
+		$total_posts = false;
+
+		if ( ! empty( $courses ) && is_array( $courses ) ) {
+			$total_pages = $courses['total_pages'];
+			$total_posts = $courses['total_posts'];
+		}
+
+		/* all options for templates */
+		$atts = array(
+			'show_header'        => $settings['show_header'],
+			'header_presets'     => $settings['header_presets'],
+			'title_text'         => $settings['title_text'],
+			'show_sorting'       => $settings['show_sorting'],
+			'sort_presets'       => $settings['sort_presets'],
+			'show_pagination'    => $settings['show_pagination'],
+			'pagination_presets' => $settings['pagination_presets'],
+			'courses'            => $courses['posts'] ?? array(),
+			'featured_courses'   => $featured_courses['posts'] ?? array(),
+			'sorting_data'       => array(
+				'sort_options'        => $sort_options,
+				'sort_by'             => $settings['sort_by'],
+				'sort_options_by_cat' => $settings['sort_options_by_cat'] ?? '',
+			),
+			'pagination_data'    => array(
+				'current_page'   => 1,
+				'total_pages'    => $total_pages,
+				'total_posts'    => $total_posts,
+				'posts_per_page' => $posts_per_page,
+				'offset'         => $posts_per_page,
+			),
+		);
+
+		return $atts;
 	}
 
 	protected function courses_archive_data() {
@@ -267,9 +481,7 @@ class MsLmsCourses extends Widget_Base {
 		if ( ! empty( $metas ) || ! empty( $terms ) ) {
 			$default_args['meta_query']['featured'] = array();
 		}
-
-		$default_args     = apply_filters( 'stm_lms_filter_courses', $default_args, $terms, $metas, $sort_by );
-		$featured_args    = array(
+		$featured_args = array(
 			'posts_per_page' => $pp_featured,
 			'meta_query'     => array(
 				array(
@@ -279,10 +491,15 @@ class MsLmsCourses extends Widget_Base {
 				),
 			),
 		);
-		$courses          = \STM_LMS_Courses::get_all_courses( $default_args );
-		$featured_courses = \STM_LMS_Courses::get_all_courses( $featured_args );
-		$total_pages      = 1;
-		$total_posts      = false;
+		if ( 0 !== $pp_featured ) {
+			$featured_courses = \STM_LMS_Courses::get_all_courses( $featured_args );
+		}
+		$default_args = apply_filters( 'stm_lms_filter_courses', $default_args, $terms, $metas, $sort_by );
+		if ( 0 !== $posts_per_page ) {
+			$courses = \STM_LMS_Courses::get_all_courses( $default_args );
+		}
+		$total_pages = 1;
+		$total_posts = false;
 
 		if ( ! empty( $courses ) && is_array( $courses ) ) {
 			$total_pages = $courses['total_pages'];
@@ -291,33 +508,65 @@ class MsLmsCourses extends Widget_Base {
 
 		/* all options for templates */
 		$atts = array(
-			'show_header'        => $settings['show_header'],
-			'header_presets'     => $settings['header_presets'],
-			'title_text'         => $settings['title_text'],
-			'show_sorting'       => $settings['show_sorting'],
-			'show_filter'        => $settings['show_filter'],
-			'sort_presets'       => $settings['sort_presets'],
-			'show_pagination'    => $settings['show_pagination'],
-			'pagination_presets' => $settings['pagination_presets'],
-			'courses'            => ( isset( $courses['posts'] ) ) ? $courses['posts'] : array(),
-			'featured_courses'   => ( isset( $featured_courses['posts'] ) ) ? $featured_courses['posts'] : array(),
-			'filter_data'        => array(
+			'show_header'         => $settings['show_header'],
+			'header_presets'      => $settings['header_presets'],
+			'title_text'          => $settings['title_text'],
+			'show_sorting'        => $settings['show_sorting'],
+			'show_filter'         => $settings['show_filter'],
+			'show_featured_block' => $settings['show_featured_block'],
+			'sort_presets'        => $settings['sort_presets'],
+			'show_pagination'     => $settings['show_pagination'],
+			'pagination_presets'  => $settings['pagination_presets'],
+			'courses'             => ( isset( $courses['posts'] ) ) ? $courses['posts'] : array(),
+			'featured_courses'    => ( isset( $featured_courses['posts'] ) ) ? $featured_courses['posts'] : array(),
+			'filter_data'         => array(
 				'filter_position' => $settings['filter_position'],
 				'filter_options'  => $filter_options,
 				'terms'           => $terms,
 				'metas'           => $metas,
 			),
-			'sorting_data'       => array(
+			'sorting_data'        => array(
 				'sort_options' => $sort_options,
 				'sort_by'      => $sort_by,
 			),
-			'pagination_data'    => array(
+			'pagination_data'     => array(
 				'current_page'   => $current_page,
 				'total_pages'    => $total_pages,
 				'total_posts'    => $total_posts,
 				'posts_per_page' => $posts_per_page,
 				'offset'         => $posts_per_page,
 			),
+		);
+
+		return $atts;
+	}
+
+	protected function featured_teacher_data() {
+
+		$settings = $this->get_settings_for_display();
+
+		/* courses query */
+		$posts_per_page = ( empty( $settings['cards_to_show_choice'] ) || 'all' === $settings['cards_to_show_choice'] ) ? -1 : intval( $settings['cards_to_show'] );
+		$default_args   = array(
+			'posts_per_page' => $posts_per_page,
+			'author__in'     => array( $settings['instructor_choice'] ),
+		);
+		$default_args   = apply_filters( 'stm_lms_filter_courses', $default_args, array(), array(), $settings['sort_by'] );
+		if ( 0 !== $posts_per_page ) {
+			$courses = \STM_LMS_Courses::get_all_courses( $default_args );
+		}
+
+		/* all options for templates */
+		$atts = array(
+			'courses'                  => $courses['posts'] ?? array(),
+			'instructor'               => \STM_LMS_User::get_current_user( $settings['instructor_choice'], false, true ),
+			'label'                    => $settings['instructor_label'],
+			'show_instructor_label'    => $settings['show_instructor_label'],
+			'show_instructor_position' => $settings['show_instructor_position'],
+			'show_instructor_bio'      => $settings['show_instructor_bio'],
+			'show_view_all'            => $settings['show_view_all'],
+			'view_all_text'            => $settings['view_all_text'],
+			'view_all_url'             => $settings['view_all_url'],
 		);
 
 		return $atts;
@@ -335,6 +584,12 @@ class MsLmsCourses extends Widget_Base {
 			<?php
 		}
 
+		/* slider add if carousel type */
+		if ( 'courses-carousel' === $settings['type'] ) {
+			wp_enqueue_style( 'ms_lms_courses_carousel', STM_LMS_URL . 'assets/vendors/swiper-bundle.min.css', array(), STM_LMS_VERSION, false );
+			wp_enqueue_script( 'ms_lms_courses_carousel', STM_LMS_URL . 'assets/vendors/swiper-bundle.min.js', array( 'elementor-frontend' ), STM_LMS_VERSION, true );
+		}
+
 		/* card's & popup's slots */
 		$meta_slots = array(
 			'card_slot_1'  => $settings['card_slot_1'],
@@ -349,6 +604,7 @@ class MsLmsCourses extends Widget_Base {
 		/* card options for templates */
 		$atts = array(
 			'course_card_presets' => $settings['course_card_presets'],
+			'widget_type'         => $settings['type'],
 			'meta_slots'          => $meta_slots,
 			'card_data'           => array(
 				'show_popup'        => $settings['show_popup'],

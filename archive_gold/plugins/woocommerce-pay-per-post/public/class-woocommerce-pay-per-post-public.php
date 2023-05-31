@@ -82,9 +82,9 @@ class Woocommerce_Pay_Per_Post_Public
     /**
      * @param $unfiltered_content
      *
-     * @return string
+     * @return mixed|string
      */
-    public function restrict_content( $unfiltered_content ) : string
+    public function restrict_content( $unfiltered_content )
     {
         $post_id = get_the_ID();
         Woocommerce_Pay_Per_Post_Helper::logger( 'Post ID: ' . $post_id . ' - Woocommerce_Pay_Per_Post_Public/restrict_content() called' );
@@ -96,6 +96,7 @@ class Woocommerce_Pay_Per_Post_Public
             $check_archive = is_archive();
         }
         
+        Woocommerce_Pay_Per_Post_Helper::logger( 'Post ID: ' . $post_id . ' - Woocommerce_Pay_Per_Post_Public/restrict_content() $show_paywall_in_archives() = ' . var_export( $show_paywall_in_archives, true ) );
         //ensure that our filter only runs one time
         
         if ( $check_archive && !in_the_loop() && !is_singular() && !is_main_query() && Woocommerce_Pay_Per_Post_Helper::is_an_allowed_protected_post_type() ) {
@@ -114,7 +115,7 @@ class Woocommerce_Pay_Per_Post_Public
         
         //check and see if inline shortcode exists, if it does skip
         
-        if ( strpos( $unfiltered_content, '[/wc-pay-for-post-inline]' ) ) {
+        if ( strpos( get_the_content(), '[/wc-pay-for-post-inline]' ) ) {
             Woocommerce_Pay_Per_Post_Helper::logger( 'Post ID: ' . $post_id . ' - Woocommerce_Pay_Per_Post_Public/restrict_content() - skipping - Inline Shortcode Present' );
             // Handle shortcode access
             return $unfiltered_content;
@@ -122,7 +123,7 @@ class Woocommerce_Pay_Per_Post_Public
             $restrict = new Woocommerce_Pay_Per_Post_Restrict_Content( $post_id );
             $show_paywall = apply_filters( 'wc_pay_per_post_force_bypass_paywall', $restrict->can_user_view_content() );
             
-            if ( $show_paywall == false ) {
+            if ( $show_paywall === false ) {
                 Woocommerce_Pay_Per_Post_Helper::logger( 'Post ID: ' . $post_id . ' - Woocommerce_Pay_Per_Post_Public/restrict_content() - $show_paywall is FALSE displaying full content' );
                 return $restrict->show_content( $unfiltered_content );
             }

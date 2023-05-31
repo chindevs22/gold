@@ -16,7 +16,7 @@ class Loader {
 	public $starter_theme_version    = '1.0.0';
 	public $starter_theme_slug       = 'starter_lms_demo_installer';
 	public $child_starter_theme_slug = 'ms-lms-starter-theme-child';
-	private $ms_lms_themes           = array( 'smarty', 'masterstudy', 'betop', 'starter-text-domain' );
+	private $ms_lms_themes           = array( 'smarty', 'masterstudy', 'globalstudy', 'betop', 'starter-text-domain' );
 
 	protected function get_current_theme_text_domain() {
 		$current_theme = wp_get_theme();
@@ -240,7 +240,7 @@ class Loader {
 
 		echo '<div class="notice notice-info is-dismissible">
 				<p class="install-text">' . esc_html( __( 'Thank you for installing the Masterstudy LMS Plugin. What to do next, try the ', 'masterstudy-lms-learning-management-system' ) ) . '<b>' . esc_html( __( 'Masterstudy Starter Theme.', 'masterstudy-lms-learning-management-system' ) ) . '</b>  &nbsp;</p>
-				<p> 
+				<p>
 				<button class="buttonload button starter_install_theme_btn" name="starter_install_theme_btn" >
 				  <span class="ui-button-text">' . esc_html( __( 'Install Now', 'masterstudy-lms-learning-management-system' ) ) . '</span>
 					<i class="fa fa-refresh fa-spin installing"></i>

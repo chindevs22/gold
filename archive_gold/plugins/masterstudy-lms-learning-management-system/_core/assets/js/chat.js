@@ -10,6 +10,7 @@
           conversations: [],
           conversation: '',
           myMessage: '',
+          myResponse: '',
           loading: false,
           updating: false
         };
@@ -75,8 +76,13 @@
             vm.loading = true;
             this.$http.get(url).then(function (response) {
               vm.getMessages(vm.conversations[vm.conversation]['conversation_info']['conversation_id'], true, true);
-              vm.loading = false;
+
+              if (response.body.response && response.body.status === 'error') {
+                vm['myResponse'] = response.body.response;
+              }
+
               vm['myMessage'] = '';
+              vm.loading = false;
             });
           }
         }

@@ -1,6 +1,6 @@
 <?php
 /*
-Version: 0.7
+Version: 0.8
 Text Domain: wordpress-importer
 */
 

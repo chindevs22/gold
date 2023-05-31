@@ -1,0 +1,24 @@
+{
+    "name": "masterstudy/lms-pro",
+    "description": "MasterStudy LMS PRO – Learning Management System WordPress Plugin for Online Courses",
+    "homepage": "https://masterstudy.stylemixthemes.com/lms-plugin/",
+    "license": "GPL-2.0-or-later",
+    "version": "3.9.2",
+    "type": "wordpress-plugin",
+    "require": {
+        "php": "^7.4 || 8.0 - 8.1",
+        "ext-json": "*",
+        "ext-zip": "*"
+    },
+    "require-dev": {
+    },
+    "autoload": {
+        "psr-4": {
+            "MasterStudy\\Lms\\Pro\\addons\\": "addons/"
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true
+    }
+}

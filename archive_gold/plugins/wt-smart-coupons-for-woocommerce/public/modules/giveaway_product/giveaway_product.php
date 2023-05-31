@@ -414,7 +414,12 @@ class Wt_Smart_Coupon_Giveaway_Product_Public extends Wt_Smart_Coupon_Giveaway_P
      */
     public function check_to_add_giveaway($cart_item_key, $quantity, $old_quantity, $cart)
     {
-        $cart_item_data=$cart->cart_contents[$cart_item_key];
+        $cart_item_data = isset($cart->cart_contents[$cart_item_key]) ? $cart->cart_contents[$cart_item_key] : null;
+        
+        if(is_null($cart_item_data))
+        {
+            return;
+        }
         if(self::is_a_free_item($cart_item_data))
         {
             return; /* already a free item so no need to check */
@@ -1428,14 +1433,10 @@ class Wt_Smart_Coupon_Giveaway_Product_Public extends Wt_Smart_Coupon_Giveaway_P
                     {
                         if(self::is_a_free_item($cart_item, $coupon_code)) /* a free item under the given coupon */
                         {
-                            $item_id=0;
-                            if($cart_item['variation_id']>0 && isset($bogo_products[$cart_item['variation_id']]))
-                            {
-                                $item_id=$cart_item['variation_id'];
-                            }elseif(isset($bogo_products[$cart_item['product_id']]))
-                            {
-                                $item_id=$cart_item['product_id'];
-                            }
+                            /**
+                            * @since 1.4.5
+                            */
+                            $item_id = $this->check_giveaway_id_match_on_multi_lang_site($cart_item, $coupon_id, $bogo_products);
 
                             if($item_id>0)
                             {
@@ -1745,6 +1746,167 @@ class Wt_Smart_Coupon_Giveaway_Product_Public extends Wt_Smart_Coupon_Giveaway_P
     public function check_and_add_giveaway_on_add_to_cart($cart_item_key, $product_id, $quantity, $variation_id, $variation, $cart_item_data)
     {
         $this->check_to_add_giveaway($cart_item_key, $quantity, 0, WC()->cart);
+    }
+
+    /**
+     *  Check cart `giveaway product id` and coupon `giveaway product id` to confirm the current giveaway item belongs to the coupon.
+     *  When a multi language plugin(WPML) is active then the function will compare ids of all languages with giveaway product ids to get a match
+     * 
+     *  @since 1.4.5
+     *  @param $cart_item       array       Cart item array
+     *  @param $coupon_id       int         Id of coupon
+     *  @param $bogo_products   array       Associative array of giveaway products and its data
+     *  @return $item_id        int         If any match found then the matched ID will return otherwise 0
+     */
+    private function check_giveaway_id_match_on_multi_lang_site($cart_item, $coupon_id, $bogo_products = null)
+    {
+        $bogo_products = is_null($bogo_products) ? self::get_all_bogo_giveaway_products($coupon_id) : $bogo_products;
+        $item_id = 0;
+        
+        if(0 < $cart_item['variation_id'] && isset($bogo_products[$cart_item['variation_id']]))
+        {
+            $item_id = $cart_item['variation_id'];
+
+        }elseif(isset($bogo_products[$cart_item['product_id']]))
+        {
+            $item_id = $cart_item['product_id'];
+        }
+
+        /**
+         *  For multi language compatibility
+         */
+        if(0 === $item_id)
+        {
+           
+            $multi_lang_obj = Wt_Smart_Coupon_Mulitlanguage::get_instance();
+
+            if($multi_lang_obj->is_multilanguage_plugin_active())
+            {
+                $bogo_product_ids = array_keys($bogo_products); //product ids
+
+                if(0 < $cart_item['variation_id']) //variable product
+                {
+                    /**
+                     *  Take ids of all languages
+                     */
+                    $all_lang_ids = $multi_lang_obj->get_all_translations($cart_item['variation_id'], 'post_product');
+
+                    if(!empty($all_lang_ids) && !empty($matching_ids = array_intersect($all_lang_ids, $bogo_product_ids)))
+                    {
+                        $item_id = (int) reset($matching_ids); //take first item
+                    }
+                }
+
+                if(0 === $item_id)
+                {  
+                    /**
+                     *  Take ids of all languages
+                     */
+                    $all_lang_ids = $multi_lang_obj->get_all_translations($cart_item['product_id'], 'post_product');
+
+                    if(!empty($all_lang_ids) && !empty($matching_ids = array_intersect($all_lang_ids, $bogo_product_ids)))
+                    {
+                        $item_id = (int) reset($matching_ids); //take first item
+                    }
+                }
+            }
+        }
+
+        return $item_id;
+    }
+
+    /**
+     *  Get all giveaway product ids for cart operations.
+     * 
+     *  @since 1.4.5
+     *  @param $post_id     int     Id of coupon
+     *  @return $free_products     array     Array of giveaway product ids. Product ids will be updated to current language product ids if multi language plugin(WPML) is active
+     */
+    public static function get_giveaway_products($post_id)
+    {
+        $free_products = parent::get_giveaway_products($post_id);
+        $free_products_original = $free_products; //assumes main language product id
+
+        $multi_lang_obj = Wt_Smart_Coupon_Mulitlanguage::get_instance();
+
+        if($multi_lang_obj->is_multilanguage_plugin_active())
+        {
+            $out = array();
+
+            foreach($free_products as $product_id)
+            {
+                /**
+                 *  Take id of product in the current language.
+                 * 
+                 *  @param  $product_id         int     Id of product
+                 *  @param  post type           string  Post type
+                 *  @param  Return original     bool    Return original if no translation found in the current language. Default: false
+                 * 
+                 */
+                $out[] = apply_filters('wpml_object_id', $product_id, 'product', TRUE);
+            }
+            
+            $free_products = $out;
+        }
+
+        /**
+         *  Alter BOGO product ids for cart (Only applicable for frontend functionalities)
+         * 
+         *  @param  $free_products              array       Array of giveaway product ids. Product ids of this array was converted to current language ids if any multi lang plugin(WPML) exists.
+         *  @param  $post_id                    int         Id of coupon
+         *  @param  $free_products_original     array       Array of giveaway product ids. Here the product ids are the ids configured by admin from backend.
+         * 
+         */
+        return apply_filters('wt_sc_alter_bogo_giveaway_product_ids_for_cart', $free_products, $post_id, $free_products_original);
+    }
+
+
+    /**
+     *  Get all giveaway products and its data for cart operations.
+     * 
+     *  @since 1.4.5
+     *  @param $post_id     int     Id of coupon
+     *  @return $bogo_products     array     Associative array of giveaway products and its data. Product ids will be updated to current language product ids if multi language plugin(WPML) is active
+     */
+    public static function get_all_bogo_giveaway_products($post_id)
+    {
+        $bogo_products = parent::get_all_bogo_giveaway_products($post_id);
+        $bogo_products_original = $bogo_products; //assumes main language product id
+
+       
+        $multi_lang_obj = Wt_Smart_Coupon_Mulitlanguage::get_instance();
+
+        if($multi_lang_obj->is_multilanguage_plugin_active())
+        {
+            $out = array();
+
+            foreach($bogo_products as $product_id => $product_data)
+            {
+                /**
+                 *  Take id of product in the current language.
+                 * 
+                 *  @param  $product_id         int     Id of product
+                 *  @param  post type           string  Post type
+                 *  @param  Return original     bool    Return original if no translation found in the current language. Default: false
+                 * 
+                 */
+                $product_id = apply_filters('wpml_object_id', $product_id, 'product', TRUE);
+
+                $out[$product_id] = $product_data;
+            }
+            
+            $bogo_products = $out;
+        }
+
+        /**
+         *  Alter BOGO products data for cart (Only applicable for frontend functionalities)
+         * 
+         *  @param  $bogo_products              array       An associative array of giveaway products and its giveaway data. Product ids of this array was converted to current language ids if any multi lang plugin(WPML) exists.
+         *  @param  $post_id                    int         Id of coupon
+         *  @param  $bogo_products_original     array       An associative array of giveaway products and its giveaway data. Here the product ids are the ids configured by admin from backend.
+         * 
+         */
+        return apply_filters('wt_sc_alter_bogo_giveaway_products_for_cart', $bogo_products, $post_id, $bogo_products_original);
     }
 }
 Wt_Smart_Coupon_Giveaway_Product_Public::get_instance();

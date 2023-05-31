@@ -31,7 +31,7 @@ class STM_LMS_User_Manager_Add_User {
 			);
 		}
 
-		$adding = STM_LMS_Instructor::_add_student_to_course( array( $course_id ), array( $email ) );
+		$adding = STM_LMS_Instructor::add_student_to_course( array( $course_id ), array( $email ) );
 
 		if ( ! $adding['error'] ) {
 			$adding['status'] = 'success';

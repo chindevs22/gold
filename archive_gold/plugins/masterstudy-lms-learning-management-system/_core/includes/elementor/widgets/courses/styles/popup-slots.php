@@ -23,7 +23,7 @@ $this->add_group_control(
 	Group_Control_Typography::get_type(),
 	array(
 		'name'     => 'style_popup_slots_typography',
-		'selector' => '{{WRAPPER}} .ms_lms_courses_card_item_popup_meta .ms_lms_courses_card_item_meta_block',
+		'selector' => '{{WRAPPER}} .ms_lms_courses_card_item_popup_meta .ms_lms_courses_card_item_meta_block span',
 	)
 );
 $this->add_control(

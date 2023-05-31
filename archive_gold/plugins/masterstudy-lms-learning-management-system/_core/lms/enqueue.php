@@ -9,6 +9,8 @@ function stm_lms_wp_head() {    ?>
 	<script type="text/javascript">
 		var stm_lms_ajaxurl = '<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>';
 		var stm_lms_resturl = '<?php echo rest_url( 'stm-lms/v1', 'json' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>';
+		var ms_lms_resturl = '<?php echo rest_url( 'masterstudy-lms/v2', 'json' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>';
+		var ms_lms_nonce = '<?php echo wp_create_nonce( 'wp_rest' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>';
 	</script>
 
 	<style>

@@ -130,7 +130,7 @@ class STM_LMS_Multi_Instructors {
 					'views'        => STM_LMS_Course::get_course_views( $id ),
 					'simple_price' => $price,
 					'price'        => STM_LMS_Helpers::display_price( $price ),
-					'edit_link'    => apply_filters( 'stm_lms_course_edit_link', admin_url( "post.php?post={$id}&action=edit" ), $id ),
+					'edit_link'    => ms_plugin_manage_course_url() . "/$id",
 					'post_status'  => $post_status,
 				);
 

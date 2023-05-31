@@ -44,3 +44,21 @@ if ( mslms_verify() ) {
 		}
 	}
 }
+
+add_filter(
+	'masterstudy_lms_plugin_addons',
+	function ( $addons ) {
+		return array_merge(
+			$addons,
+			array(
+				new \MasterStudy\Lms\Pro\addons\assignments\Assignments(),
+				new \MasterStudy\Lms\Pro\addons\sequential_drip_content\DripContent(),
+				new \MasterStudy\Lms\Pro\addons\live_streams\LiveStreams(),
+				new \MasterStudy\Lms\Pro\addons\prerequisite\Prerequisite(),
+				new \MasterStudy\Lms\Pro\addons\scorm\Scorm(),
+				new \MasterStudy\Lms\Pro\addons\shareware\Shareware(),
+				new \MasterStudy\Lms\Pro\addons\zoom_conference\ZoomConference(),
+			)
+		);
+	}
+);

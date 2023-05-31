@@ -44,7 +44,7 @@ if ( ! empty( $taxonomy ) ) :
 				<div class="stm_lms_courses_category stm_lms_courses_category__<?php echo esc_attr( $key ); ?> stm_lms_courses_category_<?php echo esc_attr( $class ); ?>">
 			<?php endif; ?>
 
-				<a href="<?php echo esc_url( get_term_link( $term, 'stm_lms_course_taxonomy' ) ); ?>"
+				<a href="<?php echo esc_url( STM_LMS_Course::courses_page_url() . '?terms[]=' . $term->term_id . '&category[]=' . $term->term_id ); ?>"
 					title="<?php echo esc_attr( $term->name ); ?>"
 					class="no_deco <?php echo esc_attr( $class ); ?>">
 

@@ -16,14 +16,8 @@ function stm_theme_import_content( $layout, $builder = 'js_composer' ) {
 
 	if ( 'elementor' === $builder ) {
 		if ( defined( 'STM_DEV_MODE' ) ) {
-			if ( 'default' === $layout ) {
-				consulting_upload_placeholder();
-			}
 			$ready = STM_POST_TYPE_PATH . '/importer/demos/elementor/elementor-' . $layout . '.xml';
 		} else {
-			if ( 'default' === $layout ) {
-				consulting_upload_placeholder();
-			}
 			$ready = prepare_demo( $builder . '-' . $layout );
 		}
 	} else {

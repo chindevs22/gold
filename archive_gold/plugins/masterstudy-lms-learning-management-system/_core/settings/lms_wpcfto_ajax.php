@@ -284,7 +284,7 @@ class STM_LMS_WPCFTO_AJAX {
 		$result['is_edit']    = false;
 		$result['title']      = html_entity_decode( get_the_title( $result['id'] ) );
 		$result['post_type']  = $post_type;
-		$result['edit_link']  = html_entity_decode( get_edit_post_link( $result['id'] ) );
+		$result['edit_link']  = html_entity_decode( ms_plugin_edit_item_url( $result['id'], $post_type ) );
 
 		$result = apply_filters( 'stm_lms_wpcfto_create_question', $result, array( $post_type ) );
 
@@ -371,7 +371,9 @@ class STM_LMS_WPCFTO_AJAX {
 				foreach ( $fields as $field_key => $field ) {
 					if ( isset( $question[ $field_key ] ) ) {
 						foreach ( $question[ $field_key ] as $index => $value ) {
-							$question[ $field_key ][ $index ]['text'] = sanitize_text_field( wp_slash( $value['text'] ) );
+							if ( is_array( $question[ $field_key ][ $index ] ) ) {
+								$question[ $field_key ][ $index ]['text'] = sanitize_text_field( wp_slash( $value['text'] ) );
+							}
 						}
 
 						$r[ $field_key ] = update_post_meta( $post_id, $field_key, $question[ $field_key ] );

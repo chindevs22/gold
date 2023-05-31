@@ -20,6 +20,131 @@ class Woocommerce_Pay_Per_Post_Admin
     {
     }
     
+    public function admin_init()
+    {
+        //Register Options
+        $this->options_init();
+        //Load Block Editor
+        $this->load_block_editor();
+    }
+    
+    public function load_block_editor()
+    {
+        if ( get_option( WC_PPP_SLUG . '_block_editor_enabled', true ) ) {
+            
+            if ( Woocommerce_Pay_Per_Post_Helper::allowed_roles_for_meta_box() ) {
+                $this->check_requirements_for_selected_custom_post_types();
+                $this->wp_editor_integration_register_post_meta();
+                add_action( 'enqueue_block_editor_assets', [ $this, 'enqueue_wp_editor_integration_scripts' ] );
+            }
+        
+        }
+    }
+    
+    public function check_requirements_for_selected_custom_post_types()
+    {
+        $failed = [];
+        foreach ( $this->get_post_types() as $post_type ) {
+            if ( false === post_type_supports( $post_type, 'custom-fields' ) ) {
+                $failed[] = $post_type;
+            }
+        }
+        
+        if ( count( $failed ) > 0 ) {
+            $message = 'In order to utilize the Block Editor and Pay for Post on the <code>' . implode( ', ', $failed ) . '</code> custom post type(s), you must enable <a href="https://developer.wordpress.org/reference/functions/add_post_type_support/" target="_blank">custom field support</a> for the custom post types or utilize disable Block Editor Integration in the <a href="' . admin_url() . '/admin.php?page=wc_pay_per_post-settings">Settings</a>';
+            add_action( 'admin_notices', function () use( $message ) {
+                echo  '<div class="notice notice-error is-dismissible"><p>' . $message . '</p></div>' ;
+            } );
+        }
+    
+    }
+    
+    public function edit_post_block_editor( $post_id, $post_data )
+    {
+        $ppp_document_settings_meta = get_post_meta( $post_id, '_ppp_document_settings_meta', true );
+        $ppp_document_settings_meta = ( !empty($ppp_document_settings_meta) ? json_decode( $ppp_document_settings_meta ) : [] );
+        $ppp_document_protected_ids = $ppp_document_settings_meta->product_ids ?? [];
+        $protected_ids = [];
+        foreach ( $ppp_document_protected_ids as $data ) {
+            $protected_ids[] = $data->value;
+        }
+        $protected_ids = $this->sanitize_product_ids( $protected_ids );
+        update_post_meta( $post_id, WC_PPP_SLUG . '_product_ids', $protected_ids );
+    }
+    
+    public function enqueue_wp_editor_integration_scripts()
+    {
+        
+        if ( 'post' === WP_Screen::get()->base ) {
+            global  $post ;
+            $id = $post->ID;
+            $selected_product_ids = get_post_meta( $id, WC_PPP_SLUG . '_product_ids', true );
+            $delay_restriction_enable = get_post_meta( $id, WC_PPP_SLUG . '_delay_restriction_enable', true );
+            $delay_restriction = get_post_meta( $id, WC_PPP_SLUG . '_delay_restriction', true );
+            $delay_restriction_frequency = get_post_meta( $id, WC_PPP_SLUG . '_delay_restriction_frequency', true );
+            $page_view_restriction_enable = get_post_meta( $id, WC_PPP_SLUG . '_page_view_restriction_enable', true );
+            $page_view_restriction = get_post_meta( $id, WC_PPP_SLUG . '_page_view_restriction', true );
+            $page_view_restriction_frequency = get_post_meta( $id, WC_PPP_SLUG . '_page_view_restriction_frequency', true );
+            $page_view_restriction_enable_time_frame = get_post_meta( $id, WC_PPP_SLUG . '_page_view_restriction_enable_time_frame', true );
+            $page_view_restriction_time_frame = get_post_meta( $id, WC_PPP_SLUG . '_page_view_restriction_time_frame', true );
+            $expire_restriction_enable = get_post_meta( $id, WC_PPP_SLUG . '_expire_restriction_enable', true );
+            $expire_restriction = get_post_meta( $id, WC_PPP_SLUG . '_expire_restriction', true );
+            $expire_restriction_frequency = get_post_meta( $id, WC_PPP_SLUG . '_expire_restriction_frequency', true );
+            $show_warnings = get_post_meta( $id, WC_PPP_SLUG . '_show_warnings', true );
+            $wc_products = Woocommerce_Pay_Per_Post_Helper::get_products();
+            $productIds = [];
+            $productTitles = [];
+            foreach ( $wc_products as $product ) {
+                $productIds[] = (string) $product['ID'];
+                $productTitles[] = $product['post_title'] . ' - [#' . $product['ID'] . ']';
+            }
+            $wcppp_freemius_upgrade_url = ( wcppp_freemius()->is_not_paying() && !wcppp_freemius()->is_trial() ? wcppp_freemius()->get_upgrade_url() : '' );
+            $can_use_premium_code = wcppp_freemius()->is__premium_only() && wcppp_freemius()->can_use_premium_code();
+            wp_enqueue_script(
+                WC_PPP_SLUG . '_wp-editor-integration-js',
+                plugin_dir_url( __FILE__ ) . 'wp-editor-integration/build/index.js',
+                null,
+                null,
+                true
+            );
+            wp_enqueue_style( WC_PPP_SLUG . '_admin' );
+            wp_localize_script( WC_PPP_SLUG . '_wp-editor-integration-js', 'wpEditorIntegrationObj', [
+                'selected_product_ids'                    => $selected_product_ids,
+                'productIds'                              => $productIds,
+                'productTitles'                           => $productTitles,
+                'adminUrl'                                => get_admin_url(),
+                'wcppp_freemius_upgrade_url'              => $wcppp_freemius_upgrade_url,
+                'upgrade_url_image_base'                  => plugin_dir_url( __DIR__ ) . 'admin/img/',
+                'can_use_premium_code'                    => $can_use_premium_code,
+                'delay_restriction_enable'                => $delay_restriction_enable,
+                'delay_restriction'                       => $delay_restriction,
+                'delay_restriction_frequency'             => $delay_restriction_frequency,
+                'page_view_restriction_enable'            => $page_view_restriction_enable,
+                'page_view_restriction'                   => $page_view_restriction,
+                'page_view_restriction_frequency'         => $page_view_restriction_frequency,
+                'page_view_restriction_enable_time_frame' => $page_view_restriction_enable_time_frame,
+                'page_view_restriction_time_frame'        => $page_view_restriction_time_frame,
+                'expire_restriction_enable'               => $expire_restriction_enable,
+                'expire_restriction'                      => $expire_restriction,
+                'expire_restriction_frequency'            => $expire_restriction_frequency,
+                'show_warnings'                           => $show_warnings,
+                'post_types'                              => Woocommerce_Pay_Per_Post_Helper::get_post_types(),
+            ] );
+        }
+    
+    }
+    
+    public function wp_editor_integration_register_post_meta()
+    {
+        register_meta( 'post', '_ppp_document_settings_meta', [
+            'auth_callback' => '__return_true',
+            'default'       => '',
+            'show_in_rest'  => true,
+            'single'        => true,
+            'type'          => 'string',
+        ] );
+    }
+    
     public function add_plugin_options()
     {
         global  $wp_version ;
@@ -119,32 +244,32 @@ class Woocommerce_Pay_Per_Post_Admin
     public function admin_menu_separator_styles()
     {
         ?>
-            <style>
-                .pramadillo-admin-separator-container {
-                    display: flex;
-                    height: 12px;
-                    align-items: center;
-                    margin: 0 -10px 0 0;
-                }
+        <style>
+            .pramadillo-admin-separator-container {
+                display: flex;
+                height: 12px;
+                align-items: center;
+                margin: 0 -10px 0 0;
+            }
 
-                .pramadillo-admin-separator-container .pramadillo-admin-separator-title {
-                    font-size: .68em;
-                    text-transform: uppercase;
-                    font-weight: 700;
-                    margin-right: 10px;
-                    color: hsla(0, 0%, 100%, .25);
-                }
+            .pramadillo-admin-separator-container .pramadillo-admin-separator-title {
+                font-size: .68em;
+                text-transform: uppercase;
+                font-weight: 700;
+                margin-right: 10px;
+                color: hsla(0, 0%, 100%, .25);
+            }
 
-                .pramadillo-admin-separator-container .pramadillo-admin-separator {
-                    display: block;
-                    flex: 1;
-                    padding: 0;
-                    height: 1px;
-                    line-height: 1px;
-                    background: hsla(0, 0%, 100%, .125);
-                }
-            </style>
-			<?php 
+            .pramadillo-admin-separator-container .pramadillo-admin-separator {
+                display: block;
+                flex: 1;
+                padding: 0;
+                height: 1px;
+                line-height: 1px;
+                background: hsla(0, 0%, 100%, .125);
+            }
+        </style>
+		<?php 
     }
     
     public function ajax_post_types() : array
@@ -167,9 +292,12 @@ class Woocommerce_Pay_Per_Post_Admin
         register_setting( WC_PPP_SLUG . '_settings', WC_PPP_SLUG . '_allow_admins_access_to_protected_posts' );
         register_setting( WC_PPP_SLUG . '_settings', WC_PPP_SLUG . '_enable_debugging' );
         register_setting( WC_PPP_SLUG . '_settings', WC_PPP_SLUG . '_delete_settings' );
+        register_setting( WC_PPP_SLUG . '_settings', WC_PPP_SLUG . '_block_editor_enabled', [
+            'type'    => 'boolean',
+            'default' => 1,
+        ] );
     }
     
-    /** @noinspection PhpIncludeInspection */
     public function create_options_page()
     {
         global  $wcppp_freemius ;
@@ -197,7 +325,8 @@ class Woocommerce_Pay_Per_Post_Admin
         if ( isset( $_GET['delete_log_nonce'] ) && wp_verify_nonce( $_GET['delete_log_nonce'], 'delete_log' ) ) {
             $log = new Woocommerce_Pay_Per_Post_Logger();
             $log->delete_log_file();
-            echo  '<script>alert("Log File Deleted");</script>' ;
+            //echo '<script>alert("Log File Deleted");</script>';
+            wp_safe_redirect( admin_url( 'options-general.php?page=' . WC_PPP_SLUG ) );
         }
         
         require_once plugin_dir_path( __FILE__ ) . 'partials/settings.php';
@@ -209,7 +338,6 @@ class Woocommerce_Pay_Per_Post_Admin
         wp_enqueue_style( WC_PPP_SLUG . '_select2' );
         wp_enqueue_script( WC_PPP_SLUG . '_select2' );
         wp_enqueue_script( WC_PPP_SLUG . '_admin' );
-        /** @noinspection PhpIncludeInspection */
         require_once plugin_dir_path( __FILE__ ) . 'partials/help.php';
     }
     
@@ -243,14 +371,12 @@ class Woocommerce_Pay_Per_Post_Admin
                 }
                 $data[$post->ID]['users'] = call_user_func_array( 'array_merge', $users );
             }
-            /** @noinspection PhpIncludeInspection */
             require_once plugin_dir_path( __FILE__ ) . 'partials/protected-content.php';
         }
     
     }
     
     /** @noinspection PhpUnnecessaryCurlyVarSyntaxInspection
-     * @noinspection PhpUnnecessaryCurlyVarSyntaxInspection
      */
     protected function get_users_by_product_id( $product_id ) : array
     {
@@ -271,7 +397,6 @@ class Woocommerce_Pay_Per_Post_Admin
         $transients = Woocommerce_Pay_Per_Post_Debug::get_transients();
         
         if ( isset( $_POST['wc_ppp_create_table_nonce'] ) && wp_verify_nonce( $_POST['wc_ppp_create_table_nonce'], 'wc_ppp_create_table' ) ) {
-            /** @noinspection PhpIncludeInspection */
             require_once WC_PPP_PATH . '/includes/class-woocommerce-pay-per-post-activator.php';
             Woocommerce_Pay_Per_Post_Activator::create_table__premium_only();
         }
@@ -279,14 +404,12 @@ class Woocommerce_Pay_Per_Post_Admin
         if ( isset( $_POST['wc_ppp_delete_transients_nonce'] ) && wp_verify_nonce( $_POST['wc_ppp_delete_transients_nonce'], 'wc_ppp_delete_transients' ) ) {
             Woocommerce_Pay_Per_Post_Debug::delete_transients();
         }
-        /** @noinspection PhpIncludeInspection */
         require_once plugin_dir_path( __FILE__ ) . 'partials/debug.php';
     }
     
     public function create_getting_started_page()
     {
         wp_enqueue_style( WC_PPP_SLUG . '_admin' );
-        /** @noinspection PhpIncludeInspection */
         require_once plugin_dir_path( __FILE__ ) . 'partials/getting-started.php';
     }
     
@@ -313,7 +436,6 @@ class Woocommerce_Pay_Per_Post_Admin
         $full_change_log = $changelog[0];
         $last_change = explode( '=', $full_change_log );
         $last_change = $last_change[2];
-        /** @noinspection PhpIncludeInspection */
         require_once plugin_dir_path( __FILE__ ) . 'partials/whats-new.php';
     }
     
@@ -349,27 +471,35 @@ class Woocommerce_Pay_Per_Post_Admin
         ob_start();
         global  $post ;
         $id = $post->ID;
-        $selected = get_post_meta( $id, WC_PPP_SLUG . '_product_ids', true );
-        $restricted_content_override = get_post_meta( $id, WC_PPP_SLUG . '_restricted_content_override', true );
-        $delay_restriction_enable = get_post_meta( $id, WC_PPP_SLUG . '_delay_restriction_enable', true );
-        $delay_restriction = get_post_meta( $id, WC_PPP_SLUG . '_delay_restriction', true );
-        $delay_restriction_frequency = get_post_meta( $id, WC_PPP_SLUG . '_delay_restriction_frequency', true );
-        $page_view_restriction_enable = get_post_meta( $id, WC_PPP_SLUG . '_page_view_restriction_enable', true );
-        $page_view_restriction = get_post_meta( $id, WC_PPP_SLUG . '_page_view_restriction', true );
-        $page_view_restriction_frequency = get_post_meta( $id, WC_PPP_SLUG . '_page_view_restriction_frequency', true );
-        $page_view_restriction_enable_time_frame = get_post_meta( $id, WC_PPP_SLUG . '_page_view_restriction_enable_time_frame', true );
-        $page_view_restriction_time_frame = get_post_meta( $id, WC_PPP_SLUG . '_page_view_restriction_time_frame', true );
-        $expire_restriction_enable = get_post_meta( $id, WC_PPP_SLUG . '_expire_restriction_enable', true );
-        $expire_restriction = get_post_meta( $id, WC_PPP_SLUG . '_expire_restriction', true );
-        $expire_restriction_frequency = get_post_meta( $id, WC_PPP_SLUG . '_expire_restriction_frequency', true );
-        $show_warnings = get_post_meta( $id, WC_PPP_SLUG . '_show_warnings', true );
-        $drop_down = $this->generate_products_dropdown( $selected );
-        wp_enqueue_style( WC_PPP_SLUG . '_admin' );
-        wp_enqueue_style( WC_PPP_SLUG . '_select2' );
-        wp_enqueue_script( WC_PPP_SLUG . '_select2' );
-        wp_enqueue_script( WC_PPP_SLUG . '_admin' );
-        /** @noinspection PhpIncludeInspection */
-        require plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/meta-box-base.php';
+        $enable_block_editor_integration = (bool) get_option( WC_PPP_SLUG . '_block_editor_enabled' );
+        
+        if ( $enable_block_editor_integration && WP_Screen::get()->is_block_editor() ) {
+            $meta_box_file_name = 'meta-box.php';
+            $restricted_content_override = get_post_meta( $id, WC_PPP_SLUG . '_restricted_content_override', true );
+        } else {
+            $selected = get_post_meta( $id, WC_PPP_SLUG . '_product_ids', true );
+            $delay_restriction_enable = get_post_meta( $id, WC_PPP_SLUG . '_delay_restriction_enable', true );
+            $delay_restriction = get_post_meta( $id, WC_PPP_SLUG . '_delay_restriction', true );
+            $delay_restriction_frequency = get_post_meta( $id, WC_PPP_SLUG . '_delay_restriction_frequency', true );
+            $page_view_restriction_enable = get_post_meta( $id, WC_PPP_SLUG . '_page_view_restriction_enable', true );
+            $page_view_restriction = get_post_meta( $id, WC_PPP_SLUG . '_page_view_restriction', true );
+            $page_view_restriction_frequency = get_post_meta( $id, WC_PPP_SLUG . '_page_view_restriction_frequency', true );
+            $page_view_restriction_enable_time_frame = get_post_meta( $id, WC_PPP_SLUG . '_page_view_restriction_enable_time_frame', true );
+            $page_view_restriction_time_frame = get_post_meta( $id, WC_PPP_SLUG . '_page_view_restriction_time_frame', true );
+            $expire_restriction_enable = get_post_meta( $id, WC_PPP_SLUG . '_expire_restriction_enable', true );
+            $expire_restriction = get_post_meta( $id, WC_PPP_SLUG . '_expire_restriction', true );
+            $expire_restriction_frequency = get_post_meta( $id, WC_PPP_SLUG . '_expire_restriction_frequency', true );
+            $show_warnings = get_post_meta( $id, WC_PPP_SLUG . '_show_warnings', true );
+            $restricted_content_override = get_post_meta( $id, WC_PPP_SLUG . '_restricted_content_override', true );
+            $drop_down = $this->generate_products_dropdown( $selected );
+            wp_enqueue_style( WC_PPP_SLUG . '_admin' );
+            wp_enqueue_style( WC_PPP_SLUG . '_select2' );
+            wp_enqueue_script( WC_PPP_SLUG . '_select2' );
+            wp_enqueue_script( WC_PPP_SLUG . '_admin' );
+            $meta_box_file_name = 'meta-box-base.php';
+        }
+        
+        require plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/' . $meta_box_file_name;
         echo  ob_get_clean() ;
     }
     
@@ -397,6 +527,16 @@ class Woocommerce_Pay_Per_Post_Admin
         if ( !current_user_can( 'edit_posts' ) ) {
             return;
         }
+        
+        if ( !isset( $_POST[WC_PPP_SLUG . '_classic_editor'] ) ) {
+            $this->edit_post_block_editor( $post_id, $_POST );
+            $clear_transients = apply_filters( 'wc_pay_per_post_clear_transients_on_post_edit', true );
+            if ( $clear_transients ) {
+                Woocommerce_Pay_Per_Post_Debug::delete_transients();
+            }
+            return;
+        }
+        
         // Boolean Values.
         $_delay_restriction_enable = 0;
         $_page_view_restriction_enable = 0;
@@ -407,6 +547,10 @@ class Woocommerce_Pay_Per_Post_Admin
         $product_ids = $_POST[WC_PPP_SLUG . '_product_ids'] ?? '';
         $product_ids = $this->sanitize_product_ids( $product_ids );
         update_post_meta( $post_id, WC_PPP_SLUG . '_product_ids', $product_ids );
+        $clear_transients = apply_filters( 'wc_pay_per_post_clear_transients_on_post_edit', true );
+        if ( $clear_transients ) {
+            Woocommerce_Pay_Per_Post_Debug::delete_transients();
+        }
     }
     
     public function manage_custom_column( $column, $post_id )
@@ -515,7 +659,7 @@ class Woocommerce_Pay_Per_Post_Admin
         
         }
         update_option( 'wc_pay_per_post_needs_upgrade', 'false', false );
-        update_option( 'wc_pay_per_post_db_version', WC_PPP_PLUGIN_VERSION, false );
+        update_option( 'wc_pay_per_post_db_version', WC_PPP_VERSION, false );
         $url = admin_url( 'admin.php?page=' . WC_PPP_SLUG . '-whats-new&upgrade_complete=true' );
         wp_safe_redirect( $url );
     }

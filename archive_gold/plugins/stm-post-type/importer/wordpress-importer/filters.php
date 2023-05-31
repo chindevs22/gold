@@ -42,17 +42,24 @@ function stm_wp_import_attachment_url_filter( $url, $theme, $layout, $builder ) 
 			break;
 		case 'masterstudy':
 			$image_name = basename($url);
-			if ( $layout !== 'default' ) {
-				$url = "https://stylemixthemes.com/masterstudy/demoimages/{$layout}/{$image_name}";
-			} else {
+			if ( 'default' === $layout && 'elementor' !== $builder ) {
 				$url = 'http://stylemixthemes.com/masterstudy/demo/wp-content/uploads/2015/07/placeholder.gif';
+			} else {
+				$url = "https://stylemixthemes.com/masterstudy/demoimages/{$layout}/{$image_name}";
 			}
 			break;
 		case 'pearl':
 			$url = str_replace('.jpeg', '?dpr=1&auto=format&fit=crop&w=1920&h=700&q=1', $url);
 			break;
 		case 'motors':
-			$url = str_replace('.jpeg', '?dpr=1&auto=format&fit=crop&w=1920&h=700&q=1', $url);
+			if ( $builder === 'elementor' ) {
+
+				$lName = str_replace('_', '-', $layout);
+
+				$url = str_replace( 'http://test.loc', 'https://motors.stylemixthemes.com/demo/' . $lName, $url );
+			} else {
+				$url = str_replace( '.jpeg', '?dpr=1&auto=format&fit=crop&w=1920&h=700&q=1', $url );
+			}
 			break;
 		case 'elab':
 			$image_name = basename($url);
@@ -95,6 +102,11 @@ function stm_wp_import_attachment_url_filter( $url, $theme, $layout, $builder ) 
 				}
 			}
 
+			break;
+		case 'sequoia':
+			$lName = str_replace('_', '-', $layout);
+
+			$url = str_replace( 'http://sequoia.loc', 'https://sequoia.stylemixthemes.com/demo/' . $lName, $url );
 			break;
 	}
 

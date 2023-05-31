@@ -76,8 +76,9 @@ function stm_lms_tables_update() {
 	stm_lms_user_quizzes();
 	stm_lms_user_quizzes_times();
 	stm_lms_user_searches();
-	stm_lms_curriculum_log();
-	stm_lms_curriculum_bind();
+	stm_lms_curriculum_sections();
+	stm_lms_curriculum_materials();
+
 	if ( function_exists( 'stm_lms_user_subscriptions' ) ) {
 		stm_lms_user_subscriptions();
 	}

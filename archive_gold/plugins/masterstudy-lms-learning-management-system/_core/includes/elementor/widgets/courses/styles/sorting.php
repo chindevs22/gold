@@ -14,8 +14,8 @@ $this->start_controls_section(
 			'terms' => array(
 				array(
 					'name'     => 'type',
-					'operator' => '===',
-					'value'    => 'courses-archive',
+					'operator' => 'in',
+					'value'    => array( 'courses-archive', 'courses-grid', 'courses-carousel' ),
 				),
 				array(
 					'name'     => 'show_sorting',
@@ -36,7 +36,7 @@ $this->add_group_control(
 	array(
 		'name'           => 'style_sorting_wrapper_background',
 		'types'          => array( 'classic', 'gradient' ),
-		'selector'       => '{{WRAPPER}} .ms_lms_courses_archive__sorting.style_2',
+		'selector'       => '{{WRAPPER}} .ms_lms_courses_archive__sorting.style_2, {{WRAPPER}} .ms_lms_courses_grid__sorting.style_2, {{WRAPPER}} .ms_lms_courses_carousel__sorting.style_2',
 		'fields_options' => array(
 			'background' => array(
 				'label' => esc_html__( 'Wrapper background', 'masterstudy-lms-learning-management-system' ),
@@ -57,7 +57,7 @@ $this->add_group_control(
 	Group_Control_Border::get_type(),
 	array(
 		'name'           => 'style_sorting_wrapper_border',
-		'selector'       => '{{WRAPPER}} .ms_lms_courses_archive__sorting.style_2',
+		'selector'       => '{{WRAPPER}} .ms_lms_courses_archive__sorting.style_2, {{WRAPPER}} .ms_lms_courses_grid__sorting.style_2, {{WRAPPER}} .ms_lms_courses_carousel__sorting.style_2',
 		'fields_options' => array(
 			'border' => array(
 				'label' => esc_html__( 'Wrapper Border', 'masterstudy-lms-learning-management-system' ),
@@ -81,7 +81,9 @@ $this->add_control(
 		'type'       => Controls_Manager::DIMENSIONS,
 		'size_units' => array( 'px', '%' ),
 		'selectors'  => array(
-			'{{WRAPPER}} .ms_lms_courses_archive__sorting.style_2' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			'{{WRAPPER}} .ms_lms_courses_archive__sorting.style_2'  => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			'{{WRAPPER}} .ms_lms_courses_grid__sorting.style_2'     => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			'{{WRAPPER}} .ms_lms_courses_carousel__sorting.style_2' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 		),
 		'conditions' => array(
 			'terms' => array(
@@ -113,7 +115,7 @@ $this->add_group_control(
 	Group_Control_Typography::get_type(),
 	array(
 		'name'     => 'style_sorting_typography',
-		'selector' => '{{WRAPPER}} .ms_lms_courses_archive__sorting li span',
+		'selector' => '{{WRAPPER}} .ms_lms_courses_archive__sorting li span, {{WRAPPER}} .ms_lms_courses_grid__sorting li span, {{WRAPPER}} .ms_lms_courses_carousel__sorting li span',
 	)
 );
 $this->add_responsive_control(
@@ -123,7 +125,9 @@ $this->add_responsive_control(
 		'type'       => Controls_Manager::DIMENSIONS,
 		'size_units' => array( 'px', '%' ),
 		'selectors'  => array(
-			'{{WRAPPER}} .ms_lms_courses_archive__sorting li span' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			'{{WRAPPER}} .ms_lms_courses_archive__sorting li span'  => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			'{{WRAPPER}} .ms_lms_courses_grid__sorting li span'     => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			'{{WRAPPER}} .ms_lms_courses_carousel__sorting li span' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 		),
 	)
 );
@@ -134,7 +138,9 @@ $this->add_responsive_control(
 		'type'       => Controls_Manager::DIMENSIONS,
 		'size_units' => array( 'px', '%' ),
 		'selectors'  => array(
-			'{{WRAPPER}} .ms_lms_courses_archive__sorting' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			'{{WRAPPER}} .ms_lms_courses_archive__sorting'  => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			'{{WRAPPER}} .ms_lms_courses_grid__sorting'     => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			'{{WRAPPER}} .ms_lms_courses_carousel__sorting' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 		),
 		'conditions' => array(
 			'terms' => array(
@@ -167,7 +173,9 @@ $this->add_responsive_control(
 			),
 		),
 		'selectors'  => array(
-			'{{WRAPPER}} .ms_lms_courses_archive__sorting' => 'align-self: {{VALUE}};',
+			'{{WRAPPER}} .ms_lms_courses_archive__sorting'  => 'align-self: {{VALUE}};',
+			'{{WRAPPER}} .ms_lms_courses_grid__sorting'     => 'align-self: {{VALUE}};',
+			'{{WRAPPER}} .ms_lms_courses_carousel__sorting' => 'align-self: {{VALUE}};',
 		),
 		'conditions' => array(
 			'terms' => array(
@@ -192,7 +200,9 @@ $this->add_responsive_control(
 		'type'       => Controls_Manager::DIMENSIONS,
 		'size_units' => array( 'px', '%' ),
 		'selectors'  => array(
-			'{{WRAPPER}} .ms_lms_courses_archive__sorting_wrapper' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			'{{WRAPPER}} .ms_lms_courses_archive__sorting_wrapper'  => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			'{{WRAPPER}} .ms_lms_courses_grid__sorting_wrapper'     => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			'{{WRAPPER}} .ms_lms_courses_carousel__sorting_wrapper' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 		),
 		'conditions' => array(
 			'terms' => array(
@@ -230,7 +240,9 @@ $this->add_responsive_control(
 			),
 		),
 		'selectors'  => array(
-			'{{WRAPPER}} .ms_lms_courses_archive__sorting_wrapper' => 'justify-content: {{VALUE}};',
+			'{{WRAPPER}} .ms_lms_courses_archive__sorting_wrapper'  => 'justify-content: {{VALUE}};',
+			'{{WRAPPER}} .ms_lms_courses_grid__sorting_wrapper'     => 'justify-content: {{VALUE}};',
+			'{{WRAPPER}} .ms_lms_courses_carousel__sorting_wrapper' => 'justify-content: {{VALUE}};',
 		),
 		'conditions' => array(
 			'terms' => array(
@@ -269,7 +281,9 @@ $this->add_control(
 		'label'     => esc_html__( 'Color', 'masterstudy-lms-learning-management-system' ),
 		'type'      => Controls_Manager::COLOR,
 		'selectors' => array(
-			'{{WRAPPER}} .ms_lms_courses_archive__sorting li span:not(.active)' => 'color: {{VALUE}}',
+			'{{WRAPPER}} .ms_lms_courses_archive__sorting li span:not(.active)'  => 'color: {{VALUE}}',
+			'{{WRAPPER}} .ms_lms_courses_grid__sorting li span:not(.active)'     => 'color: {{VALUE}}',
+			'{{WRAPPER}} .ms_lms_courses_carousel__sorting li span:not(.active)' => 'color: {{VALUE}}',
 		),
 	)
 );
@@ -278,14 +292,14 @@ $this->add_group_control(
 	array(
 		'name'     => 'style_sorting_background',
 		'types'    => array( 'classic', 'gradient' ),
-		'selector' => '{{WRAPPER}} .ms_lms_courses_archive__sorting li span:not(.active)',
+		'selector' => '{{WRAPPER}} .ms_lms_courses_archive__sorting li span:not(.active), {{WRAPPER}} .ms_lms_courses_grid__sorting li span:not(.active), {{WRAPPER}} .ms_lms_courses_carousel__sorting li span:not(.active)',
 	)
 );
 $this->add_group_control(
 	Group_Control_Border::get_type(),
 	array(
 		'name'     => 'style_sorting_border',
-		'selector' => '{{WRAPPER}} .ms_lms_courses_archive__sorting li span:not(.active)',
+		'selector' => '{{WRAPPER}} .ms_lms_courses_archive__sorting li span:not(.active), {{WRAPPER}} .ms_lms_courses_grid__sorting li span:not(.active), {{WRAPPER}} .ms_lms_courses_carousel__sorting li span:not(.active)',
 	)
 );
 $this->add_control(
@@ -295,7 +309,9 @@ $this->add_control(
 		'type'       => Controls_Manager::DIMENSIONS,
 		'size_units' => array( 'px', '%' ),
 		'selectors'  => array(
-			'{{WRAPPER}} .ms_lms_courses_archive__sorting li span:not(.active)' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			'{{WRAPPER}} .ms_lms_courses_archive__sorting li span:not(.active)'  => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			'{{WRAPPER}} .ms_lms_courses_grid__sorting li span:not(.active)'     => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			'{{WRAPPER}} .ms_lms_courses_carousel__sorting li span:not(.active)' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 		),
 	)
 );
@@ -312,8 +328,12 @@ $this->add_control(
 		'label'     => esc_html__( 'Color', 'masterstudy-lms-learning-management-system' ),
 		'type'      => Controls_Manager::COLOR,
 		'selectors' => array(
-			'{{WRAPPER}} .ms_lms_courses_archive__sorting li span:hover'  => 'color: {{VALUE}}',
-			'{{WRAPPER}} .ms_lms_courses_archive__sorting li span.active' => 'color: {{VALUE}}',
+			'{{WRAPPER}} .ms_lms_courses_archive__sorting li span:hover'   => 'color: {{VALUE}}',
+			'{{WRAPPER}} .ms_lms_courses_archive__sorting li span.active'  => 'color: {{VALUE}}',
+			'{{WRAPPER}} .ms_lms_courses_grid__sorting li span:hover'      => 'color: {{VALUE}}',
+			'{{WRAPPER}} .ms_lms_courses_grid__sorting li span.active'     => 'color: {{VALUE}}',
+			'{{WRAPPER}} .ms_lms_courses_carousel__sorting li span:hover'  => 'color: {{VALUE}}',
+			'{{WRAPPER}} .ms_lms_courses_carousel__sorting li span.active' => 'color: {{VALUE}}',
 		),
 	)
 );
@@ -322,14 +342,18 @@ $this->add_group_control(
 	array(
 		'name'     => 'style_sorting_background_hover',
 		'types'    => array( 'classic', 'gradient' ),
-		'selector' => '{{WRAPPER}} .ms_lms_courses_archive__sorting li span:hover, {{WRAPPER}} .ms_lms_courses_archive__sorting li span.active',
+		'selector' => '{{WRAPPER}} .ms_lms_courses_archive__sorting li span:hover, {{WRAPPER}} .ms_lms_courses_archive__sorting li span.active,
+		{{WRAPPER}} .ms_lms_courses_grid__sorting li span:hover, {{WRAPPER}} .ms_lms_courses_grid__sorting li span.active,
+		{{WRAPPER}} .ms_lms_courses_carousel__sorting li span:hover, {{WRAPPER}} .ms_lms_courses_carousel__sorting li span.active',
 	)
 );
 $this->add_group_control(
 	Group_Control_Border::get_type(),
 	array(
 		'name'     => 'style_sorting_border_hover',
-		'selector' => '{{WRAPPER}} .ms_lms_courses_archive__sorting li span:hover, {{WRAPPER}} .ms_lms_courses_archive__sorting li span.active',
+		'selector' => '{{WRAPPER}} .ms_lms_courses_archive__sorting li span:hover, {{WRAPPER}} .ms_lms_courses_archive__sorting li span.active,
+		{{WRAPPER}} .ms_lms_courses_grid__sorting li span:hover, {{WRAPPER}} .ms_lms_courses_grid__sorting li span.active,
+		{{WRAPPER}} .ms_lms_courses_carousel__sorting li span:hover, {{WRAPPER}} .ms_lms_courses_carousel__sorting li span.active',
 	)
 );
 $this->add_control(
@@ -339,8 +363,12 @@ $this->add_control(
 		'type'       => Controls_Manager::DIMENSIONS,
 		'size_units' => array( 'px', '%' ),
 		'selectors'  => array(
-			'{{WRAPPER}} .ms_lms_courses_archive__sorting li span:hover'  => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-			'{{WRAPPER}} .ms_lms_courses_archive__sorting li span.active' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			'{{WRAPPER}} .ms_lms_courses_archive__sorting li span:hover'   => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			'{{WRAPPER}} .ms_lms_courses_archive__sorting li span.active'  => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			'{{WRAPPER}} .ms_lms_courses_grid__sorting li span:hover'      => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			'{{WRAPPER}} .ms_lms_courses_grid__sorting li span.active'     => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			'{{WRAPPER}} .ms_lms_courses_carousel__sorting li span:hover'  => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			'{{WRAPPER}} .ms_lms_courses_carousel__sorting li span.active' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 		),
 	)
 );

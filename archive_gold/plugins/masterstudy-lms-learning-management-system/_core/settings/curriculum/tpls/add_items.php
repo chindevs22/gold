@@ -26,11 +26,11 @@
 
 	</div>
 
-	<curriculum_add_item inline-template :type.sync="section.activeTab" v-if="section.activeTab !== 'search'" v-on:curriculum_item_added="section['items'].push($event);">
+	<curriculum_add_item inline-template :type.sync="section.activeTab" v-if="section.activeTab !== 'search'" v-on:curriculum_item_added="itemAdded(section, $event)">
 		<?php stm_lms_curriculum_v2_load_template( 'add_item' ); ?>
 	</curriculum_add_item>
 
-	<curriculum_search inline-template v-if="section.search" :sections="sections" :section="section" v-on:close_popup="$set(section, 'search', false)">
+	<curriculum_search inline-template v-if="section.search" :sections="sections" :section="section" :current_course_id="<?php echo esc_attr( get_the_ID() ); ?>" v-on:close_popup="$set(section, 'search', false)">
 		<?php stm_lms_curriculum_v2_load_template( 'search' ); ?>
 	</curriculum_search>
 

@@ -7,8 +7,7 @@ use Elementor\Group_Control_Background;
 use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Typography;
-use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
-use Elementor\Core\Kits\Documents\Tabs\Global_Colors;
+use Elementor\Plugin;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
@@ -20,6 +19,8 @@ class MsLmsInstructorsCarousel extends Widget_Base {
 		parent::__construct( $data, $args );
 		wp_register_style( 'ms_lms_instructors_carousel', STM_LMS_URL . '/assets/css/elementor-widgets/instructors-carousel/instructors-carousel.css', array(), STM_LMS_VERSION, false );
 		wp_register_script( 'ms_lms_instructors_carousel', STM_LMS_URL . '/assets/js/elementor-widgets/instructors-carousel/instructors-carousel.js', array( 'elementor-frontend' ), STM_LMS_VERSION, true );
+		wp_enqueue_style( 'ms_lms_instructors_carousel_slider', STM_LMS_URL . 'assets/vendors/swiper-bundle.min.css', array(), STM_LMS_VERSION, false );
+		wp_enqueue_script( 'ms_lms_instructors_carousel_slider', STM_LMS_URL . 'assets/vendors/swiper-bundle.min.js', array( 'elementor-frontend' ), STM_LMS_VERSION, true );
 	}
 
 	public function get_style_depends() {
@@ -277,30 +278,23 @@ class MsLmsInstructorsCarousel extends Widget_Base {
 			'slides_per_view',
 			array(
 				'label'              => esc_html__( 'Slides Per View', 'masterstudy-lms-learning-management-system' ),
-				'type'               => Controls_Manager::NUMBER,
-				'min'                => 1,
-				'max'                => 6,
-				'step'               => 1,
-				'devices'            => array( 'desktop', 'tablet', 'mobile' ),
-				'desktop_default'    => 4,
-				'tablet_default'     => 3,
-				'mobile_default'     => 1,
+				'type'               => Controls_Manager::SELECT,
+				'options'            => array(
+					'100%'       => intval( 1 ),
+					'50%'        => intval( 2 ),
+					'33.333333%' => intval( 3 ),
+					'25%'        => intval( 4 ),
+					'20%'        => intval( 5 ),
+					'16.666666%' => intval( 6 ),
+				),
 				'frontend_available' => true,
-			)
-		);
-		$this->add_responsive_control(
-			'slides_to_scroll',
-			array(
-				'label'              => esc_html__( 'Slides To Scroll', 'masterstudy-lms-learning-management-system' ),
-				'type'               => Controls_Manager::NUMBER,
-				'min'                => 1,
-				'max'                => 6,
-				'step'               => 1,
 				'devices'            => array( 'desktop', 'tablet', 'mobile' ),
-				'desktop_default'    => 1,
-				'tablet_default'     => 1,
-				'mobile_default'     => 1,
-				'frontend_available' => true,
+				'desktop_default'    => '25%',
+				'tablet_default'     => '33.333333%',
+				'mobile_default'     => '100%',
+				'selectors'          => array(
+					'{{WRAPPER}} .ms_lms_instructors_carousel__item' => 'width: {{VALUE}};',
+				),
 			)
 		);
 		$this->add_control(
@@ -310,7 +304,7 @@ class MsLmsInstructorsCarousel extends Widget_Base {
 				'type'               => Controls_Manager::SWITCHER,
 				'label_on'           => esc_html__( 'On', 'masterstudy-lms-learning-management-system' ),
 				'label_off'          => esc_html__( 'Off', 'masterstudy-lms-learning-management-system' ),
-				'return_value'       => 2500,
+				'return_value'       => true,
 				'frontend_available' => true,
 			)
 		);
@@ -322,6 +316,7 @@ class MsLmsInstructorsCarousel extends Widget_Base {
 				'label_on'           => esc_html__( 'On', 'masterstudy-lms-learning-management-system' ),
 				'label_off'          => esc_html__( 'Off', 'masterstudy-lms-learning-management-system' ),
 				'return_value'       => 'true',
+				'default'            => 'true',
 				'frontend_available' => true,
 			)
 		);
@@ -472,9 +467,6 @@ class MsLmsInstructorsCarousel extends Widget_Base {
 			array(
 				'name'     => 'widget_title_typography',
 				'selector' => '{{WRAPPER}} .ms_lms_instructors_carousel__header_title',
-				'global'   => array(
-					'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
-				),
 			)
 		);
 		$this->add_control(
@@ -484,9 +476,6 @@ class MsLmsInstructorsCarousel extends Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .ms_lms_instructors_carousel__header_title' => 'color: {{VALUE}}',
-				),
-				'global'    => array(
-					'default' => Global_Colors::COLOR_PRIMARY,
 				),
 			)
 		);
@@ -578,9 +567,6 @@ class MsLmsInstructorsCarousel extends Widget_Base {
 			array(
 				'name'     => 'widget_description_typography',
 				'selector' => '{{WRAPPER}} .ms_lms_instructors_carousel__header_description',
-				'global'   => array(
-					'default' => Global_Typography::TYPOGRAPHY_SECONDARY,
-				),
 			)
 		);
 		$this->add_control(
@@ -590,9 +576,6 @@ class MsLmsInstructorsCarousel extends Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .ms_lms_instructors_carousel__header_description' => 'color: {{VALUE}}',
-				),
-				'global'    => array(
-					'default' => Global_Colors::COLOR_SECONDARY,
 				),
 			)
 		);
@@ -791,9 +774,6 @@ class MsLmsInstructorsCarousel extends Widget_Base {
 			array(
 				'name'     => 'instructor_name_typography',
 				'selector' => '{{WRAPPER}} .ms_lms_instructors_carousel__item_title',
-				'global'   => array(
-					'default' => Global_Typography::TYPOGRAPHY_SECONDARY,
-				),
 			)
 		);
 		$this->add_control(
@@ -803,9 +783,6 @@ class MsLmsInstructorsCarousel extends Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .ms_lms_instructors_carousel__item_title' => 'color: {{VALUE}}',
-				),
-				'global'    => array(
-					'default' => Global_Colors::COLOR_SECONDARY,
 				),
 			)
 		);
@@ -858,9 +835,6 @@ class MsLmsInstructorsCarousel extends Widget_Base {
 			array(
 				'name'     => 'instructor_position_typography',
 				'selector' => '{{WRAPPER}} .ms_lms_instructors_carousel__item_position',
-				'global'   => array(
-					'default' => Global_Typography::TYPOGRAPHY_TEXT,
-				),
 			)
 		);
 		$this->add_control(
@@ -870,9 +844,6 @@ class MsLmsInstructorsCarousel extends Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .ms_lms_instructors_carousel__item_position' => 'color: {{VALUE}}',
-				),
-				'global'    => array(
-					'default' => Global_Colors::COLOR_TEXT,
 				),
 			)
 		);
@@ -925,9 +896,6 @@ class MsLmsInstructorsCarousel extends Widget_Base {
 			array(
 				'name'     => 'instructor_course_quantity_typography',
 				'selector' => '{{WRAPPER}} .ms_lms_instructors_carousel__item_courses',
-				'global'   => array(
-					'default' => Global_Typography::TYPOGRAPHY_TEXT,
-				),
 			)
 		);
 		$this->add_control(
@@ -937,9 +905,6 @@ class MsLmsInstructorsCarousel extends Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .ms_lms_instructors_carousel__item_courses' => 'color: {{VALUE}}',
-				),
-				'global'    => array(
-					'default' => Global_Colors::COLOR_TEXT,
 				),
 			)
 		);
@@ -1108,9 +1073,6 @@ class MsLmsInstructorsCarousel extends Widget_Base {
 				'selectors' => array(
 					'{{WRAPPER}} .ms_lms_instructors_carousel__item_rating_stars::before' => 'color: {{VALUE}}',
 				),
-				'global'    => array(
-					'default' => Global_Colors::COLOR_ACCENT,
-				),
 			)
 		);
 		$this->add_control(
@@ -1120,9 +1082,6 @@ class MsLmsInstructorsCarousel extends Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .ms_lms_instructors_carousel__item_rating_stars_filled::after' => 'color: {{VALUE}}',
-				),
-				'global'    => array(
-					'default' => Global_Colors::COLOR_PRIMARY,
 				),
 			)
 		);
@@ -1146,9 +1105,6 @@ class MsLmsInstructorsCarousel extends Widget_Base {
 			array(
 				'name'     => 'instructor_reviews_count_typography',
 				'selector' => '{{WRAPPER}} .ms_lms_instructors_carousel__item_rating_quantity',
-				'global'   => array(
-					'default' => Global_Typography::TYPOGRAPHY_TEXT,
-				),
 			)
 		);
 		$this->add_control(
@@ -1158,9 +1114,6 @@ class MsLmsInstructorsCarousel extends Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .ms_lms_instructors_carousel__item_rating_quantity' => 'color: {{VALUE}}',
-				),
-				'global'    => array(
-					'default' => Global_Colors::COLOR_TEXT,
 				),
 			)
 		);
@@ -1225,9 +1178,6 @@ class MsLmsInstructorsCarousel extends Widget_Base {
 				'selectors' => array(
 					'{{WRAPPER}} .ms_lms_instructors_carousel__item_socials_link i' => 'color: {{VALUE}}',
 				),
-				'global'    => array(
-					'default' => Global_Colors::COLOR_TEXT,
-				),
 			)
 		);
 		$this->add_group_control(
@@ -1277,9 +1227,6 @@ class MsLmsInstructorsCarousel extends Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .ms_lms_instructors_carousel__item_socials_link:hover i' => 'color: {{VALUE}}',
-				),
-				'global'    => array(
-					'default' => Global_Colors::COLOR_TEXT,
 				),
 			)
 		);
@@ -1365,9 +1312,6 @@ class MsLmsInstructorsCarousel extends Widget_Base {
 			array(
 				'name'     => 'view_all_button_typography',
 				'selector' => '{{WRAPPER}} .ms_lms_instructors_carousel__header_view_all',
-				'global'   => array(
-					'default' => Global_Typography::TYPOGRAPHY_SECONDARY,
-				),
 			)
 		);
 		$this->add_control(
@@ -1377,9 +1321,6 @@ class MsLmsInstructorsCarousel extends Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .ms_lms_instructors_carousel__header_view_all' => 'color: {{VALUE}}',
-				),
-				'global'    => array(
-					'default' => Global_Colors::COLOR_PRIMARY,
 				),
 			)
 		);
@@ -1430,9 +1371,6 @@ class MsLmsInstructorsCarousel extends Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .ms_lms_instructors_carousel__header_view_all:hover' => 'color: {{VALUE}}',
-				),
-				'global'    => array(
-					'default' => Global_Colors::COLOR_SECONDARY,
 				),
 			)
 		);
@@ -1587,9 +1525,6 @@ class MsLmsInstructorsCarousel extends Widget_Base {
 					'{{WRAPPER}} .ms_lms_instructors_carousel__navigation_prev::before'  => 'color: {{VALUE}}',
 					'{{WRAPPER}} .ms_lms_instructors_carousel__navigation_next::before'  => 'color: {{VALUE}}',
 				),
-				'global'    => array(
-					'default' => Global_Colors::COLOR_TEXT,
-				),
 			)
 		);
 		$this->add_group_control(
@@ -1691,9 +1626,6 @@ class MsLmsInstructorsCarousel extends Widget_Base {
 					'{{WRAPPER}} .ms_lms_instructors_carousel__navigation_prev:hover:before ' => 'color: {{VALUE}}',
 					'{{WRAPPER}} .ms_lms_instructors_carousel__navigation_next:hover:after'   => 'color: {{VALUE}}',
 				),
-				'global'    => array(
-					'default' => Global_Colors::COLOR_SECONDARY,
-				),
 			)
 		);
 		$this->add_group_control(
@@ -1765,6 +1697,16 @@ class MsLmsInstructorsCarousel extends Widget_Base {
 
 	protected function render() {
 		$settings  = $this->get_settings_for_display();
+
+		/* slider turn off for editor mode */
+		if ( Plugin::$instance->editor->is_edit_mode() ) {
+			?>
+			<script>
+				let edit_mode = true;
+			</script>
+			<?php
+		}
+
 		$sort_args = array();
 		if ( 'date' === $settings['instructors_sort_by'] ) {
 			$sort_args = array(
@@ -1814,7 +1756,7 @@ class MsLmsInstructorsCarousel extends Widget_Base {
 			'slides_per_view'                 => $settings['slides_per_view'],
 			'rtl'                             => $settings['rtl'],
 		);
-		\STM_LMS_Templates::show_lms_template( 'elementor-widgets/instructors-carousel', $atts );
+		\STM_LMS_Templates::show_lms_template( 'elementor-widgets/instructors-carousel/main', $atts );
 	}
 
 	protected function content_template() {

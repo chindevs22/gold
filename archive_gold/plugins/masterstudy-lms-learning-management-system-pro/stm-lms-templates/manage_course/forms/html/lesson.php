@@ -48,7 +48,6 @@ $presto_players_posts = apply_filters( 'ms_plugin_presto_player_posts', array() 
 						<select name="type" v-model="fields['type']" class="form-control">
 							<option value="text"><?php esc_html_e( 'Text', 'masterstudy-lms-learning-management-system-pro' ); ?></option>
 							<option value="video"><?php esc_html_e( 'Video', 'masterstudy-lms-learning-management-system-pro' ); ?></option>
-							<option value="slide"><?php esc_html_e( 'Slide', 'masterstudy-lms-learning-management-system-pro' ); ?></option>
 							<?php do_action( 'stm_lms_lesson_types' ); ?>
 						</select>
 					</label>
@@ -73,7 +72,7 @@ $presto_players_posts = apply_filters( 'ms_plugin_presto_player_posts', array() 
 							<h4><?php esc_html_e( 'Presto player videos', 'masterstudy-lms-learning-management-system-pro' ); ?></h4>
 							<select name="type" v-model="fields['presto_player_idx']" class="form-control">
 								<?php foreach ( $presto_players_posts as $pp ) : ?>
-									<option value="<?php echo esc_attr( $pp['id'] ); ?>"><?php echo esc_html( $pp['title'] ); ?></option>
+									<option value="<?php echo esc_attr( $pp['id'] ); ?>"><?php echo esc_html( $pp['label'] ); ?></option>
 								<?php endforeach; ?>
 							</select>
 						</label>
@@ -218,21 +217,6 @@ $presto_players_posts = apply_filters( 'ms_plugin_presto_player_posts', array() 
 						?>
 					</label>
 				</div>
-
-				<div class="stm_metaboxes_grid" v-if="!loading">
-					<div class="stm_metaboxes_grid__inner">
-						<wpcfto_repeater v-bind:fields="lesson_files_pack_data"
-										v-bind:parent_repeater="'parent'"
-										v-bind:field_label="lesson_files_pack_data['label']"
-										v-bind:field_name="'lesson_files_pack'"
-										v-bind:field_id="'section_settings-lesson_files_pack'"
-										v-bind:field_value="fields['lesson_files_pack']"
-										v-bind:field_data='lesson_files_pack_data'
-										@wpcfto-get-value="$set(fields, 'lesson_files_pack', JSON.stringify($event));">
-						</wpcfto_repeater>
-					</div>
-				</div>
-
 
 			</div>
 		</div>

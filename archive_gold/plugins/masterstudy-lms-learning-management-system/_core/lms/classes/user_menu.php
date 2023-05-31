@@ -218,6 +218,19 @@ class STM_LMS_User_Menu {
 				'type'  => 'divider',
 				'title' => esc_html__( 'Learning area', 'masterstudy-lms-learning-management-system' ),
 			);
+
+			if ( apply_filters( 'stm_lms_enable_add_course', true ) ) {
+				$menus[] = array(
+					'order'        => 55,
+					'id'           => 'add_course',
+					'slug'         => 'edit-course',
+					'lms_template' => 'course-builder',
+					'menu_title'   => esc_html__( 'Add Course', 'masterstudy-lms-learning-management-system' ),
+					'menu_icon'    => 'fa-plus',
+					'menu_url'     => ms_plugin_manage_course_url(),
+					'menu_place'   => 'main',
+				);
+			}
 		}
 
 		$menus[] = array(
@@ -356,9 +369,10 @@ class STM_LMS_User_Menu {
 
 			if ( ! empty( $menu_settings ) ) {
 				foreach ( $menu_settings as $menu_item ) {
-					$found_key = array_search( $menu_item['id'], array_column( $menu_items, 'id' ), true );
+					$found_key   = array_search( $menu_item['id'], array_column( $menu_items, 'id' ), true );
+					$existed_key = array_search( $menu_item['id'], array_column( $actual_menu, 'id' ), true );
 
-					if ( -1 < $found_key ) {
+					if ( -1 < $found_key && ! $existed_key ) {
 						$actual_menu[] = $menu_items[ $found_key ];
 					}
 				}

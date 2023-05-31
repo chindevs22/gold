@@ -1,0 +1,593 @@
+.cmcal-customize-calendar-holder {
+    padding-right: 20px;
+}
+
+.cmcal-customize-calendar-title {
+    padding: 20px 10px;
+    background-color: white;
+    margin: 25px 2px 4px 3px;
+    position: relative;
+}
+
+.cmcal-customize-calendar-title > h2 > span {
+    color:#adadad;
+}
+
+.cmcal-customize-calendar-title h2 {
+    margin: 0;
+}
+
+.cmcal-customize-calendar-title pre {
+    background-color: #ddd;
+    padding: 10px;
+    width: auto;
+    display: inline-block;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    margin: 0;
+}
+
+.cmcal-customize-calendar-container {
+    width: 100%;
+}
+
+.cmcal-customize-calendar-container .cmcal-preview{
+    padding: 0;
+}
+
+.cmcal-customize-calendar-container .cmcal-settings{
+    width: 550px;
+}
+
+.cmcal-customize-calendar-container .cmcal-preview-container{
+    padding: 20px;
+    background-color: white;
+}
+
+.cmcal-customize-calendar-container .cmcal-settings {
+    padding-right: 4px;
+}
+
+.cmcal-customize-calendar-container .cmcal-settings{
+    padding-top: 0px;
+}
+
+.cmcal-customize-calendar-container .cmcal-preview-header{
+    text-align: center;
+    margin-bottom: 5px;
+    margin-top: 0;
+    background-color: white;
+    padding: 1em 0;
+}
+
+.cmcal-customize-calendar-container .cmcal-settings-header{
+    text-align: center;
+    margin: 0px;
+    margin-bottom: 5px;
+    padding: 1em 0;
+    background-color: white;
+}
+
+/*******************************************************************************************************/
+/*cmcal toggle visibility*/
+/*******************************************************************************************************/
+
+.cmcal-subsection-header,
+.cmcal-section-header {
+    cursor: pointer;
+    -webkit-margin-after:0;
+    -webkit-margin-before:0px;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    color: #555;
+    background-color: #fff;
+    border-bottom: 1px solid #eee;    
+    padding: 10px ;
+    line-height: 21px;
+    font-size: 14px;
+}
+
+.cmcal-subsection-header.open.always-hide,
+.cmcal-subsection-header{
+    display: none;
+}
+.cmcal-subsection-header.open{
+    display: block;
+}
+.cmcal-subsection-content.open.open-subsection.always-hide,
+.cmcal-subsection-content{
+    display: none;
+}
+.cmcal-subsection-content.open.open-subsection{
+    display: block;
+    background-color: white;
+    border-top: none;
+    margin-bottom: 1px;
+    padding: 10px;
+}
+
+.cmcal-subsection-content textarea {
+    width: 100%;
+}
+
+.cmcal-section-header:after {
+    content: '\f345';
+    float:right;    
+}
+.cmcal-subsection-header:after {
+    content: '\f347';
+    float:right;    
+}
+
+.cmcal-subsection-header.open.open-subsection:after
+{
+    content: '\f343';
+}
+
+.cmcal-section-header.open:after 
+{
+    content: none;
+}
+
+.cmcal-subsection-header:after
+,.cmcal-section-header:after
+{
+    color: #adadad;
+    /*dashicons*/ 
+    font-size: 20px;
+    font-family: dashicons;
+    width: 20px;
+    height: 20px;
+    line-height: 1;
+    font-weight: 400;
+    text-decoration: inherit;
+    vertical-align: top;
+    text-align: center;
+    -webkit-font-smoothing: antialiased;
+    -mos-osx-font-smoothing: grayscale;
+}
+
+.cmcal-section-header.open {
+    cursor: initial;
+    line-height: 57px;
+    font-size: 14px;
+    padding-left: 80px;
+}
+
+.cmcal-subsection-header.open-subsection,
+.cmcal-subsection-header:hover,
+.cmcal-section-header:not(.open):hover{
+    background-color: #f5f5f5;
+}
+
+.cmcal-section-content {
+    padding: 10px 0;
+}
+
+div.cmcal-section-content.hideAlways,
+div.cmcal-section-content.open.hideAlways {
+    display: none;
+
+}
+
+/*******************************************************************************************************/
+/*cmcal-settings-back-button*/
+/*******************************************************************************************************/
+.cmcal-settings-back-button{
+    display: none;
+    cursor: pointer;
+    padding: 0px 8px;
+    background: #f5f5f5; 
+    padding: 10px ;
+    position: absolute;
+    line-height: 55px;
+    text-align: center;
+    width: 48px;
+    margin: 0;
+    background: #fff;
+    border-right: 1px solid #F1F1F1;
+}
+.cmcal-settings-back-button.open{
+    display: inline-block;
+}
+
+.cmcal-settings-back-button:before {
+    font-size: 30px;
+    font-family: dashicons;
+    vertical-align: middle;
+    content: '\f341';
+}
+.cmcal-settings-back-button.open:hover{
+    background-color: #f5f5f5;
+}
+
+/*******************************************************************************************************/
+/*calendar toolbar settings*/
+/*******************************************************************************************************/
+.cmcal_toolbar_gap_container,
+.cmcal_toolbar_select_container{
+    display: inline-block;
+    width: 50%;
+}
+
+/*.cmcal-section-content .add_cmcal_toolbar_setting*/
+.add_cmcal_toolbar_setting{
+    display: block;
+}
+
+.cmcal-hs-editors-template-gap,
+.cmcal-hs-editors-template-name {
+    display: none;
+}
+
+/*******************************************************************************************************/
+/*cmcal-radio*/
+/*******************************************************************************************************/
+
+.cmcal-radio{
+    display: inline-block;
+    padding: 0px 10px 0px 0px;
+    vertical-align: top;
+}
+
+/*******************************************************************************************************/
+/*color-picker*/
+/*******************************************************************************************************/
+.color-picker,
+.color-picker div.cmcal-checkboc-container{
+    display: inline-block;
+    text-transform: capitalize;
+}
+.color-picker .wp-picker-container
+{
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/*******************************************************************************************************/
+/*header of setting*/
+/*******************************************************************************************************/
+.cmcal-setting-header{
+    display: inline-block;
+    width: 30%;
+    margin: 0;
+}
+
+.cmcal-section-content > select,
+.cmcal-section-content > .color-picker,
+.cmcal-section-content > input {
+    vertical-align: top;
+}
+
+/*******************************************************************************************************/
+/*font settings*/
+/*******************************************************************************************************/
+.select2-container{
+    display: block!important;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+}
+
+.cmcal-font-editors-container{
+    width:100%; 
+    border-spacing: 0;
+}
+
+.cmcal-settings .select2-container--default .select2-selection--single .select2-selection__arrow {
+    border-left: 1px solid #aaa;
+    width: 18px;
+    right: 0;
+    top: 0;
+    border-radius: 0 4px 4px 0;
+    background: #ccc; 
+    background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #ccc), color-stop(0.6, #eee));
+    background-image: -webkit-linear-gradient(center bottom, #ccc 0%, #eee 60%);
+    background-image: -moz-linear-gradient(center bottom, #ccc 0%, #eee 60%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#eeeeee', endColorstr = '#cccccc', GradientType = 0);
+    background-image: linear-gradient(to top, #ccc 0%, #eee 60%); 
+}
+
+.cmcal-settings .select2-container--default .select2-selection--single .select2-selection__clear {
+    padding-right: 6px;
+    height: 26px;
+}
+
+.select2-dropdown {
+    margin-left: -1px;
+}
+
+.select2-dropdown.select2-dropdown--above {
+    margin-top: 1px;
+}
+
+.select2-dropdown.select2-dropdown--below {
+    margin-top: -3px;
+}
+
+.cmcal-font-editors-container td{
+    width:50%; 
+    vertical-align:top;
+}
+.cmcal-font-editors-container tr td:first-child {
+    padding-right: 10px;
+}
+
+.cmcal-font-editors-container label{
+    display:block;
+    color: #999;
+    font-size: 12px!important;
+}
+
+.cmcal-font-editor-container-size{
+    vertical-align: top;
+    width:70%; 
+    display:inline-block;   
+}
+
+.cmcal-font-editor-container-size input{
+    width:95%; 
+    border-radius: 4px;
+    height: 28px;
+}
+.cmcal-font-editor-container-pxem{
+    width:30%; 
+    display:inline-block;   
+}
+
+.cmcal-font-editor-container-pxem label{
+    padding:8px 0px;
+    display:inline-block;   
+}
+
+/*******************************************************************************************************/
+/*borders / margin-padding settings*/
+/*******************************************************************************************************/
+.cmcal-margin-padding-editors-container,
+.cmcal-border-editors-container{
+    width: 100%;
+}
+.cmcal-margin-padding-editors-container td,
+.cmcal-border-editors-container td{
+    width:25%; 
+    vertical-align:top;
+}
+
+.cmcal-border-editors-container td{
+    width:19%; 
+    vertical-align:top;
+}
+
+.cmcal-border-editors-container td.cmcal_border_style_td{
+    width:24%; 
+}
+
+.cmcal-margin-padding-editors-container .cmcal-arrow,
+.cmcal-border-editors-container .border_setting_header,
+.cmcal-border-editors-container .cmcal-arrow{
+    display:inline-block;
+}
+
+.cmcal-margin-padding-editors-container .cmcal-arrow,
+.cmcal-border-editors-container .cmcal-arrow {
+    background-color: #eeeeee;
+    border: 1px solid #cccccc !important;
+    vertical-align: top;
+    margin-left: 0;
+    border-left: none;
+    height: 25px;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    padding: 0 5px;
+}
+
+.cmcal-border-editors-container .border_setting_header{
+    margin:0px 8px 0px 0px;
+}
+.cmcal-margin-padding-editors-container input,
+.cmcal-border-editors-container input[type="text"] {
+    width: 40px;
+    display:inline;
+    margin-top: 0;
+    margin-left: 0;
+    border-left: none;
+    padding-left: 10px;
+}
+.cmcal-border-editors-container .select2-container {
+    display:inline-block!important;
+}
+.cmcal-settings .select2-container--default .select2-selection--single {
+    height: 26px;
+    border: none;
+    background-color: #fff;
+    background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #eee), color-stop(0.5, #fff));
+    background-image: -webkit-linear-gradient(center bottom, #eee 0%, #fff 50%);
+    background-image: -moz-linear-gradient(center bottom, #eee 0%, #fff 50%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#ffffff', endColorstr = '#eeeeee', GradientType = 0);
+    background-image: linear-gradient(to top, #eee 0%, #fff 50%);
+}
+
+.cmcal-border-editors-container .cmcal_border_style {
+    width: 80px;
+}
+
+.cmcal-border-editors-container .cmcal_border_color {
+    padding:10px 0px;
+}
+
+.cmcal-arrow:before {
+    font-size: 16px;
+    font-family: dashicons;
+    vertical-align: middle;
+    position: relative;
+    top: 2px;
+}
+
+.cmcal-arrow.top:before {
+    content: '\f342';
+}
+.cmcal-arrow.right:before {
+    content: '\f344';
+}
+.cmcal-arrow.bottom:before {
+    content: '\f346';
+}
+.cmcal-arrow.left:before {
+    content: '\f340';
+}
+
+.cmcal-arrow.top-left ,
+.cmcal-arrow.top-right ,
+.cmcal-arrow.bottom-left ,
+.cmcal-arrow.bottom-right {
+    display: inline-block;
+}
+
+.cmcal-arrow.top-left:before ,
+.cmcal-arrow.top-right:before ,
+.cmcal-arrow.bottom-left:before ,
+.cmcal-arrow.bottom-right:before {
+    -ms-transform: rotate(-45deg); /* IE 9 */
+    -webkit-transform: rotate(-45deg); /* Chrome, Safari, Opera */
+    transform: rotate(-45deg);
+    display: inline-block;
+}
+
+.cmcal-arrow.top-left:before {
+    content: '\f342';
+}
+.cmcal-arrow.top-right:before {
+    content: '\f344';
+}
+.cmcal-arrow.bottom-left:before {
+    content: '\f340';
+}
+.cmcal-arrow.bottom-right:before {
+    content: '\f346';
+}
+
+.cmcal-text-number {
+    margin-right: 5px;
+}
+
+/*******************************************************************************************************/
+/*text multilingual*/
+/*******************************************************************************************************/
+.text_multilingual.language_not_active,
+.text_multilingual.language_not_active.open
+{
+    display: none!important;
+}
+
+/*******************************************************************************************************/
+/*themes*/
+/*******************************************************************************************************/
+
+.cmcal-theme-browser .theme {
+    position: relative;
+    width: 500px;
+    border: 1px solid #ddd;
+    margin:auto;
+    margin-bottom:35px;
+    cursor:  initial;
+}
+
+.cmcal-theme-browser .theme .theme-screenshot {
+    display: inline-block;
+    width: 500px;
+
+}
+
+.cmcal-theme-browser .theme .theme-screenshot img {
+    max-width:100%;
+    max-height:100%;
+}
+
+.cmcal-theme-browser .theme.active .theme-name {
+    background: #23282d;
+    color: #fff;
+    padding-right: 110px;
+    font-weight: 300;
+}
+.cmcal-theme-browser .theme .theme-name {
+    font-size: 15px;
+    font-weight: 600;
+    height: 18px;
+    margin: 0;
+    padding: 15px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    background: #fff;
+    background: rgba(255,255,255,.65);
+}
+
+.cmcal-theme-browser .theme.active .theme-actions {
+    background: rgba(49,49,49,.7);
+    border-left: none;
+}
+.cmcal-theme-browser .theme .theme-actions {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 38px;
+    padding: 9px 10px 0;
+}
+
+/*******************************************************************************************************/
+/*cmcal-editor-info*/
+/*******************************************************************************************************/
+.cmcal-editor-info {
+    color: #666;
+    display: inline-block;
+    font-size: 1.3em;
+    font-style: normal;
+    height: 16px;
+    line-height: 16px;
+    position: relative;
+    vertical-align: middle;
+    width: 16px;
+    font-family: dashicons;
+}
+.cmcal-editor-info:after {
+    content: '\f223';
+    font-family: dashicons;
+}
+
+.shortcode {
+    padding: 5px;
+    background-color: #ddd;
+    margin: 5px 0;
+}
+
+.cmcal-section-header-disabled {
+    color:red;
+    display:none;
+}
+
+/*******************************************************************************************************/
+/*cmcal-editor-info*/
+/*******************************************************************************************************/
+.cmcal-import-export-spinner {
+    border:0px !important
+}
+.cmcal-import-export-spinner .cmcal-spinner{
+    background: url('../img/spinner.gif') no-repeat;
+    background-size: 22px 22px;
+    width: 22px;
+    height: 22px;
+    margin: 5px 5px 0;
+    position: fixed;
+    top: 50%;
+    left: 50%;    
+}
+.cmcal-export-desc-text,
+.cmcal-import-desc-text {
+    padding-bottom: 5px;
+}
+.cmcal-import-text {
+    margin-bottom: 5px;
+}
+.cmcal-export-text {
+    margin-top: 10px;
+}

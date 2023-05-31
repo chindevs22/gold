@@ -1,4 +1,7 @@
 <?php
+
+use \MasterStudy\Lms\Repositories\CurriculumMaterialRepository;
+
 new STM_LMS_Instructor_Assignments();
 
 class STM_LMS_Instructor_Assignments {
@@ -71,8 +74,7 @@ class STM_LMS_Instructor_Assignments {
 		$args['s']              = ( ! empty( $_GET['s'] ) ) ? sanitize_text_field( $_GET['s'] ) : '';
 		if ( ! empty( $_GET['course_id'] ) ) {
 			$course_id        = intval( $_GET['course_id'] );
-			$curriculum       = STM_LMS_Course::get_course_curriculum( $course_id );
-			$args['post__in'] = $curriculum['curriculum'];
+			$args['post__in'] = ( new CurriculumMaterialRepository() )->get_course_materials( $course_id );
 		}
 
 		$assignments = self::get_instructor_assignments( $args );

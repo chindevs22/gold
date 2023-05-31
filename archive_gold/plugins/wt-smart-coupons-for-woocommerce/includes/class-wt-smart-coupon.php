@@ -83,7 +83,7 @@ if( ! class_exists('Wt_Smart_Coupon') ) {
 			if ( defined( 'WEBTOFFEE_SMARTCOUPON_VERSION' ) ) {
 				$this->version = WEBTOFFEE_SMARTCOUPON_VERSION;
 			} else {
-				$this->version = '1.4.4';
+				$this->version = '1.4.6';
 			}
 			$this->plugin_name = WT_SC_PLUGIN_NAME;
 	
@@ -143,12 +143,24 @@ if( ! class_exists('Wt_Smart_Coupon') ) {
 			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wt-security-helper.php';
 
 			/**
+			 *  @since 1.4.5
+			 *  Compatability to WPML
+			 * 
+			 * Webtoffee Language Functions
+			 * 
+			 * Includes functions to manage translations
+			 */
+
+			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wt-multi-languages.php';
+
+
+			/**
 			 * The class responsible for defining internationalization functionality
 			 * of the plugin.
 			 */
 			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wt-smart-coupon-i18n.php';
 	
-			
+			  
 			/**
 			 * @since 1.3.5
 			 * The class responsible for defining all actions common to admin/public.
@@ -253,10 +265,8 @@ if( ! class_exists('Wt_Smart_Coupon') ) {
 			$this->loader->add_action('admin_enqueue_scripts', $this->plugin_admin, 'enqueue_styles' );
 			$this->loader->add_action('admin_enqueue_scripts', $this->plugin_admin, 'enqueue_scripts' );
 			$this->loader->add_filter('plugin_action_links_' . $this->get_plugin_base_name(), $this->plugin_admin, 'add_plugin_links_wt_smartcoupon');
-			$this->loader->add_filter('woocommerce_coupon_data_tabs', $this->plugin_admin, 'admin_coupon_options_tabs', 20, 1);
-			$this->loader->add_action('woocommerce_coupon_data_panels', $this->plugin_admin, 'admin_coupon_options_panels', 10, 0);
+			
 
-			$this->loader->add_action('webtoffee_coupon_metabox_checkout',$this->plugin_admin, 'admin_coupon_metabox_checkout2', 10, 2);
 			$this->loader->add_action('woocommerce_process_shop_coupon_meta', $this->plugin_admin, 'process_shop_coupon_meta', 10, 2);
 	
 	
@@ -333,9 +343,24 @@ if( ! class_exists('Wt_Smart_Coupon') ) {
 			/**
 			* Smart coupon settings button on coupons page
 			* 	
-			* @since 1.3.5
+			* @since 1.4.4
 			*/
 			$this->loader->add_action('admin_head-edit.php', $this->plugin_admin, 'coupon_page_settings_button');
+
+
+			/**
+			* Saving hook for debug tab
+			* 	
+			* @since 1.4.5
+			*/
+			$this->loader->add_action('admin_init', $this->plugin_admin, 'debug_save');
+
+			/**
+			 *  Lookup table migration in progress message
+			 * 	
+			 * 	@since 1.4.5
+			 */
+			$this->loader->add_action('admin_notices', $this->plugin_admin, 'lookup_table_migration_message');
 		}
 	
 		/**
@@ -351,7 +376,6 @@ if( ! class_exists('Wt_Smart_Coupon') ) {
 	
 			$this->loader->add_action('wp_enqueue_scripts', $this->plugin_public, 'enqueue_styles' );
 			$this->loader->add_action('wp_enqueue_scripts', $this->plugin_public, 'enqueue_scripts' );
-			$this->loader->add_filter('woocommerce_coupon_is_valid', $this->plugin_public,  'wt_woocommerce_coupon_is_valid', 10, 2 );
 
 			/**
 			 * 	@since 1.3.7

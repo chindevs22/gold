@@ -94,6 +94,7 @@ add_action( 'admin_init', 'stm_lms_deny_instructor_admin' );
 function stm_lms_deny_instructor_admin() {
 	if ( ! wp_doing_ajax() && ! empty( STM_LMS_Options::get_option( 'deny_instructor_admin', '' ) ) ) {
 		$user = wp_get_current_user();
+		// phpcs:ignore WordPress.PHP.StrictInArray.MissingTrueStrict
 		if ( in_array( 'stm_lms_instructor', (array) $user->roles ) ) {
 			wp_safe_redirect( STM_LMS_User::user_page_url() );
 			die();
@@ -151,4 +152,113 @@ add_action(
 		return $data;
 	},
 	100
+);
+
+add_action(
+	'admin_url',
+	function ( $url, $path ) {
+		if ( home_url( '/' ) === ms_plugin_manage_course_url() ) {
+			return $url;
+		}
+
+		switch ( $path ) {
+			case 'post-new.php?post_type=stm-courses':
+				$url = ms_plugin_manage_course_url();
+				break;
+			case 'post-new.php?post_type=stm-lessons':
+				$url = ms_plugin_manage_course_url( 'edit-lesson' );
+				break;
+			case 'post-new.php?post_type=stm-quizzes':
+				$url = ms_plugin_manage_course_url( 'edit-quiz' );
+				break;
+			case 'post-new.php?post_type=stm-assignments':
+				$url = ms_plugin_manage_course_url( 'edit-assignment' );
+				break;
+		}
+
+		return $url;
+	},
+	10,
+	2
+);
+
+add_action(
+	'edit_form_after_title',
+	function ( $post ) {
+		$edit_url = ms_plugin_edit_course_builder_url( $post->post_type );
+
+		if ( empty( $edit_url ) || home_url( '/' ) === $edit_url ) {
+			return;
+		}
+		?>
+		<style>
+			#ms-lms-course-builder {
+				height: 300px;
+				width: 100%;
+				margin: 15px 0;
+				transition: all .5s ease;
+			}
+			#ms-lms-course-builder a {
+				position: relative;
+				height: 100%;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				text-decoration: none;
+				border: 1px solid #ddd;
+				background-color: #f7f7f7;
+				cursor: pointer;
+			}
+			#ms-lms-course-builder a:hover {
+				background-color: #fff;
+			}
+			#ms-lms-course-builder a i:before {
+				vertical-align: sub;
+				margin-right: 3px;
+			}
+			#ms-lms-course-builder .button-edit-course-builder {
+				background: #227AFF;
+				border-color: #227AFF;
+			}
+			#elementor-switch-mode-button,
+			#elementor-editor-button {
+				background: #93003c;
+				border-color: #93003c;
+			}
+		</style>
+		<div id="ms-lms-course-builder">
+			<a href="<?php echo esc_url( "{$edit_url}/{$post->ID}" ); ?>">
+				<div class="button button-primary button-hero button-edit-course-builder">
+					<i class="dashicons-before dashicons-edit-large" aria-hidden="true"></i>
+					<?php echo esc_html__( 'Edit with Course Builder', 'masterstudy-lms-learning-management-system' ); ?>
+				</div>
+			</a>
+		</div>
+		<?php
+	},
+	1
+);
+
+add_action(
+	'post_row_actions',
+	function ( $actions, $post ) {
+		if ( 'trash' === $post->post_status ) {
+			return $actions;
+		}
+
+		$edit_url = ms_plugin_edit_course_builder_url( $post->post_type );
+
+		if ( ! empty( $edit_url ) && home_url( '/' ) !== $edit_url ) {
+			$actions[] = sprintf(
+				'<a href="%s" aria-label="%s">%s</a>',
+				esc_url( $edit_url . "/{$post->ID}" ),
+				esc_attr__( 'Edit with Course Builder', 'masterstudy-lms-learning-management-system' ),
+				esc_html__( 'Edit with Course Builder', 'masterstudy-lms-learning-management-system' )
+			);
+		}
+
+		return $actions;
+	},
+	1,
+	2
 );

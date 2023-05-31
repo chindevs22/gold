@@ -1,4 +1,5 @@
 <?php
+// phpcs:ignoreFile
 /**
  * WordPress Importer class for managing the import process of a WXR file
  *
@@ -658,7 +659,7 @@ if(class_exists('WP_Importer')) {
                  */
                 $post_exists = apply_filters( 'wp_import_existing_post', $post_exists, $post );
 
-                if ( $post_exists && get_post_type( $post_exists ) == $post['post_type'] ) {
+                if ( $post_exists && get_post_type( $post_exists ) == $post['post_type'] && 'publish' === get_post_status( $post_exists ) ) {
                     printf( __('%s &#8220;%s&#8221; already exists.', 'wordpress-importer'), $post_type_object->labels->singular_name, esc_html($post['post_title']) );
                     echo '<br />';
                     $comment_post_ID = $post_id = $post_exists;

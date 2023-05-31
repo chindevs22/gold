@@ -138,11 +138,58 @@ trait MsLmsAddControls {
 			'terms' => array(
 				array(
 					'name'     => 'type',
-					'operator' => '===',
+					'operator' => 'in',
 					'value'    => $type,
 				),
 			),
 		);
 	}
 
+	public function get_categories_terms( $type ) {
+		$terms = get_terms(
+			'stm_lms_course_taxonomy',
+			array(
+				'orderby'    => 'count',
+				'order'      => 'DESC',
+				'hide_empty' => true,
+			)
+		);
+		if ( 'all' === $type ) {
+			$term_array = array();
+			foreach ( $terms as $term ) {
+				$term_array[ $term->term_id ] = $term->name;
+			}
+			return $term_array;
+		} elseif ( 'default' === $type ) {
+			$default_terms = array_map(
+				function( $term ) {
+					return array( $term->term_id );
+				},
+				$terms
+			);
+			$default_terms = array_merge( ...$default_terms );
+			return $default_terms;
+		}
+	}
+
+	public function get_instructors() {
+		$instructors = get_users(
+			array(
+				'role__in' => array( 'administrator', 'stm_lms_instructor' ),
+				'orderby'  => 'display_name',
+				'order'    => 'ASC',
+			)
+		);
+		if ( ! empty( $instructors ) ) {
+			$instructor_array = array_reduce(
+				$instructors,
+				function( $result, $instructor ) {
+					$result[ $instructor->ID ] = $instructor->display_name;
+					return $result;
+				},
+				array()
+			);
+			return $instructor_array;
+		}
+	}
 }

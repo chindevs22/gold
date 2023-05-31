@@ -3,7 +3,6 @@ require_once STM_LMS_PRO_INCLUDES . '/helpers.php';
 
 require_once STM_LMS_PRO_INCLUDES . '/hooks/templates.php';
 require_once STM_LMS_PRO_INCLUDES . '/hooks/sale-price.php';
-require_once STM_LMS_PRO_INCLUDES . '/hooks/instructors.php';
 require_once STM_LMS_PRO_INCLUDES . '/hooks/routes.php';
 
 if ( class_exists( 'SitePress' ) ) {

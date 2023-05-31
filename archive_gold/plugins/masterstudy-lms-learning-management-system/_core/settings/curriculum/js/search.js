@@ -1,5 +1,5 @@
 Vue.component('curriculum_search', {
-    props: ['sections', 'section'],
+    props: ['sections', 'section', 'current_course_id'],
     data() {
         return {
             opened: false,
@@ -11,7 +11,6 @@ Vue.component('curriculum_search', {
         };
     },
     mounted: function () {
-
         (function($){
             $('html').addClass('curriculum-search-activated');
         })(jQuery);
@@ -41,12 +40,28 @@ Vue.component('curriculum_search', {
 
         },
         addItems: function () {
-
             var _this = this;
+            var material_ids = [];
 
-            _this.searchList.forEach(function (item) {
-                if (item.selected) _this.section['items'].push(item);
+            _this.searchList.forEach(function (material) {
+                if (material.selected) {
+                    material_ids.push(material.id);
+                    _this.section['materials'].push(material);
+                }
             });
+
+            if (material_ids.length > 0) {
+                let course_id = (typeof stm_lms_manage_course_id !== 'undefined') ? stm_lms_manage_course_id : this.current_course_id;
+                let data = {
+                    'material_ids': material_ids,
+                    'section_id': _this.section.id,
+                };
+                _this.$http.post(
+                    `${ms_lms_resturl}/courses/${course_id}/curriculum/import`,
+                    data,
+                    {headers: {'X-WP-Nonce': ms_lms_nonce}}
+                );
+            }
 
             _this.getExcludedIDs();
 
@@ -84,8 +99,8 @@ Vue.component('curriculum_search', {
             _this.excludeIDs = [];
 
             _this.sections.forEach(function (section) {
-                section.items.forEach(function (item) {
-                    _this.excludeIDs.push(item.id);
+                section.materials.forEach(function (material) {
+                    _this.excludeIDs.push(material.id);
                 });
             });
 

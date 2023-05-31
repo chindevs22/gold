@@ -168,13 +168,12 @@ function stm_layout_icons_loader() {
 	foreach ( $layout_icons as $layout_name => $layout_icon ) {
 		$icons_json = get_template_directory() . "/assets/layout_icons/{$layout_icon}/selection.json";
 
-		if ( file_exists( $icons_json ) ) {
+		if ( file_exists( $icons_json ) && is_string( wp_remote_get( $icons_json ) ) ) {
 
 			$fonts[ $layout_name ] = array();
-
-			$icons  = json_decode( wp_remote_get( $icons_json ), true );
-			$prefix = $icons['preferences']['fontPref']['prefix'];
-			$icons  = $icons['icons'];
+			$icons                 = json_decode( wp_remote_get( $icons_json ), true );
+			$prefix                = $icons['preferences']['fontPref']['prefix'];
+			$icons                 = $icons['icons'];
 			foreach ( $icons as $icon ) {
 				$icon_name               = $icon['properties']['name'];
 				$fonts[ $layout_icon ][] = array(
@@ -186,7 +185,6 @@ function stm_layout_icons_loader() {
 
 	return $fonts;
 }
-
 
 add_action( 'wp_enqueue_scripts', 'stm_conf_enqueue_ss' );
 

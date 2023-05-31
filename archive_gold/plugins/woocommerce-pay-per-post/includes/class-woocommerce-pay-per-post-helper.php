@@ -17,79 +17,7 @@ class Woocommerce_Pay_Per_Post_Helper extends Woocommerce_Pay_Per_Post
         'page-view',
         'expire'
     ) ;
-    /**
-     * @param null $post_id
-     *
-     * @return array
-     */
-    public static function is_protected_old( $post_id = null )
-    {
-        global  $product_ids ;
-        if ( is_null( $post_id ) ) {
-            $post_id = get_the_ID();
-        }
-        Woocommerce_Pay_Per_Post_Helper::logger( 'Post ID: ' . $post_id . ' - Woocommerce_Pay_Per_Post_Helper::is_protected() is called' );
-        $origin_type = 'post';
-        $protection_type = 'standard';
-        $is_protected = false;
-        $delay_restriction_enable = (bool) get_post_meta( $post_id, WC_PPP_SLUG . '_delay_restriction_enable', true );
-        $page_view_restriction_enable = (bool) get_post_meta( $post_id, WC_PPP_SLUG . '_page_view_restriction_enable', true );
-        $expire_restriction_enable = (bool) get_post_meta( $post_id, WC_PPP_SLUG . '_expire_restriction_enable', true );
-        //		$selected = get_post_meta( $post_id, WC_PPP_SLUG . '_product_ids', true );
-        
-        if ( is_array( $product_ids ) && count( $product_ids ) > 0 && !empty($product_ids[0]) ) {
-            Woocommerce_Pay_Per_Post_Helper::logger( 'Post ID: ' . $post_id . ' - Woocommerce_Pay_Per_Post_Helper::is_protected() Product IDs $selected array contains items' );
-            $is_protected = true;
-            
-            if ( $delay_restriction_enable ) {
-                $protection_type = 'delay';
-                Woocommerce_Pay_Per_Post_Helper::logger( 'Post ID: ' . $post_id . ' - Woocommerce_Pay_Per_Post_Helper::is_protected() Protection Type: DELAY' );
-            } else {
-                
-                if ( $page_view_restriction_enable ) {
-                    $protection_type = 'page-view';
-                    Woocommerce_Pay_Per_Post_Helper::logger( 'Post ID: ' . $post_id . ' - Woocommerce_Pay_Per_Post_Helper::is_protected() Protection Type: PAGE VIEW' );
-                } else {
-                    
-                    if ( $expire_restriction_enable ) {
-                        $protection_type = 'expire';
-                        Woocommerce_Pay_Per_Post_Helper::logger( 'Post ID: ' . $post_id . ' - Woocommerce_Pay_Per_Post_Helper::is_protected() Protection Type: EXPIRE' );
-                    } else {
-                        Woocommerce_Pay_Per_Post_Helper::logger( 'Post ID: ' . $post_id . ' - Woocommerce_Pay_Per_Post_Helper::is_protected() Protection Type: STANDARD' );
-                    }
-                
-                }
-            
-            }
-        
-        }
-        
-        Woocommerce_Pay_Per_Post_Helper::logger( 'Post ID: ' . $post_id . ' - Woocommerce_Pay_Per_Post_Helper::is_protected() selected products = ' . print_r( $product_ids, true ) );
-        //		if ( wcppp_freemius()->is__premium_only() ) {
-        //			if ( wcppp_freemius()->can_use_premium_code() ) {
-        //
-        //				//Elementor Integration
-        //				if ( Woocommerce_Pay_Per_Post_Helper::can_use_elementor() ) {
-        //					Woocommerce_Pay_Per_Post_Helper::logger( 'Post ID: ' . $post_id . ' - Woocommerce_Pay_Per_Post_Helper::is_protected() Elementor Integration starts' );
-        //
-        //					$product_ids = Woocommerce_Pay_Per_Post_Helper::get_elementor_product_ids( $post_id );
-        //					if ( $product_ids && count( $product_ids ) > 0 ) {
-        //						$is_protected = true;
-        //						$origin_type  = 'elementor';
-        //					}
-        //
-        //				}
-        //
-        //			}
-        //		}
-        return [
-            'is_protected'    => $is_protected,
-            'origin_type'     => $origin_type,
-            'protection_type' => $protection_type,
-        ];
-    }
-    
-    public static function is_protected( $post_id = null )
+    public static function is_protected( $post_id = null ) : array
     {
         global  $product_ids ;
         if ( is_null( $post_id ) ) {
@@ -120,7 +48,7 @@ class Woocommerce_Pay_Per_Post_Helper extends Woocommerce_Pay_Per_Post
      */
     public static function have_post_products( $post_id ) : bool
     {
-        $cache_key = WC_PPP_SLUG . 'have_post_products' . $post_id;
+        $cache_key = WC_PPP_SLUG . '_have_post_products' . $post_id;
         $result = wp_cache_get( $cache_key, WC_PPP_SLUG );
         
         if ( $result === false ) {
@@ -262,7 +190,7 @@ class Woocommerce_Pay_Per_Post_Helper extends Woocommerce_Pay_Per_Post
         return ( empty($custom_post_types) ? [] : $custom_post_types );
     }
     
-    public static function get_protected_post_types_args()
+    public static function get_protected_post_types_args() : array
     {
         $custom_post_types = self::get_protected_post_types();
         if ( !is_array( $custom_post_types ) ) {
@@ -309,7 +237,6 @@ class Woocommerce_Pay_Per_Post_Helper extends Woocommerce_Pay_Per_Post
         return (array) $ppp_posts;
     }
     
-    //TODO: Optimize for Elementor @scalar
     public static function get_posts_associated_with_product_id( $product_id ) : array
     {
         Woocommerce_Pay_Per_Post_Helper::logger( 'Product ID: ' . $product_id . ' - Woocommerce_Pay_Per_Post_Helper::get_posts_associated_with_product_id() Called' );
@@ -428,7 +355,6 @@ class Woocommerce_Pay_Per_Post_Helper extends Woocommerce_Pay_Per_Post
             'nopaging'    => true,
         ];
         $products = get_posts( apply_filters( 'wc_pay_per_post_all_product_args', $args ) );
-        //TODO: Document this filter
         $return = [];
         foreach ( $products as $product ) {
             $return[] = [
@@ -441,7 +367,6 @@ class Woocommerce_Pay_Per_Post_Helper extends Woocommerce_Pay_Per_Post
     
     public static function get_virtual_products() : array
     {
-        //TODO Check/test this. Document in 3.0.0
         $args = [
             'post_type'   => [ 'product' ],
             'post_status' => 'publish',
@@ -497,7 +422,6 @@ class Woocommerce_Pay_Per_Post_Helper extends Woocommerce_Pay_Per_Post
     
     public static function replace_tokens( $paywall_content, $product_ids, $unfiltered_content = null )
     {
-        $excerpt = apply_filters( 'wc_pay_per_post_modify_excerpt', wp_trim_words( $unfiltered_content ) );
         $parent_id = null;
         if ( isset( $product_ids[0] ) ) {
             $parent_id = wp_get_post_parent_id( $product_ids[0] );
@@ -527,6 +451,9 @@ class Woocommerce_Pay_Per_Post_Helper extends Woocommerce_Pay_Per_Post
             'month'  => 'addMonths',
             'year'   => 'addYears',
         ];
+        if ( "" === $method ) {
+            return $methods['day'];
+        }
         return $methods[$method];
     }
     
@@ -545,6 +472,9 @@ class Woocommerce_Pay_Per_Post_Helper extends Woocommerce_Pay_Per_Post
             'month'  => 'diffInMonths',
             'year'   => 'diffInYears',
         ];
+        if ( "" === $method ) {
+            return $methods['day'];
+        }
         return $methods[$method];
     }
     
@@ -636,7 +566,7 @@ class Woocommerce_Pay_Per_Post_Helper extends Woocommerce_Pay_Per_Post
     public static function get_post_types() : array
     {
         $user_included_post_types = get_option( WC_PPP_SLUG . '_custom_post_types', [] );
-        if ( '' === $user_included_post_types || empty($user_included_post_types) ) {
+        if ( empty($user_included_post_types) ) {
             $user_included_post_types = [];
         }
         return (array) $user_included_post_types;
@@ -674,7 +604,7 @@ class Woocommerce_Pay_Per_Post_Helper extends Woocommerce_Pay_Per_Post
     /**
      * @return bool
      */
-    public static function is_an_allowed_protected_post_type()
+    public static function is_an_allowed_protected_post_type() : bool
     {
         return in_array( get_post_type(), self::get_post_types() );
     }
@@ -684,10 +614,9 @@ class Woocommerce_Pay_Per_Post_Helper extends Woocommerce_Pay_Per_Post
      *
      * @return array
      */
-    public static function get_product_ids_by_post_id( $post_id = null )
+    public static function get_product_ids_by_post_id( $post_id = null ) : array
     {
         $bypass_allowed_protected_post_types = false;
-        //TODO Document in 3.1.2 changelog
         
         if ( is_null( $post_id ) ) {
             $bypass_allowed_protected_post_types = true;
@@ -725,7 +654,6 @@ class Woocommerce_Pay_Per_Post_Helper extends Woocommerce_Pay_Per_Post
         }
         $origin_type = 'post';
         $protection_type = '';
-        //TODO Document bug fix 3.1.2
         $is_protected = false;
         $delay_restriction_enable = (bool) get_post_meta( $post_id, WC_PPP_SLUG . '_delay_restriction_enable', true );
         $page_view_restriction_enable = (bool) get_post_meta( $post_id, WC_PPP_SLUG . '_page_view_restriction_enable', true );
@@ -767,7 +695,7 @@ class Woocommerce_Pay_Per_Post_Helper extends Woocommerce_Pay_Per_Post
         
         }
         
-        $elementor_product_ids = array();
+        $elementor_product_ids = [];
         $return = [
             'product_ids'         => $standard_product_ids,
             'section_product_ids' => $elementor_product_ids,

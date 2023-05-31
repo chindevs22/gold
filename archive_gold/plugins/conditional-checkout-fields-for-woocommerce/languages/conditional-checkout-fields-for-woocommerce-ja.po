@@ -1,0 +1,449 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Conditional Checkout Fields for WooCommerce\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-02-17 10:17+0000\n"
+"PO-Revision-Date: 2023-03-03 04:50+0000\n"
+"Last-Translator: \n"
+"Language-Team: Japanese\n"
+"Language: ja\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.6.3; wp-6.1.1\n"
+"X-Domain: conditional-checkout-fields-for-woocommerce"
+
+#: front/fme-ccfw-front.php:147
+msgid " fields"
+msgstr " 田畑"
+
+#: front/fme-ccfw-front.php:887
+msgid " is a required field."
+msgstr " は必須フィールドです。"
+
+#: admin/fme-ccfw-admin.php:1154
+msgid " Taxable"
+msgstr " 課税対象"
+
+#: admin/checkout/fme-ccfw-checkout-fields.php:88
+msgid " Yes"
+msgstr " はい"
+
+#: admin/checkout/fme-ccfw-checkout-fields.php:60
+msgid "+ Add field"
+msgstr "+ フィールドを追加"
+
+#: admin/fme-ccfw-admin.php:1401 admin/fme-ccfw-admin.php:1460
+#: admin/fme-ccfw-admin.php:1512 admin/checkout/fme-ccfw-checkout-fields.php:72
+#: admin/checkout/fme-ccfw-checkout-fields.php:139
+#: admin/view/fme-ccfw-condtion-html.php:16
+#: admin/view/fme-ccfw-condtion-html.php:73
+#: admin/view/fme-ccfw-add-condtion-html.php:4
+#: admin/view/fme-ccfw-add-condtion-html.php:61
+msgid "Action"
+msgstr "アクション"
+
+#: admin/fme-ccfw-admin.php:1376
+msgid "Add a Condition Group"
+msgstr "条件グループを追加する"
+
+#: admin/view/fme-ccfw-condtion-html.php:81
+msgid "Add Condition"
+msgstr "条件を追加"
+
+#: admin/fme-ccfw-admin.php:1497
+msgid "Add Options"
+msgstr "オプションを追加"
+
+#: front/fme-ccfw-front.php:137
+msgid "additional"
+msgstr "追加"
+
+#: admin/view/fme-ccfw-checkoutfield-settings.php:32
+msgid "Additional Fields"
+msgstr "追加フィールド"
+
+#: admin/checkout/fme-ccfw-checkout-fields.php:48
+msgid "Additional Fields Label"
+msgstr "追加フィールド ラベル"
+
+#: front/fme-ccfw-front.php:137
+msgid "billing"
+msgstr "請求する"
+
+#: admin/view/fme-ccfw-checkoutfield-settings.php:28
+msgid "Billing Fields"
+msgstr "請求フィールド"
+
+#: admin/fme-ccfw-admin.php:1222
+msgid "Category"
+msgstr "カテゴリー"
+
+#: admin/fme-ccfw-admin.php:861
+msgid "Checkbox"
+msgstr "チェックボックス"
+
+#: front/fme-ccfw-front.php:1168
+msgid "Choose an option"
+msgstr "オプションを選択"
+
+#: admin/fme-ccfw-admin.php:1296
+msgid "Choose Category"
+msgstr "カテゴリを選択"
+
+#: admin/fme-ccfw-admin.php:1238
+msgid "Choose Product"
+msgstr "製品を選択"
+
+#: admin/fme-ccfw-admin.php:1342
+msgid "Choose User Role(s)"
+msgstr "ユーザーの役割を選択"
+
+#: admin/checkout/fme-ccfw-checkout-fields.php:166
+msgid "Close"
+msgstr "近い"
+
+#: admin/fme-ccfw-admin.php:885
+msgid "Colo Picker"
+msgstr "コロピッカー"
+
+#: admin/fme-ccfw-admin.php:1441 admin/view/fme-ccfw-condtion-html.php:54
+#: admin/view/fme-ccfw-add-condtion-html.php:42
+msgid "Condition"
+msgstr "状態"
+
+#: admin/fme-ccfw-admin.php:1374
+msgid "Condition(s) to Meet:"
+msgstr "満たすべき条件:"
+
+#: admin/fme-ccfw-admin.php:1712
+msgid "Conditional Checkout Fields"
+msgstr "条件付きチェックアウト フィールド"
+
+#. Name of the plugin
+msgid "Conditional Checkout Fields for WooCommerce"
+msgstr "WooCommerce の条件付きチェックアウト フィールド"
+
+#. Description of the plugin
+msgid ""
+"Customize the checkout page by adding new and conditional based fields in "
+"Billing, Shipping, and Additional section."
+msgstr "請求、配送、および追加セクションに新しい条件ベースのフィールドを追加して、チェックアウト ページをカスタマイズします。"
+
+#: admin/fme-ccfw-admin.php:873
+msgid "Date Picker"
+msgstr "日付ピッカー"
+
+#: admin/checkout/fme-ccfw-checkout-fields.php:69
+msgid "Default"
+msgstr "デフォルト"
+
+#: admin/checkout/fme-ccfw-checkout-fields.php:120
+msgid "Delete"
+msgstr "消去"
+
+#: admin/fme-ccfw-admin.php:943
+msgid "Disable"
+msgstr "無効にする"
+
+#: admin/fme-ccfw-admin.php:1183
+msgid "Display for Specific Product or Category"
+msgstr "特定の製品またはカテゴリの表示"
+
+#: admin/fme-ccfw-admin.php:1319
+#, fuzzy
+#| msgid "Display  Specific User roles"
+msgid "Display for Specific User roles"
+msgstr "特定のユーザー ロールの表示"
+
+#: admin/checkout/fme-ccfw-checkout-fields.php:115
+msgid "Edit"
+msgstr "編集"
+
+#: admin/fme-ccfw-admin.php:937 admin/checkout/fme-ccfw-checkout-fields.php:71
+#: admin/checkout/fme-ccfw-checkout-fields.php:138
+msgid "Enable"
+msgstr "有効"
+
+#: admin/fme-ccfw-admin.php:930
+msgid "Enable "
+msgstr "有効"
+
+#: admin/fme-ccfw-admin.php:970 admin/fme-ccfw-admin.php:977
+msgid "Field Class "
+msgstr "フィールドクラス"
+
+#: admin/fme-ccfw-admin.php:1033
+msgid "Field Extension"
+msgstr "フィールド拡張"
+
+#: admin/fme-ccfw-admin.php:910
+msgid "Field Name"
+msgstr "フィールド名"
+
+#: admin/fme-ccfw-admin.php:1051
+msgid "File Size"
+msgstr "ファイルサイズ"
+
+#: admin/fme-ccfw-admin.php:903
+msgid "File Upload"
+msgstr "ファイルのアップロード"
+
+#. Author of the plugin
+msgid "FME Addons"
+msgstr "FME アドオン"
+
+#: admin/fme-ccfw-admin.php:984
+msgid "form-row-first"
+msgstr "フォーム行優先"
+
+#: admin/fme-ccfw-admin.php:990
+msgid "form-row-last"
+msgstr "フォーム-行-最後"
+
+#: admin/fme-ccfw-admin.php:997
+msgid "form-row-wide"
+msgstr "フォーム行全体"
+
+#: admin/fme-ccfw-admin.php:1088
+msgid "H1"
+msgstr "H1"
+
+#: admin/fme-ccfw-admin.php:1094
+msgid "H2"
+msgstr "H2"
+
+#: admin/fme-ccfw-admin.php:1100
+msgid "H3"
+msgstr "H3"
+
+#: admin/fme-ccfw-admin.php:1104
+msgid "H4"
+msgstr "H4"
+
+#: admin/fme-ccfw-admin.php:1112
+msgid "H5"
+msgstr "H5"
+
+#: admin/fme-ccfw-admin.php:1118
+msgid "H6"
+msgstr "H6"
+
+#: admin/fme-ccfw-admin.php:891
+msgid "Heading"
+msgstr "見出し"
+
+#: admin/fme-ccfw-admin.php:1075
+msgid "Heading Type"
+msgstr "見出しの種類"
+
+#: admin/fme-ccfw-admin.php:1405 admin/view/fme-ccfw-condtion-html.php:20
+#: admin/view/fme-ccfw-add-condtion-html.php:8
+msgid "Hide"
+msgstr "隠れる"
+
+#: admin/fme-ccfw-admin.php:1324
+msgid "Hide for  Specific User roles"
+msgstr "特定のユーザー ロールの非表示"
+
+#: admin/fme-ccfw-admin.php:1418 admin/view/fme-ccfw-condtion-html.php:31
+#: admin/view/fme-ccfw-add-condtion-html.php:19
+msgid "If value of"
+msgstr "値の場合"
+
+#: admin/fme-ccfw-admin.php:1448 admin/view/fme-ccfw-condtion-html.php:61
+#: admin/view/fme-ccfw-add-condtion-html.php:49
+msgid "is checked"
+msgstr "チェックされています"
+
+#: admin/fme-ccfw-admin.php:1444 admin/view/fme-ccfw-condtion-html.php:57
+#: admin/view/fme-ccfw-add-condtion-html.php:45
+msgid "is empty"
+msgstr "空です"
+
+#: admin/fme-ccfw-admin.php:1446 admin/view/fme-ccfw-condtion-html.php:59
+#: admin/view/fme-ccfw-add-condtion-html.php:47
+msgid "is equal to "
+msgstr "に等しい"
+
+#: admin/fme-ccfw-admin.php:1445 admin/view/fme-ccfw-condtion-html.php:58
+#: admin/view/fme-ccfw-add-condtion-html.php:46
+msgid "is not empty"
+msgstr "空ではありません"
+
+#: admin/fme-ccfw-admin.php:1447 admin/view/fme-ccfw-condtion-html.php:60
+#: admin/view/fme-ccfw-add-condtion-html.php:48
+msgid "is not equal to"
+msgstr "等しくない"
+
+#: admin/fme-ccfw-admin.php:1058
+msgid "KB"
+msgstr "KB"
+
+#: admin/fme-ccfw-admin.php:921 admin/checkout/fme-ccfw-checkout-fields.php:66
+msgid "Label"
+msgstr "ラベル"
+
+#: admin/fme-ccfw-admin.php:1059
+msgid "MB"
+msgstr "MB"
+
+#: admin/fme-ccfw-admin.php:855
+msgid "MultiSelect"
+msgstr "複数選択"
+
+#: admin/checkout/fme-ccfw-checkout-fields.php:67
+#: admin/checkout/fme-ccfw-checkout-fields.php:134
+msgid "Name"
+msgstr "名前"
+
+#: admin/checkout/fme-ccfw-checkout-fields.php:90
+msgid "No"
+msgstr "いいえ"
+
+#: admin/fme-ccfw-admin.php:831
+msgid "Number"
+msgstr "番号"
+
+#: admin/fme-ccfw-admin.php:1509
+msgid "Option Name"
+msgstr "オプション名"
+
+#: admin/fme-ccfw-admin.php:1511
+msgid "Option Price"
+msgstr "オプション価格"
+
+#: admin/fme-ccfw-admin.php:1510
+msgid "Option Value"
+msgstr "オプション値"
+
+#: front/fme-ccfw-front.php:893
+msgid "optional"
+msgstr "オプション"
+
+#: admin/fme-ccfw-admin.php:897
+msgid "Paragraph"
+msgstr "段落"
+
+#: admin/fme-ccfw-admin.php:1130
+msgid "paragraph"
+msgstr "段落"
+
+#: admin/fme-ccfw-admin.php:843
+msgid "Password"
+msgstr "パスワード"
+
+#: admin/checkout/fme-ccfw-checkout-fields.php:136
+msgid "Placeholder"
+msgstr "プレースホルダ"
+
+#: admin/fme-ccfw-admin.php:1210
+msgid "Please Choose one"
+msgstr "一つ選んでください"
+
+#: admin/fme-ccfw-admin.php:1082
+msgid "Please Select Heading"
+msgstr "見出しを選択してください"
+
+#: admin/fme-ccfw-admin.php:1016
+msgid "Price"
+msgstr "価格"
+
+#: admin/fme-ccfw-admin.php:1216
+msgid "Product"
+msgstr "製品"
+
+#: admin/fme-ccfw-admin.php:867
+msgid "Radio Button"
+msgstr "ラジオボタン"
+
+#: admin/fme-ccfw-admin.php:1375
+msgid "Relation Between Conditions is \"AND\" & Relations with Group is \"OR\""
+msgstr "条件間の関係は「AND」 & グループとの関係は「OR」"
+
+#: admin/view/fme-ccfw-condtion-html.php:82
+msgid "Remove Group"
+msgstr "グループを削除"
+
+#: admin/fme-ccfw-admin.php:1147 admin/checkout/fme-ccfw-checkout-fields.php:70
+#: admin/checkout/fme-ccfw-checkout-fields.php:137
+msgid "Required"
+msgstr "必要"
+
+#: admin/checkout/fme-ccfw-checkout-fields.php:165
+msgid "Save Changes"
+msgstr "変更内容を保存"
+
+#: admin/fme-ccfw-admin.php:849 admin/fme-ccfw-admin.php:1403
+#: admin/fme-ccfw-admin.php:1423 admin/fme-ccfw-admin.php:1432
+#: admin/fme-ccfw-admin.php:1443 admin/view/fme-ccfw-condtion-html.php:18
+#: admin/view/fme-ccfw-condtion-html.php:36
+#: admin/view/fme-ccfw-condtion-html.php:45
+#: admin/view/fme-ccfw-condtion-html.php:56
+#: admin/view/fme-ccfw-add-condtion-html.php:6
+#: admin/view/fme-ccfw-add-condtion-html.php:24
+#: admin/view/fme-ccfw-add-condtion-html.php:33
+#: admin/view/fme-ccfw-add-condtion-html.php:44
+msgid "Select"
+msgstr "選択する"
+
+#: admin/checkout/fme-ccfw-checkout-fields.php:133
+msgid "Seq"
+msgstr "シーケンス"
+
+#: front/fme-ccfw-front.php:137
+msgid "shipping"
+msgstr "運送"
+
+#: admin/view/fme-ccfw-checkoutfield-settings.php:30
+msgid "Shipping Fields"
+msgstr "配送フィールド"
+
+#: admin/fme-ccfw-admin.php:1404 admin/view/fme-ccfw-condtion-html.php:19
+#: admin/view/fme-ccfw-add-condtion-html.php:7
+msgid "Show"
+msgstr "見せる"
+
+#: admin/checkout/fme-ccfw-checkout-fields.php:65
+msgid "Sort"
+msgstr "選別"
+
+#: admin/fme-ccfw-admin.php:1124
+msgid "strong"
+msgstr "強い"
+
+#: admin/fme-ccfw-admin.php:837
+msgid "Telephone"
+msgstr "電話"
+
+#: admin/fme-ccfw-admin.php:819
+msgid "Text"
+msgstr "文章"
+
+#: admin/fme-ccfw-admin.php:825
+msgid "TextArea"
+msgstr "テキストエリア"
+
+#: admin/fme-ccfw-admin.php:879
+msgid "Time Picker"
+msgstr "タイムピッカー"
+
+#: admin/fme-ccfw-admin.php:809 admin/checkout/fme-ccfw-checkout-fields.php:68
+#: admin/checkout/fme-ccfw-checkout-fields.php:135
+msgid "Type"
+msgstr "タイプ"
+
+#: admin/fme-ccfw-admin.php:1172
+msgid "User can select date before current date"
+msgstr "ユーザーは現在の日付より前の日付を選択できます"
+
+#: admin/fme-ccfw-admin.php:1454 admin/view/fme-ccfw-condtion-html.php:67
+#: admin/view/fme-ccfw-add-condtion-html.php:55
+msgid "value"
+msgstr "価値"
+
+#: admin/checkout/fme-ccfw-checkout-fields.php:163
+msgid "Your settings have been saved."
+msgstr "設定が保存されています。"

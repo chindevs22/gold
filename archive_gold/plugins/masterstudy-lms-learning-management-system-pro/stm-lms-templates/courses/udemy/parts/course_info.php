@@ -18,8 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 $author_info = get_post_meta( $post_id, 'udemy_visible_instructors', true );
 $level       = get_post_meta( $post_id, 'level', true );
 $duration    = get_post_meta( $post_id, 'duration_info', true );
-$lectures    = STM_LMS_Course::curriculum_info( get_post_meta( $post_id, 'curriculum', true ) );
-
+$lectures    = STM_LMS_Course::curriculum_info( $post_id );
 ?>
 
 <div class="stm_lms_courses__single--info">

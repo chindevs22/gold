@@ -27,10 +27,10 @@ if ( ! empty( $course_id ) && get_post_type( $course_id ) !== 'stm-courses' ) {
 
 <?php STM_LMS_Templates::show_lms_template( 'modals/preloader' ); ?>
 
-	<div class="stm-lms-wrapper user-account-page">
-		<div class="container">
-			<?php STM_LMS_Templates::show_lms_template( 'manage_course/single', array( 'course_id' => $course_id ) ); ?>
-		</div>
+<div class="stm-lms-wrapper user-account-page">
+	<div class="container">
+		<?php STM_LMS_Templates::show_lms_template( 'manage_course/single', array( 'course_id' => $course_id ) ); ?>
 	</div>
+</div>
 
 <?php get_footer(); ?>

@@ -39,6 +39,22 @@ class Wt_Smart_Coupon_Limit_Max_Discount_Admin
 
 
         add_filter('woocommerce_coupon_get_discount_amount', array($this, 'calculate_maximum_discount'), 20, 5 );
+
+        /**
+         * To correct the maximum discount
+         * 
+         * @since 1.4.5
+         */
+        add_action('woocommerce_after_calculate_totals', array($this, 'correct_maximum_discount'), 1000);
+
+        /**
+         * 
+         *  Control percentage coupon maximum limit from backend and compatability for adding product wise discount via backend
+         * 
+         *  @since 1.4.5
+         */
+        add_action('woocommerce_order_after_calculate_totals', array($this, 'wt_woocommerce_order_after_calculate_totals'), 100, 2);
+
     }
 
     /**
@@ -189,6 +205,173 @@ class Wt_Smart_Coupon_Limit_Max_Discount_Admin
             }
         }
         return $sum_allowed_product;
+    }
+
+   
+    /**
+     * 
+     * To correct the maximum discount from the cart
+     * 
+     * @since 1.4.5  
+     *  
+     */
+    public function correct_maximum_discount($cart)
+    {
+        if(is_null($cart))
+        {
+            $cart = WC()->cart;
+        }
+
+        if(version_compare(WC()->version, '3.1.2', '>'))
+        {
+            $cart_total = $cart->get_total('edit');
+        }else
+        {
+            $cart_total = $cart->total;
+        }
+
+        if(empty($cart_total))
+        {
+            return;
+        }
+
+        $applied_coupons = WC()->cart->get_applied_coupons();
+        if(empty($applied_coupons))
+        {
+            return;
+        }
+
+        $coupon_discount_totals=$this->get_coupon_discount_totals();
+        foreach($applied_coupons as $coupon_code)
+        {
+            $coupon = new WC_Coupon($coupon_code);
+            if(!$coupon || !(!$coupon->is_type('percent') || !$coupon->is_type('fixed_product')))
+            {
+                continue;
+            }
+
+            $max_discount = (int) get_post_meta($coupon->get_id(), '_wt_max_discount', true);
+            if(!$max_discount)
+            {
+                continue;
+            }
+
+            if(!isset($coupon_discount_totals[$coupon_code]))
+            {
+                continue;
+            }
+            $current_discount_total=$coupon_discount_totals[$coupon_code];
+            if($current_discount_total!==$max_discount) /* not equal */
+            {
+                $discount_diff=$current_discount_total-$max_discount;
+                if(absint($discount_diff)>.1)
+                {
+                    continue;   
+                }
+
+                $coupon_discount_totals[$coupon_code]=$coupon_discount_totals[$coupon_code]-$discount_diff;
+                $cart_total=$cart_total+$discount_diff;
+            }
+        }        
+
+        $this->update_coupon_discount_total($cart, $coupon_discount_totals);
+        
+        if ( method_exists( $cart, 'set_total' ) ) {
+            $cart->set_total( $cart_total );
+        } else {
+            $cart->total = $cart_total;
+        }
+
+    }
+
+    /**
+     *  Update cart object (Update coupon discount total)
+     * 
+     * @since 1.4.5  
+     * 
+     */
+    public function update_coupon_discount_total($cart, $coupon_discount_totals)
+    {       
+        if(method_exists($cart, 'set_coupon_discount_totals')){
+            $cart->set_coupon_discount_totals( $coupon_discount_totals );
+        } else {
+            $cart->coupon_discount_amounts = $coupon_discount_totals;
+        }
+    }
+    /**
+     *  Get Coupon Discount total from cart session.
+     * 
+     * @since 1.4.5  
+     * 
+     */
+    public function get_coupon_discount_totals()
+    {
+        if ( method_exists( WC()->cart, 'get_coupon_discount_totals' ) ) {
+            $coupon_discount_totals = WC()->cart->get_coupon_discount_totals();
+        } else {
+            $coupon_discount_totals = ( isset( WC()->cart->coupon_discount_amounts ) ? WC()->cart->coupon_discount_amounts : array() );
+        }
+    
+        return $coupon_discount_totals;
+    }
+
+
+     /**
+     * 
+     *  Control the percentage coupon max limit when applying coupon via backend. [SC-387]
+     * 
+     *  Added compatibility when adding product wise discount via backend. [SC-716]
+     * 
+     *  @since 1.4.5  
+     */
+    function wt_woocommerce_order_after_calculate_totals($taxes, $order)
+    {
+        if (!is_admin()) {
+            return;
+        }
+        if(!empty($order_coupons = $order->get_coupons())){
+            $total_discount = 0;
+
+            $order_discount_total = $order->get_discount_total();
+            $order_discount_total_backup = $order_discount_total; //take a backup for comparing
+
+            foreach($order_coupons as $key => $order_coupon) //loop through the order coupons
+            {
+
+                $coupon_code = $order_coupon->get_code();
+                $coupon_id   = wc_get_coupon_id_by_code($coupon_code);
+
+                if(0 === $coupon_id) //coupon not exists
+                {
+                     continue;
+                }
+                
+                $coupon = new WC_Coupon($coupon_id); // to perform is percentage type check 
+            
+                if(!$coupon->is_type('percent')) //not a percentage coupon
+                {
+                    continue;
+                }
+
+                $max_discount = get_post_meta($coupon_id, '_wt_max_discount', true);
+                $coupon_discount = $order_coupon->get_discount();
+
+                if(!empty($max_discount) && $max_discount < $coupon_discount) //max restriction enabled.
+                {
+                    $order_discount_total -= ($coupon_discount - $max_discount); //deduct the extra calculated amount
+                }
+            }
+
+
+            if( $order_discount_total_backup > $order_discount_total) // An extra amount is found. So need to update
+            { 
+                $order->set_discount_total($order_discount_total); //set order discount total
+                $order_total = $order->get_total();
+                $order->set_total($order_total + ($order_discount_total_backup - $order_discount_total)); //set order total
+
+            }    
+
+        }
     }
 }
 Wt_Smart_Coupon_Limit_Max_Discount_Admin::get_instance();

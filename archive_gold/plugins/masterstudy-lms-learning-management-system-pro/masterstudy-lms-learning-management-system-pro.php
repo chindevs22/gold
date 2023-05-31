@@ -1,14 +1,13 @@
 <?php
 /**
-Plugin Name: MasterStudy LMS – Online Courses, eLearning PRO Plus
+Plugin Name: MasterStudy LMS – Online Courses, eLearning PRO
 Plugin URI: http://masterstudy.stylemixthemes.com/lms-plugin/
 Description: Create brilliant lessons with videos, graphs, images, slides and any other attachments thanks to flexible and user-friendly lesson management tool powered by WYSIWYG editor.
 As the ultimate LMS WordPress Plugin, MasterStudy makes it simple and hassle-free to build, customize and manage your Online Education WordPress website.
 Author: StylemixThemes
 Author URI: https://stylemixthemes.com/
 Text Domain: masterstudy-lms-learning-management-system-pro
-Version: 3.9.8
-Update URI: https://api.freemius.com
+Version: 4.0.0
 */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -20,6 +19,7 @@ define( 'STM_LMS_PRO_PATH', dirname( STM_LMS_PRO_FILE ) );
 define( 'STM_LMS_PRO_INCLUDES', STM_LMS_PRO_PATH . '/includes' );
 define( 'STM_LMS_PRO_ADDONS', STM_LMS_PRO_PATH . '/addons' );
 define( 'STM_LMS_PRO_URL', plugin_dir_url( STM_LMS_PRO_FILE ) );
-define( 'STM_LMS_PRO_VERSION', '3.9.8' );
+define( 'STM_LMS_PRO_VERSION', '4.0.0' );
 
+require_once STM_LMS_PRO_PATH . '/vendor/autoload.php';
 require_once STM_LMS_PRO_INCLUDES . '/init.php';

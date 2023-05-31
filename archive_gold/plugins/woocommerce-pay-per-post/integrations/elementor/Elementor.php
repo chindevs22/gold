@@ -127,7 +127,7 @@
 			// once set, changing any of the control IDs will result in the loss of access of associated setting on existing websites
 				WC_PPP_SLUG . '_section',
 				[
-					'label' => __( 'Pay for Post (BETA V2)', 'wc_pay_per_post' ),
+					'label' => __( 'Pay for Post (BETA V3)', 'wc_pay_per_post' ),
 					'tab'   => WC_PPP_SLUG . '_protection', // add this section to our custom new tab declared above.
 
 				]
@@ -156,7 +156,7 @@
 //					'render_type' => 'none',
 					'multiple'    => true, // allow multiple products to be selected
 					'label_block' => true, // full length select2 dropdown for a better experience
-					'description' => __( 'This is the id of the product that is required to have been purchased before a user can view the content of this page. You can select multiple products.', 'wc_pay_per_post' ),
+					'description' => __( 'This is the id of the product that is required to have been purchased before a user can view the content of this page. You can select multiple products.<br><br><strong style="color:red;">Know issue: If you protect an element it will always show up in the HAS ACCESS shortcode.  This is a default shortcode that is on the My Account page under Protected Content.  The widget is  protected if you goto the actual page, but the shortcode will still include it in the Has Access shortcode.  This will be fixed in the next release. </strong> ', 'wc_pay_per_post' ),
 					'options'     => $options,
 					'condition'   => [
 						WC_PPP_SLUG . '_enable' => 'yes',

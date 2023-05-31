@@ -7,7 +7,6 @@ use Elementor\Repeater;
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 
-
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
@@ -17,10 +16,10 @@ class StmLmsProTestimonials extends Widget_Base {
 
 	public function __construct( $data = array(), $args = null ) {
 		parent::__construct( $data, $args );
-		$version = ( WP_DEBUG ) ? time() : STM_LMS_VERSION;
 		wp_register_style( 'lms-testimonials-carousel', STM_LMS_URL . '/assets/css/elementor-widgets/testimonials-carousel.css', array(), STM_LMS_VERSION, false );
-		wp_register_script( 'lms-testimonials-carousel', STM_LMS_URL . '/assets/js/elementor-widgets/testimonials_carousel.js', array( 'elementor-frontend' ), $version, true );
-
+		wp_register_script( 'lms-testimonials-carousel', STM_LMS_URL . '/assets/js/elementor-widgets/testimonials_carousel.js', array( 'elementor-frontend' ), STM_LMS_VERSION, true );
+		wp_enqueue_style( 'lms-testimonials-carousel-slider', STM_LMS_URL . 'assets/vendors/swiper-bundle.min.css', array(), STM_LMS_VERSION, false );
+		wp_enqueue_script( 'lms-testimonials-carousel-slider', STM_LMS_URL . 'assets/vendors/swiper-bundle.min.js', array( 'elementor-frontend' ), STM_LMS_VERSION, true );
 	}
 
 	public function get_style_depends() {
@@ -30,7 +29,6 @@ class StmLmsProTestimonials extends Widget_Base {
 		return array( 'lms-testimonials-carousel' );
 	}
 
-
 	public function get_name() {
 		return 'stm_lms_pro_testimonials';
 	}
@@ -39,39 +37,30 @@ class StmLmsProTestimonials extends Widget_Base {
 		return esc_html__( 'Testimonials', 'masterstudy-lms-learning-management-system' );
 	}
 
-
 	public function get_icon() {
 		return 'stmlms-testimonials lms-icon';
 	}
-
 
 	public function get_categories() {
 		return array( 'stm_lms' );
 	}
 
 	/** Register General Controls */
-
 	protected function register_controls() {
-
 		$this->register_general_content_controls();
-
 		$this->register_heading_typo_content_controls();
 		$this->register_heading_review_content_controls();
 		$this->register_description_content_controls();
 		$this->register_author_content_controls();
-
 	}
 
-
 	protected function register_general_content_controls() {
-
 		$this->start_controls_section(
 			'section_general_fields',
 			array(
 				'label' => esc_html__( 'General', 'masterstudy-lms-learning-management-system' ),
 			)
 		);
-
 		$this->add_control(
 			'testimonials_title',
 			array(
@@ -79,7 +68,29 @@ class StmLmsProTestimonials extends Widget_Base {
 				'type'  => Controls_Manager::TEXT,
 			)
 		);
-
+		$this->add_control(
+			'autoplay',
+			array(
+				'label'              => esc_html__( 'Autoplay', 'masterstudy-lms-learning-management-system' ),
+				'type'               => Controls_Manager::SWITCHER,
+				'label_on'           => esc_html__( 'On', 'masterstudy-lms-learning-management-system' ),
+				'label_off'          => esc_html__( 'Off', 'masterstudy-lms-learning-management-system' ),
+				'return_value'       => true,
+				'frontend_available' => true,
+			)
+		);
+		$this->add_control(
+			'loop',
+			array(
+				'label'              => esc_html__( 'Loop', 'masterstudy-lms-learning-management-system' ),
+				'type'               => Controls_Manager::SWITCHER,
+				'label_on'           => esc_html__( 'On', 'masterstudy-lms-learning-management-system' ),
+				'label_off'          => esc_html__( 'Off', 'masterstudy-lms-learning-management-system' ),
+				'return_value'       => 'true',
+				'default'            => 'true',
+				'frontend_available' => true,
+			)
+		);
 		$repeater = new Repeater();
 		$repeater->add_control(
 			'image',
@@ -88,7 +99,6 @@ class StmLmsProTestimonials extends Widget_Base {
 				'type'  => Controls_Manager::MEDIA,
 			)
 		);
-
 		$repeater->add_control(
 			'author_name',
 			array(
@@ -96,7 +106,6 @@ class StmLmsProTestimonials extends Widget_Base {
 				'type'  => Controls_Manager::TEXT,
 			)
 		);
-
 		$repeater->add_control(
 			'review_rating',
 			array(
@@ -112,7 +121,6 @@ class StmLmsProTestimonials extends Widget_Base {
 				),
 			)
 		);
-
 		$repeater->add_control(
 			'content',
 			array(
@@ -121,7 +129,6 @@ class StmLmsProTestimonials extends Widget_Base {
 				'show_label' => false,
 			)
 		);
-
 		$this->add_control(
 			'testimonials_heading',
 			array(
@@ -130,7 +137,6 @@ class StmLmsProTestimonials extends Widget_Base {
 				'separator' => 'before',
 			)
 		);
-
 		$this->add_control(
 			'testimonials',
 			array(
@@ -141,11 +147,9 @@ class StmLmsProTestimonials extends Widget_Base {
 			)
 		);
 		$this->end_controls_section();
-
 	}
 
 	/** Register Typography Controls */
-
 	protected function register_heading_typo_content_controls() {
 		$this->start_controls_section(
 			'section_heading_typography',
@@ -154,7 +158,6 @@ class StmLmsProTestimonials extends Widget_Base {
 				'tab'   => Controls_Manager::TAB_STYLE,
 			)
 		);
-
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			array(
@@ -166,7 +169,6 @@ class StmLmsProTestimonials extends Widget_Base {
 				'selector' => '{{WRAPPER}} .ms-lms-testimonials-header p',
 			)
 		);
-
 		$this->add_responsive_control(
 			'text_margin',
 			array(
@@ -187,7 +189,6 @@ class StmLmsProTestimonials extends Widget_Base {
 				'label' => esc_html__( 'Normal', 'companion-elementor' ),
 			)
 		);
-
 		$this->add_control(
 			'testimonials_title_color',
 			array(
@@ -198,16 +199,13 @@ class StmLmsProTestimonials extends Widget_Base {
 				),
 			)
 		);
-
 		$this->end_controls_tab();
-
 		$this->start_controls_tab(
 			'header_text_hover',
 			array(
 				'label' => esc_html__( 'Hover', 'companion-elementor' ),
 			)
 		);
-
 		$this->add_control(
 			'testimonials_title_color_hover',
 			array(
@@ -218,14 +216,11 @@ class StmLmsProTestimonials extends Widget_Base {
 				),
 			)
 		);
-
 		$this->end_controls_tab();
-
 		$this->end_controls_tabs();
-
 		$this->end_controls_section();
-
 	}
+
 	protected function register_heading_review_content_controls() {
 		$this->start_controls_section(
 			'section_heading_star',
@@ -234,7 +229,6 @@ class StmLmsProTestimonials extends Widget_Base {
 				'tab'   => Controls_Manager::TAB_STYLE,
 			)
 		);
-
 		$this->add_control(
 			'testimonials_icon_color',
 			array(
@@ -246,7 +240,6 @@ class StmLmsProTestimonials extends Widget_Base {
 				),
 			)
 		);
-
 		$this->add_responsive_control(
 			'reviews_margin',
 			array(
@@ -259,7 +252,6 @@ class StmLmsProTestimonials extends Widget_Base {
 			)
 		);
 		$this->end_controls_section();
-
 	}
 
 	protected function register_description_content_controls() {
@@ -270,7 +262,6 @@ class StmLmsProTestimonials extends Widget_Base {
 				'tab'   => Controls_Manager::TAB_STYLE,
 			)
 		);
-
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			array(
@@ -283,7 +274,6 @@ class StmLmsProTestimonials extends Widget_Base {
 				),
 			)
 		);
-
 		$this->add_responsive_control(
 			'content_margin',
 			array(
@@ -295,7 +285,6 @@ class StmLmsProTestimonials extends Widget_Base {
 				),
 			)
 		);
-
 		$this->start_controls_tabs(
 			'style_tabs_content'
 		);
@@ -305,7 +294,6 @@ class StmLmsProTestimonials extends Widget_Base {
 				'label' => esc_html__( 'Normal', 'companion-elementor' ),
 			)
 		);
-
 		$this->add_control(
 			'testimonials_content_color',
 			array(
@@ -316,16 +304,13 @@ class StmLmsProTestimonials extends Widget_Base {
 				),
 			)
 		);
-
 		$this->end_controls_tab();
-
 		$this->start_controls_tab(
 			'content_text_hover',
 			array(
 				'label' => esc_html__( 'Hover', 'companion-elementor' ),
 			)
 		);
-
 		$this->add_control(
 			'testimonials_content_color_hover',
 			array(
@@ -336,13 +321,9 @@ class StmLmsProTestimonials extends Widget_Base {
 				),
 			)
 		);
-
 		$this->end_controls_tab();
-
 		$this->end_controls_tabs();
-
 		$this->end_controls_section();
-
 	}
 
 	protected function register_author_content_controls() {
@@ -353,7 +334,6 @@ class StmLmsProTestimonials extends Widget_Base {
 				'tab'   => Controls_Manager::TAB_STYLE,
 			)
 		);
-
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			array(
@@ -362,7 +342,6 @@ class StmLmsProTestimonials extends Widget_Base {
 				'selector' => '{{WRAPPER}} .elementor-testimonials-carousel .ms-lms-testimonial-data .author-name',
 			)
 		);
-
 		$this->add_responsive_control(
 			'author_margin',
 			array(
@@ -374,7 +353,6 @@ class StmLmsProTestimonials extends Widget_Base {
 				),
 			)
 		);
-
 		$this->start_controls_tabs(
 			'style_tabs_author'
 		);
@@ -384,7 +362,6 @@ class StmLmsProTestimonials extends Widget_Base {
 				'label' => esc_html__( 'Normal', 'companion-elementor' ),
 			)
 		);
-
 		$this->add_control(
 			'testimonials_author_color',
 			array(
@@ -396,16 +373,13 @@ class StmLmsProTestimonials extends Widget_Base {
 				),
 			)
 		);
-
 		$this->end_controls_tab();
-
 		$this->start_controls_tab(
 			'author_text_hover',
 			array(
 				'label' => esc_html__( 'Hover', 'companion-elementor' ),
 			)
 		);
-
 		$this->add_control(
 			'testimonials_author_color_hover',
 			array(
@@ -417,28 +391,15 @@ class StmLmsProTestimonials extends Widget_Base {
 				),
 			)
 		);
-
 		$this->end_controls_tab();
-
 		$this->end_controls_tabs();
-
 		$this->end_controls_section();
-
 	}
 
-
 	/** Render the widget output on the frontend */
-
 	protected function render() {
-
 		$settings              = $this->get_settings_for_display();
 		$settings['unique_id'] = 'stm_testimonials_carousel-' . $this->get_id();
-
-		if ( defined( 'ELEMENTOR_ASSETS_URL' ) ) {
-			if ( ! wp_script_is( 'swiper', 'registered' ) ) {
-				wp_enqueue_script( 'swiper', ELEMENTOR_ASSETS_URL . 'lib/swiper/swiper.min.js', array(), time(), true );
-			}
-		}
 		if ( empty( $settings['testimonials'] ) ) {
 			?>
 			<h2><?php echo esc_html__( 'LMS Testimonials Widget', 'masterstudy-lms-learning-management-system' ); ?></h2>
@@ -448,45 +409,6 @@ class StmLmsProTestimonials extends Widget_Base {
 		extract( $settings );
 		if ( ! empty( $testimonials ) ) {
 			?>
-			<script>
-				jQuery(window).on('load', function () {
-					let swiper = new Swiper('#<?php echo esc_attr( $unique_id ); ?>', {
-						loop: true,
-						slidesPerView: 1,
-						on: {
-							init: function () {
-								/** removed from total count 2 , cause Loop is True, and have 2 fake elements **/
-								var totalSlides = jQuery('.elementor-testimonials-carousel').children().length - 2;
-								this.slideToLoop(parseInt(totalSlides / 2));
-							},
-						},
-						pagination: {
-							el: '.ms-lms-elementor-testimonials-swiper-pagination',
-							clickable: true,
-							renderBullet: function (index, className) {
-
-								var userThumbnail = '';
-								var testimonialItem = jQuery('.elementor-testimonials-carousel').children().eq(index + 1);
-								if (testimonialItem.length > 0) {
-									userThumbnail = testimonialItem.attr('data-thumbnail');
-								}
-
-								var span = jQuery('<span></span>');
-								span.addClass(className);
-								span.css("background-image", "url(" + userThumbnail + ")");
-								return span.prop('outerHTML');
-
-							},
-						},
-
-						breakpoints: {
-							992: {
-								slidesPerView: 1,
-							}
-						},
-					});
-				});
-			</script>
 			<div class="stm-testimonials-carousel-wrapper swiper-container" id="<?php echo esc_attr( $unique_id ); ?>">
 				<div class="ms-lms-testimonials-header">
 					<i class="ms-lms-testimonials-icon"></i>
@@ -500,7 +422,6 @@ class StmLmsProTestimonials extends Widget_Base {
 							$thumbnail_img = wp_get_attachment_image_src( $testimonial['image']['id'], 'thumbnail' );
 						}
 						?>
-
 						<div class="ms-lms-testimonial-data swiper-slide"
 							data-thumbnail="<?php echo esc_attr( $thumbnail_img[0] ); ?>">
 							<div class="ms-lms-testimonial-review-rating">
@@ -508,7 +429,6 @@ class StmLmsProTestimonials extends Widget_Base {
 									<i class="fa fa-star"></i>
 								<?php } ?>
 							</div>
-
 							<div class="author-name"><?php echo esc_html( $testimonial['author_name'] ); ?></div>
 							<div class="content">
 								<?php echo wp_kses_post( $testimonial['content'] ); ?>
@@ -523,15 +443,12 @@ class StmLmsProTestimonials extends Widget_Base {
 	}
 
 	protected function get_html_data( $testimonials_data, $title ) {
-
 		$html = '<div class="ms-lms-testimonials-wrapper simple_carousel_wrapper">';
 		$html .= '<div class="ms-lms-testimonials-header"><i class="ms-lms-testimonials-icon"></i>';
 		$html .= '<p>' . esc_html( $title ) . '</p>';
 		$html .= '</div>';
 		$html .= '<div class="ms-lms-starter-theme-testimonials">';
-
 		foreach ( $testimonials_data as $testimonial ) {
-
 			$html .= '<div class="stm_testimonials_single" >
 						<div class="stars" ><i class="fa fa-star" ></i ></div>
 						<div class="testimonials_title h3" >'
@@ -542,15 +459,10 @@ class StmLmsProTestimonials extends Widget_Base {
 					'</div>
 					</div>';
 		}
-
 		$html .= '</div>';
-
 		$html .= '<div class="navs">';
-
 		$html .= '<ul id="carousel-custom-dots">';
-
 		foreach ( $testimonials_data as $testimonial ) {
-
 			$html .= '<li class="testinomials_dots_image"><img src="' . esc_url( $testimonial['image'] ) . '" /></li>';
 		}
 		$html .= '</ul></div></div>';
