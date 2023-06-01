@@ -181,11 +181,6 @@ class STM_LMS_Certificate_Builder {
 				'name'  => esc_html__( 'Student code', 'masterstudy-lms-learning-management-system-pro' ),
 				'value' => esc_html__( '-Student code-', 'masterstudy-lms-learning-management-system-pro' ),
 			),
-			// ChinDevs Code to Add GPA
-			'student_gpa'  => array(
-				'name'  => esc_html__( 'GPA', 'masterstudy-lms-learning-management-system-pro' ),
-				'value' => esc_html__( '-GPA-', 'masterstudy-lms-learning-management-system-pro' ),
-			),
 		);
 
 		wp_send_json( apply_filters( 'stm_certificates_fields', $fields ) );
@@ -482,7 +477,7 @@ class STM_LMS_Certificate_Builder {
 					$field['content'] = STM_LMS_Certificates::generate_certificate_user_code( $current_user_id, $course_id );
 				} // ChinDevs to add student gpa code
 				elseif ( 'student_gpa' === $field['type'] && ! empty( $course_id )) {
-				    $field['content'] = STM_LMS_Certificates::generate_certificate_student_gpa($current_user_id, $course_id);
+				    $field['content'] = chindevs_generate_certificate_student_gpa($current_user_id, $course_id);
 				}
 				$fields_with_data[] = $field;
 			}

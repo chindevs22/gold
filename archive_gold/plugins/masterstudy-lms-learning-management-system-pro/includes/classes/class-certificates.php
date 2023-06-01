@@ -31,64 +31,6 @@ class STM_LMS_Certificates {
 
 	}
 
-
-    //ChinDevs function to add GPA to certificate
-	public static function generate_certificate_student_gpa ( $user_id , $course_id ) {
-        global $wpdb;
-        $table = stm_lms_user_quizzes_name( $wpdb );
-
-        $request = "SELECT progress FROM {$table}
-                WHERE
-                user_id = {$user_id} AND
-                course_id = {$course_id}";
-
-        // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
-        $quiz_grades = $wpdb->get_results( $request, ARRAY_A );
-
-        // get grade for quizzes
-		$total_quizzes = count($quiz_grades);
-		$quiz_grade = 0;
-		foreach($quiz_grades as $quiz_row) {
-			$quiz_grade += $quiz_row['progress'];
-		}
-
-        //assignments.posts TODO: this is prob wrong, figure out how to actually get the data from it!
-        $user_assignments = STM_LMS_User_Assignment::my_assignments($user_id);
-        $assignment_grade = 0;
-        $total_assignments = 0;
-
-        foreach($user_assignments as $assignment) {
-            if ($assignment.course_id == $course_id) {
-               $assignment_grade += $assignment.assignment_grade;'
-               $total_assignments += 1;
-            }
-        }
-
-        //calculate totals
-		$total_grade = $assignment_grade + $quiz_grade;
-		$total_lessons = $total_assignments + $total_quizzes;
-
-		$final_percent = $total_grade/$total_lessons;
-
-        //what to show on a course with only lessons that has certificate?
-        if ($total_lessons == 0) {
-            return "P";
-        }
-        if ($final_percent >= 80) {
-            return "O+";
-        }
-        if ($final_percent >= 60) {
-            return "A+";
-        }
-        if ($final_percent >= 50) {
-            return "A";
-        }
-        if ($final_percent > 80) {
-            return "B";
-        }
-	}
-
-
 	public static function generate_certificate_user_code( $user_id, $course_id ) {
 		$current_code = get_user_meta( $user_id, "stm_lms_certificate_code_{$course_id}", true );
 		if ( ! empty( $current_code ) ) {
