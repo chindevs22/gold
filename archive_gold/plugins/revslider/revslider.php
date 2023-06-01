@@ -6,7 +6,7 @@ Description: Slider Revolution - More than just a WordPress Slider
 Author: ThemePunch
 Text Domain: revslider
 Domain Path: /languages
-Version: 6.5.25
+Version: 6.6.12
 Author URI: https://themepunch.com/
 */
 
@@ -17,7 +17,7 @@ if(class_exists('RevSliderFront')){
 	die('ERROR: It looks like you have more than one instance of Slider Revolution installed. Please remove additional instances for this plugin to work again.');
 }
 
-define('RS_REVISION',			'6.5.25');
+define('RS_REVISION',			'6.6.12');
 define('RS_PLUGIN_PATH',		plugin_dir_path(__FILE__));
 define('RS_PLUGIN_SLUG_PATH',	plugin_basename(__FILE__));
 define('RS_PLUGIN_FILE_PATH',	__FILE__);
@@ -25,7 +25,7 @@ define('RS_PLUGIN_SLUG',		apply_filters('set_revslider_slug', 'revslider'));
 define('RS_PLUGIN_URL',			get_rs_plugin_url());
 define('RS_PLUGIN_URL_CLEAN',	str_replace(array('http://', 'https://'), '//', RS_PLUGIN_URL));
 define('RS_DEMO',				false);
-define('RS_TP_TOOLS',			'6.5.18'); //holds the version of the tp-tools script, load only the latest!
+define('RS_TP_TOOLS',			'6.6.12'); //holds the version of the tp-tools script, load only the latest!
 
 global $revslider_fonts;
 global $revslider_is_preview_mode;
@@ -88,6 +88,10 @@ try{
 		//do not render in elementor preview iframe
 		if (isset($_GET['elementor-preview'])) return false;
 
+		//do not render on saving a post/page
+		global $revslider_save_post;
+		if($revslider_save_post) return false;
+		
 		//skip shortcode generation if any of these functions found in backtrace 
 		//function can be provided as array item without key
 		//or as 'class' => 'function'
@@ -198,9 +202,10 @@ try{
 		require_once(RS_PLUGIN_PATH . 'admin/includes/newsletter.class.php');
 		require_once(RS_PLUGIN_PATH . 'admin/revslider-admin.class.php');
 		require_once(RS_PLUGIN_PATH . 'includes/update.class.php');
+		require_once(RS_PLUGIN_PATH . 'admin/includes/tracking.class.php');
 		//require_once(RS_PLUGIN_PATH . 'admin/includes/debug.php');
-
-		$rs_admin = new RevSliderAdmin();
+		$rstrack	= new RevSliderTracking();
+		$rs_admin	= new RevSliderAdmin();
 	}else{
 		require_once(RS_PLUGIN_PATH . 'public/includes/functions-public.class.php');
 

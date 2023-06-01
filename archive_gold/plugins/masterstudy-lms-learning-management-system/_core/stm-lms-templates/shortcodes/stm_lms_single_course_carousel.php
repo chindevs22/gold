@@ -47,7 +47,7 @@ if ( $q->have_posts() ) :
 				$post_id  = get_the_ID();
 				$level    = get_post_meta( $post_id, 'level', true );
 				$duration = get_post_meta( $post_id, 'duration_info', true );
-				$lectures = STM_LMS_Course::curriculum_info( get_post_meta( $post_id, 'curriculum', true ) );
+				$lectures = STM_LMS_Course::curriculum_info( $post_id );
 				?>
 
 				<div class="stm_lms_single_course_carousel_item stm_carousel_glitch">

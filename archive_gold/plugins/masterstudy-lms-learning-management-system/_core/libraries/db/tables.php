@@ -25,6 +25,6 @@ if ( is_admin() ) {
 	require_once STM_LMS_LIBRARY . '/db/tables/user_cart.table.php';
 	require_once STM_LMS_LIBRARY . '/db/tables/user_chat.table.php';
 	require_once STM_LMS_LIBRARY . '/db/tables/user_searches.table.php';
-	require_once STM_LMS_LIBRARY . '/db/tables/curriculum_log.table.php';
-	require_once STM_LMS_LIBRARY . '/db/tables/curriculum_bind.table.php';
+	require_once STM_LMS_LIBRARY . '/db/tables/curriculum_sections.table.php';
+	require_once STM_LMS_LIBRARY . '/db/tables/curriculum_materials.table.php';
 }

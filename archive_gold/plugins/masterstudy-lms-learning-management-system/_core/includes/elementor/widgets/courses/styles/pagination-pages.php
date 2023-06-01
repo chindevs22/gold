@@ -14,8 +14,8 @@ $this->start_controls_section(
 			'terms' => array(
 				array(
 					'name'     => 'type',
-					'operator' => '===',
-					'value'    => 'courses-archive',
+					'operator' => 'in',
+					'value'    => array( 'courses-archive', 'courses-grid' ),
 				),
 				array(
 					'name'     => 'show_pagination',
@@ -35,7 +35,7 @@ $this->add_group_control(
 	Group_Control_Typography::get_type(),
 	array(
 		'name'     => 'style_pagination_pages_typography',
-		'selector' => '{{WRAPPER}} .ms_lms_courses_archive__pagination_list_item a, {{WRAPPER}} .ms_lms_courses_archive__pagination_list_item span:not(.dots)',
+		'selector' => '{{WRAPPER}} .ms_lms_courses_archive__pagination_list_item a, {{WRAPPER}} .ms_lms_courses_archive__pagination_list_item span:not(.dots), {{WRAPPER}} .ms_lms_courses_grid__pagination_list_item a, {{WRAPPER}} .ms_lms_courses_grid__pagination_list_item span:not(.dots)',
 	)
 );
 $this->add_responsive_control(
@@ -47,6 +47,8 @@ $this->add_responsive_control(
 		'selectors'  => array(
 			'{{WRAPPER}} .ms_lms_courses_archive__pagination_list_item a' => 'min-width: {{SIZE}}{{UNIT}};',
 			'{{WRAPPER}} .ms_lms_courses_archive__pagination_list_item span:not(.dots)' => 'min-width: {{SIZE}}{{UNIT}};',
+			'{{WRAPPER}} .ms_lms_courses_grid__pagination_list_item a' => 'min-width: {{SIZE}}{{UNIT}};',
+			'{{WRAPPER}} .ms_lms_courses_grid__pagination_list_item span:not(.dots)' => 'min-width: {{SIZE}}{{UNIT}};',
 		),
 	)
 );
@@ -65,6 +67,8 @@ $this->add_responsive_control(
 		'selectors'  => array(
 			'{{WRAPPER}} .ms_lms_courses_archive__pagination_list_item a' => 'min-height: {{SIZE}}{{UNIT}};',
 			'{{WRAPPER}} .ms_lms_courses_archive__pagination_list_item span:not(.dots)' => 'min-height: {{SIZE}}{{UNIT}};',
+			'{{WRAPPER}} .ms_lms_courses_grid__pagination_list_item a' => 'min-height: {{SIZE}}{{UNIT}};',
+			'{{WRAPPER}} .ms_lms_courses_grid__pagination_list_item span:not(.dots)' => 'min-height: {{SIZE}}{{UNIT}};',
 		),
 	)
 );
@@ -81,6 +85,7 @@ $this->add_control(
 		'type'      => Controls_Manager::COLOR,
 		'selectors' => array(
 			'{{WRAPPER}} .ms_lms_courses_archive__pagination_list_item span.dots::after' => 'color: {{VALUE}}',
+			'{{WRAPPER}} .ms_lms_courses_grid__pagination_list_item span.dots::after' => 'color: {{VALUE}}',
 		),
 	)
 );
@@ -92,6 +97,7 @@ $this->add_responsive_control(
 		'size_units' => array( 'px' ),
 		'selectors'  => array(
 			'{{WRAPPER}} .ms_lms_courses_archive__pagination_list_item span.dots::after' => 'font-size: {{SIZE}}{{UNIT}};',
+			'{{WRAPPER}} .ms_lms_courses_grid__pagination_list_item span.dots::after' => 'font-size: {{SIZE}}{{UNIT}};',
 		),
 	)
 );
@@ -103,6 +109,7 @@ $this->add_responsive_control(
 		'size_units' => array( 'px' ),
 		'selectors'  => array(
 			'{{WRAPPER}} .ms_lms_courses_archive__pagination_list_item span.dots' => 'min-width: {{SIZE}}{{UNIT}};',
+			'{{WRAPPER}} .ms_lms_courses_grid__pagination_list_item span.dots' => 'min-width: {{SIZE}}{{UNIT}};',
 		),
 	)
 );
@@ -114,6 +121,7 @@ $this->add_responsive_control(
 		'size_units' => array( 'px' ),
 		'selectors'  => array(
 			'{{WRAPPER}} .ms_lms_courses_archive__pagination_list_item span.dots' => 'bottom: {{SIZE}}{{UNIT}};',
+			'{{WRAPPER}} .ms_lms_courses_grid__pagination_list_item span.dots' => 'bottom: {{SIZE}}{{UNIT}};',
 		),
 	)
 );
@@ -140,6 +148,8 @@ $this->add_control(
 		'selectors' => array(
 			'{{WRAPPER}} .ms_lms_courses_archive__pagination_list_item a' => 'color: {{VALUE}}',
 			'{{WRAPPER}} .ms_lms_courses_archive__pagination_list_item span:not(.dots):not(.current)' => 'color: {{VALUE}}',
+			'{{WRAPPER}} .ms_lms_courses_grid__pagination_list_item a' => 'color: {{VALUE}}',
+			'{{WRAPPER}} .ms_lms_courses_grid__pagination_list_item span:not(.dots):not(.current)' => 'color: {{VALUE}}',
 		),
 	)
 );
@@ -148,14 +158,14 @@ $this->add_group_control(
 	array(
 		'name'     => 'pagination_pages_background',
 		'types'    => array( 'classic', 'gradient' ),
-		'selector' => '{{WRAPPER}} .ms_lms_courses_archive__pagination_list_item a, {{WRAPPER}} .ms_lms_courses_archive__pagination_list_item span:not(.dots):not(.current)',
+		'selector' => '{{WRAPPER}} .ms_lms_courses_archive__pagination_list_item a, {{WRAPPER}} .ms_lms_courses_archive__pagination_list_item span:not(.dots):not(.current), {{WRAPPER}} .ms_lms_courses_grid__pagination_list_item a, {{WRAPPER}} .ms_lms_courses_grid__pagination_list_item span:not(.dots):not(.current)',
 	)
 );
 $this->add_group_control(
 	Group_Control_Border::get_type(),
 	array(
 		'name'     => 'pagination_pages_border',
-		'selector' => '{{WRAPPER}} .ms_lms_courses_archive__pagination_list_item a, {{WRAPPER}} .ms_lms_courses_archive__pagination_list_item span:not(.dots):not(.current)',
+		'selector' => '{{WRAPPER}} .ms_lms_courses_archive__pagination_list_item a, {{WRAPPER}} .ms_lms_courses_archive__pagination_list_item span:not(.dots):not(.current), {{WRAPPER}} .ms_lms_courses_grid__pagination_list_item a, {{WRAPPER}} .ms_lms_courses_grid__pagination_list_item span:not(.dots):not(.current)',
 	)
 );
 $this->add_control(
@@ -167,6 +177,8 @@ $this->add_control(
 		'selectors'  => array(
 			'{{WRAPPER}} .ms_lms_courses_archive__pagination_list_item a' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 			'{{WRAPPER}} .ms_lms_courses_archive__pagination_list_item span:not(.dots):not(.current)' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			'{{WRAPPER}} .ms_lms_courses_grid__pagination_list_item a' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			'{{WRAPPER}} .ms_lms_courses_grid__pagination_list_item span:not(.dots):not(.current)' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 		),
 	)
 );
@@ -185,6 +197,8 @@ $this->add_control(
 		'selectors' => array(
 			'{{WRAPPER}} .ms_lms_courses_archive__pagination_list_item a:hover' => 'color: {{VALUE}}',
 			'{{WRAPPER}} .ms_lms_courses_archive__pagination_list_item span.current' => 'color: {{VALUE}}',
+			'{{WRAPPER}} .ms_lms_courses_grid__pagination_list_item a:hover' => 'color: {{VALUE}}',
+			'{{WRAPPER}} .ms_lms_courses_grid__pagination_list_item span.current' => 'color: {{VALUE}}',
 		),
 	)
 );
@@ -193,14 +207,14 @@ $this->add_group_control(
 	array(
 		'name'     => 'pagination_pages_background_hover',
 		'types'    => array( 'classic', 'gradient' ),
-		'selector' => '{{WRAPPER}} .ms_lms_courses_archive__pagination_list_item a:hover, {{WRAPPER}} .ms_lms_courses_archive__pagination_list_item span.current',
+		'selector' => '{{WRAPPER}} .ms_lms_courses_archive__pagination_list_item a:hover, {{WRAPPER}} .ms_lms_courses_archive__pagination_list_item span.current, {{WRAPPER}} .ms_lms_courses_grid__pagination_list_item a:hover, {{WRAPPER}} .ms_lms_courses_grid__pagination_list_item span.current',
 	)
 );
 $this->add_group_control(
 	Group_Control_Border::get_type(),
 	array(
 		'name'     => 'pagination_pages_border_hover',
-		'selector' => '{{WRAPPER}} .ms_lms_courses_archive__pagination_list_item a:hover, {{WRAPPER}} .ms_lms_courses_archive__pagination_list_item span.current',
+		'selector' => '{{WRAPPER}} .ms_lms_courses_archive__pagination_list_item a:hover, {{WRAPPER}} .ms_lms_courses_archive__pagination_list_item span.current, {{WRAPPER}} .ms_lms_courses_grid__pagination_list_item a:hover, {{WRAPPER}} .ms_lms_courses_grid__pagination_list_item span.current',
 	)
 );
 $this->add_control(
@@ -212,6 +226,8 @@ $this->add_control(
 		'selectors'  => array(
 			'{{WRAPPER}} .ms_lms_courses_archive__pagination_list_item a:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 			'{{WRAPPER}} .ms_lms_courses_archive__pagination_list_item span.current' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			'{{WRAPPER}} .ms_lms_courses_grid__pagination_list_item a:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			'{{WRAPPER}} .ms_lms_courses_grid__pagination_list_item span.current' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 		),
 	)
 );

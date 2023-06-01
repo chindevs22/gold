@@ -1,0 +1,50 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Add to Calendar Button Plugin\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/add-to-calendar-"
+"button\n"
+"POT-Creation-Date: 2023-01-05 10:23+0100\n"
+"PO-Revision-Date: 2023-01-16 22:02+0100\n"
+"Last-Translator: Jens Kuerschner <mail@add-to-calendar-pro.com>\n"
+"Language-Team: \n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.2.2\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Domain: add-to-calendar-button\n"
+
+msgid "Creates a button that adds an event to the user's calendar."
+msgstr ""
+
+msgid "My Event Title"
+msgstr ""
+
+msgid "World Wide Web"
+msgstr ""
+
+msgid "Attributes"
+msgstr ""
+
+msgid "Click here for documentation"
+msgstr ""
+
+msgid "Mind that the interaction with the button is blocked in edit mode"
+msgstr ""
+
+msgid "Calendar"
+msgstr ""
+
+msgid "save"
+msgstr ""
+
+msgid "Date"
+msgstr ""
+
+msgid "Appointment"
+msgstr ""
+
+msgid "Configuration Options"
+msgstr ""

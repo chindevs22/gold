@@ -318,16 +318,26 @@ class Wt_Smart_Coupon_Giveaway_Product
     {
         if($product->is_on_sale())
         { 
-            $product_price =  $product->get_sale_price();
+            $product_price = $product->get_sale_price();
         } else {
             $product_price = $product->get_regular_price();
         }
-        if(""==$product_price)
+
+        if("" === $product_price)
         {
             $product_price = $product->get_price();
-        }  
+        }
+
         $product_price = (float) $product_price;
-        return $product_price; 
+        
+        /**
+         *  Alter product price of giveaway item
+         * 
+         *  @since 1.4.5
+         *  @param $product_price   float           Price of the product
+         *  @param $product         WC_Product      Product object
+         */
+        return apply_filters('wt_sc_alter_giveaway_product_price', $product_price, $product); 
     }
 
     public static function get_all_bogo_giveaway_products($post_id)

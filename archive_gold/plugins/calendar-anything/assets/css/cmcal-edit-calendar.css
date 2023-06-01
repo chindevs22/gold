@@ -1,0 +1,161 @@
+.cmcal-calendars-table{
+    margin-top: 10px;
+    width: 100%;
+}
+
+.cmcal-calendars-table pre{
+    background-color: #ddd;
+    margin:0px;
+    width: fit-content;
+    padding: 4px;
+}
+
+.cmcal-calendars-table .delete-btn{
+    background-color: red;
+}
+
+.cmcal-calendars-table .delete-btn:hover,
+.cmcal-calendars-table .delete-btn:focus{
+    background-color: #ee0000;
+}
+
+.cmcal-btn,
+.cmcal-btn:focus{
+    border: none !important;
+    box-shadow:none !important;
+    text-shadow: none !important;
+}
+
+.cmcal-btn.preview.button{
+    border: 1px solid #999 !important;
+    margin-right:50px;
+}
+
+.cmcal-btn.preview.button:hover {
+    background: #0085ba;
+    color: white;
+}
+
+.cmcal-calendars-table input[name='cmcal-calendar-update'],
+.cmcal-calendars-table input[name='cmcal-calendar-delete']{
+    float: right;
+    margin-left:10px;
+}
+
+/*table title*/
+#cmb2-metabox-cmcal_setup_calendars_metabox > .cmb-type-title .cmcal-calendars-table {
+    background-color: #e1e1e1 !important;
+}
+
+#cmb2-metabox-cmcal_setup_calendars_metabox .cmb-repeat-group-wrap .cmb-row.cmb-type-title {
+    padding: 20px 8px !important;
+}
+
+/*Edit form*/
+.cmcal-edit-form-blockUI {
+    border: none !important;
+}
+
+#cmcal-calendar-edit-form {
+    text-align: left;
+    padding: 20px 20px 10px 20px;
+    display: none;
+}
+#cmcal-calendar-edit-form .cmcal-btn{
+    float: right;
+    margin-top:20px;
+    margin-left:20px;
+    margin-bottom:20px;
+}
+
+#cmcal-calendar-edit-form input[type='text'] {
+    width:100%;
+    margin-top: 10px;
+}
+
+.cmcal-edit-form-spinner {
+    background: url('../img/spinner.gif') no-repeat;
+    background-size: 22px 22px;
+    width: 22px;
+    height: 22px;
+    margin: 5px 5px 0;
+    position: fixed;
+    top: 50%;
+    left: 50%;    
+}
+
+#cmcal-calendar-edit-form .cancel.button.cmcal-btn {
+    border: 1px solid #f7f7f7;
+    margin-right: -10px;
+    height: 30px;
+    line-height: 28px;
+    padding: 0 12px 2px;
+}
+
+/*Group Fields Styling*/
+
+.cmcal-calendar-settings-section table{
+    margin:0px !important;  
+    border:0px !important;
+}
+
+.cmcal-calendar-settings-section .cmbhandle{
+    position:absolute !important;
+    right:0px !important;
+}
+
+.cmcal-calendar-settings-section .cmb-group-title{
+    cursor: pointer;
+}
+
+.cmcal-calendar-settings-section .cmcal-calendars-table-header,
+.cmcal-calendar-settings-section .cmb-group-title,
+.cmcal-calendar-settings-section .cmb-repeat-group-wrap,
+.cmcal-calendar-settings-section .cmb-repeatable-grouping{
+    margin:0px !important;
+    padding:0px !important;
+}
+
+
+.cmcal-calendar-settings-section .cmb-row.cmb-type-title{
+    margin:0px !important;
+    background-color: white !important;
+}
+
+.cmcal-calendar-settings-section .cmb-repeat-group-wrap,
+.cmcal-calendar-settings-section .cmb-repeatable-grouping{
+    border:0px !important;
+}
+
+.cmcal-calendar-settings-section .inside.cmb-field-list{
+    margin: 0px !important;
+    border-top:1px solid rgb(233, 233, 233)!important;
+}
+
+.cmcal-calendar-settings-section .cmb-repeat-group-wrap .cmb-type-title h3{
+    color: #222 !important;
+    padding: 0 10px !important;
+}
+
+.cmcal-calendar-settings-section .cmb2-metabox .cmb-type-group {
+    max-width: 100%;
+}
+
+.cmcal-calendar-settings-section .cmb-repeatable-grouping {
+    margin-top: 10px !important;
+}
+
+.cmcal-inline-cmb2,
+.cmcal-inline-cmb2 .cmb2-metabox-description {
+    width: fit-content;
+    display: inline-block;
+    border:none !important;  
+}
+.cmcal-inline-cmb2 .cmb2-metabox-title {
+    text-transform: none !important;  
+    font-size: inherit !important;      
+}
+
+.cmcal-calendar-settings-section .cmb-repeat-group-wrap .cmcal-inline-cmb2 .cmb2-metabox-title{     
+    padding: 0 20px !important;
+}

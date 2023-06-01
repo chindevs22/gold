@@ -1,12 +1,12 @@
 === Smart Coupons For WooCommerce Coupons ===
 Contributors: WebToffee
-Version: 1.4.4
+Version: 1.4.6
 Donate link:https://www.webtoffee.com/plugins/
 Tags: WooCommerce coupon, BOGO, url coupons, gift coupons, signup coupons, coupons, smart coupons, advanced coupons, woocommerce smart coupons, woocommerce, url coupons for woocommerce,  extended coupons, auto coupons,  smart coupons for woocommerce,  coupon category
 Requires at least: 3.3
-Tested up to: 6.1
+Tested up to: 6.2
 Requires PHP: 5.6
-Stable tag: 1.4.4
+Stable tag: 1.4.6
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -198,6 +198,20 @@ Yes. You can create coupons that get applied as per the purchase amount of a cus
 
 
 == Changelog ==
+
+= 1.4.6 - 2023-03-30 =
+* [Add] Country wise restriction for coupons
+* [Bug fix] Coupon start date not showing properly on different timezones.
+* [Compatibility] WC 7.5
+
+= 1.4.5 - 2023-02-21 =
+* [Add] New filter: `wt_sc_alter_giveaway_product_price` to alter giveaway product price.
+* [Add] New filter: `wt_sc_chosen_shipping_for_validation` to process the shipping method name for validation.
+* [Improvement] Added compatibility for shipping method value that has no `colon`
+* [Improvement] Added WPML compatibility for giveaway products.
+* [Improvement] Compatibility when adding product wise discounts(not via coupon) in the back-end.
+* [Compatibility] WooCommerce HPOS.
+* [Compatibility] WC 7.3
 
 = 1.4.4 - 13-01-2023 =
 * [Bug fix] Lookup table int column size issue. Few columns converted from int to bigint
@@ -458,15 +472,7 @@ Yes. You can create coupons that get applied as per the purchase amount of a cus
 
 == Upgrade Notice ==
 
-= 1.4.4 =
-* [Bug fix] Lookup table int column size issue. Few columns converted from int to bigint
-* [Bug fix] BOGO product quantity was not updated correctly when different eligible products are added
-* [Bug fix] Displaying coupons that are expired in the same date.
-* [Bug fix] Giveaway product alignment issue in small screens.
-* [Bug fix] Showing non-existing coupons.
-* [Improvement] Lookup table migration code updated to handle very slow websites. New filter added to control migration batch limit. wt_sc_lookup_table_migration_batch_limit
-* [Improvement] Coupon restriction compatibility added for backend coupon applying
-* [Improvement] Custom warning message added, if lookup table not exists
-* [Add] Search coupons using email
-* [Add] New filter: `wt_sc_auto_coupons_list` to alter auto coupon list.
-* [Compatibility] WC 7.2
+= 1.4.6 =
+* [Add] Country wise restriction for coupons
+* [Bug fix] Coupon start date not showing properly on different timezones.
+* [Compatibility] WC 7.5

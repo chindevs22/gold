@@ -354,18 +354,6 @@ class MsLmsCoursesChild extends Widget_Base {
             $featured_args['tax_query'][] = $tax_query;
         }
 
-//        if(isset($settings['taxonomy']) && !empty($settings['taxonomy'])) {
-//            $tax_query = array(
-//                'taxonomy' => 'stm_lms_course_taxonomy',
-//                'field' => 'term_id',
-//                'terms' => array_map('intval', $settings['taxonomy']),
-//                'operator' => 'IN',
-//            );
-//
-//            $default_args['tax_query'][] = $tax_query;
-//            $featured_args['tax_query'][] = $tax_query;
-//        }
-
 		$default_args   = apply_filters( 'stm_lms_filter_courses', $default_args, array(), array(), $settings['sort_by'] );
 		$featured_args  = apply_filters( 'stm_lms_filter_courses', $featured_args, array(), array(), $settings['sort_by'] );
 		if ( 0 !== $posts_per_page ) {

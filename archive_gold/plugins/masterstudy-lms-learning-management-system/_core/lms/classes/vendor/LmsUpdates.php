@@ -9,6 +9,12 @@ abstract class LmsUpdates {
 		'2.6.4'  => array( 'lms_page_routes' ), // LMS Chat system update with fixes
 		'2.6.7'  => array( 'lms_admin_notification_transient' ), // LMS Rate Us Admin Notification
 		'2.9.22' => array( 'lms_add_lesson_video_sources' ), // Added lesson video sources
+		'3.0.0'  => array(
+			'lms_create_curriculum_tables', // Curriculum Refactoring
+			'lms_migrate_course_data', // Curriculum & Course Files Refactoring
+			'lms_migrate_lesson_data', // Lesson Files Refactoring & Changing Slide Lesson Type
+			'lms_instructor_role_add_capability', // Add "list_users" capability to Instructor User Role
+		),
 	);
 
 	/**

@@ -1,109 +1,61 @@
-class StmLmsProTestimonials extends elementorModules.frontend.handlers.SwiperBase {
+class StmLmsProTestimonials extends elementorModules.frontend.handlers.Base {
 
 	getDefaultSettings() {
 		return {
 			selectors: {
-				carousel: '.swiper-container',
-				slideContent: '.swiper-slide'
+				carousel: '.stm-testimonials-carousel-wrapper',
 			}
 		};
 	}
 
 	getDefaultElements() {
 		const selectors = this.getSettings('selectors');
-		const elements = {
-			$swiperContainer: this.$element.find(selectors.carousel)
-		};
-		elements.$slides = elements.$swiperContainer.find(selectors.slideContent);
-		return elements;
-	}
-
-	getSwiperSettings() {
+		const elementSettings = this.getElementSettings();
 		return {
-			pagination: {
-				el: '.ms-lms-elementor-testimonials-swiper-pagination',
-				clickable: true,
-				renderBullet: function (index, className) {
-
-					var userThumbnail = '';
-					var testimonialItem = jQuery('.elementor-testimonials-carousel').children().eq(index);
-					if (testimonialItem.length > 0) {
-						userThumbnail = testimonialItem.attr('data-thumbnail');
-					}
-					var span = jQuery('<span></span>');
-					span.addClass(className);
-					span.css("background-image", "url(" + userThumbnail + ")");
-					return span.prop('outerHTML');
-
-				},
+			$sliderContainer: this.$element.find(selectors.carousel),
+			$sliderData: {
+				'autoplay': elementSettings['autoplay'],
+				'loop': elementSettings['loop'],
 			},
 		};
 	}
 
-	async onInit(...args) {
-		super.onInit(...args);
-		const elementSettings = this.getElementSettings();
-
-		if (!this.elements.$swiperContainer.length || 2 > this.elements.$slides.length) {
-			return;
-		}
-
-		const Swiper = elementorFrontend.utils.swiper;
-		this.swiper = await new Swiper(this.elements.$swiperContainer, this.getSwiperSettings()); // Expose the swiper instance in the frontend
-
-		this.elements.$swiperContainer.data('swiper', this.swiper);
-
-		if ('yes' === elementSettings.pause_on_hover) {
-			this.togglePauseOnHover(true);
-		}
+	bindEvents() {
+		jQuery(document).ready( this.sliderInit.bind(this) );
 	}
 
-	updateSwiperOption(propertyName) {
-		const elementSettings = this.getElementSettings(),
-			newSettingValue = elementSettings[propertyName],
-			params = this.swiper.params; // Handle special cases where the value to update is not the value that the Swiper library accepts.
-
-		switch (propertyName) {
-			case 'space_between':
-				params.spaceBetween = newSettingValue.size || 0;
-				break;
-
-			case 'autoplay_speed':
-				params.autoplay.delay = newSettingValue;
-				break;
-
-			case 'speed':
-				params.speed = newSettingValue;
-				break;
+	sliderInit() {
+		let _this = this,
+			autoplayData = false,
+			widgetID = _this.elements.$sliderContainer.closest('.elementor-widget-stm_lms_pro_testimonials').data('id'),
+			sliderContainer = document.querySelector(`[data-id="${widgetID}"] .stm-testimonials-carousel-wrapper`),
+			bullets = document.querySelector(`[data-id="${widgetID}"] .ms-lms-elementor-testimonials-swiper-pagination`),
+			sliderWrapper = document.querySelector(`[data-id="${widgetID}"] .elementor-testimonials-carousel`);
+		if ( _this.elements.$sliderData['autoplay'] ) {
+			autoplayData = {delay: 2000};
 		}
-
-		this.swiper.update();
-	}  getChangeableProperties() {
-		return {
-			pause_on_hover: 'pauseOnHover',
-			autoplay_speed: 'delay',
-			speed: 'speed',
-			space_between: 'spaceBetween'
-		};
-	}
-
-	onElementChange(propertyName) {
-		const changeableProperties = this.getChangeableProperties();
-
-		if (changeableProperties[propertyName]) {
-			// 'pause_on_hover' is implemented by the handler with event listeners, not the Swiper library.
-			if ('pause_on_hover' === propertyName) {
-				const newSettingValue = this.getElementSettings('pause_on_hover');
-				this.togglePauseOnHover('yes' === newSettingValue);
-			} else {
-				this.updateSwiperOption(propertyName);
-			}
-		}
-	}
-
-	onEditSettingsChange(propertyName) {
-		if ('activeItemIndex' === propertyName) {
-			this.swiper.slideToLoop(this.getEditSettings('activeItemIndex') - 1);
+		if ( _this.elements.$sliderContainer.length !== 0 && typeof edit_mode === 'undefined' ) {
+			const mySwiper = new Swiper( sliderContainer, {
+				slidesPerView: 1,
+				allowTouchMove: true,
+				loop: _this.elements.$sliderData['loop'],
+				autoplay: autoplayData,
+				pagination: {
+					el: bullets,
+					clickable: true,
+					renderBullet: function(index, className) {
+						let userThumbnail = '',
+							testimonialItem = sliderWrapper.children[index];
+						if (testimonialItem !== null && typeof testimonialItem === 'object') {
+							userThumbnail = testimonialItem.getAttribute('data-thumbnail');
+						}
+						let span = jQuery('<span></span>');
+						span.addClass(className);
+						span.css("background-image", "url(" + userThumbnail + ")");
+						return span.prop('outerHTML');
+					},
+				},
+			});
 		}
 	}
 }

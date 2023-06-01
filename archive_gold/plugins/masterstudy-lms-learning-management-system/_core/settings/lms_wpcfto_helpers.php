@@ -18,7 +18,7 @@ class STM_LMS_WPCFTO_HELPERS {
 
 		add_filter( 'stm_wpcfto_single_field_classes', array( $this, 'wpcfto_field_addon_state' ), 10, 3 );
 
-		add_action( 'stm_wpcfto_single_field_before_start', array( $this, 'start_field' ), 10, 5 );
+		add_action( 'stm_wpcfto_single_field_before_start', array( $this, 'start_field' ), 10, 6 );
 
 		add_filter(
 			'wpcfto_all_users_label',
@@ -250,35 +250,52 @@ class STM_LMS_WPCFTO_HELPERS {
 		return ( ! empty( $addons[ $addon_name ] ) && 'on' === $addons[ $addon_name ] );
 	}
 
-	public function start_field( $classes, $field_name, $field, $is_pro, $pro_url ) {
+	public function start_field( $classes, $field_name, $field, $is_pro, $pro_url, $disable ) {
 
 		$is_addon    = $this->is_addon( $classes, $field_name, $field );
 		$addon_state = $this->addon_state( $field_name );
+
 		if ( empty( $pro_url ) ) {
 			$pro_url = 'https://stylemixthemes.com/wordpress-lms-plugin/';
 		}
-		if ( 'is_pro' === $is_pro ) : ?>
-				<div class="field_overlay"></div>
-				<!--We have no pro plugin active-->
-				<span class="pro-notice">
-					<?php esc_html_e( 'Available in ', 'masterstudy-lms-learning-management-system' ); ?>
-					<a href="<?php echo esc_url( $pro_url ); ?>" target="_blank"><?php esc_html_e( 'Pro Version', 'masterstudy-lms-learning-management-system' ); ?></a>
-				</span>
-			<?php
-			endif;
 
-		if ( $is_addon ) :
+		if ( 'is_pro' === $is_pro ) { ?>
+			<div class="field_overlay"></div>
+			<!--We have no pro plugin active-->
+			<span class="pro-notice">
+				<?php esc_html_e( 'Available in ', 'masterstudy-lms-learning-management-system' ); ?>
+				<a href="<?php echo esc_url( $pro_url ); ?>" target="_blank"><?php esc_html_e( 'Pro Version', 'masterstudy-lms-learning-management-system' ); ?></a>
+			</span>
+			<?php
+		}
+
+		if ( $is_addon ) {
 			/*We have pro plugin but addon seems to be disabled*/
 			?>
-				<div class="field_overlay"></div>
-				<span class="pro-notice">
-					<a href="#" @click.prevent="enableAddon($event, '<?php echo esc_attr( $addon_state ); ?>')">
-						<i class="fa fa-power-off"></i>
-					<?php esc_html_e( 'Enable addon', 'masterstudy-lms-learning-management-system' ); ?>
-					</a>
-				</span>
+			<div class="field_overlay"></div>
+			<span class="pro-notice">
+				<a href="#" @click.prevent="enableAddon($event, '<?php echo esc_attr( $addon_state ); ?>')">
+					<i class="fa fa-power-off"></i>
+				<?php esc_html_e( 'Enable addon', 'masterstudy-lms-learning-management-system' ); ?>
+				</a>
+			</span>
 			<?php
-			endif;
+		}
+
+		if ( 'is_disabled' === $disable ) {
+			$no_quota = ( STM_LMS_Subscriptions::get_featured_quota() < 1 ) ? true : false;
+			$post_id  = ( isset( $_GET['post'] ) ) ? intval( $_GET['post'] ) : false;
+			$featured = get_post_meta( $post_id, 'featured', true );
+
+			if ( $no_quota && 'on' !== $featured ) {
+				?>
+				<div class="field_overlay"></div>
+				<span class="is_disabled_notice">
+					<?php esc_html_e( 'You have reached your featured courses quota limit!', 'masterstudy-lms-learning-management-system' ); ?>
+				</span>
+				<?php
+			}
+		}
 	}
 
 }

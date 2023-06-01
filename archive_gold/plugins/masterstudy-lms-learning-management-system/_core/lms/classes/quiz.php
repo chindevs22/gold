@@ -176,7 +176,7 @@ class STM_LMS_Quiz {
 		}
 		$single_question_score_percent = 100 / $total_questions;
 		$cutting_rate                  = ( ! empty( $quiz_info['re_take_cut'] ) ) ? ( 100 - $quiz_info['re_take_cut'] ) / 100 : 1;
-		$passing_grade                 = ( ! empty( $quiz_info['passing_grade'] ) ) ? $quiz_info['passing_grade'] : 0;
+		$passing_grade                 = ( ! empty( $quiz_info['passing_grade'] ) ) ? intval( $quiz_info['passing_grade'] ) : 0;
 
 		$user_quizzes   = stm_lms_get_user_quizzes( $user_id, $quiz_id, array( 'user_quiz_id', 'progress' ) );
 		$attempt_number = count( $user_quizzes ) + 1;
@@ -185,11 +185,16 @@ class STM_LMS_Quiz {
 		foreach ( $_POST as $question_id => $value ) {
 			if ( is_numeric( $question_id ) ) {
 				$question_id = intval( $question_id );
+				$type        = get_post_meta( $question_id, 'type', true );
 
-				if ( is_array( $value ) ) {
-					$answer = self::sanitize_answers( $value );
+				if ( 'fill_the_gap' === $type ) {
+					$answer = self::encode_answers( $value );
 				} else {
-					$answer = sanitize_text_field( $value );
+					if ( is_array( $value ) ) {
+						$answer = self::sanitize_answers( $value );
+					} else {
+						$answer = sanitize_text_field( $value );
+					}
 				}
 
 				$user_answer = ( is_array( $answer ) ) ? implode( ',', $answer ) : $answer;
@@ -212,7 +217,7 @@ class STM_LMS_Quiz {
 		}
 
 		/*Add user quiz*/
-		$progress  = round( $progress, 5 );
+		$progress  = round( $progress );
 		$status    = ( $progress < $passing_grade ) ? 'failed' : 'passed';
 		$user_quiz = compact( 'user_id', 'course_id', 'quiz_id', 'progress', 'status', 'sequency' );
 
@@ -223,11 +228,10 @@ class STM_LMS_Quiz {
 
 		if ( 'passed' === $status ) {
 			STM_LMS_Course::update_course_progress( $user_id, $course_id );
-			$user_login         = $user['login'];
-			$course_title  = get_the_title( $course_id );
-			$quiz_name     = get_the_title( $quiz_id );
-			$passing_grade = round( $user_quiz['progress'], 1 );
-			$message       = sprintf(
+			$user_login   = $user['login'];
+			$course_title = get_the_title( $course_id );
+			$quiz_name    = get_the_title( $quiz_id );
+			$message      = sprintf(
 			/* translators: %1$s Course Title, %2$s User Login */
 				esc_html__( '%1$s completed the %2$s on the course %3$s with a Passing grade of %4$s%%', 'masterstudy-lms-learning-management-system' ),
 				$user_login,
@@ -240,7 +244,7 @@ class STM_LMS_Quiz {
 
 		}
 		$user_quiz['passed']   = $progress >= $passing_grade;
-		$user_quiz['progress'] = round( $user_quiz['progress'], 1 );
+		$user_quiz['progress'] = round( $user_quiz['progress'] );
 		$user_quiz['url']      = '<a class="btn btn-default btn-close-quiz-modal-results" href="' . apply_filters( 'stm_lms_item_url_quiz_ended', STM_LMS_Course::item_url( $course_id, $quiz_id ) ) . '">' . esc_html__( 'Close', 'masterstudy-lms-learning-management-system' ) . '</a>';
 		$user_quiz['url']      = apply_filters( 'user_answers__course_url', $user_quiz['url'], $source );
 
@@ -321,6 +325,17 @@ class STM_LMS_Quiz {
 		$content = preg_replace( '/\\\+/', '\\', $content );
 
 		return $content;
+	}
+
+	public static function encode_answers( $answers ) {
+		if ( is_array( $answers ) ) {
+			foreach ( $answers as &$answer ) {
+				$answer = wp_kses_post( rawurlencode( $answer ) );
+			}
+		} else {
+			$answers = wp_kses_post( rawurlencode( $answers ) );
+		}
+		return $answers;
 	}
 
 	public static function sanitize_answers( $answers ) {
@@ -436,7 +451,7 @@ class STM_LMS_Quiz {
 								break;
 							};
 
-							if ( strtolower( $correct_answer['answer'] ) !== strtolower( $answer[ $i ] ) ) {
+							if ( strtolower( stripslashes( rawurldecode( $correct_answer['answer'] ) ) ) !== strtolower( stripslashes( rawurldecode( $answer[ $i ] ) ) ) ) {
 								$correct = false;
 								break;
 							};

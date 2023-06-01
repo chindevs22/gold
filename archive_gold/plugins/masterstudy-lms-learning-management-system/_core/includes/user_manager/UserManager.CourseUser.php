@@ -1,5 +1,8 @@
 <?php
 
+use MasterStudy\Lms\Repositories\CurriculumMaterialRepository;
+use MasterStudy\Lms\Repositories\CurriculumRepository;
+
 new STM_LMS_User_Manager_Course_User();
 
 class STM_LMS_User_Manager_Course_User {
@@ -28,24 +31,23 @@ class STM_LMS_User_Manager_Course_User {
 		$course_id  = intval( $data['course_id'] );
 		$student_id = intval( $data['user_id'] );
 
-		$curriculum = get_post_meta( $course_id, 'curriculum', true );
+		$curriculum = ( new CurriculumRepository() )->get_curriculum( $course_id );
 
-		if ( empty( $curriculum ) ) {
+		if ( empty( $curriculum['materials'] ) ) {
 			die;
 		}
 
-		$curriculum = explode( ',', $curriculum );
-
-		foreach ( $curriculum as $item_id ) {
-
-			$item_type = get_post_type( $item_id );
-
-			if ( 'stm-lessons' === $item_type ) {
-				self::reset_lesson( $student_id, $course_id, $item_id );
-			} elseif ( 'stm-assignments' === $item_type ) {
-				self::reset_assignment( $student_id, $course_id, $item_id );
-			} elseif ( 'stm-quizzes' === $item_type ) {
-				self::reset_quiz( $student_id, $course_id, $item_id );
+		foreach ( $curriculum['materials'] as $material ) {
+			switch ( $material['post_type'] ) {
+				case 'stm-lessons':
+					self::reset_lesson( $student_id, $course_id, $material['post_id'] );
+					break;
+				case 'stm-assignments':
+					self::reset_assignment( $student_id, $course_id, $material['post_id'] );
+					break;
+				case 'stm-quizzes':
+					self::reset_quiz( $student_id, $course_id, $material['post_id'] );
+					break;
 			}
 		}
 
@@ -54,35 +56,14 @@ class STM_LMS_User_Manager_Course_User {
 		STM_LMS_Course::update_course_progress( $student_id, $course_id );
 
 		wp_send_json( self::_student_progress( $course_id, $student_id ) );
-
 	}
 
 	// phpcs:ignore PSR2.Methods.MethodDeclaration.Underscore
 	public static function _student_progress( $course_id, $student_id ) {
-		$curriculum = get_post_meta( $course_id, 'curriculum', true );
+		$curriculum = ( new CurriculumRepository() )->get_curriculum( $course_id );
 
-		$curriculum    = explode( ',', $curriculum );
-		$sections_data = STM_LMS_Lesson::create_sections( $curriculum );
-
-		$sections = array();
-		foreach ( $sections_data as $sections_datum ) {
-			$sections[] = $sections_datum;
-		}
-
-		foreach ( $sections as $index => &$section_info ) {
-
-			$curriculum = ( ! empty( $section_info['items'] ) ) ? $section_info['items'] : array();
-
-			foreach ( $curriculum as $curriculum_index => $curriculum_item ) {
-
-				$item_data = self::course_item_data( intval( $curriculum_item ), $student_id, $course_id );
-
-				$section_info['section_items'][] = $item_data;
-
-				if ( ! isset( $user_id ) ) {
-					$user_id = 0;
-				}
-			}
+		foreach ( $curriculum['materials'] as &$material ) {
+			$material = array_merge( $material, self::course_material_data( $material, $student_id, $course_id ) );
 		}
 
 		$user_stats = STM_LMS_Helpers::simplify_db_array(
@@ -106,12 +87,12 @@ class STM_LMS_User_Manager_Course_User {
 
 		$user_stats['lesson_type'] = $lesson_type;
 
-		$data = array_merge( $user_stats, array( 'sections' => $sections ) );
+		$curriculum = array_merge( $user_stats, $curriculum );
 
-		$data['user']         = STM_LMS_User::get_current_user( $student_id );
-		$data['course_title'] = get_the_title( $course_id );
+		$curriculum['user']         = STM_LMS_User::get_current_user( $student_id );
+		$curriculum['course_title'] = get_the_title( $course_id );
 
-		return $data;
+		return $curriculum;
 	}
 
 	public function student_progress() {
@@ -132,9 +113,7 @@ class STM_LMS_User_Manager_Course_User {
 		$course_id  = intval( $data['course_id'] );
 		$student_id = intval( $data['user_id'] );
 
-		$data = self::_student_progress( $course_id, $student_id );
-
-		wp_send_json( $data );
+		wp_send_json( self::_student_progress( $course_id, $student_id ) );
 	}
 
 	public function set_student_progress() {
@@ -159,26 +138,26 @@ class STM_LMS_User_Manager_Course_User {
 
 		/*For various item types*/
 		/*Check item in curriculum*/
-		$curriculum = get_post_meta( $course_id, 'curriculum', true );
+		$course_materials = ( new CurriculumMaterialRepository() )->get_course_materials( $course_id );
 
-		if ( empty( $curriculum ) ) {
+		if ( empty( $course_materials ) ) {
 			die;
 		}
 
-		$curriculum = explode( ',', $curriculum );
-		// phpcs:ignore WordPress.PHP.StrictInArray.MissingTrueStrict
-		if ( ! in_array( $item_id, $curriculum ) ) {
+		if ( ! in_array( $item_id, $course_materials, true ) ) {
 			die;
 		}
 
-		$item_type = get_post_type( $item_id );
-
-		if ( 'stm-lessons' === $item_type ) {
-			self::complete_lesson( $student_id, $course_id, $item_id );
-		} elseif ( 'stm-assignments' === $item_type ) {
-			self::complete_assignment( $student_id, $course_id, $item_id, $completed );
-		} elseif ( 'stm-quizzes' === $item_type ) {
-			self::complete_quiz( $student_id, $course_id, $item_id, $completed );
+		switch ( get_post_type( $item_id ) ) {
+			case 'stm-lessons':
+				self::complete_lesson( $student_id, $course_id, $item_id );
+				break;
+			case 'stm-assignments':
+				self::complete_assignment( $student_id, $course_id, $item_id, $completed );
+				break;
+			case 'stm-quizzes':
+				self::complete_quiz( $student_id, $course_id, $item_id, $completed );
+				break;
 		}
 
 		STM_LMS_Course::update_course_progress( $student_id, $course_id );
@@ -241,29 +220,22 @@ class STM_LMS_User_Manager_Course_User {
 		stm_lms_add_user_quiz( compact( 'user_id', 'course_id', 'quiz_id', 'progress', 'status' ) );
 	}
 
-	public static function course_item_data( $curriculum_item, $student_id, $course_id ) {
-		$item_id = intval( $curriculum_item );
-
-		$title        = get_the_title( $curriculum_item );
-		$content_type = get_post_type( $curriculum_item );
-		$quiz_info    = array();
-
+	public static function course_material_data( $material, $student_id, $course_id ) {
 		$previous_completed = ( isset( $completed ) ) ? $completed : 'first';
-		$has_preview        = STM_LMS_Lesson::lesson_has_preview( $curriculum_item );
+		$has_preview        = STM_LMS_Lesson::lesson_has_preview( $material['post_id'] );
 
-		$user    = STM_LMS_User::get_current_user( $student_id );
-		$user_id = $user['id'];
-
+		$user      = STM_LMS_User::get_current_user( $student_id );
+		$user_id   = $user['id'];
 		$duration  = '';
 		$questions = '';
-		$attempts  = 0;
+		$quiz_info = array();
 
-		if ( 'stm-quizzes' === $content_type ) {
+		if ( 'stm-quizzes' === $material['post_type'] ) {
 			$type      = 'quiz';
-			$quiz_info = STM_LMS_Helpers::simplify_db_array( stm_lms_get_user_quizzes( $user_id, $curriculum_item, array( 'progress' ) ) );
-			$completed = STM_LMS_Quiz::quiz_passed( $curriculum_item, $user_id );
+			$quiz_info = STM_LMS_Helpers::simplify_db_array( stm_lms_get_user_quizzes( $user_id, $material['post_id'], array( 'progress' ) ) );
+			$completed = STM_LMS_Quiz::quiz_passed( $material['post_id'], $user_id );
 
-			$q = get_post_meta( $curriculum_item, 'questions', true );
+			$q = get_post_meta( $material['post_id'], 'questions', true );
 			if ( ! empty( $q ) ) :
 				/* translators: %s: Post Type Label */
 				$questions = sprintf(
@@ -288,15 +260,14 @@ class STM_LMS_User_Manager_Course_User {
 				);
 			endif;
 
-		} elseif ( 'stm-assignments' === $content_type ) {
+		} elseif ( 'stm-assignments' === $material['post_type'] ) {
 			$type      = 'assignment';
 			$completed = class_exists( 'STM_LMS_Assignments' ) ? STM_LMS_Assignments::has_passed_assignment( $curriculum_item, $student_id ) : false;
 			$completed = ( ! empty( $completed ) );
 		} else {
-			$completed = STM_LMS_Lesson::is_lesson_completed( $user_id, $course_id, $curriculum_item );
-
-			$type     = get_post_meta( $curriculum_item, 'type', true );
-			$duration = get_post_meta( $curriculum_item, 'duration', true );
+			$completed = STM_LMS_Lesson::is_lesson_completed( $user_id, $course_id, $material['post_id'] );
+			$type      = get_post_meta( $material['post_id'], 'type', true );
+			$duration  = get_post_meta( $material['post_id'], 'duration', true );
 		}
 
 		if ( empty( $type ) ) {
@@ -310,14 +281,12 @@ class STM_LMS_User_Manager_Course_User {
 		$locked = str_replace(
 			'prev-status-',
 			'',
-			apply_filters( 'stm_lms_prev_status', "{$previous_completed}", $course_id, $curriculum_item, $user_id )
+			apply_filters( 'stm_lms_prev_status', "{$previous_completed}", $course_id, $material['post_id'], $user_id )
 		);
 
 		$locked = ( empty( $locked ) );
 
-		$item_data = compact( 'item_id', 'title', 'type', 'quiz_info', 'locked', 'completed', 'has_preview', 'duration', 'questions' );
-
-		return $item_data;
+		return compact( 'type', 'quiz_info', 'locked', 'completed', 'has_preview', 'duration', 'questions' );
 	}
 
 

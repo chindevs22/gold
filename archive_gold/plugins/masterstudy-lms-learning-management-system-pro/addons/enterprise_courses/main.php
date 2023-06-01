@@ -83,7 +83,7 @@ class STM_LMS_Enterprise_Courses {
 
 	public static function get_group_common_limit() {
 		$options = get_option( 'stm_lms_enterprise_courses_settings', array() );
-		return ( ! empty( $options['locked'] ) ) ? $options['locked'] : 99;
+		return ( ! empty( $options['locked'] ) ) ? $options['locked'] : 5;
 	}
 
 	public static function get_group_limit( $group ) {
@@ -146,7 +146,7 @@ class STM_LMS_Enterprise_Courses {
 						'locked' => array(
 							'type'  => 'number',
 							'label' => esc_html__( 'Number of allowed members in group', 'masterstudy-lms-learning-management-system-pro' ),
-							'value' => false,
+							'value' => 5,
 						),
 					),
 				),

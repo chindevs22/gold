@@ -1,5 +1,7 @@
 <?php
 
+use \MasterStudy\Lms\Repositories\CurriculumMaterialRepository;
+
 new STM_LMS_Sequential_Drip_Content();
 
 class STM_LMS_Sequential_Drip_Content {
@@ -222,20 +224,9 @@ class STM_LMS_Sequential_Drip_Content {
 			return $html;
 		}
 
-		$curriculum = get_post_meta( $post_id, 'curriculum', true );
-		if ( ! empty( $curriculum ) ) {
-			$curriculum = explode( ',', $curriculum );
-			$curriculum = array_values(
-				array_filter(
-					$curriculum,
-					function ( $value ) {
-						return is_numeric( $value );
-					}
-				)
-			);
-		}
+		$course_materials = ( new CurriculumMaterialRepository() )->get_course_materials( $post_id );
 
-		$item_order = array_search( $item_id, $curriculum ); // phpcs:ignore WordPress.PHP.StrictInArray.MissingTrueStrict
+		$item_order = array_search( intval( $item_id ), $course_materials, true );
 
 		/*First item is always allowed to do*/
 		if ( 0 === $item_order ) {
@@ -243,7 +234,7 @@ class STM_LMS_Sequential_Drip_Content {
 		}
 
 		/*Check if prev lesson is passed*/
-		$prev_lesson              = ( ! empty( $curriculum[ $item_order - 1 ] ) ) ? $curriculum[ $item_order - 1 ] : 0;
+		$prev_lesson              = ( ! empty( $course_materials[ $item_order - 1 ] ) ) ? $course_materials[ $item_order - 1 ] : 0;
 		$is_prev_lesson_completed = STM_LMS_Lesson::is_lesson_completed( '', $post_id, $prev_lesson );
 
 		if ( ! $is_prev_lesson_completed ) {

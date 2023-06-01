@@ -1,0 +1,452 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Conditional Checkout Fields for WooCommerce\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-02-17 10:17+0000\n"
+"PO-Revision-Date: 2023-03-03 04:47+0000\n"
+"Last-Translator: \n"
+"Language-Team: Danish\n"
+"Language: da_DK\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.6.3; wp-6.1.1\n"
+"X-Domain: conditional-checkout-fields-for-woocommerce"
+
+#: front/fme-ccfw-front.php:147
+msgid " fields"
+msgstr " felter"
+
+#: front/fme-ccfw-front.php:887
+msgid " is a required field."
+msgstr " er et obligatorisk felt."
+
+#: admin/fme-ccfw-admin.php:1154
+msgid " Taxable"
+msgstr " Skattepligtig"
+
+#: admin/checkout/fme-ccfw-checkout-fields.php:88
+msgid " Yes"
+msgstr " Ja"
+
+#: admin/checkout/fme-ccfw-checkout-fields.php:60
+msgid "+ Add field"
+msgstr "+ Tilføj felt"
+
+#: admin/fme-ccfw-admin.php:1401 admin/fme-ccfw-admin.php:1460
+#: admin/fme-ccfw-admin.php:1512 admin/checkout/fme-ccfw-checkout-fields.php:72
+#: admin/checkout/fme-ccfw-checkout-fields.php:139
+#: admin/view/fme-ccfw-condtion-html.php:16
+#: admin/view/fme-ccfw-condtion-html.php:73
+#: admin/view/fme-ccfw-add-condtion-html.php:4
+#: admin/view/fme-ccfw-add-condtion-html.php:61
+msgid "Action"
+msgstr "Handling"
+
+#: admin/fme-ccfw-admin.php:1376
+msgid "Add a Condition Group"
+msgstr "Tilføj en tilstandsgruppe"
+
+#: admin/view/fme-ccfw-condtion-html.php:81
+msgid "Add Condition"
+msgstr "Tilføj tilstand"
+
+#: admin/fme-ccfw-admin.php:1497
+msgid "Add Options"
+msgstr "Tilføj indstillinger"
+
+#: front/fme-ccfw-front.php:137
+msgid "additional"
+msgstr "ekstra"
+
+#: admin/view/fme-ccfw-checkoutfield-settings.php:32
+msgid "Additional Fields"
+msgstr "Yderligere felter"
+
+#: admin/checkout/fme-ccfw-checkout-fields.php:48
+msgid "Additional Fields Label"
+msgstr "Yderligere felter etiket"
+
+#: front/fme-ccfw-front.php:137
+msgid "billing"
+msgstr "fakturering"
+
+#: admin/view/fme-ccfw-checkoutfield-settings.php:28
+msgid "Billing Fields"
+msgstr "Faktureringsfelter"
+
+#: admin/fme-ccfw-admin.php:1222
+msgid "Category"
+msgstr "Kategori"
+
+#: admin/fme-ccfw-admin.php:861
+msgid "Checkbox"
+msgstr "Afkrydsningsfelt"
+
+#: front/fme-ccfw-front.php:1168
+msgid "Choose an option"
+msgstr "Vælg en mulighed"
+
+#: admin/fme-ccfw-admin.php:1296
+msgid "Choose Category"
+msgstr "Vælg Kategori"
+
+#: admin/fme-ccfw-admin.php:1238
+msgid "Choose Product"
+msgstr "Vælg produkt"
+
+#: admin/fme-ccfw-admin.php:1342
+msgid "Choose User Role(s)"
+msgstr "Vælg brugerrolle(r)"
+
+#: admin/checkout/fme-ccfw-checkout-fields.php:166
+msgid "Close"
+msgstr "Tæt"
+
+#: admin/fme-ccfw-admin.php:885
+msgid "Colo Picker"
+msgstr "Colo Picker"
+
+#: admin/fme-ccfw-admin.php:1441 admin/view/fme-ccfw-condtion-html.php:54
+#: admin/view/fme-ccfw-add-condtion-html.php:42
+msgid "Condition"
+msgstr "Tilstand"
+
+#: admin/fme-ccfw-admin.php:1374
+msgid "Condition(s) to Meet:"
+msgstr "Betingelser for at opfylde:"
+
+#: admin/fme-ccfw-admin.php:1712
+msgid "Conditional Checkout Fields"
+msgstr "Betingede udtjekningsfelter"
+
+#. Name of the plugin
+msgid "Conditional Checkout Fields for WooCommerce"
+msgstr "Betingede checkout-felter til WooCommerce"
+
+#. Description of the plugin
+msgid ""
+"Customize the checkout page by adding new and conditional based fields in "
+"Billing, Shipping, and Additional section."
+msgstr ""
+"Tilpas betalingssiden ved at tilføje nye og betinget baserede felter i "
+"sektionen Fakturering, Forsendelse og Yderligere."
+
+#: admin/fme-ccfw-admin.php:873
+msgid "Date Picker"
+msgstr "Datovælger"
+
+#: admin/checkout/fme-ccfw-checkout-fields.php:69
+msgid "Default"
+msgstr "Standard"
+
+#: admin/checkout/fme-ccfw-checkout-fields.php:120
+msgid "Delete"
+msgstr "Slet"
+
+#: admin/fme-ccfw-admin.php:943
+msgid "Disable"
+msgstr "Deaktiver"
+
+#: admin/fme-ccfw-admin.php:1183
+msgid "Display for Specific Product or Category"
+msgstr "Visning for specifikt produkt eller kategori"
+
+#: admin/fme-ccfw-admin.php:1319
+#, fuzzy
+#| msgid "Display  Specific User roles"
+msgid "Display for Specific User roles"
+msgstr "Visning for specifikke brugerroller"
+
+#: admin/checkout/fme-ccfw-checkout-fields.php:115
+msgid "Edit"
+msgstr "Redigere"
+
+#: admin/fme-ccfw-admin.php:937 admin/checkout/fme-ccfw-checkout-fields.php:71
+#: admin/checkout/fme-ccfw-checkout-fields.php:138
+msgid "Enable"
+msgstr "Aktiver"
+
+#: admin/fme-ccfw-admin.php:930
+msgid "Enable "
+msgstr "Aktiver"
+
+#: admin/fme-ccfw-admin.php:970 admin/fme-ccfw-admin.php:977
+msgid "Field Class "
+msgstr "Feltklasse"
+
+#: admin/fme-ccfw-admin.php:1033
+msgid "Field Extension"
+msgstr "Feltudvidelse"
+
+#: admin/fme-ccfw-admin.php:910
+msgid "Field Name"
+msgstr "Feltnavn"
+
+#: admin/fme-ccfw-admin.php:1051
+msgid "File Size"
+msgstr "Filstørrelse"
+
+#: admin/fme-ccfw-admin.php:903
+msgid "File Upload"
+msgstr "Fil upload"
+
+#. Author of the plugin
+msgid "FME Addons"
+msgstr "FME tilføjelser"
+
+#: admin/fme-ccfw-admin.php:984
+msgid "form-row-first"
+msgstr "form-række-først"
+
+#: admin/fme-ccfw-admin.php:990
+msgid "form-row-last"
+msgstr "form-række-sidste"
+
+#: admin/fme-ccfw-admin.php:997
+msgid "form-row-wide"
+msgstr "form-række-dækkende"
+
+#: admin/fme-ccfw-admin.php:1088
+msgid "H1"
+msgstr "H1"
+
+#: admin/fme-ccfw-admin.php:1094
+msgid "H2"
+msgstr "H2"
+
+#: admin/fme-ccfw-admin.php:1100
+msgid "H3"
+msgstr "H3"
+
+#: admin/fme-ccfw-admin.php:1104
+msgid "H4"
+msgstr "H4"
+
+#: admin/fme-ccfw-admin.php:1112
+msgid "H5"
+msgstr "H5"
+
+#: admin/fme-ccfw-admin.php:1118
+msgid "H6"
+msgstr "H6"
+
+#: admin/fme-ccfw-admin.php:891
+msgid "Heading"
+msgstr "Overskrift"
+
+#: admin/fme-ccfw-admin.php:1075
+msgid "Heading Type"
+msgstr "Overskriftstype"
+
+#: admin/fme-ccfw-admin.php:1405 admin/view/fme-ccfw-condtion-html.php:20
+#: admin/view/fme-ccfw-add-condtion-html.php:8
+msgid "Hide"
+msgstr "Skjule"
+
+#: admin/fme-ccfw-admin.php:1324
+msgid "Hide for  Specific User roles"
+msgstr "Skjul for specifikke brugerroller"
+
+#: admin/fme-ccfw-admin.php:1418 admin/view/fme-ccfw-condtion-html.php:31
+#: admin/view/fme-ccfw-add-condtion-html.php:19
+msgid "If value of"
+msgstr "Hvis værdien af"
+
+#: admin/fme-ccfw-admin.php:1448 admin/view/fme-ccfw-condtion-html.php:61
+#: admin/view/fme-ccfw-add-condtion-html.php:49
+msgid "is checked"
+msgstr "er tjekket"
+
+#: admin/fme-ccfw-admin.php:1444 admin/view/fme-ccfw-condtion-html.php:57
+#: admin/view/fme-ccfw-add-condtion-html.php:45
+msgid "is empty"
+msgstr "er tom"
+
+#: admin/fme-ccfw-admin.php:1446 admin/view/fme-ccfw-condtion-html.php:59
+#: admin/view/fme-ccfw-add-condtion-html.php:47
+msgid "is equal to "
+msgstr "er lig med"
+
+#: admin/fme-ccfw-admin.php:1445 admin/view/fme-ccfw-condtion-html.php:58
+#: admin/view/fme-ccfw-add-condtion-html.php:46
+msgid "is not empty"
+msgstr "er ikke tom"
+
+#: admin/fme-ccfw-admin.php:1447 admin/view/fme-ccfw-condtion-html.php:60
+#: admin/view/fme-ccfw-add-condtion-html.php:48
+msgid "is not equal to"
+msgstr "er ikke lig med"
+
+#: admin/fme-ccfw-admin.php:1058
+msgid "KB"
+msgstr "KB"
+
+#: admin/fme-ccfw-admin.php:921 admin/checkout/fme-ccfw-checkout-fields.php:66
+msgid "Label"
+msgstr "Etiket"
+
+#: admin/fme-ccfw-admin.php:1059
+msgid "MB"
+msgstr "MB"
+
+#: admin/fme-ccfw-admin.php:855
+msgid "MultiSelect"
+msgstr "MultiSelect"
+
+#: admin/checkout/fme-ccfw-checkout-fields.php:67
+#: admin/checkout/fme-ccfw-checkout-fields.php:134
+msgid "Name"
+msgstr "Navn"
+
+#: admin/checkout/fme-ccfw-checkout-fields.php:90
+msgid "No"
+msgstr "Ingen"
+
+#: admin/fme-ccfw-admin.php:831
+msgid "Number"
+msgstr "Nummer"
+
+#: admin/fme-ccfw-admin.php:1509
+msgid "Option Name"
+msgstr "Indstillingsnavn"
+
+#: admin/fme-ccfw-admin.php:1511
+msgid "Option Price"
+msgstr "Option pris"
+
+#: admin/fme-ccfw-admin.php:1510
+msgid "Option Value"
+msgstr "Optionsværdi"
+
+#: front/fme-ccfw-front.php:893
+msgid "optional"
+msgstr "valgfri"
+
+#: admin/fme-ccfw-admin.php:897
+msgid "Paragraph"
+msgstr "Afsnit"
+
+#: admin/fme-ccfw-admin.php:1130
+msgid "paragraph"
+msgstr "afsnit"
+
+#: admin/fme-ccfw-admin.php:843
+msgid "Password"
+msgstr "Adgangskode"
+
+#: admin/checkout/fme-ccfw-checkout-fields.php:136
+msgid "Placeholder"
+msgstr "Pladsholder"
+
+#: admin/fme-ccfw-admin.php:1210
+msgid "Please Choose one"
+msgstr "Vælg venligst en"
+
+#: admin/fme-ccfw-admin.php:1082
+msgid "Please Select Heading"
+msgstr "Vælg venligst overskrift"
+
+#: admin/fme-ccfw-admin.php:1016
+msgid "Price"
+msgstr "Pris"
+
+#: admin/fme-ccfw-admin.php:1216
+msgid "Product"
+msgstr "Produkt"
+
+#: admin/fme-ccfw-admin.php:867
+msgid "Radio Button"
+msgstr "Radio knap"
+
+#: admin/fme-ccfw-admin.php:1375
+msgid "Relation Between Conditions is \"AND\" & Relations with Group is \"OR\""
+msgstr ""
+"Relation Between Conditions er \"AND\" & Relations med Gruppen er \"ELLER\""
+
+#: admin/view/fme-ccfw-condtion-html.php:82
+msgid "Remove Group"
+msgstr "Fjern gruppe"
+
+#: admin/fme-ccfw-admin.php:1147 admin/checkout/fme-ccfw-checkout-fields.php:70
+#: admin/checkout/fme-ccfw-checkout-fields.php:137
+msgid "Required"
+msgstr "Påkrævet"
+
+#: admin/checkout/fme-ccfw-checkout-fields.php:165
+msgid "Save Changes"
+msgstr "Gem ændringer"
+
+#: admin/fme-ccfw-admin.php:849 admin/fme-ccfw-admin.php:1403
+#: admin/fme-ccfw-admin.php:1423 admin/fme-ccfw-admin.php:1432
+#: admin/fme-ccfw-admin.php:1443 admin/view/fme-ccfw-condtion-html.php:18
+#: admin/view/fme-ccfw-condtion-html.php:36
+#: admin/view/fme-ccfw-condtion-html.php:45
+#: admin/view/fme-ccfw-condtion-html.php:56
+#: admin/view/fme-ccfw-add-condtion-html.php:6
+#: admin/view/fme-ccfw-add-condtion-html.php:24
+#: admin/view/fme-ccfw-add-condtion-html.php:33
+#: admin/view/fme-ccfw-add-condtion-html.php:44
+msgid "Select"
+msgstr "Vælg"
+
+#: admin/checkout/fme-ccfw-checkout-fields.php:133
+msgid "Seq"
+msgstr "Sekv"
+
+#: front/fme-ccfw-front.php:137
+msgid "shipping"
+msgstr "Forsendelse"
+
+#: admin/view/fme-ccfw-checkoutfield-settings.php:30
+msgid "Shipping Fields"
+msgstr "Forsendelsesfelter"
+
+#: admin/fme-ccfw-admin.php:1404 admin/view/fme-ccfw-condtion-html.php:19
+#: admin/view/fme-ccfw-add-condtion-html.php:7
+msgid "Show"
+msgstr "At vise"
+
+#: admin/checkout/fme-ccfw-checkout-fields.php:65
+msgid "Sort"
+msgstr "Sortere"
+
+#: admin/fme-ccfw-admin.php:1124
+msgid "strong"
+msgstr "stærk"
+
+#: admin/fme-ccfw-admin.php:837
+msgid "Telephone"
+msgstr "Telefon"
+
+#: admin/fme-ccfw-admin.php:819
+msgid "Text"
+msgstr "Tekst"
+
+#: admin/fme-ccfw-admin.php:825
+msgid "TextArea"
+msgstr "TextArea"
+
+#: admin/fme-ccfw-admin.php:879
+msgid "Time Picker"
+msgstr "Tidsvælger"
+
+#: admin/fme-ccfw-admin.php:809 admin/checkout/fme-ccfw-checkout-fields.php:68
+#: admin/checkout/fme-ccfw-checkout-fields.php:135
+msgid "Type"
+msgstr "Type"
+
+#: admin/fme-ccfw-admin.php:1172
+msgid "User can select date before current date"
+msgstr "Brugeren kan vælge dato før den aktuelle dato"
+
+#: admin/fme-ccfw-admin.php:1454 admin/view/fme-ccfw-condtion-html.php:67
+#: admin/view/fme-ccfw-add-condtion-html.php:55
+msgid "value"
+msgstr "værdi"
+
+#: admin/checkout/fme-ccfw-checkout-fields.php:163
+msgid "Your settings have been saved."
+msgstr "Dine indstillinger er blevet gemt."

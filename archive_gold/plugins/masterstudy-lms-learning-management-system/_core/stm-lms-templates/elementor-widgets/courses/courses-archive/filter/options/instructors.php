@@ -1,5 +1,5 @@
 <?php
-$metas['instructors'] = isset( $metas['instructors'] ) ? $metas['instructors'] : '';
+$metas['instructor'] = isset( $metas['instructor'] ) ? $metas['instructor'] : array();
 $limit = 2;
 ?>
 <div class="ms_lms_courses_archive__filter_options_item">

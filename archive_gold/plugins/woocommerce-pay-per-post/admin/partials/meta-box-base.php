@@ -1,4 +1,5 @@
 <?php wp_nonce_field(WC_PPP_SLUG . '_nonce', WC_PPP_SLUG . '_nonce'); ?>
+<input type="hidden" name="<?php echo WC_PPP_SLUG; ?>_classic_editor" value="1">
 <!-- Start tabs -->
 <ul class="wcppp-tab-bar">
     <li class="wcppp-tab-active"><a href="#wc-ppp-product-info"><?php esc_attr_e( 'Product Information', 'wc_pay_per_post' ); ?></a></li>

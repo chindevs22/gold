@@ -1,6 +1,7 @@
 "use strict";
 
 (function ($) {
+	console.log('inside register');
   $(window).on('load', function () {
     stm_lms_register(true);
   });

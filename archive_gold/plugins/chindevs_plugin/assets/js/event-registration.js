@@ -7,10 +7,10 @@
   $(document).ready(function () {
     var $price_btn = $('.event-add-to-cart');
 
-//	  $body.on('click', '.wpcf7-form', function(event) {
-//		  event.preventDefault(); // prevent default form submission behavior
-//		  console.log("im coming from the form!");
-//	  });
+// 	  $body.on('click', '.wpcf7-form', function(event) {
+// 		  event.preventDefault(); // prevent default form submission behavior
+// 		  console.log("im coming from the form!");
+// 	  });
 
 	$body.on('click', '.event-add-to-cart', function (e) {
 	  console.log("hiiii");

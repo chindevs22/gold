@@ -60,7 +60,7 @@ if ( ! empty( $terms_all ) ) {
 						'lms_template' => 'stm-lms-taxonomy',
 						'menu_title'   => $term['title'],
 						'menu_icon'    => $term['image'],
-						'menu_url'     => get_term_link( $term['id'], 'stm_lms_course_taxonomy' ),
+						'menu_url'     => esc_url( STM_LMS_Course::courses_page_url() . '?terms[]=' . $term['id'] . '&category[]=' . $term['id'] ),
 						'font_pack'    => '',
 					)
 				);

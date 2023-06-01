@@ -46,7 +46,7 @@ endif;
 
 			</div>
 			<div class="col-md-6">
-				<div class="form-group" id="emailID">
+				<div class="form-group">
 					<label class="heading_font"><?php esc_html_e( 'E-mail', 'masterstudy-lms-learning-management-system' ); ?></label>
 					<input class="form-control"
 						   type="email"
@@ -55,7 +55,6 @@ endif;
 						   placeholder="<?php esc_html_e( 'Enter your E-mail', 'masterstudy-lms-learning-management-system' ); ?>"/>
 				</div>
 			</div>
-			
 		</div>
 
 		<div class="row">
@@ -79,7 +78,6 @@ endif;
 						   placeholder="<?php esc_html_e( 'Confirm password', 'masterstudy-lms-learning-management-system' ); ?>"/>
 				</div>
 			</div>
-			
 		</div>
 		<div class="row">
 			<div v-for="(profileField, index) in profileDefaultFieldsForRegister" :class="index === 'description' ? 'col-md-12' : 'col-md-6'">

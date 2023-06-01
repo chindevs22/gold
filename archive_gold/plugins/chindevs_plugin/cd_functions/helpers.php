@@ -28,7 +28,7 @@ function build_attr_array($attr, $count) {
 
 function progress_user_lessons($wp_course_id, $wp_quiz_id, $wp_user_id) {
     global $wpdb;
-
+	error_log("progressing user lessons");
     $curriculum_string = get_post_meta($wp_course_id, 'curriculum', true);
     $ca = create_array_from_string($curriculum_string, ',');
     $arrLength = count($ca);
@@ -81,6 +81,8 @@ function build_faq($faq) {
 
     foreach($qna as $qa) {
         $arr = explode("panel-body", $qa);
+// 		error_log("faq arr");
+// 		error_log(print_r($arr, true));
         $question = trim(substr(strip_tags(html_entity_decode($arr[0])),3));
         $answer = trim(substr(strip_tags(html_entity_decode($arr[1])),3));
 

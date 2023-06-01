@@ -44,6 +44,8 @@ class Plugin {
 		add_action( 'elementor/editor/before_enqueue_styles', array( $this, 'preview_styles' ) );
 		add_action( 'elementor/frontend/after_enqueue_styles', array( $this, 'preview_styles' ) );
 		add_action( 'elementor/preview/enqueue_scripts', array( $this, 'preview_scripts' ) );
+		add_action( 'elementor/preview/enqueue_styles', array( $this, 'editor_styles' ) );
+		add_action( 'elementor/preview/enqueue_scripts', array( $this, 'editor_scripts' ) );
 	}
 
 	/**
@@ -76,6 +78,24 @@ class Plugin {
 		};
 
 		$set_categories->call( $elements_manager, $categories );
+	}
+
+	public function editor_scripts() {
+		wp_register_script( 'stm_lms_add_overlay', STM_LMS_URL . 'assets/js/elementor-widgets/helpers/add-overlay.js', array(), STM_LMS_VERSION, true );
+		wp_localize_script(
+			'stm_lms_add_overlay',
+			'stm_lms_add_overlay_change',
+			array(
+				'nonce'    => wp_create_nonce( 'add-overlay' ),
+				'ajax_url' => admin_url( 'admin-ajax.php' ),
+			)
+		);
+		wp_enqueue_script( 'stm_lms_add_overlay' );
+	}
+
+	public function editor_styles() {
+		wp_register_style( 'stm_lms_add_overlay', STM_LMS_URL . 'assets/css/elementor-widgets/helpers/add-overlay.css', array(), STM_LMS_VERSION, false );
+		wp_enqueue_style( 'stm_lms_add_overlay' );
 	}
 
 	public static function preview_scripts() {
@@ -159,6 +179,7 @@ class Plugin {
 	 */
 	private function includes() {
 		require STM_LMS_PATH . '/includes/elementor/helpers/add-controls-class.php';
+		require STM_LMS_PATH . '/includes/elementor/helpers/add-overlay.php';
 		require STM_LMS_PATH . '/includes/elementor/widgets/courses/ms_lms_courses.php';
 		require STM_LMS_PATH . '/includes/elementor/widgets/ms_lms_courses_searchbox.php';
 		require STM_LMS_PATH . '/includes/elementor/widgets/ms_lms_instructors_carousel.php';

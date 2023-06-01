@@ -62,7 +62,7 @@ esc_attr_e( 'Display on additional Post Types', 'wc_pay_per_post' );
 
                             <div class="inside">
                                 <p><?php 
-esc_attr_e( 'By default the Pay For Post with WooCommerce Meta Box appears only on standard Wordpress Pages and Posts.  If you would like the Meta Box to appear for other custom post types, please enter them below.', 'wc_pay_per_post' );
+_e( 'By default, the Pay For Post with WooCommerce Meta Box appears only on standard WordPress Pages and Posts.  If you would like the Meta Box to appear for other custom post types, please enter them below. <br><br><strong>Please note that any custom post type needs to support custom fields in order for the Block Editor to save the post data! <a href="https://developer.wordpress.org/reference/functions/add_post_type_support/" target="_blank">See More</a> </strong>', 'wc_pay_per_post' );
 ?></p>
                                 <label for="<?php 
 echo  WC_PPP_SLUG ;
@@ -199,6 +199,24 @@ esc_attr_e( 'Allow all administrator users to view all protected posts?', 'wc_pa
 _e( 'This is useful for debugging, you can enable or disable viewing of protected content when logged in as an administrator', 'wc_pay_per_post' );
 ?>
                                 </p>
+
+                                <label>
+                                    <input type="checkbox" value="1" class="<?php 
+echo  WC_PPP_SLUG ;
+?>_block_editor_enabled" name="<?php 
+echo  WC_PPP_SLUG ;
+?>_block_editor_enabled" <?php 
+checked( get_option( WC_PPP_SLUG . '_block_editor_enabled' ) );
+?>> <?php 
+esc_attr_e( 'Enable Block Editor Integration?', 'wc_pay_per_post' );
+?>
+                                </label>
+                                <p class="description">
+		                            <?php 
+_e( 'If you disable the standard meta box will display at the bottom of your edit screen rather than in the sidebar of the block editor.', 'wc_pay_per_post' );
+?>
+                                </p>
+
                                 <label>
                                     <input type="checkbox" value="1" class="<?php 
 echo  WC_PPP_SLUG ;
@@ -212,13 +230,13 @@ esc_attr_e( 'Enable Debugging?', 'wc_pay_per_post' );
                                 </label>
                                 <p class="description">
 									<?php 
-_e( 'This will create a Pay For Post with WooCommerce log to let you see what is going on behind the scenes.  Can help to debug why a paywall is showing up or not showing up.', 'wc_pay_per_post' );
+_e( 'This will create a Pay For Post with WooCommerce log to let you see what is going on behind the scenes.  Can help to debug why a paywall is showing up or not showing up.  <strong>In order to debug you need to add ?wc-ppp-debug to your URL to log that particular page.</strong>', 'wc_pay_per_post' );
 ?>
 									<?php 
 
-if ( $enable_debugging ) {
+if ( $enable_debugging || file_exists( Woocommerce_Pay_Per_Post_Helper::logger_uri() ) ) {
     ?>
-                                        <br>
+                                        <br><br>
                                         <strong><?php 
     esc_attr_e( 'Log File Location', 'wc_pay_per_post' );
     ?></strong>: <a href="<?php 
@@ -250,6 +268,8 @@ esc_attr_e( 'Delete all settings and records this plugin made on deactivation?',
 _e( 'This will remove all customer page view stats, along with all settings, debug files, and database tables upon deactivation.  <br><strong>THIS CAN NOT BE UNDONE!</strong>', 'wc_pay_per_post' );
 ?>
                                 </p>
+
+
 
                             </div>
                         </div>

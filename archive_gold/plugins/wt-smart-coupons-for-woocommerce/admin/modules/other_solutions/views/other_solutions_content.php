@@ -188,8 +188,8 @@ if ( ! defined( 'WPINC' ) ) {
                     'premium_url'   => 'https://www.webtoffee.com/product/woocommerce-import-export-suite/?utm_source=other_solution_page&utm_medium=free_plugin&utm_campaign=Import_Export_Suite',
                     'basic_url'     => '',
                     'pro_plugin'    => array(
-                        'product'   => 'wt-import-export-for-woo-user/wt-import-export-for-woo-user.php',
-                        'user'      => 'wt-import-export-for-woo-order/wt-import-export-for-woo-order.php',
+                        'product'   => 'wt-import-export-for-woo-product/wt-import-export-for-woo-product.php',
+                        'user'      => 'wt-import-export-for-woo-user/wt-import-export-for-woo-user.php',
                         'order'     => 'wt-import-export-for-woo-order/wt-import-export-for-woo-order.php',
                         ),
                     'basic_plugin'  => '', 

@@ -6,7 +6,7 @@ Description: Configurations plugin for the Masterstudy theme
 Author: StylemixThemes
 Author URI: https://stylemixthemes.com/
 Text Domain: stm-post-type
-Version: 4.4.9
+Version: 4.6.0
 */
 
 define( 'STM_POST_TYPE', 'stm_post_type' );

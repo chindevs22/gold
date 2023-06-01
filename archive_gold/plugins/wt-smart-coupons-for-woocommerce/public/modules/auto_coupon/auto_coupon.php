@@ -85,10 +85,11 @@ class Wt_Smart_Coupon_Auto_Coupon_Public
     public function get_available_auto_coupons($return = "OBJECT", $offset=0, $limit=5)
     {       
         global $wpdb;
-        $user= wp_get_current_user();
+        $user = wp_get_current_user();
+        
         if($user)
         {
-            $user_id = $user->ID; 
+            $user_id = $user->ID; //id will be zero for guest users 
             $email = $user->user_email;
         }else
         {

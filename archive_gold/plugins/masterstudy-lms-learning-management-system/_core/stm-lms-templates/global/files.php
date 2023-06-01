@@ -1,47 +1,49 @@
 <?php
 /**
- *
- * @var $item_id
- * @var $pack_name
- * @var $file_in_pack
- * @var $file_in_pack_name
- *
+ * @var $post_id
+ * @var $post_meta
  */
 
-$pack = get_post_meta($item_id, $pack_name, true);
-$pack = json_decode($pack, true);
-if (is_array($pack)): ?>
-    <div class="stm_lms_downloadable_content__files" id="stm_lms_downloadable_content__files">
-        <?php foreach ($pack as $file):
-            if (empty($file[$file_in_pack])) continue;
+$ids = json_decode( get_post_meta( $post_id, $post_meta, true ) );
 
-            $course_files = json_decode($file[$file_in_pack], true);
+if ( ! empty( $ids ) ) {
+	$attachments = get_posts(
+		array(
+			'post_type' => 'attachment',
+			'include'   => $ids,
+			'order'     => 'ASC',
+		)
+	);
 
-            if (empty($course_files['path']) or empty($course_files['url'])) continue;
+	if ( is_array( $attachments ) ) : ?>
+		<div class="stm_lms_downloadable_content__files" id="stm_lms_downloadable_content__files">
+			<?php
+			foreach ( $attachments as $attachment ) :
+				$file            = get_attached_file( $attachment->ID );
+				$file_size       = filesize( $file );
+				$file_size       = $file_size / 1024;
+				$file_size_label = 'kb';
 
-            $course_files_label = !empty($file[$file_in_pack_name]) ? $file[$file_in_pack_name] : esc_html__('Attached file', 'masterstudy-lms-learning-management-system');
+				if ( $file_size > 1000 ) {
+					$file_size       = $file_size / 1024;
+					$file_size_label = 'mB';
+				}
 
-            if(!file_exists($course_files['path'])) continue;
-            $file_size = filesize($course_files['path']);
-            $file_size = $file_size / 1024;
-            $file_size_label = 'kb';
-            if ($file_size > 1000) {
-                $file_size = $file_size / 1024;
-                $file_size_label = 'mB';
-            }
+				STM_LMS_Templates::show_lms_template(
+					'global/file',
+					array(
+						'title'          => $attachment->post_title,
+						'filename'       => basename( $file ),
+						'ext'            => pathinfo( $file, PATHINFO_EXTENSION ),
+						'filesize'       => $file_size,
+						'filesize_label' => $file_size_label,
+						'url'            => wp_get_attachment_url( $attachment->ID ),
+					)
+				);
 
-            $ext = pathinfo($course_files['path'], PATHINFO_EXTENSION);
-
-
-            STM_LMS_Templates::show_lms_template('global/file', array(
-                'title' => $course_files_label,
-                'filename' => basename($course_files['path']),
-                'ext' => $ext,
-                'filesize' => $file_size,
-                'filesize_label' => $file_size_label,
-                'url' => $course_files['url']
-            ));
-
-        endforeach; ?>
-    </div>
-<?php endif; ?>
+			endforeach;
+			?>
+		</div>
+		<?php
+	endif;
+}

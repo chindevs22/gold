@@ -19,7 +19,7 @@
 		$wpdata['first_name'] = $userData['first_name'];
 		$wpdata['last_name'] = $userData['last_name'];
 		$wpdata['display_name'] = $userData['first_name'];
-        $wpdata['user_email'] = "chindevsRound2" . $randomEmailCounter . "@gmail.com";
+        $wpdata['user_email'] = "chindevsRound1" . $randomEmailCounter . "@gmail.com";
         $randomEmailCounter += 1;
 
 		//  $wpdata['user_email'] = $userData['email']; TODO: Add back the actual email

@@ -469,19 +469,13 @@ class STM_LMS_Certificate_Builder {
 						$field['content'] = '';
 					}
 				} elseif ( 'details' === $field['type'] && ! empty( $course_id ) ) {
-					$curriculum_info = STM_LMS_Course::curriculum_info( get_post_meta( $course_id, 'curriculum', true ) );
-					$field_content   = esc_html__( '0 Lessons 0, Quizzes', 'masterstudy-lms-learning-management-system-pro' );
-					if ( ! empty( $curriculum_info ) ) {
-						$lessons_count = ! empty( $curriculum_info['lessons'] ) ? $curriculum_info['lessons'] : '0';
-						$quizzes_count = ! empty( $curriculum_info['quizzes'] ) ? $curriculum_info['quizzes'] : '0';
-						$field_content = sprintf(
+					$curriculum_info  = STM_LMS_Course::curriculum_info( $course_id );
+					$field['content'] = sprintf(
 						/* translators: %s: number */
-							esc_html__( '%1$s Lessons, %2$s Quizzes', 'masterstudy-lms-learning-management-system-pro' ),
-							$lessons_count,
-							$quizzes_count
-						);
-					}
-					$field['content'] = $field_content;
+						esc_html__( '%1$s Lessons, %2$s Quizzes', 'masterstudy-lms-learning-management-system-pro' ),
+						$curriculum_info['lessons'],
+						$curriculum_info['quizzes']
+					);
 				} elseif ( 'code' === $field['type'] && ! empty( $course_id ) ) {
 					$field['content'] = get_post_meta( $id, 'code', true );
 				} elseif ( 'student_code' === $field['type'] && ! empty( $course_id ) ) {

@@ -260,6 +260,4 @@ if ( ! class_exists( 'STM_Lms_Post_Type' ) ) {
 	}
 
 	new STM_Lms_Post_Type();
-
-	require_once STM_LMS_PATH . '/includes/post_type/taxonomies.php';
 }

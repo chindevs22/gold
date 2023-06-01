@@ -1,0 +1,453 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Conditional Checkout Fields for WooCommerce\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-04-13 06:20+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: \n"
+"Language: \n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.6.3; wp-6.1.1\n"
+"X-Domain: conditional-checkout-fields-for-woocommerce"
+
+#: front/fme-ccfw-front.php:156
+msgid " fields"
+msgstr ""
+
+#: front/fme-ccfw-front.php:887
+msgid " is a required field."
+msgstr ""
+
+#: admin/fme-ccfw-admin.php:1156
+msgid " Taxable"
+msgstr ""
+
+#: admin/checkout/fme-ccfw-checkout-fields.php:88
+msgid " Yes"
+msgstr ""
+
+#: admin/checkout/fme-ccfw-checkout-fields.php:60
+msgid "+ Add field"
+msgstr ""
+
+#: admin/fme-ccfw-admin.php:1396 admin/fme-ccfw-admin.php:1455
+#: admin/fme-ccfw-admin.php:1507 admin/checkout/fme-ccfw-checkout-fields.php:72
+#: admin/checkout/fme-ccfw-checkout-fields.php:139
+#: admin/view/fme-ccfw-condtion-html.php:16
+#: admin/view/fme-ccfw-condtion-html.php:73
+#: admin/view/fme-ccfw-add-condtion-html.php:4
+#: admin/view/fme-ccfw-add-condtion-html.php:61
+msgid "Action"
+msgstr ""
+
+#: admin/fme-ccfw-admin.php:1371
+msgid "Add a Condition Group"
+msgstr ""
+
+#: admin/view/fme-ccfw-condtion-html.php:81
+msgid "Add Condition"
+msgstr ""
+
+#: admin/fme-ccfw-admin.php:1492
+msgid "Add Options"
+msgstr ""
+
+#: front/fme-ccfw-front.php:143
+msgid "additional"
+msgstr ""
+
+#: admin/view/fme-ccfw-checkoutfield-settings.php:32
+msgid "Additional Fields"
+msgstr ""
+
+#: admin/checkout/fme-ccfw-checkout-fields.php:48
+msgid "Additional Fields Label"
+msgstr ""
+
+#: front/fme-ccfw-front.php:143
+msgid "billing"
+msgstr ""
+
+#: admin/view/fme-ccfw-checkoutfield-settings.php:28
+msgid "Billing Fields"
+msgstr ""
+
+#: admin/fme-ccfw-admin.php:1224
+msgid "Category"
+msgstr ""
+
+#: admin/fme-ccfw-admin.php:863
+msgid "Checkbox"
+msgstr ""
+
+#: front/fme-ccfw-front.php:1175
+msgid "Choose an option"
+msgstr ""
+
+#: admin/fme-ccfw-admin.php:1298
+msgid "Choose Category"
+msgstr ""
+
+#: admin/fme-ccfw-admin.php:1240
+msgid "Choose Product"
+msgstr ""
+
+#: admin/fme-ccfw-admin.php:1336
+msgid "Choose User Role(s)"
+msgstr ""
+
+#: admin/checkout/fme-ccfw-checkout-fields.php:166
+msgid "Close"
+msgstr ""
+
+#: admin/fme-ccfw-admin.php:887
+msgid "Colo Picker"
+msgstr ""
+
+#: admin/fme-ccfw-admin.php:1436 admin/view/fme-ccfw-condtion-html.php:54
+#: admin/view/fme-ccfw-add-condtion-html.php:42
+msgid "Condition"
+msgstr ""
+
+#: admin/fme-ccfw-admin.php:1369
+msgid "Condition(s) to Meet:"
+msgstr ""
+
+#: admin/fme-ccfw-admin.php:1706
+msgid "Conditional Checkout Fields"
+msgstr ""
+
+#. Name of the plugin
+msgid "Conditional Checkout Fields for WooCommerce"
+msgstr ""
+
+#. Description of the plugin
+msgid ""
+"Customize the checkout page by adding new and conditional based fields in "
+"Billing, Shipping, and Additional section."
+msgstr ""
+
+#: admin/fme-ccfw-admin.php:875
+msgid "Date Picker"
+msgstr ""
+
+#: admin/checkout/fme-ccfw-checkout-fields.php:69
+msgid "Default"
+msgstr ""
+
+#: admin/checkout/fme-ccfw-checkout-fields.php:120
+msgid "Delete"
+msgstr ""
+
+#: admin/fme-ccfw-admin.php:945
+msgid "Disable"
+msgstr ""
+
+#: admin/fme-ccfw-admin.php:1185
+msgid "Display for Specific Product or Category"
+msgstr ""
+
+#: admin/fme-ccfw-admin.php:1321
+msgid "Display for Specific User roles"
+msgstr ""
+
+#: admin/checkout/fme-ccfw-checkout-fields.php:115
+msgid "Edit"
+msgstr ""
+
+#: admin/fme-ccfw-admin.php:939 admin/checkout/fme-ccfw-checkout-fields.php:71
+#: admin/checkout/fme-ccfw-checkout-fields.php:138
+msgid "Enable"
+msgstr ""
+
+#: admin/fme-ccfw-admin.php:932
+msgid "Enable "
+msgstr ""
+
+#: admin/fme-ccfw-admin.php:972 admin/fme-ccfw-admin.php:979
+msgid "Field Class "
+msgstr ""
+
+#: admin/fme-ccfw-admin.php:1035
+msgid "Field Extension"
+msgstr ""
+
+#: admin/fme-ccfw-admin.php:912
+msgid "Field Name"
+msgstr ""
+
+#: admin/fme-ccfw-admin.php:1053
+msgid "File Size"
+msgstr ""
+
+#: admin/fme-ccfw-admin.php:905
+msgid "File Upload"
+msgstr ""
+
+#. Author of the plugin
+msgid "FME Addons"
+msgstr ""
+
+#: admin/fme-ccfw-admin.php:986
+msgid "form-row-first"
+msgstr ""
+
+#: admin/fme-ccfw-admin.php:992
+msgid "form-row-last"
+msgstr ""
+
+#: admin/fme-ccfw-admin.php:999
+msgid "form-row-wide"
+msgstr ""
+
+#: admin/fme-ccfw-admin.php:1090
+msgid "H1"
+msgstr ""
+
+#: admin/fme-ccfw-admin.php:1096
+msgid "H2"
+msgstr ""
+
+#: admin/fme-ccfw-admin.php:1102
+msgid "H3"
+msgstr ""
+
+#: admin/fme-ccfw-admin.php:1106
+msgid "H4"
+msgstr ""
+
+#: admin/fme-ccfw-admin.php:1114
+msgid "H5"
+msgstr ""
+
+#: admin/fme-ccfw-admin.php:1120
+msgid "H6"
+msgstr ""
+
+#: admin/fme-ccfw-admin.php:893
+msgid "Heading"
+msgstr ""
+
+#: admin/fme-ccfw-admin.php:1077
+msgid "Heading Type"
+msgstr ""
+
+#: admin/fme-ccfw-admin.php:1400 admin/view/fme-ccfw-condtion-html.php:20
+#: admin/view/fme-ccfw-add-condtion-html.php:8
+msgid "Hide"
+msgstr ""
+
+#: admin/fme-ccfw-admin.php:1326
+msgid "Hide for  Specific User roles"
+msgstr ""
+
+#: admin/fme-ccfw-admin.php:1413 admin/view/fme-ccfw-condtion-html.php:31
+#: admin/view/fme-ccfw-add-condtion-html.php:19
+msgid "If value of"
+msgstr ""
+
+#: admin/fme-ccfw-admin.php:1443 admin/view/fme-ccfw-condtion-html.php:61
+#: admin/view/fme-ccfw-add-condtion-html.php:49
+msgid "is checked"
+msgstr ""
+
+#: admin/fme-ccfw-admin.php:1439 admin/view/fme-ccfw-condtion-html.php:57
+#: admin/view/fme-ccfw-add-condtion-html.php:45
+msgid "is empty"
+msgstr ""
+
+#: admin/fme-ccfw-admin.php:1441 admin/view/fme-ccfw-condtion-html.php:59
+#: admin/view/fme-ccfw-add-condtion-html.php:47
+msgid "is equal to "
+msgstr ""
+
+#: admin/fme-ccfw-admin.php:1440 admin/view/fme-ccfw-condtion-html.php:58
+#: admin/view/fme-ccfw-add-condtion-html.php:46
+msgid "is not empty"
+msgstr ""
+
+#: admin/fme-ccfw-admin.php:1442 admin/view/fme-ccfw-condtion-html.php:60
+#: admin/view/fme-ccfw-add-condtion-html.php:48
+msgid "is not equal to"
+msgstr ""
+
+#: admin/fme-ccfw-admin.php:1060
+msgid "KB"
+msgstr ""
+
+#: admin/fme-ccfw-admin.php:923 admin/checkout/fme-ccfw-checkout-fields.php:66
+msgid "Label"
+msgstr ""
+
+#: admin/fme-ccfw-admin.php:1360
+msgid ""
+"Leave empty to diplay field for all user roles and ignore radio selection"
+msgstr ""
+
+#: admin/fme-ccfw-admin.php:1061
+msgid "MB"
+msgstr ""
+
+#: admin/fme-ccfw-admin.php:857
+msgid "MultiSelect"
+msgstr ""
+
+#: admin/checkout/fme-ccfw-checkout-fields.php:67
+#: admin/checkout/fme-ccfw-checkout-fields.php:134
+msgid "Name"
+msgstr ""
+
+#: admin/checkout/fme-ccfw-checkout-fields.php:90
+msgid "No"
+msgstr ""
+
+#: admin/fme-ccfw-admin.php:833
+msgid "Number"
+msgstr ""
+
+#: admin/fme-ccfw-admin.php:1504
+msgid "Option Name"
+msgstr ""
+
+#: admin/fme-ccfw-admin.php:1506
+msgid "Option Price"
+msgstr ""
+
+#: admin/fme-ccfw-admin.php:1505
+msgid "Option Value"
+msgstr ""
+
+#: front/fme-ccfw-front.php:893
+msgid "optional"
+msgstr ""
+
+#: admin/fme-ccfw-admin.php:899
+msgid "Paragraph"
+msgstr ""
+
+#: admin/fme-ccfw-admin.php:1132
+msgid "paragraph"
+msgstr ""
+
+#: admin/fme-ccfw-admin.php:845
+msgid "Password"
+msgstr ""
+
+#: admin/checkout/fme-ccfw-checkout-fields.php:136
+msgid "Placeholder"
+msgstr ""
+
+#: admin/fme-ccfw-admin.php:1212
+msgid "Please Choose one"
+msgstr ""
+
+#: admin/fme-ccfw-admin.php:1084
+msgid "Please Select Heading"
+msgstr ""
+
+#: admin/fme-ccfw-admin.php:1018
+msgid "Price"
+msgstr ""
+
+#: admin/fme-ccfw-admin.php:1218
+msgid "Product"
+msgstr ""
+
+#: admin/fme-ccfw-admin.php:869
+msgid "Radio Button"
+msgstr ""
+
+#: admin/fme-ccfw-admin.php:1370
+msgid "Relation Between Conditions is \"AND\" & Relations with Group is \"OR\""
+msgstr ""
+
+#: admin/view/fme-ccfw-condtion-html.php:82
+msgid "Remove Group"
+msgstr ""
+
+#: admin/fme-ccfw-admin.php:1149 admin/checkout/fme-ccfw-checkout-fields.php:70
+#: admin/checkout/fme-ccfw-checkout-fields.php:137
+msgid "Required"
+msgstr ""
+
+#: admin/checkout/fme-ccfw-checkout-fields.php:165
+msgid "Save Changes"
+msgstr ""
+
+#: admin/fme-ccfw-admin.php:851 admin/fme-ccfw-admin.php:1398
+#: admin/fme-ccfw-admin.php:1418 admin/fme-ccfw-admin.php:1427
+#: admin/fme-ccfw-admin.php:1438 admin/view/fme-ccfw-condtion-html.php:18
+#: admin/view/fme-ccfw-condtion-html.php:36
+#: admin/view/fme-ccfw-condtion-html.php:45
+#: admin/view/fme-ccfw-condtion-html.php:56
+#: admin/view/fme-ccfw-add-condtion-html.php:6
+#: admin/view/fme-ccfw-add-condtion-html.php:24
+#: admin/view/fme-ccfw-add-condtion-html.php:33
+#: admin/view/fme-ccfw-add-condtion-html.php:44
+msgid "Select"
+msgstr ""
+
+#: admin/checkout/fme-ccfw-checkout-fields.php:133
+msgid "Seq"
+msgstr ""
+
+#: front/fme-ccfw-front.php:143
+msgid "shipping"
+msgstr ""
+
+#: admin/view/fme-ccfw-checkoutfield-settings.php:30
+msgid "Shipping Fields"
+msgstr ""
+
+#: admin/fme-ccfw-admin.php:1399 admin/view/fme-ccfw-condtion-html.php:19
+#: admin/view/fme-ccfw-add-condtion-html.php:7
+msgid "Show"
+msgstr ""
+
+#: admin/checkout/fme-ccfw-checkout-fields.php:65
+msgid "Sort"
+msgstr ""
+
+#: admin/fme-ccfw-admin.php:1126
+msgid "strong"
+msgstr ""
+
+#: admin/fme-ccfw-admin.php:839
+msgid "Telephone"
+msgstr ""
+
+#: admin/fme-ccfw-admin.php:821
+msgid "Text"
+msgstr ""
+
+#: admin/fme-ccfw-admin.php:827
+msgid "TextArea"
+msgstr ""
+
+#: admin/fme-ccfw-admin.php:881
+msgid "Time Picker"
+msgstr ""
+
+#: admin/fme-ccfw-admin.php:811 admin/checkout/fme-ccfw-checkout-fields.php:68
+#: admin/checkout/fme-ccfw-checkout-fields.php:135
+msgid "Type"
+msgstr ""
+
+#: admin/fme-ccfw-admin.php:1174
+msgid "User can select date before current date"
+msgstr ""
+
+#: admin/fme-ccfw-admin.php:1449 admin/view/fme-ccfw-condtion-html.php:67
+#: admin/view/fme-ccfw-add-condtion-html.php:55
+msgid "value"
+msgstr ""
+
+#: admin/checkout/fme-ccfw-checkout-fields.php:163
+msgid "Your settings have been saved."
+msgstr ""

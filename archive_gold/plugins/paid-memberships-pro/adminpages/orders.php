@@ -113,9 +113,9 @@ if ( empty( $filter ) || $filter === 'all' ) {
 	$start_date = $start_year . '-' . $start_month . '-' . $start_day;
 	$end_date   = $end_year . '-' . $end_month . '-' . $end_day;
 
-	// add times to dates
-	$start_date = $start_date . ' 00:00:00';
-	$end_date   = $end_date . ' 23:59:59';
+	// add times to dates and localize
+	$start_date = get_gmt_from_date( $start_date . ' 00:00:00' );
+	$end_date   = get_gmt_from_date( $end_date . ' 23:59:59' );
 
 	$condition = "o.timestamp BETWEEN '" . esc_sql( $start_date ) . "' AND '" . esc_sql( $end_date ) . "'";
 } elseif ( $filter == 'predefined-date-range' ) {
@@ -135,15 +135,15 @@ if ( empty( $filter ) || $filter === 'all' ) {
 		$end_date   = date( 'Y-m-d', strtotime( "last day of December $year", $now ) );
 	}
 
-	// add times to dates
-	$start_date = $start_date . ' 00:00:00';
-	$end_date   = $end_date . ' 23:59:59';
+	// add times to dates and localize
+	$start_date = get_gmt_from_date( $start_date . ' 00:00:00' );
+	$end_date   = get_gmt_from_date( $end_date . ' 23:59:59' );
 
 	$condition = "o.timestamp BETWEEN '" . esc_sql( $start_date ) . "' AND '" . esc_sql( $end_date ) . "'";
 } elseif ( $filter == 'within-a-level' ) {
-	$condition = 'o.membership_id = ' . esc_sql( $l );
+	$condition = 'o.membership_id = ' . (int) $l ;
 } elseif ( $filter == 'with-discount-code' ) {
-	$condition = 'dc.code_id = ' . esc_sql( $discount_code );
+	$condition = 'dc.code_id = ' . (int) $discount_code;
 } elseif ( $filter == 'within-a-status' ) {
 	$condition = "o.status = '" . esc_sql( $status ) . "' ";
 } elseif ( $filter == 'only-paid' ) {
@@ -501,8 +501,7 @@ require_once( dirname( __FILE__ ) . '/admin_header.php' ); ?>
 							$timestamp = $order->getTimestamp();
 						} else {
 							$timestamp = current_time( 'timestamp' );
-						}
-
+						}						
 						$year   = date( 'Y', $timestamp );
 						$month  = date( 'n', $timestamp );
 						$day    = date( 'j', $timestamp );
@@ -1394,7 +1393,7 @@ require_once( dirname( __FILE__ ) . '/admin_header.php' ); ?>
 			$sqlQuery .= "WHERE " . $condition . ' ORDER BY o.id DESC, o.timestamp DESC ';
 		}
 
-		$sqlQuery .= "LIMIT " . esc_sql( $start ) . "," . esc_sql( $limit );
+		$sqlQuery .= "LIMIT " . (int) $start . "," . (int) $limit;
 
 		$order_ids = $wpdb->get_col( $sqlQuery );
 

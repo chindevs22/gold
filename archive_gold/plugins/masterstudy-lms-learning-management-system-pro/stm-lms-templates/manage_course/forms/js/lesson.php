@@ -41,14 +41,13 @@
 						lesson_video: '',
 						lesson_files_pack : '',
 						uploaded_lesson_video : '',
-					},
-					lesson_files_pack_data : stm_lms_manage_course['lesson_file_pack_data']
+					}
 				}
 			},
 			mounted() {
 				var _this = this;
 				WPCFTO_EventBus.$on('STM_LMS_Curriculum_item', function (item) {
-					_this.id = item.id;
+					_this.id = item.post_id;
 					_this.title = item.title;
 					_this.opened = true;
 					_this.loading = true;

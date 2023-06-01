@@ -35,7 +35,7 @@ if ( ! empty( $taxonomy ) ) :
 				$term_icon = ( ! empty( $term_icon ) ) ? $term_icon : 'no-icon';
 				?>
 				<div class="stm_lms_courses_category">
-					<a href="<?php echo esc_url( get_term_link( $term, 'stm_lms_course_taxonomy' ) ); ?>"
+					<a href="<?php echo esc_url( STM_LMS_Course::courses_page_url() . '?terms[]=' . $term->term_id . '&category[]=' . $term->term_id ); ?>"
 						title="<?php echo esc_attr( $term->name ); ?>"
 						class="no_deco sbc_h">
 						<i class="<?php echo esc_attr( $term_icon ); ?>"></i>

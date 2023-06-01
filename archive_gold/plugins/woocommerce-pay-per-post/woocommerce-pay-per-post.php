@@ -10,11 +10,11 @@
  * Plugin Name: Pay For Post with WooCommerce
  * Plugin URI:              pramadillo.com/plugins/woocommerce-pay-per-post
  * Description:             Allows for the sale of a specific post/page in WordPress through WooCommerce.
- * Version:                 3.1.5
+ * Version:                 3.1.8
  * WC requires at least:    2.6
- * WC tested up to:         7.0.0
- * Elementor tested up to: 3.7.8
- * Elementor Pro tested up to: 3.7.7
+ * WC tested up to:         7.4.0
+ * Elementor tested up to: 3.11.2
+ * Elementor Pro tested up to: 3.10.3
  * Author:                  Pramadillo
  * Author URI:              pramadillo.com
  * License:                 GPL-2.0+
@@ -25,7 +25,7 @@
 if ( !defined( 'ABSPATH' ) ) {
     exit;
 }
-const  WC_PPP_VERSION = '3.1.5' ;
+const  WC_PPP_VERSION = '3.1.8' ;
 const  WC_PPP_SLUG = 'wc_pay_per_post' ;
 const  WC_PPP_NAME = 'Pay For Post with WooCommerce' ;
 const  WC_PPP_TEMPLATE_PATH = 'woocommerce-pay-per-post/' ;
@@ -49,10 +49,9 @@ if ( apply_filters( 'wcppp_is_active', true ) === true ) {
                         define( 'WP_FS__PRODUCT_1664_MULTISITE', true );
                     }
                     // Include Freemius SDK.
-                    /** @noinspection PhpIncludeInspection */
                     require_once plugin_dir_path( __FILE__ ) . 'vendor/freemius/wordpress-sdk/start.php';
                     try {
-                        $wcppp_freemius = fs_dynamic_init( array(
+                        $wcppp_freemius = fs_dynamic_init( [
                             'id'              => '1664',
                             'slug'            => 'woocommerce-pay-per-post',
                             'type'            => 'plugin',
@@ -61,17 +60,17 @@ if ( apply_filters( 'wcppp_is_active', true ) === true ) {
                             'premium_suffix'  => 'Premium',
                             'has_addons'      => false,
                             'has_paid_plans'  => true,
-                            'trial'           => array(
+                            'trial'           => [
                             'days'               => 7,
                             'is_require_payment' => true,
-                        ),
-                            'has_affiliation' => 'all',
-                            'menu'            => array(
+                        ],
+                            'has_affiliation' => 'customers',
+                            'menu'            => [
                             'slug'       => 'wc_pay_per_post',
                             'first-path' => 'admin.php?page=wc_pay_per_post-whats-new',
-                        ),
+                        ],
                             'is_live'         => true,
-                        ) );
+                        ] );
                     } catch ( Freemius_Exception $e ) {
                         die( esc_html( $e->getMessage() ) );
                     }
@@ -81,20 +80,16 @@ if ( apply_filters( 'wcppp_is_active', true ) === true ) {
             }
         
         }
-        /** @noinspection PhpIncludeInspection */
         require plugin_dir_path( __FILE__ ) . 'includes/class-woocommerce-pay-per-post.php';
-        /** @noinspection PhpIncludeInspection */
         require plugin_dir_path( __FILE__ ) . 'vendor/autoload.php';
         function activate_woocommerce_pay_per_post()
         {
-            /** @noinspection PhpIncludeInspection */
             require_once plugin_dir_path( __FILE__ ) . 'includes/class-woocommerce-pay-per-post-activator.php';
             Woocommerce_Pay_Per_Post_Activator::activate( WC_PPP_VERSION );
         }
         
         function deactivate_woocommerce_pay_per_post()
         {
-            /** @noinspection PhpIncludeInspection */
             require_once plugin_dir_path( __FILE__ ) . 'includes/class-woocommerce-pay-per-post-deactivator.php';
             Woocommerce_Pay_Per_Post_Deactivator::deactivate();
         }
@@ -105,14 +100,11 @@ if ( apply_filters( 'wcppp_is_active', true ) === true ) {
         {
             wcppp_freemius();
             do_action( 'wcppp_freemius_loaded' );
-            wcppp_freemius()->add_filter( 'plugin_icon', 'wcppp_fs_custom_icon' );
+            wcppp_freemius()->add_filter( 'plugin_icon', function () {
+                return dirname( __FILE__ ) . '/admin/img/icon.png';
+            } );
             $plugin = new Woocommerce_Pay_Per_Post();
             $plugin->run();
-        }
-        
-        function wcppp_fs_custom_icon() : string
-        {
-            return dirname( __FILE__ ) . '/admin/img/icon.png';
         }
         
         run_woocommerce_pay_per_post();

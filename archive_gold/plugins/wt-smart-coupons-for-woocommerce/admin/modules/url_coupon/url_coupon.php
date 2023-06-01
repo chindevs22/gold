@@ -142,6 +142,12 @@ class Wt_Smart_Coupon_Url_Coupon_Admin
                 </div>
                 <div class="wt_sc_popup_body">
                     <?php 
+                    $image_path  = plugin_dir_url( __FILE__ ).'assets/images/';
+
+                    $view_params = array(
+                        'image_path' => $image_path,
+                    );
+
                     include plugin_dir_path( __FILE__ ).'views/_tab_data.php';
                     ?>   
                 </div>

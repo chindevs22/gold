@@ -179,7 +179,7 @@ Vue.component('stm_questions_v2', {
                 action: 'stm_lms_questions',
                 nonce: stm_lms_nonces['stm_lms_questions'],
                 posts_per_page: -1,
-                order: 'ASC',
+                orderby: 'post__in',
                 ids: this.stored_ids,
                 post_types: this.posts.join(','),
             };
@@ -413,7 +413,9 @@ Vue.component('stm_questions_v2', {
             /*Rebuild categories to array without keys*/
             let categories = [];
             Object.keys(vm.question_bank_category).forEach(key => {
-                categories.push(vm.question_bank_category[key]);
+                if (typeof vm.question_bank_category[key] !== 'undefined') {
+                    categories.push(vm.question_bank_category[key]);
+                }
             });
 
             var data = {
@@ -432,7 +434,7 @@ Vue.component('stm_questions_v2', {
                 }];
 
                 vm.$set(item, 'answers', answer);
-console.log(response.body);
+
                 vm.items.push(response.body);
                 vm.question_bank_title = '';
 

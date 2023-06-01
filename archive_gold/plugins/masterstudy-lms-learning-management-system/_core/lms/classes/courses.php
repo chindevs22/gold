@@ -12,55 +12,50 @@ class STM_LMS_Courses {
 	public function trash_course( $post_id ) {
 		if ( current_user_can( 'manage_options' ) ) {
 			$post_type = get_post_type( $post_id );
-			if ( 'stm-courses' == $post_type ) {
+			if ( 'stm-courses' === $post_type ) {
 				stm_lms_get_delete_courses( $post_id );
 			}
 		}
 	}
 
-	public static function stm_lms_rows_to_cols_pivot( $meta_keys ) {
-		$result = '';
-		foreach ( $meta_keys as $meta_key ) {
-			$result = $result . " max(case when pm.meta_key='{$meta_key}' then meta_value end) as {$meta_key},";
-		}
-		if ( ! empty( $result ) ) {
-			return substr( $result, 0, -1 );
-		}
-	}
-
 	public static function get_courses_metas( $courses ) {
 		global $wpdb;
-		$meta_keys  = array(
-			'curriculum',
-			'current_students',
-			'views',
-			'level',
-			'price',
-			'sale_price',
-			'not_single_sale',
-			'featured',
-			'duration_info',
-			'course_marks',
-		);
-		$meta_query = self::stm_lms_rows_to_cols_pivot( $meta_keys );
-		$courses    = implode( ',', $courses );
-		$result     = $wpdb->get_results(
-			/* phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared */
-			'SELECT p.id, p.post_title, p.post_author, p.post_excerpt, ' . $meta_query . ' FROM ' . $wpdb->prefix . 'posts AS p LEFT JOIN ' . $wpdb->prefix . "postmeta as pm ON pm.post_id = p.ID
-			WHERE p.post_type = 'stm-courses' AND p.post_status = 'publish' AND p.ID IN ( $courses ) GROUP BY p.ID ORDER BY FIELD( p.ID, $courses )", // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+		$courses = implode( ',', $courses );
+		// phpcs:disable
+		$result = $wpdb->get_results(
+			$wpdb->prepare(
+				"SELECT p.id, p.post_title, p.post_author, p.post_excerpt,
+				MAX(CASE WHEN pm.meta_key = 'curriculum' THEN pm.meta_value END) AS curriculum,
+				MAX(CASE WHEN pm.meta_key = 'current_students' THEN pm.meta_value END) AS current_students,
+				MAX(CASE WHEN pm.meta_key = 'views' THEN pm.meta_value END) AS views,
+				MAX(CASE WHEN pm.meta_key = 'level' THEN pm.meta_value END) AS level,
+				MAX(CASE WHEN pm.meta_key = 'price' THEN pm.meta_value END) AS price,
+				MAX(CASE WHEN pm.meta_key = 'sale_price' THEN pm.meta_value END) AS sale_price,
+				MAX(CASE WHEN pm.meta_key = 'not_single_sale' THEN pm.meta_value END) AS not_single_sale,
+				MAX(CASE WHEN pm.meta_key = 'featured' THEN pm.meta_value END) AS featured,
+				MAX(CASE WHEN pm.meta_key = 'duration_info' THEN pm.meta_value END) AS duration_info,
+				MAX(CASE WHEN pm.meta_key = 'course_marks' THEN pm.meta_value END) AS course_marks
+				FROM {$wpdb->prefix}posts AS p
+				LEFT JOIN {$wpdb->prefix}postmeta AS pm ON pm.post_id = p.ID
+				WHERE p.post_type = %s AND p.post_status = %s AND p.ID IN ( $courses )
+				GROUP BY p.ID ORDER BY FIELD( p.ID, $courses )",
+				'stm-courses',
+				'publish'
+			),
 			ARRAY_A
 		);
+		// phpcs:enable
 		return $result ?? array();
 	}
 
 	public static function get_course_submetas( $course ) {
 		$course['current_status'] = STM_LMS_Course::get_post_status( $course['id'] );
 		$course['rating']         = STM_LMS_Course::course_average_rate( maybe_unserialize( $course['course_marks'] ) );
-		$course['lectures']       = STM_LMS_Course::curriculum_info( $course['curriculum'] );
+		$course['lectures']       = STM_LMS_Course::curriculum_info( $course['id'] );
 		$course['image']          = get_the_post_thumbnail_url( $course['id'], 'img-300-225' );
 		$course['author_info']    = STM_LMS_User::get_current_user( $course['post_author'] );
 		$course['url']            = get_post_permalink( $course['id'] );
-		$categories               = stm_lms_get_terms_array( $course['id'], 'stm_lms_course_taxonomy', false, true );
+		$categories               = wp_get_post_terms( $course['id'], 'stm_lms_course_taxonomy' );
 		$course['terms']          = ! empty( $categories[0] ) ? $categories[0] : '';
 		$progress                 = 0;
 		if ( is_user_logged_in() ) {
@@ -373,7 +368,7 @@ class STM_LMS_Courses {
 			$args['orderby']        = 'rand';
 			if ( empty( $status ) ) {
 				$status = array( 'featured' );
-			} elseif ( ! empty( $status ) && is_array( $status ) && ! in_array( 'featured', $status ) ) {
+			} elseif ( is_array( $status ) && ! in_array( 'featured', $status, true ) ) {
 				$status[] = 'featured';
 			}
 		}
@@ -388,7 +383,7 @@ class STM_LMS_Courses {
 				);
 			}
 
-			if ( in_array( 'featured', $status ) ) {
+			if ( in_array( 'featured', $status, true ) ) {
 				$args['meta_query']['status'][] = array(
 					'key'     => 'featured',
 					'value'   => 'on',
@@ -396,7 +391,7 @@ class STM_LMS_Courses {
 				);
 			}
 
-			if ( in_array( 'hot', $status ) ) {
+			if ( in_array( 'hot', $status, true ) ) {
 				$args['meta_query']['status'][] = array(
 					'key'     => 'status',
 					'value'   => 'hot',
@@ -404,7 +399,7 @@ class STM_LMS_Courses {
 				);
 			}
 
-			if ( in_array( 'new', $status ) ) {
+			if ( in_array( 'new', $status, true ) ) {
 				$args['meta_query']['status'][] = array(
 					'key'     => 'status',
 					'value'   => 'new',
@@ -412,7 +407,7 @@ class STM_LMS_Courses {
 				);
 			}
 
-			if ( in_array( 'special', $status ) ) {
+			if ( in_array( 'special', $status, true ) ) {
 				$args['meta_query']['status'][] = array(
 					'key'     => 'status',
 					'value'   => 'special',
@@ -489,6 +484,7 @@ class STM_LMS_Courses {
 				);
 			}
 
+			// phpcs:ignore WordPress.PHP.StrictInArray.MissingTrueStrict
 			if ( in_array( 'free_courses', $_GET['price'] ) && in_array( 'paid_courses', $_GET['price'] ) ) {
 				$args['meta_query']['prices'][] = array(
 					array(
@@ -512,6 +508,7 @@ class STM_LMS_Courses {
 					),
 				);
 			} else {
+				// phpcs:ignore WordPress.PHP.StrictInArray.MissingTrueStrict
 				if ( in_array( 'free_courses', $_GET['price'] ) ) {
 					$args['meta_query']['free_price'][] = array(
 						array(
@@ -544,6 +541,7 @@ class STM_LMS_Courses {
 					);
 				}
 
+				// phpcs:ignore WordPress.PHP.StrictInArray.MissingTrueStrict
 				if ( in_array( 'paid_courses', $_GET['price'] ) ) {
 					$args['meta_query']['paid_price'][] = array(
 						array(
@@ -570,7 +568,7 @@ class STM_LMS_Courses {
 				}
 			}
 
-			if ( in_array( 'subscription', $_GET['price'] ) ) {
+			if ( in_array( 'subscription', $_GET['price'], true ) ) {
 				$args['meta_query']['subscription'][] = array(
 					array(
 						'key'     => 'not_single_sale',

@@ -6,7 +6,7 @@ $this->start_controls_section(
 	array(
 		'label'      => esc_html__( 'Filter', 'masterstudy-lms-learning-management-system' ),
 		'tab'        => Controls_Manager::TAB_CONTENT,
-		'conditions' => $this->add_widget_type_conditions( 'courses-archive' ),
+		'conditions' => $this->add_widget_type_conditions( array( 'courses-archive' ) ),
 	)
 );
 $this->add_subswitcher_control(

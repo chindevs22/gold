@@ -16,26 +16,6 @@ class STM_LMS_Manage_Course {
 		add_action( 'wp_ajax_stm_lms_pro_save_front_course', 'STM_LMS_Manage_Course::save_course' );
 
 		add_action( 'stm_lms_pro_course_data_validated', 'STM_LMS_Manage_Course::stm_lms_pro_course_data_check_user', 10, 2 );
-
-		add_filter(
-			'stm_lms_menu_items',
-			function ( $menus ) {
-				if ( STM_LMS_Instructor::is_instructor() && apply_filters( 'stm_lms_enable_add_course', true ) ) {
-					$menus[] = array(
-						'order'        => 55,
-						'id'           => 'add_course',
-						'slug'         => 'edit-course',
-						'lms_template' => 'stm-lms-manage-course',
-						'menu_title'   => esc_html__( 'Add Course', 'masterstudy-lms-learning-management-system-pro' ),
-						'menu_icon'    => 'fa-plus',
-						'menu_url'     => self::manage_course_url(),
-						'menu_place'   => 'main',
-					);
-				}
-
-				return $menus;
-			}
-		);
 	}
 
 	public static function manage_course_url() {
@@ -60,8 +40,6 @@ class STM_LMS_Manage_Course {
 		$localize                          = array();
 		$localize['i18n']                  = self::i18n();
 		$localize['post_id']               = $course_id;
-		$localize['course_file_pack_data'] = stm_lms_course_files_data();
-		$localize['lesson_file_pack_data'] = stm_lms_lesson_files_data();
 		if ( ! empty( $course_id ) ) {
 			$localize['post_data'] = array(
 				'title'   => get_the_title( $course_id ),
@@ -479,12 +457,11 @@ class STM_LMS_Manage_Course {
 		$required_fields = apply_filters(
 			'stm_lms_manage_course_required_fields',
 			array(
-				'title'      => 'required',
-				'category'   => 'required',
-				'image'      => 'required|integer',
-				'content'    => 'required',
-				'price'      => 'float',
-				'curriculum' => 'required',
+				'title'    => 'required',
+				'category' => 'required',
+				'image'    => 'required|integer',
+				'content'  => 'required',
+				'price'    => 'float',
 			)
 		);
 

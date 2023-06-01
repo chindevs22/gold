@@ -29,7 +29,7 @@
 		}
 		?>
 		<div class="ms_lms_courses_card_wrapper">
-			<?php if ( ! empty( $featured_courses ) && is_array( $featured_courses ) ) { ?>
+			<?php if ( ! empty( $featured_courses ) && is_array( $featured_courses ) && ! empty( $show_featured_block ) ) { ?>
 				<div class="ms_lms_courses_card featured <?php echo ( ! empty( $course_card_presets ) ) ? esc_attr( $course_card_presets ) : ''; ?>">
 					<?php
 					STM_LMS_Templates::show_lms_template(
@@ -47,6 +47,20 @@
 			<?php } ?>
 			<div class="ms_lms_courses_card <?php echo ( ! empty( $course_card_presets ) ) ? esc_attr( $course_card_presets ) : ''; ?>">
 				<?php
+				if ( ! empty( $featured_courses ) && is_array( $featured_courses ) && empty( $show_featured_block ) ) {
+					STM_LMS_Templates::show_lms_template(
+						"elementor-widgets/courses/card/{$course_card_presets}/main",
+						array(
+							'courses'             => $featured_courses,
+							'meta_slots'          => $meta_slots,
+							'card_data'           => $card_data,
+							'popup_data'          => $popup_data,
+							'course_card_presets' => $course_card_presets,
+							'featured'            => 'featured',
+							'widget_type'         => $widget_type,
+						)
+					);
+				}
 				if ( ! empty( $courses ) && is_array( $courses ) ) {
 					STM_LMS_Templates::show_lms_template(
 						"elementor-widgets/courses/card/{$course_card_presets}/main",
@@ -59,7 +73,7 @@
 						)
 					);
 				} else {
-					STM_LMS_Templates::show_lms_template( 'elementor-widgets/courses-archive/filter/no-results' );
+					STM_LMS_Templates::show_lms_template( 'elementor-widgets/courses/courses-archive/filter/no-results' );
 				}
 				?>
 			</div>

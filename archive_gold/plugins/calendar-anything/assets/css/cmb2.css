@@ -1,0 +1,168 @@
+/*calendar setup backend pages*/
+
+.cmb2-options-page {
+    max-width: 3000px !important;
+}
+
+.cmb2-options-page .cmb2-wrap .cmb-type-title {
+    margin-top: 0 !important;
+}
+
+body.calendar-setup_page_cmcal_setup_custom_fields .cmb2-wrap.form-table {
+    padding: 0;
+}
+
+body.calendar-setup_page_cmcal_setup_color_fields .cmb2-wrap.form-table,
+body.calendar-setup_page_cmcal_setup_post_fields .cmb2-wrap.form-table,
+body.toplevel_page_cmcal_setup .cmb2-wrap.form-table {
+    background-color: white;
+    border: 1px solid #e1e1e1;
+}
+
+.cmb2-wrap.form-table {
+    margin: 20px 0;
+}
+
+#cmcal_setup_color_fields_metabox .cmb-th,
+#cmcal_setup_post_fields_metabox .cmb-th {
+    width: 300px;
+}
+
+#cmcal_setup_color_fields_metabox .cmb2-metabox>.cmb-row>.cmb-th+.cmb-td,
+#cmcal_setup_post_fields_metabox .cmb2-metabox>.cmb-row>.cmb-th+.cmb-td {
+    margin-left: 300px;
+}
+
+.cmb-type-title {
+    background-color: #F1F1F1 !important;
+    padding: 20px !important;
+}
+
+.cmb-type-title h3 {
+    margin: 0 !important;
+    color: #222 !important;
+    padding: 0 !important;
+}
+.cmb2-options-page .cmb2-metabox-title+p.cmb2-metabox-description {
+    margin: 0 !important;
+    padding: 0 10px !important;
+
+}
+.cmb-th {
+    position: relative;
+    left: 20px;
+}
+
+#codemine_event_event_metaboxes .hndle.ui-sortable-handle {
+    padding-left: 30px !important;
+}
+
+.cmb2-wrap.form-table .cmb-th label {
+    padding: 0;
+}
+
+/*EVENT OPTIONS INSIDE POSTS*/
+
+#codemine_event_cmcal_event_event_metaboxes .cmb-row {
+    padding: 10px 0 !important;
+}
+
+#codemine_event_cmcal_event_event_metaboxes .cmb-type-title {
+    padding: 12px 20px !important;
+}
+
+/*repeatable*/
+
+#codemine_event_cmcal_event_event_metaboxes .cmb-row.cmb-repeatable-grouping {
+    padding: 0 !important;
+}
+
+#codemine_event_cmcal_event_event_metaboxes .cmb-group-title.cmbhandle-title {
+    margin: 0 !important;
+}
+
+#codemine_event_cmcal_event_event_metaboxes .cmb-type-group .cmb-row .cmbhandle, .cmb2-postbox .cmb-row .cmbhandle {
+    right: 5px;
+    top: -8px;
+}
+
+#codemine_event_cmcal_event_event_metaboxes .cmb-row.cmb-remove-field-row {
+    padding: 10px !important;
+}
+
+/* zebra rows on settings pages */
+
+#cmb2-metabox-cmcal_setup_metabox .cmb-td > p {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+}
+
+body.calendar-setup_page_cmcal_setup_custom_fields .cmb2-wrap.form-table .cmb-row:nth-child(even) {
+    background-color: white;
+}
+
+.cmb2-metabox .cmbhandle:before {
+    content:  '\f343' !important;
+    top: 10px !important;
+}
+
+.cmb2-metabox .postbox.closed .cmbhandle:before {
+    content: '\f347' !important;
+}
+
+.post_type_row {
+    margin-bottom: 20px;
+    border: 1px solid #e1e1e1;
+    background-color: white;
+}
+
+.post_type_row .cmb-type-title {
+    border-bottom: 1px solid #e1e1e1;
+}
+
+.cmcal_notice {
+    padding: 20px;
+    background-color: white;
+}
+
+/*taxonomy color fields*/
+
+#cmb2-metabox-cmal_tax_custom_fields {
+    background-color: white;
+    border: 1px solid #e1e1e1;
+}
+
+#cmb2-metabox-cmal_tax_custom_fields .cmb-type-title {
+    background-color: white;
+    border-bottom: 1px solid #e1e1e1;
+}
+
+.cmcal_warning {
+    border: 1px solid orange; 
+    border-left-width: 5px; 
+    padding: 15px;
+}
+
+.cmcal-calendar-settings-section .cmb-type-group .cmb-row {
+    margin: 0;
+}
+
+#cmb2-metabox-cmcal_setup_calendars_metabox .cmb-repeat-group-wrap .cmb-row.cmb-type-title.cmcal-range-dummy-item {
+    padding: 0 !important;
+}
+
+/*ical*/
+.ical_holder .cmb2-metabox-title {
+    text-transform: initial !important;
+    font-weight: normal !important;
+}
+
+.ical_holder pre {
+    font-family: Courier, serif;
+    background-color: #F1F1F1 !important;
+    padding: 20px;
+}
+
+.cmcal-calendar-settings-section .cmb-row.cmb-type-title.cmcal_colorize_title {
+    background-color: #F1F1F1 !important;
+}

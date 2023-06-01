@@ -48,10 +48,10 @@ function stm_lms_user_searches_stats_name( $wpdb ) {
 	return $wpdb->prefix . 'stm_lms_user_searches_stats';
 }
 
-function stm_lms_curriculum_log_name( $wpdb ) {
-	return $wpdb->prefix . 'stm_lms_curriculum_log';
+function stm_lms_curriculum_sections_name( $wpdb ) {
+	return $wpdb->prefix . 'stm_lms_curriculum_sections';
 }
 
-function stm_lms_curriculum_bind_name( $wpdb ) {
-	return $wpdb->prefix . 'stm_lms_curriculum_bind';
+function stm_lms_curriculum_materials_name( $wpdb ) {
+	return $wpdb->prefix . 'stm_lms_curriculum_materials';
 }

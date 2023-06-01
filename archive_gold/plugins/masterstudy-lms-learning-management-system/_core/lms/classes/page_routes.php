@@ -1,7 +1,7 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-} //Exit if accessed directly
+	exit; // Exit if accessed directly
+}
 
 new STM_LMS_Page_Router();
 
@@ -214,6 +214,58 @@ class STM_LMS_Page_Router {
 						'protected'        => true,
 						'instructors_only' => true,
 						'url'              => 'announcement',
+					),
+					'manage_course'        => array(
+						'template'         => 'course-builder',
+						'protected'        => true,
+						'instructors_only' => true,
+						'url'              => 'edit-course',
+						'sub_pages'        => array(
+							'edit_course' => array(
+								'template'  => 'course-builder',
+								'protected' => true,
+								'var'       => 'course_id',
+							),
+						),
+					),
+					'manage_lesson'        => array(
+						'template'         => 'course-builder',
+						'protected'        => true,
+						'instructors_only' => true,
+						'url'              => 'edit-lesson',
+						'sub_pages'        => array(
+							'edit_course' => array(
+								'template'  => 'course-builder',
+								'protected' => true,
+								'var'       => 'lesson_id',
+							),
+						),
+					),
+					'manage_quiz'          => array(
+						'template'         => 'course-builder',
+						'protected'        => true,
+						'instructors_only' => true,
+						'url'              => 'edit-quiz',
+						'sub_pages'        => array(
+							'edit_course' => array(
+								'template'  => 'course-builder',
+								'protected' => true,
+								'var'       => 'quiz_id',
+							),
+						),
+					),
+					'manage_assignment'    => array(
+						'template'         => 'course-builder',
+						'protected'        => true,
+						'instructors_only' => true,
+						'url'              => 'edit-assignment',
+						'sub_pages'        => array(
+							'edit_course' => array(
+								'template'  => 'course-builder',
+								'protected' => true,
+								'var'       => 'assignment_id',
+							),
+						),
 					),
 				),
 			),
@@ -462,7 +514,7 @@ class STM_LMS_Page_Router {
 			foreach ( $languages as $language ) {
 				$page_id = apply_filters( 'wpml_object_id', $page['page_id'], get_post_type( $page['page_id'] ), false, $language['code'] );
 
-				if ( in_array( $page_id, $page_ids ) ) {
+				if ( in_array( $page_id, $page_ids ) ) { // phpcs:ignore WordPress.PHP.StrictInArray.MissingTrueStrict
 					continue;
 				}
 

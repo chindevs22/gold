@@ -4,6 +4,7 @@ namespace StmLmsElementor\Widgets;
 
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
+use Elementor\Plugin;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
@@ -18,16 +19,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class StmLmsCoursesGrid extends Widget_Base {
 
+	use \MsLmsAddOverlay;
 
-	/**
-	 * Retrieve the widget name.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @access public
-	 *
-	 * @return string Widget name.
-	 */
 	public function get_name() {
 		return 'stm_lms_courses_grid';
 	}
@@ -216,7 +209,9 @@ class StmLmsCoursesGrid extends Widget_Base {
 			'posts_per_page'   => ! empty( $settings['posts_per_page'] ) ? $settings['posts_per_page'] : '',
 			'taxonomy_default' => ! empty( $settings['taxonomy'] ) ? implode( ', ', $settings['taxonomy'] ) : '',
 		);
-
+		if ( Plugin::$instance->editor->is_edit_mode() ) {
+			$this->add_courses_widget_overlay();
+		}
 		\STM_LMS_Templates::show_lms_template( 'shortcodes/stm_lms_courses_grid', $atts );
 	}
 

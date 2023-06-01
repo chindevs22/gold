@@ -11,8 +11,8 @@ $this->start_controls_section(
 			'terms' => array(
 				array(
 					'name'     => 'type',
-					'operator' => '===',
-					'value'    => 'courses-archive',
+					'operator' => 'in',
+					'value'    => array( 'courses-archive', 'courses-grid', 'courses-carousel' ),
 				),
 				array(
 					'name'     => 'show_header',
@@ -27,7 +27,7 @@ $this->add_group_control(
 	Group_Control_Typography::get_type(),
 	array(
 		'name'     => 'style_title_typography',
-		'selector' => '{{WRAPPER}} .ms_lms_courses_archive__title h2',
+		'selector' => '{{WRAPPER}} .ms_lms_courses_archive__title h2, {{WRAPPER}} .ms_lms_courses_grid__title h2, {{WRAPPER}} .ms_lms_courses_carousel__title h2',
 	)
 );
 $this->add_control(
@@ -37,6 +37,8 @@ $this->add_control(
 		'type'      => Controls_Manager::COLOR,
 		'selectors' => array(
 			'{{WRAPPER}} .ms_lms_courses_archive__title h2' => 'color: {{VALUE}}',
+			'{{WRAPPER}} .ms_lms_courses_grid__title h2' => 'color: {{VALUE}}',
+			'{{WRAPPER}} .ms_lms_courses_carousel__title h2' => 'color: {{VALUE}}',
 		),
 	)
 );
@@ -48,6 +50,8 @@ $this->add_responsive_control(
 		'size_units' => array( 'px', '%' ),
 		'selectors'  => array(
 			'{{WRAPPER}} .ms_lms_courses_archive__title h2' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			'{{WRAPPER}} .ms_lms_courses_grid__title h2' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			'{{WRAPPER}} .ms_lms_courses_carousel__title h2' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 		),
 	)
 );
@@ -59,6 +63,8 @@ $this->add_responsive_control(
 		'size_units' => array( 'px', '%' ),
 		'selectors'  => array(
 			'{{WRAPPER}} .ms_lms_courses_archive__title h2' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			'{{WRAPPER}} .ms_lms_courses_grid__title h2' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			'{{WRAPPER}} .ms_lms_courses_carousel__title h2' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 		),
 	)
 );
@@ -83,6 +89,8 @@ $this->add_responsive_control(
 		),
 		'selectors'  => array(
 			'{{WRAPPER}} .ms_lms_courses_archive__title h2' => 'text-align: {{VALUE}};',
+			'{{WRAPPER}} .ms_lms_courses_grid__title h2' => 'text-align: {{VALUE}};',
+			'{{WRAPPER}} .ms_lms_courses_carousel__title h2' => 'text-align: {{VALUE}};',
 		),
 		'conditions' => array(
 			'terms' => array(
@@ -90,6 +98,11 @@ $this->add_responsive_control(
 					'name'     => 'header_presets',
 					'operator' => '===',
 					'value'    => 'style_1',
+				),
+				array(
+					'name'     => 'type',
+					'operator' => 'in',
+					'value'    => array( 'courses-archive', 'courses-grid', 'courses-carousel' ),
 				),
 			),
 		),

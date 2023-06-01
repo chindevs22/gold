@@ -1,4 +1,12 @@
 <div class="stm-lms-addons">
+	<div class="stm-lms-addon-search">
+		<input id="addons-search" type="text" placeholder="<?php esc_attr_e( 'Search addons', 'masterstudy-lms-learning-management-system' ); ?>"
+			value="<?php echo esc_attr( $_GET['search'] ?? '' ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>">
+		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+			<defs></defs>
+			<path id="Forma_1" data-name="Forma 1" d="M15.8,14.855L11.25,10.31a6.338,6.338,0,1,0-.942.942L14.854,15.8A0.666,0.666,0,1,0,15.8,14.855ZM6.335,11.33a5,5,0,1,1,4.994-5A5,5,0,0,1,6.335,11.33Z" class="cls-1"></path>
+		</svg>
+	</div>
 	<?php
 	if ( ! STM_LMS_Helpers::is_pro() ) {
 		?>
@@ -26,7 +34,7 @@
 					<?php echo esc_html__( 'Starter theme', 'masterstudy-lms-learning-management-system' ); ?>
 				</li>
 			</ul>
-			<a href="https://stylemixthemes.com/wordpress-lms-plugin/?utm_source=wpadmin-ms&utm_medium=addons&utm_campaign=get-now-addons" class="stm-lms-addon-banner-button" target="_blank">
+			<a href="https://stylemixthemes.com/wordpress-lms-plugin/pricing/?utm_source=wpadmin-ms&utm_medium=addons&utm_campaign=get-now-addons" class="stm-lms-addon-banner-button" target="_blank">
 				<i class="fas fa-arrow-right"></i>
 				<?php echo esc_html__( 'Get Now', 'masterstudy-lms-learning-management-system' ); ?>
 			</a>
@@ -35,15 +43,11 @@
 	</div>
 		<?php
 	}
+
 	foreach ( $addons as $key => $addon ) {
 		$addon_enabled = ! empty( $enabled_addons[ $key ] );
 		?>
-		<div class="stm-lms-addon 
-		<?php
-		if ( $addon_enabled ) {
-			echo 'active';}
-		?>
-		">
+		<div class="stm-lms-addon <?php echo $addon_enabled ? 'active' : ''; ?>">
 			<div class="addon-image">
 				<img src="<?php echo esc_url( $addon['url'] ); ?>"/>
 			</div>
@@ -75,24 +79,14 @@
 				<?php if ( STM_LMS_Helpers::is_pro() ) { ?>
 						<div class="wpcfto-admin-checkbox section_2-enable_courses_filter">
 							<label class="toggle-addon" data-key="<?php echo esc_attr( $key ); ?>">
-								<div class="wpcfto-admin-checkbox-wrapper is_toggle 
-								<?php
-								if ( $addon_enabled ) {
-									echo 'active';}
-								?>
-								">
+								<div class="wpcfto-admin-checkbox-wrapper is_toggle <?php echo $addon_enabled ? 'active' : ''; ?>">
 									<div class="wpcfto-checkbox-switcher"></div>
 									<input type="checkbox" name="enable_courses_filter" id="section_2-enable_courses_filter">
 								</div>
 							</label>
 						</div>
 						<?php if ( ! empty( $addon['settings'] ) ) { ?>
-							<a href="<?php echo esc_url( $addon['settings'] ); ?>" class="addon-settings 
-												<?php
-												if ( $addon_enabled ) {
-													echo 'active';}
-												?>
-							" target="_blank">
+							<a href="<?php echo esc_url( $addon['settings'] ); ?>" class="addon-settings <?php echo $addon_enabled ? 'active' : ''; ?>" target="_blank">
 								<i class="fa fa-cog"></i>
 								<?php esc_html_e( 'Settings', 'masterstudy-lms-learning-management-system' ); ?>
 							</a>

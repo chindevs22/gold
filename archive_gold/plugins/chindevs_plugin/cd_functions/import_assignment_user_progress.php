@@ -32,6 +32,8 @@
         if ($hasDot || $isPostal) {
 			error_log("is a split assignment");
 
+//             $ids = explode( '.', $progressData['quiz_id']); //quizID.questionID
+//             $questionID = $ids[1];
             $wp_assignment_id = get_from_post('stm-assignments', 'mgml_assignment_id', $progressData['quiz_id']);
 			error_log($wp_assignment_id);
             //Student Name
@@ -49,12 +51,12 @@
             $wpdata['post_type'] = 'stm-user-assignment';
 			$wpdata['post_author'] = $wp_user_id;
 			$wpdata['meta_input']  = array(
-				'student_id' => $wp_user_id,
-				'course_id' => $wp_course_id,
-				'assignment_id' =>  $wp_assignment_id,
+				'student_id' => $wp_user_id, 
+				'course_id' => $wp_course_id, 
+				'assignment_id' =>  $wp_assignment_id, 
 				'status' => 'passed'
 			);
-
+			
 			error_log("all good before inserting");
             $user_assignment_post_id = wp_insert_post( $wpdata );
 

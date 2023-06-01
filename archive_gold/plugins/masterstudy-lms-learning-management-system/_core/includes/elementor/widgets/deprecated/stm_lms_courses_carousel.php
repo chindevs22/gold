@@ -12,6 +12,7 @@ use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Typography;
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
+use Elementor\Plugin;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
@@ -26,14 +27,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class StmLmsCoursesCarousel extends Widget_Base {
 
-	/**
-	 * Retrieve the widget name.
-	 *
-	 * @return string Widget name.
-	 * @since  1.0.0
-	 *
-	 * @access public
-	 */
+	use \MsLmsAddOverlay;
+
 	public function get_name() {
 		return 'stm_lms_courses_carousel';
 	}
@@ -59,7 +54,7 @@ class StmLmsCoursesCarousel extends Widget_Base {
 	 * @access public
 	 */
 	public function get_icon() {
-		return 'eicon-media-carousel lms-icon';
+		return 'stmlms-courses-carousel-old lms-icon';
 	}
 
 	/**
@@ -501,6 +496,9 @@ class StmLmsCoursesCarousel extends Widget_Base {
 		);
 		$uniq         = stm_lms_create_unique_id( $atts );
 		$atts['uniq'] = $uniq;
+		if ( Plugin::$instance->editor->is_edit_mode() ) {
+			$this->add_courses_widget_overlay();
+		}
 		\STM_LMS_Templates::show_lms_template( 'shortcodes/stm_lms_courses_carousel', $atts );
 	}
 

@@ -3,11 +3,11 @@
 add_filter(
 	'stm_lms_custom_routes_config',
 	function ( $routes ) {
-		$routes['user_url']['sub_pages']['manage_course'] = array(
+		$routes['user_url']['sub_pages']['manage_course_old'] = array(
 			'template'         => 'stm-lms-manage-course',
 			'protected'        => true,
 			'instructors_only' => true,
-			'url'              => 'edit-course',
+			'url'              => 'old-edit-course',
 			'sub_pages'        => array(
 				'edit_course' => array(
 					'template'  => 'stm-lms-manage-course',

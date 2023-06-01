@@ -2,13 +2,23 @@
 
 namespace MasterStudy\Lms\Libraries;
 
+use MasterStudy\Lms\Database\CurriculumMaterial;
+use MasterStudy\Lms\Database\CurriculumSection;
+
 class Mixpanel_Posts extends Mixpanel {
 
-	private static $post_types = array(
+	private static $published_post_types = array(
 		'stm-courses'     => 'Courses count',
 		'stm-lessons'     => 'Lessons count',
 		'stm-quizzes'     => 'Quizzes count',
 		'stm-assignments' => 'Assignments count',
+	);
+
+	private static $draft_post_types = array(
+		'stm-courses'     => 'Draft Courses Count',
+		'stm-lessons'     => 'Draft Lessons Count',
+		'stm-quizzes'     => 'Draft Quizzes Count',
+		'stm-assignments' => 'Draft Assignments Count',
 	);
 
 	private static $question_types = array(
@@ -24,7 +34,6 @@ class Mixpanel_Posts extends Mixpanel {
 	private static $lesson_types = array(
 		'video'           => 'Lesson Type Video Count',
 		'text'            => 'Lesson Type Text Count',
-		'slide'           => 'Lesson Type Slide Count',
 		'stream'          => 'Lesson Type Stream Count',
 		'zoom_conference' => 'Lesson Type Zoom Conference Count',
 	);
@@ -39,8 +48,11 @@ class Mixpanel_Posts extends Mixpanel {
 	);
 
 	public static function register_data() {
-		foreach ( self::$post_types as $slug => $label ) {
+		foreach ( self::$published_post_types as $slug => $label ) {
 			self::add_data( $label, self::get_custom_posts_count( $slug ) );
+		}
+		foreach ( self::$draft_post_types as $slug => $label ) {
+			self::add_data( $label, self::get_custom_posts_count( $slug, 'draft' ) );
 		}
 
 		self::add_data( 'First Course Creation Date', self::get_oldest_post( 'stm-courses' ) );
@@ -72,14 +84,15 @@ class Mixpanel_Posts extends Mixpanel {
 		}
 
 		self::add_data( 'Average Number of Sections in Course', self::get_average_sections_count() );
+		self::add_data( 'Lesson Multi Usage', self::get_lessons_multi_usage() );
 	}
 
-	public static function get_custom_posts_count( $post_type ) {
+	public static function get_custom_posts_count( $post_type, $post_status = 'publish' ) {
 		$posts_count = get_posts(
 			array(
 				'post_type'      => $post_type,
 				'posts_per_page' => - 1,
-				'post_status'    => 'publish',
+				'post_status'    => $post_status,
 			)
 		);
 
@@ -172,21 +185,17 @@ class Mixpanel_Posts extends Mixpanel {
 	}
 
 	public static function get_average_sections_count() {
-		$sections_array = array();
 		$course_ids     = self::get_custom_posts_ids( 'stm-courses' );
-
-		foreach ( $course_ids as $course_id ) {
-			$sections_array = array_merge( $sections_array, explode( ',', get_post_meta( $course_id, 'curriculum', true ) ) );
-		}
-
-		foreach ( $sections_array as $key => $value ) {
-			if ( is_numeric( $value ) ) {
-				unset( $sections_array[ $key ] );
-			}
-		}
+		$sections_count = ( new CurriculumSection() )->query()->find( true );
 
 		wp_reset_postdata();
 
-		return ! empty( $sections_array ) ? round( count( $sections_array ) / count( $course_ids ), 2 ) : 0;
+		return ! empty( $sections_count ) ? round( $sections_count / count( $course_ids ), 2 ) : 0;
+	}
+
+	public static function get_lessons_multi_usage() {
+		$lessons = ( new CurriculumMaterial() )->query()->select( 'post_id' )->find( false, 'ARRAY' );
+
+		return max( array_count_values( array_column( $lessons, 'post_id' ) ) ) > 1;
 	}
 }

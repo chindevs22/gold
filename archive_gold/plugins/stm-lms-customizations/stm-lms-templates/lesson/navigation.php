@@ -12,6 +12,21 @@ $args = [
 $lite_terms = wp_get_post_terms( $post_id, 'stm_lms_course_taxonomy', $args );
 
 $course_meta = STM_LMS_Helpers::parse_meta_field( $post_id );
+
+if(isset($course_meta['drip_content']) && !empty($course_meta['drip_content'])) {
+    $drip_content = json_decode($course_meta['drip_content'], true);
+    if(count($drip_content)) {
+        foreach ($drip_content as $item) {
+
+            if($item['parent']['id'] == $item_id) {
+                $lite_terms = [];
+                break;
+            }
+
+        }
+    }
+}
+
 if ( ! empty( $course_meta['curriculum'] ) ) :
     $curriculum_full = explode( ',', $course_meta['curriculum'] );
     $curriculum      = STM_LMS_Helpers::only_array_numbers( $curriculum_full );

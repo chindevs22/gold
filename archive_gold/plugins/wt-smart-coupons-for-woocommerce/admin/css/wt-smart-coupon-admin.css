@@ -271,7 +271,7 @@ div#wt_smart_coupon_settings {
   box-sizing:border-box;
   box-shadow:0px 2px 2px #ccc;
 }
-.wt_smart_coupon_admin_form_right_box{ float:left; width:calc(35% - 25px); margin-left:25px; border-top:1px solid #c3c4c7; margin-top:-1px; }
+.wt_smart_coupon_admin_form_right_box{ float:left; width:calc(35% - 25px); margin-left:25px; margin-top:-1px; }
 .wt_smart_coupon_pro_features, .wt_smart_coupon_setup_video {
   width:100%;
   box-shadow:0px 2px 2px #ccc;
@@ -641,3 +641,5 @@ td.wt_sc_order_used_coupons ul.wc_coupon_list li.code .tips{ cursor:default; }
   .wt-sc-tab-head, .wt-sc-tab-container, .wt_smart_coupon_admin_form_right_box{ width:100%; }
   .wt_smart_coupon_admin_form_right_box{ margin:auto; margin-top:30px; }
 }
+
+fieldset.form-field._wt_need_check_location_in_field .wc-radios li { display:inline-block !important; margin-right:5px; }

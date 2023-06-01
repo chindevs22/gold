@@ -3,8 +3,8 @@ Contributors: Stylemix
 Donate link: https://stylemixthemes.com/
 Tags: lms, course, elearning, education, learning management system
 Requires at least: 4.6
-Tested up to: 6.1
-Stable tag: 2.9.29
+Tested up to: 6.2
+Stable tag: 3.0.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -16,9 +16,9 @@ Learning Management System and eLearning plugin for WordPress. Create easily LMS
 
 Masterstudy is the Best WordPress LMS Plugin, it has all the essential Learning Management System (LMS) features for managing courses, lessons, quizzes and educational content.
 
-## INTRODUCING THE MASTERSTUDY WORDPRESS LMS PLUGIN
+## INTRODUCING THE BEST FREE WORDPRESS LMS PLUGIN - MASTERSTUDY
 
-MasterStudy is the **Free WordPress LMS plugin**, where all the key elements of MasterStudy WordPress LMS plugin are built with [Vue.js](https://en.wikipedia.org/wiki/Vue.js). for **fast page loading** and **smoother transitions**.
+MasterStudy is the Best Free LMS WordPress plugin for online coaching, instructors, trainers, tutors, schools, colleges, marketplaces and any type of elearning websites.
 
 ⭐ [MasterStudy LMS Free version](https://masterstudy.stylemixthemes.com/lms-plugin/)
 ⭐ [MasterStudy LMS PRO version](https://stylemixthemes.com/wordpress-lms-plugin/?utm_source=wporg-lms&utm_medium=en&utm_campaign=2021)
@@ -53,13 +53,15 @@ The Masterstudy Learning Management System (LMS) plugin allows you to create and
 
 ## HOW DO I USE IT?
 
-### CREATE A COURSE
+### CREATE A COURSE IN POWERFUL BUILDER
 
-The MasterStudy WordPress LMS plugin simplified the process of course creation for you. Easily create a course with details like a title, descriptions, curriculum, duration, price, skill level, and the number of active students. Add videos, attachments, teachers, and even course rewards. Masterstudy WordPress LMS plugin lets you represent courses on a modern user-friendly interface with all required options for your students.
+The MasterStudy WordPress LMS plugin simplified the process of course creation for you. You can create courses in a **functional and beautifully designed course builder**. The builder is divided into sections and steps, making it easy to navigate. After creating a course, you can add lessons, quizzes, and assignments. Additionally, you can enhance the course with special features such as the ability to customize the sequence of lessons or courses, preview a specific lesson, set up pricing for the course or subscription, FAQs, and more.
+
+Easily create a course with details like a title, descriptions, curriculum, duration, price, skill level, and the number of active students. Add videos, attachments, teachers, and even course rewards. All of this is available in one course builder.
 
 ***Unlimited Course management:***
 
-- Backend Course Builder
+- Intuitive Course Builder
 - Making Course Featured
 - Course Preview
 - Course Front end Description
@@ -97,8 +99,8 @@ After the course and sections are created, it’s time to add lessons. Here you 
 
 ### A VARIETY OF VIDEO TYPES FOR ANY LESSON
 
-Adding video has never been easier when conducting a lesson. MasterStudy LMS is fully compatible with Presto Player - a cutting-edge WordPress video player plugin. In sum, this would include 7 new video sources: 
- 
+Adding video has never been easier when conducting a lesson. MasterStudy LMS is fully compatible with Presto Player - a cutting-edge WordPress video player plugin. In sum, this would include 7 new video sources:
+
 - HTML(MP4)
 - Youtube
 - Vimeo
@@ -127,7 +129,7 @@ Add questions inside quizzes or add them from the preset questions library. From
 **MASTERSTUDY FREE PLUGIN FEATURES:**
 
 - Modern Design
-- Frontend and Backend Course Builder
+- Powerful Course Builder
 - Unlimited Courses and Lessons
 - Course Preview
 - Frontend Student Dashboard
@@ -396,18 +398,14 @@ Shows the carousel with single course
 
 == Screenshots ==
 
-1. wordpress course plugin
-2. wordpress lms plugin
-3. wordpress courses plugin
-4. lms wordpress plugin
-5. education wordpress plugin
-6. wordpress elearning plugin
-7. wordpress lms plugin
-8. wordpress lms plugins
-9. plugin wordpress lms
-10. wp lms plugin
-11. wp lms plugins
-12. lms wp plugin
+1. Powerful Course Builder
+2. Onpage List of Courses
+3. Single Course Page
+4. Live Streams, Webinars & Classes
+5. External Course Materials
+6. Interactive Quizzes
+7. Lessons & Learning Content Curriculum
+8. Custom Course Completion Certificates
 
 == Frequently Asked Questions ==
 
@@ -454,6 +452,53 @@ The plugin allows uploading absolutely different formats of files. There are thr
 No, you don’t have to extend your license, the core plugin features will be available. In case you want to receive further updates and support you need to renew your license. The MasterStudy WordPress LMS plugin Pro is available at $54.99.
 
 == Changelog ==
+
+= 3.0.0 - 2023-05-08 =
+- **NEW:** Course Builder with new design and a range of enhancements released.
+- **UPD:** The slider lesson type is converted to the text lesson type. Previously created lessons with Slider type will be displayed as text lessons.
+- **FIXED:** Testimonials widget avatars were duplicated.
+
+= 2.9.39 - 2023-05-02 =
+- **FIXED:** Minor bug fixes.
+
+= 2.9.38 - 2023-04-28 =
+- **FIXED:** Minor bug fixes.
+
+= 2.9.37 - 2023-04-26 =
+- **UPD:** Option to disable the featured courses section on the Elementor course archive page.
+- **UPD:** Courses widget of Elementor can be used for the Courses grid, Courses archive, Courses Carousel and Featured Teacher block.
+- **FIXED:** The registration process did not complete when the file upload field was added to the registration form.
+- **FIXED:** The course archive page did not display a notification that there were no courses matching the filter.
+
+= 2.9.36 - 2023-04-05 =
+- **FIXED:** The deprecated function "get_page_by_title" in WordPress 6.2 is replaced with the actual "WP_Query".
+
+= 2.9.35 - 2023-04-03 =
+- **FIXED:** Broken Access Control vulnerability
+
+= 2.9.34 - 2023-03-27 =
+- **FIXED:** Site Authorization links elementor widget login button included the wrong link.
+- **FIXED:** Fill the gap quiz type displayed wrong results when answers included symbols.
+- **FIXED:** Count of question categories incorrectly redirected to blog posts.
+- **FIXED:** Instructor Carousel widget navigation did not work in the latest versions of Elementor.
+
+= 2.9.33 - 2023-03-07 =
+- **FIXED:** Minor bug fixes.
+
+= 2.9.32 - 2023-03-03 =
+- **FIXED:** Minor bug fixes.
+
+= 2.9.31 - 2023-02-22 =
+- **NEW:** Option to generate Courses Page for Elementor in LMS Settings > LMS pages section.
+- **UPD:** Grid type is added to the Courses widget for Elementor to display the courses in Grid view.
+
+= 2.9.30 - 2023-02-16 =
+- **FIXED:** The quiz results were wrong when the number of questions was even.
+- **FIXED:** The custom order of the Questions in Quizzes did not save on the Backend.
+- **FIXED:** Images did not upload to the questions when the PHP version was above 7.4.
+- **FIXED:** Lessons continuously refreshed on the translated language with WPML.
+- **FIXED:** The number of free featured courses did not apply when the course was edited on the backend.
+- **FIXED:** The page did not publish with an Online testing shortcode.
 
 = 2.9.29 - 2023-02-08 =
 - **FIXED:** Minor bug fixes.
@@ -572,7 +617,7 @@ No, you don’t have to extend your license, the core plugin features will be av
 
 = 2.9.3 - 2022-08-17 =
 - **NEW:** Courses filter sidebar added to the Courses categories archive page.
-- **UPDATE:** The user account drop-down menu on the site header now includes links to the user account. 
+- **UPDATE:** The user account drop-down menu on the site header now includes links to the user account.
 - **UPDATE:** Addons page visually improved for the site administrator.
 - **FIXED:** The Instructor's name was replaced with the student's name in Payouts and statistics when WooCommerce checkout is used.
 - **FIXED:** "I have an account" link was removed from the Restore Password page.
@@ -626,7 +671,7 @@ Welcoming the new way of the custom colors appliance to the MasterStudy LMS elem
 - **UPD**: 'Search courses' tab on Courses page
 - **FIXED**: Adding the category to the  created questions in front end builder
 - **FIXED**: Visual bug with Astra theme and switched on MasterStudy LMS
-- **FIXED**: 'Import Courses' button is removed in MasterStudy LMS Theme Wizard 
+- **FIXED**: 'Import Courses' button is removed in MasterStudy LMS Theme Wizard
 - **FIXED**: Status 'Completed' on button in individual course, even when course is not completed
 
 = 2.8.5 - 2022-03-24 =
