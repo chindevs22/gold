@@ -1,10 +1,28 @@
 <?php
 function additional_emails( $emails ) {
-    // ChinDevs Created
+
+	// ChinDevs Created - Course completed for User
+	$emails['stm_lms_course_completed_for_user'] = array(
+		'section' => 'course',
+        'notice'  => esc_html__(
+            'Course Completed (for User)',
+            'masterstudy-lms-learning-management-system-pro'
+        ),
+        'subject' => esc_html__(
+            'You have completed the course!',
+            'masterstudy-lms-learning-management-system-pro'
+        ),
+        'message' => esc_html__( 'Congrats, you completed the course: {{course_title}}', 'masterstudy-lms-learning-management-system-pro' ),
+        'vars' => array(
+            'course_title'     => esc_html__( 'Course title', 'masterstudy-lms-learning-management-system-pro' ),
+        ),
+
+	);
+    // ChinDevs Created - assignment submitted for User
     $emails['stm_lms_assignment_submitted'] = array(
         'section' => 'assignment',
         'notice'  => esc_html__(
-            'Assignment Submitted and Pending Review',
+            'Assignment Submitted and Pending Review (for User)',
             'masterstudy-lms-learning-management-system-pro'
         ),
         'subject' => esc_html__(
@@ -225,5 +243,32 @@ function additional_emails( $emails ) {
 	return $emails;
 }
 add_filter( 'stm_lms_email_manager_emails', 'additional_emails' );
+
+
+add_filter ('chindevs-course-completed-email', 'student_course_completion_email' );
+function student_course_completion_email( $data ) {
+	$full_progress = $data['course']['progress_percent'] == 100;
+	$course_completed = $data['course_completed'] == 1;
+	$user = get_user_by( 'ID', $data['course']['user_id'] );
+	$message = sprintf(
+		/* translators: %1$s Course Title */
+		esc_html__( 'Congrats! You completed the course: %1$s', 'masterstudy-lms-learning-management-system' ),
+		 $data['title'],
+	);
+
+	if ($full_progress && $course_completed) {
+		//send email to student
+		STM_LMS_Mails::send_email(
+			'You completed a course!',
+			$message,
+			$user->user_email,
+			array(),
+			'stm_lms_course_completed_for_user',
+			array('course_title' => $data['title'])
+		);
+	}
+	return $data;
+}
+
 
 ?>

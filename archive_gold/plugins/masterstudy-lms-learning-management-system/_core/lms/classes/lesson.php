@@ -318,6 +318,9 @@ class STM_LMS_Lesson {
 		$data['course_completed'] = intval( $threshold ) <= intval( $data['course']['progress_percent'] );
 		$data['certificate_url']  = STM_LMS_Course::certificates_page_url( $course_id );
 
+        //ChinDevs code to send email on course completion
+        $data = apply_filters( 'chindevs-course-completed-email', $data );
+
 		return $data;
 	}
 }

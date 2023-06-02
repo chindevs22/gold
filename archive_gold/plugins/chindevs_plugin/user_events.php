@@ -195,7 +195,7 @@ function event_button( $template_name, $vars ) {
 	}
 
 	if ( $template_name === '/stm-lms-templates/global/buy-button.php' && is_course_event($vars['course_id']) ) {
-		$template_name = '/stm-lms-templates/global/buy-button/mixed1.php';
+		$template_name = '/stm-lms-templates/buy-button/mixed1.php';
 	}
 	return $template_name;
 }
