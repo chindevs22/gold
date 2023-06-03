@@ -1,6 +1,41 @@
 <?php
 function additional_emails( $emails ) {
 
+    // ChinDevs Created
+	$emails['stm_lms_gifted_course_for_receiver'] = array(
+		'section' => 'course',
+        'notice'  => esc_html__(
+            'Gifted Course (To Receiver)',
+            'masterstudy-lms-learning-management-system-pro'
+        ),
+        'subject' => esc_html__(
+            'You were gifted a course!',
+            'masterstudy-lms-learning-management-system-pro'
+        ),
+        'message' => esc_html__( 'You were gifted course {{course_title}} by a donor! Get started studying by logging in!', 'masterstudy-lms-learning-management-system-pro' ),
+        'vars' => array(
+            'course_title'     => esc_html__( 'Course title', 'masterstudy-lms-learning-management-system-pro' ),
+        ),
+	);
+
+    // ChinDevs Created
+	$emails['stm_lms_gifted_course_for_donor'] = array(
+		'section' => 'course',
+        'notice'  => esc_html__(
+            'Gifted Course (To Donor)',
+            'masterstudy-lms-learning-management-system-pro'
+        ),
+        'subject' => esc_html__(
+            'Your Gift was successfully sent',
+            'masterstudy-lms-learning-management-system-pro'
+        ),
+        'message' => esc_html__( 'Your gift of course {{course_title}} to {{user_email}} was successful', 'masterstudy-lms-learning-management-system-pro' ),
+        'vars' => array(
+            'course_title'     => esc_html__( 'Course title', 'masterstudy-lms-learning-management-system-pro' ),
+            'user_email'       => esc_html__( 'User Email',  'masterstudy-lms-learning-management-system-pro'),
+        ),
+	);
+
 	// ChinDevs Created - Course completed for User
 	$emails['stm_lms_course_completed_for_user'] = array(
 		'section' => 'course',
@@ -16,7 +51,6 @@ function additional_emails( $emails ) {
         'vars' => array(
             'course_title'     => esc_html__( 'Course title', 'masterstudy-lms-learning-management-system-pro' ),
         ),
-
 	);
     // ChinDevs Created - assignment submitted for User
     $emails['stm_lms_assignment_submitted'] = array(
@@ -270,5 +304,25 @@ function student_course_completion_email( $data ) {
 	return $data;
 }
 
+// Gift Course - Course Added Email
+public function gift_course_emails($user, $course_title) {
+    STM_LMS_Mails::send_email(
+        'You donated a course!',
+        $message,
+        $user->user_email,
+        array(),
+        'stm_lms_gifted_course_for_donor',
+        array( 'user_email' => $user->user_email, 'course_title' =>  $course_title)
+    );
+
+    STM_LMS_Mails::send_email(
+        'You were gifted this course by a donor!',
+        $message,
+        $user->user_email,
+        array(),
+        'stm_lms_gifted_course_for_receiver',
+        array( 'course_title' =>  $course_title)
+    );
+}
 
 ?>

@@ -230,6 +230,12 @@ function add_users_to_course($emails, $course_id) {
 		foreach ( $users as $id ) {
 			STM_LMS_Course::add_user_course( $course_id, $id, 0, 0 );
 			STM_LMS_Course::add_student( $course_id );
+
+			//Send Email to Donor
+            $user = get_user_by( 'ID', $id );
+            $course_title = get_the_title( $course_id );
+
+            gift_course_emails($user, $course_title);
 		}
 	}
 }
@@ -279,7 +285,8 @@ function create_product( $id ) {
 
 	$product = array(
 		'post_title'  => $title,
-		'post_type'   => 'product'
+		'post_type'   => 'product',
+		'post_status' => 'publish',
 	);
 
 	if ( $product_id ) {
@@ -315,12 +322,12 @@ function create_product( $id ) {
 }
 
 function has_product( $id ) {
-	 $product_id = get_post_meta( $id , 'stm_lms_gift_course_id', false );
-	 if ( !$product_id || empty( $product_id ) ) {
+	 $product_id = get_post_meta( $id , 'stm_lms_gift_course_id', true );
+	 if ( empty( $product_id ) ) {
 		 error_log("product doesn't exist!");
 		 return false;
 	 }
 	 return $product_id;
- }
+}
 
 ?>
