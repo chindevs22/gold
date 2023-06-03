@@ -19,10 +19,10 @@ add_filter( 'woocommerce_cart_item_name', 'woo_cart_gift_course_name', 999, 3 );
 
 /** ORDER FUNCTIONS **/
 function gc_order_accepted( $user_id, $cart_items ) {
+error_log("here inside woocommerce order accepted");
 	if ( ! empty( $cart_items ) ) {
 		foreach ( $cart_items as $cart_item ) {
 			if ( ! empty( $cart_item['gift_course'] ) ) {
-				error_log("here inside woocommerce order accepted");
 				/*Get Group Members*/
 				$gc_email_id = intval( $cart_item['gift_course'] );
 				$emails = get_post_meta( $gc_email_id, 'emails', true );
@@ -35,8 +35,8 @@ function gc_order_accepted( $user_id, $cart_items ) {
 }
 
 function gc_order_approved( $course_data ) {
+error_log("here inside woocommerce order approved");
 	if ( ! empty( $course_data['gift_course_id'] ) ) {
-		error_log("here inside woocommerce order approved");
 		error_log(print_r($course_data, true));
 		/* Get Group Members */
 		$gc_email_id = intval( $course_data['gift_course_id'] );
