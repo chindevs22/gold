@@ -86,7 +86,7 @@ class STM_LMS_Woocommerce {
 			if ( empty( $course_id ) && class_exists( 'STM_LMS_Enterprise_Courses' ) ) {
 				$course_id = get_post_meta( $cart_item['product_id'], STM_LMS_Enterprise_Courses::$enteprise_meta_key, true );
 			}
-
+            //ChinDevs code to redirect Gift Course cart items
 			if (empty ($course_id) ) {
 				$course_id = get_post_meta( $cart_item['product_id'], 'stm_lms_gift_course_id', true );
 			}
@@ -115,6 +115,7 @@ class STM_LMS_Woocommerce {
 
 		foreach ( $courses as $course ) {
 			if ( get_post_type( $course['item_id'] ) === 'stm-courses' ) {
+			    //ChinDevs code to redirect Gift Course cart items
 				if ( empty( $course['enterprise_id'] ) && empty( $course['gift_course_id']) ) {
 					STM_LMS_Course::add_user_course( $course['item_id'], $user_id, 0, 0 );
 					STM_LMS_Course::add_student( $course['item_id'] );

@@ -305,24 +305,37 @@ function student_course_completion_email( $data ) {
 }
 
 // Gift Course - Course Added Email
-public function gift_course_emails($user, $course_title) {
+function gift_course_emails($user, $course_title, $donor) {
+
+    $donorMessage = sprintf(
+    /* translators: %1$s Course Title, %2$s User Email */
+        esc_html__( 'Your course donation of %1$s for %2$s was successfully sent!', 'masterstudy-lms-learning-management-system' ),
+        $course_title,
+        $user->user_email,
+    );
+
     STM_LMS_Mails::send_email(
         'You donated a course!',
-        $message,
-        $user->user_email,
+        $donorMessage,
+        $donor->user_email,
         array(),
         'stm_lms_gifted_course_for_donor',
         array( 'user_email' => $user->user_email, 'course_title' =>  $course_title)
     );
 
+    $receiverMessage = sprintf(
+        /* translators: %1$s Course Title, %2$s User Login */
+        esc_html__( 'Your were donated the course: %1$s, from a donor!', 'masterstudy-lms-learning-management-system' ),
+        $course_title,
+    );
+
     STM_LMS_Mails::send_email(
         'You were gifted this course by a donor!',
-        $message,
+        $receiverMessage,
         $user->user_email,
         array(),
         'stm_lms_gifted_course_for_receiver',
         array( 'course_title' =>  $course_title)
     );
 }
-
 ?>
