@@ -47,6 +47,25 @@ $existingMetaMapping = array (
     'rgcxegzsmy' => 'pincode'
 );
 
+$orderMetaMapping = array (
+    '_billing_email' => 'billing_email',
+    '_billing_phone' => 'billing_contact_no',
+    '_billing_city' =>'billing_city',
+    '_billing_state' => 'billing_state',
+    '_billing_country' => 'billing_country',
+    '_billing_postcode' => 'billing_zipcode',
+    '_billing_address_1' => 'billing_address',
+    '_shipping_email' => 'shipping_email',
+    '_shipping_phone' => 'shipping_contact_no',
+    '_shipping_city' =>'shipping_city',
+    '_shipping_state' => 'shipping_state',
+    '_shipping_country' => 'shipping_country',
+    '_shipping_postcode' => 'shipping_zipcode',
+    '_shipping_address_1' => 'shipping_address',
+    '_order_currency' => 'currency'
+);
+
+
 // Other meta keys might be needed (hear/hear_source/cm_center/)
 $newMetaMapping = array (
      'date_of_birth' => 'dob',
