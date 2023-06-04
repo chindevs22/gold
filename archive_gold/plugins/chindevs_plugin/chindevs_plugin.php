@@ -164,7 +164,7 @@ function create_course_data() {
 // 	echo "<br> <br>  DONE WITH COURSES <br> <br> ";
 
 // 	echo " <br> <br> STARTING USERS <br> <br> "; //two user files
-//     read_csv("validusers1.csv", "user");
+//     read_csv("cd-courses-docs/validusers2.csv", "user");
 // 	echo " <br> <br> ENDING USERS <br> <br> ";
 
 // 	echo " <br> <br> STARTING USER ASSESSMENT <br> <br> ";
@@ -179,9 +179,9 @@ function create_course_data() {
 //    read_csv("postal_usa.csv", "userassignmentpostal");
 // 	echo " <br> <br> ENDING USER  ASSESSMENT FOR POSTAL <br> <br> ";
 
-	echo " <br> <br> STARTING USER ASSESSMENT DETAILS FOR ASSIGNMENTS <br> <br> ";
-    read_csv("postal_usad.csv", "userassignmentanswers");
-	echo " <br> <br> ENDING USER ASSESSMENT DETAILS  FOR ASSIGNMENTS <br> <br> ";
+// 	echo " <br> <br> STARTING USER ASSESSMENT DETAILS FOR ASSIGNMENTS <br> <br> ";
+//     read_csv("postal_usad.csv", "userassignmentanswers");
+// 	echo " <br> <br> ENDING USER ASSESSMENT DETAILS  FOR ASSIGNMENTS <br> <br> ";
 
 // 	echo " <br> <br> STARTING USER ASSESSMENT DETAILS <br> <br> ";
 //     read_csv("split_usad_obj.csv", "useranswers");
@@ -191,12 +191,19 @@ function create_course_data() {
 //    read_csv("split_enrol.csv", "enrol");
 //    echo " <br> <br> ENDING ENROLL <br> <br> ";
 
-// 	read_csv("publications.csv", "publications");
+// 	echo " <br> <br> STARTING PUBLICATIONS <br> <br> ";
+// 	read_csv("products.csv", "publications");
+// 	echo " <br> <br> ENDING PUBLICATIONS <br> <br> ";
+
+// 	echo " <br> <br> STARTING ORDERS <br> <br> ";
+// 	read_csv("cd-products/orders.csv", "orders");
+// 	echo " <br> <br> ENDING ORDERS <br> <br> ";
 }
+
 // Course data migration
 function read_csv($file_name, $type) {
     //file mapping from our File Manager
-    $fileName = "/home/freewaydns-dev108/cd-split/{$file_name}"; //Ensure this is the right file location
+    $fileName = "/home/freewaydns-dev108/{$file_name}"; //Ensure this is the right file location
     $file = fopen($fileName, 'r');
     $dataArray = array();
     $headerLine = true;
@@ -210,11 +217,10 @@ function read_csv($file_name, $type) {
         // loop through the column values in one row
         $count = 0;
         $tempArray = array();
-
         // create mapping based on header
         foreach($line as $value) {
-            $sanitized_value = preg_replace("/\\\\u([0-9abcdef]{4})/", "&#x$1;", $value);
-            $tempArray[$mappingLine[$count++]] = $sanitized_value;
+            //$sanitized_value = preg_replace("/\\\\u([0-9abcdef]{4})/", "&#x$1;", $value);
+            $tempArray[$mappingLine[$count++]] = $value;
         }
         if ($type == "lesson") {
             create_lesson_from_csv($tempArray);
@@ -242,11 +248,13 @@ function read_csv($file_name, $type) {
             enrol_users_from_csv($tempArray);
         } else if ($type == "publications") {
             create_publications_from_csv($tempArray);
+        } else if ($type == "orders") {
+            create_orders_from_csv($tempArray);
         }
     }
     fclose($file);
 }
-add_shortcode( 'test-functions', 'create_course_data' );
+//add_shortcode( 'test-functions', 'create_course_data' );
 
 
 /// --------------------------------------------------------- LITE DATA MIGRATION ---------------------------------------------------------------
