@@ -73,6 +73,11 @@
             $curr_materials_table_name = 'wp_stm_lms_curriculum_materials';
             $lessonCount = 1;
             foreach($lessonArray as $lessonID) {
+                if ($lessonCount == 1) {
+                    //First Lesson - populate free lesson url, preview on
+                    update_post_meta($course_post_id, 'free_lesson', $lessonID);
+                    update_post_meta($lessonID, 'preview', 'on');
+                }
                 $post_type = get_post_type($lessonID);
                 $wpdb->insert($curr_materials_table_name, array(
                     'post_id' => $lessonID,

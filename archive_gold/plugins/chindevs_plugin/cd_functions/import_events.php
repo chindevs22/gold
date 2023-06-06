@@ -111,12 +111,37 @@
         $isWebinar = false;
         $eventLessons = cd_get_posts('stm-lessons', 'mgml_webinar_id', $eventData['id']);
         $curriculum_string = "";
+
         if ( !isset($eventLessons) ||  count($eventLessons) == 0 ) {
             error_log("No lessons for this Event: " .  $eventData['id']);
         } else {
              $isWebinar = true;
-             $eSection = array($eventData['event_name']);
-             $combinedArray = array_merge($eSection, $eventLessons);
+
+             //Create a Section Record
+             $section_table_name = 'wp_stm_lms_curriculum_sections';
+             $wpdb->insert($section_table_name, array(
+                 'title' => $eventData['event_name'],
+                 'course_id' => $event_post_id,
+                 'order' => 1,
+             ));
+             $wp_section_id = $wpdb->insert_id;
+
+             //Create a Curriculum Materials Record
+             $curr_materials_table_name = 'wp_stm_lms_curriculum_materials';
+             $lessonCount = 1;
+             foreach($eventLessons as $lessonID) {
+                 $post_type = get_post_type($lessonID);
+                 $wpdb->insert($curr_materials_table_name, array(
+                     'post_id' => $lessonID,
+                     'post_type' => 'stm-lessons',
+                     'section_id' => $wp_section_id,
+                     'order' => $lessonCount++
+                 ));
+             }
+
+             // Old Curriculum String
+             $sArray = array($eventData['event_name']);
+             $combinedArray = array_merge($sArray, $eventLessons);
              $curriculum_string = implode(",", $combinedArray);
         }
         error_log($curriculum_string);
@@ -126,6 +151,10 @@
             $curriculum_string = "InPlace Section, 215654";
         }
         update_post_meta($event_post_id, 'curriculum', $curriculum_string);
+
+
+
+
 
         // Handle Category  -----------------------------------------------------------------
         $taxonomy = 'stm_lms_course_taxonomy';

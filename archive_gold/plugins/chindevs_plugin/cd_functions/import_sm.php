@@ -43,20 +43,43 @@
 
         // Generate Curriculum String
         $smLessons = cd_get_posts('stm-lessons', 'mgml_sm_id', $smData['id']);
-		$curriculum_string = "";
-         if ( count($smLessons) == 0 ) {
+        if ( count($smLessons) == 0 ) {
             error_log("No lessons for this Shravana Mangalam: " .  $smData['id']);
             return;
+        }
+
+        //Create a Section Record
+         $section_table_name = 'wp_stm_lms_curriculum_sections';
+         $wpdb->insert($section_table_name, array(
+             'title' => $smData['title'],
+             'course_id' => $sm_post_id,
+             'order' => 1,
+         ));
+         $wp_section_id = $wpdb->insert_id;
+
+         //Create a Curriculum Materials Record
+         $curr_materials_table_name = 'wp_stm_lms_curriculum_materials';
+         $lessonCount = 1;
+         foreach($smLessons as $lessonID) {
+            if ($lessonCount == 1) {
+                 //First Lesson - populate free lesson url, preview on
+                 update_post_meta($sm_post_id, 'free_lesson', $lessonID);
+                 update_post_meta($lessonID, 'preview', 'on');
+             }
+             $post_type = get_post_type($lessonID);
+             $wpdb->insert($curr_materials_table_name, array(
+                 'post_id' => $lessonID,
+                 'post_type' => 'stm-lessons',
+                 'section_id' => $wp_section_id,
+                 'order' => $lessonCount++
+             ));
          }
 
+        //Old Curriculum String
+		$curriculum_string = "";
         $sArray = array($smData['title']);
         $combinedArray = array_merge($sArray, $smLessons);
-
-		error_log("Combined full array");
-		error_log(print_r($combinedArray, true));
-
 		$curriculum_string = implode(",", $combinedArray);
-
         if(empty($curriculum_string) || strlen($curriculum_string) == 0) {
             $curriculum_string = "Sample Section, 5552";
         }
