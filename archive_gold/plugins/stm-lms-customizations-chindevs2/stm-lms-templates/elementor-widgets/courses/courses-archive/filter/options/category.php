@@ -18,11 +18,19 @@
                     if(empty(get_term_meta($term->term_id,'is_lite_category', true))) {
                         continue;
                     }
+					if(empty(get_term_meta($term->term_id, 'lite_category_name', true))){
+						continue;
+					}
+					if(get_term_meta($term->term_id, 'lite_category_name', true) !== $lite_category_name) {
+                        continue;
+                    }
                 } else {
                     if(!empty(get_term_meta($term->term_id,'is_lite_category', true))) {
                         continue;
                     }
                 }
+				// ChinDevs code to set parents after deciding what categories to show
+				$parents[] = $term->term_id;
                 ?>
                 <div class="ms_lms_courses_archive__filter_options_item_category">
                     <label class="ms_lms_courses_archive__filter_options_item_checkbox">
