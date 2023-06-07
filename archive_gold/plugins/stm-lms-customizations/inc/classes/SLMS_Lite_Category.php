@@ -7,6 +7,9 @@ class SLMS_Lite_Category {
         add_action('init', array($this, 'add_custom_field_to_term_edit_page'));
         add_action('edited_stm_lms_course_taxonomy', array($this, 'save_custom_field_value'), 10, 2);
         add_action('created_stm_lms_course_taxonomy', array($this, 'save_custom_field_value'), 10, 2);
+        add_filter( 'manage_edit-stm_lms_course_taxonomy_columns', array($this, 'add_custom_field_column') );
+        add_action( 'manage_stm_lms_course_taxonomy_custom_column', array($this, 'populate_custom_field_column'), 10, 3 );
+
         add_action('pre_get_posts', array($this, 'exclude_category_from_posts'), 15);
 
         remove_action( 'wp_ajax_ms_lms_courses_archive_filter', 'ms_lms_courses_archive_filter' );
@@ -60,6 +63,19 @@ class SLMS_Lite_Category {
             <p class="description"><?php _e('This term will display "Lite" non-certified courses on its own page, will not be part of the course carousel', 'slms'); ?></p>
         </div>
         <?php
+    }
+
+    public function add_custom_field_column( $columns ) {
+        $columns['is_lite_category'] = __('Is Lite Category', 'slms');
+        return $columns;
+    }
+
+    public function populate_custom_field_column($content, $column_name, $term_id ){
+        if ( 'is_lite_category' === $column_name ) {
+            $term = get_term_meta($term_id, 'is_lite_category', true);
+            $content = (!empty($term)) ? __('Yes','slms') : __('No','slms');
+        }
+        return $content;
     }
 
     // Save custom field checkbox value
@@ -130,9 +146,6 @@ class SLMS_Lite_Category {
 
         $terms  =  ( isset( $_POST['args']['terms'] ) ) ? $_POST['args']['terms'] : [];
 
-//        $show_only_lite_courses  = ( isset( $_POST['show_only_lite'] ) ) ? sanitize_text_field( wp_unslash( $_POST['show_only_lite'] ) ) : '';
-
-        $terms  =  ( isset( $_POST['args']['terms'] ) ) ? $_POST['args']['terms'] : [];
         $show_only_lite_courses  =  ( isset( $_POST['args']['show_only_lite'] ) ) ? sanitize_text_field($_POST['args']['show_only_lite']) : '';
 
         /* query courses */

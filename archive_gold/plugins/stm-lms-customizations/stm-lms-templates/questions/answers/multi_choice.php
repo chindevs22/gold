@@ -23,6 +23,8 @@ foreach ( $answers as $answer ) :
 		? trim( $answer['text'] ) . '|' . $answer['text_image']['url']
 		: trim( $answer['text'] );
 
+    $full_answer = strip_tags($full_answer);
+
 	if ( in_array( $full_answer, $user_answer ) and $answer['isTrue'] ) {
 		$answer_class[] = 'correctly_answered';
 	}
@@ -37,14 +39,11 @@ foreach ( $answers as $answer ) :
 		'correctly_answered',
 		'wrongly_answered'
 	], $answer_class ) ) ? true : false;
-
-    if(!SLMS_Quiz::show_results()) {
-        $answered = false;
-    }
 	?>
-	<div class="stm-lms-single-answer">
+	<div class="stm-lms-single-answer <?php echo implode( ' ', $answer_class ); ?>">
 		<label>
 			<input <?php if ( $answered ) { echo esc_attr( 'checked' ); } ?>
+				disabled
 				type="checkbox"
 				name="<?php echo esc_attr( $question_id ); ?>[]"
 				value="<?php echo esc_attr( $full_answer ); ?>"/>

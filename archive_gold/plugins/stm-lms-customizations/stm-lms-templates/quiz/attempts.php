@@ -37,6 +37,7 @@ $attempts = SLMS_User_Quizzes::get_user_quiz_attempts($post_id, $item_id, $user[
             ),
             $key+1
         );
+//        pre_var($last_answers);
 
         $slms_points = 0;
         if(count($last_answers)) {

@@ -42,6 +42,14 @@ class SLMS_Quiz {
         wp_send_json($response);
     }
 
+    public static function show_results( $quiz_id = 0 ) {
+        if( isset($_GET['re-take']) && ! empty( $_GET['re-take'] ) ) {
+            return false;
+        }
+
+        return true;
+    }
+
     public static function show_answers( $quiz_id ) {
         if( isset($_GET['re-take']) && ! empty( $_GET['re-take'] ) ) {
             return false;

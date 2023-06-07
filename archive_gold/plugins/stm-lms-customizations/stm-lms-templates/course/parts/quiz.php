@@ -63,7 +63,7 @@ if ( ! empty( $item_id ) ) :
         }
 
 		$classes = array();
-		if ( $passed ) {
+		if ( $passed && SLMS_Quiz::show_results() ) {
 			$classes[] = 'passed';
 		}
 		if ( ! empty( $last_quiz ) && ! $passed ) {

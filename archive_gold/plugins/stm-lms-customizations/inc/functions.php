@@ -13,7 +13,7 @@ require_once SLMS_PATH . '/inc/classes/SLMS_Instructor.php';
 require_once SLMS_PATH . '/inc/classes/SLMS_Popular_Courses.php';
 require_once SLMS_PATH . '/inc/classes/SLMS_Enterprise_Price.php';
 require_once SLMS_PATH . '/inc/classes/SLMS_User_Quizzes.php';
-//require_once SLMS_PATH . '/inc/classes/SLMS_User.php';
+require_once SLMS_PATH . '/inc/classes/SLMS_User.php';
 
 add_action('plugins_loaded', function(){
     require_once SLMS_PATH . '/inc/classes/SLMS_Manage_Course.php';

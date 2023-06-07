@@ -59,13 +59,13 @@ if (!empty($questions)):
             </a>
             <?php if(count($last_answers)): ?>
             <script>
-                (function($){
-                    $(document).ready(function () {
-                        setTimeout(function(){
-                            $('.stm_lms_start_quiz').trigger('click');
-                        },100);
-                    });
-                })(jQuery);
+                // (function($){
+                //     $(document).ready(function () {
+                //         setTimeout(function(){
+                //             $('.stm_lms_start_quiz').trigger('click');
+                //         },100);
+                //     });
+                // })(jQuery);
             </script>
             <?php endif; ?>
         <?php endif; ?>

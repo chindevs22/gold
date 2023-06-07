@@ -23,6 +23,10 @@ class SLMS_IP_Info {
 
     public static function ip_data_request(){
         $ip = self::get_client_ip(true);
+
+        if( self::get_ip_info_data() ) {
+            return;
+        }
 //        $ip = '94.158.52.223';
 
         if(!is_user_logged_in()) {
@@ -50,9 +54,8 @@ class SLMS_IP_Info {
 
     }
 
-    public static function get_ip_info()
+    public static function get_ip_info_data($purpose = 'countryCode')
     {
-        $purpose = 'countryCode';
         if(is_user_logged_in()) {
             $ip_info = get_user_meta(get_current_user_id(), 'slms_ip_info', true);
             if(!empty($ip_info) && (isset($ip_info[$purpose]) && !empty($ip_info[$purpose]))) {
@@ -65,6 +68,17 @@ class SLMS_IP_Info {
                     return $ip_info[$purpose];
                 }
             }
+        }
+
+        return false;
+    }
+
+    public static function get_ip_info()
+    {
+        $purpose = 'countryCode';
+
+        if($data = self::get_ip_info_data($purpose)) {
+            return $data;
         }
 
         return 'US';

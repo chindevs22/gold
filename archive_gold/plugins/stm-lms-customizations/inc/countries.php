@@ -6,6 +6,12 @@ function slms_get_country_by_code($code = '')
     return (!empty($code) && isset($countries[$code])) ? $countries[$code] : '';
 }
 
+function slms_get_code_by_country($country = '')
+{
+    $countries = array_flip(slms_get_countries());
+    return (!empty($country) && isset($countries[$country])) ? $countries[$country] : '';
+}
+
 function slms_get_countries()
 {
     return array(

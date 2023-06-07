@@ -41,6 +41,10 @@ foreach ( $answers as $answer ) :
 
 	$answered = ! empty( array_intersect( array( 'correctly_answered', 'wrongly_answered' ), $answer_class ) ) ? true : false;
 
+    if(!SLMS_Quiz::show_results()) {
+        $answered = false;
+    }
+
 	$answer['label'] = ( esc_html__( 'True', 'masterstudy-lms-learning-management-system' ) === $answer['text'] ) ?
 		esc_html__( 'True', 'masterstudy-lms-learning-management-system' ) :
 		esc_html__( 'False', 'masterstudy-lms-learning-management-system' );

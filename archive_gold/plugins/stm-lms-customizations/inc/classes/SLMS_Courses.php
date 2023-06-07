@@ -81,30 +81,6 @@ class MsLmsCoursesChild extends Widget_Base {
             )
         );
 
-//        $this->add_control(
-//            'show_lite_courses',
-//            array(
-//                'name'        => 'show_lite_courses',
-//                'label'       => __( 'Show only lite courses', 'slms' ),
-//                'type'        => \Elementor\Controls_Manager::SELECT2,
-//                'label_block' => true,
-//                'multiple'    => true,
-//                'options'     => stm_lms_elementor_autocomplete_terms( 'stm_lms_course_taxonomy' ),
-//            )
-//        );
-
-//        $this->add_control(
-//            'taxonomy',
-//            array(
-//                'name'        => 'taxonomy',
-//                'label'       => __( 'Select taxonomy', 'masterstudy-lms-learning-management-system' ),
-//                'type'        => \Elementor\Controls_Manager::SELECT2,
-//                'label_block' => true,
-//                'multiple'    => true,
-//                'options'     => stm_lms_elementor_autocomplete_terms( 'stm_lms_course_taxonomy' ),
-//            )
-//        );
-
         $this->end_controls_section();
 
 		require STM_LMS_ELEMENTOR_WIDGETS . '/courses/content/header.php';
@@ -478,17 +454,6 @@ class MsLmsCoursesChild extends Widget_Base {
             $featured_args['tax_query'][] = $tax_query;
         }
 
-//        if(isset($settings['taxonomy']) && !empty($settings['taxonomy'])) {
-//            $tax_query = array(
-//                'taxonomy' => 'stm_lms_course_taxonomy',
-//                'field' => 'term_id',
-//                'terms' => array_map('intval', $settings['taxonomy']),
-//                'operator' => 'IN',
-//            );
-//
-//            $default_args['tax_query'][] = $tax_query;
-//            $featured_args['tax_query'][] = $tax_query;
-//        }
 
 		$courses          = \STM_LMS_Courses::get_all_courses( $default_args );
 		$featured_courses = \STM_LMS_Courses::get_all_courses( $featured_args );

@@ -12,17 +12,17 @@
 $question_id         = get_the_ID();
 $is_correct          = ( ! empty( $user_answer['correct_answer'] ) ) ? true : false;
 $user_answer         = ( ! empty( $user_answer['user_answer'] ) ) ? stripcslashes( $user_answer['user_answer'] ) : '';
-
 $show_correct_answer = get_post_meta( $item_id, 'correct_answer', true );
-$is_image            = (bool) ( ! empty( $question_view_type ) && 'image' == $question_view_type );
+$is_image            = (bool) ( ! empty( $question_view_type ) && 'image' === $question_view_type );
 
 if ( $is_correct ) {
 	$user_answer = array();
 }
 
 foreach ( $answers as $answer ) :
-	$answer_class = array();
-	$full_answer  = ( ! empty( $answer['text_image']['url'] ) )
+	$answer_class     = array();
+	$answer['isTrue'] = $answer['isTrue'] ?? false;
+	$full_answer      = ( ! empty( $answer['text_image']['url'] ) )
 		? $answer['text'] . '|' . $answer['text_image']['url']
 		: $answer['text'];
 
@@ -35,14 +35,14 @@ foreach ( $answers as $answer ) :
 
     $full_answer = strip_tags($full_answer);
 
-	if ( $full_answer == $user_answer && $answer['isTrue'] ) {
+	if ( $full_answer === $user_answer && $answer['isTrue'] ) {
 		$answer_class[] = 'correctly_answered';
 	}
-	if ( $full_answer == $user_answer && ! $answer['isTrue'] ) {
+	if ( $full_answer === $user_answer && ! $answer['isTrue'] ) {
 		$answer_class[] = 'wrongly_answered';
 	}
 
-	if ( $full_answer != $user_answer && $answer['isTrue'] && $show_correct_answer ) {
+	if ( $full_answer !== $user_answer && $answer['isTrue'] && $show_correct_answer ) {
 		$answer_class[] = 'correct_answer';
 	}
 
@@ -54,25 +54,21 @@ foreach ( $answers as $answer ) :
 			),
 			$answer_class
 		)
-	) ? true : false;
+	);
 
-    if(!SLMS_Quiz::show_results()) {
-        $answered = false;
-    }
-
-	$is_image = (bool) ( ! empty( $question_view_type ) && 'image' == $question_view_type );
-
+	$is_image = (bool) ( ! empty( $question_view_type ) && 'image' === $question_view_type );
 	?>
-	<div class="stm-lms-single-answer">
+	<div class="stm-lms-single-answer <?php echo esc_attr( implode( ' ', $answer_class ) ); ?>">
 		<label>
-			<input 
+			<input
 			<?php
 			if ( $answered ) {
 				echo esc_attr( 'checked' ); }
 			?>
 				type="radio"
+				disabled
 				name="<?php echo esc_attr( $question_id ); ?>"
-				value="<?php echo esc_html( $full_answer ); ?>"/>
+				value="<?php echo wp_kses_post( $full_answer ); ?>"/>
 			<i class="fa fa-check"></i>
 
 			<?php
