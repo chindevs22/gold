@@ -81,6 +81,19 @@ class MsLmsCoursesChild extends Widget_Base {
             )
         );
 
+		//ChinDevs code to add a control for showing a dropdown of options on the elementor widget
+        $this->add_control( 'lite_category_name',
+            array(
+                'label'   => esc_html__( 'Lite Category Name', 'slms' ),
+                'type'    => Controls_Manager::SELECT,
+                'options' => array(
+                    'event' => esc_html__( 'Event', 'slms' ),
+                    'shravana_mangalam' => esc_html__( 'Shravana Mangalam', 'slms' ),
+                    'webinar' => esc_html__( 'Webinar', 'slms' ),
+                )
+            )
+        );
+
         $this->end_controls_section();
 
 		require STM_LMS_ELEMENTOR_WIDGETS . '/courses/content/header.php';
@@ -314,13 +327,23 @@ class MsLmsCoursesChild extends Widget_Base {
 			),
 		);
 
+		//Chindevs edit to query on both is_lite_category and by category name
         if(isset($settings['show_lite_courses']) && !empty($settings['show_lite_courses'])) {
             $tax_query = array(
                 'taxonomy' => 'stm_lms_course_taxonomy',
                 'field' => 'term_id',
                 'terms' => get_terms('stm_lms_course_taxonomy', array(
-                    'meta_key' => 'is_lite_category',
-                    'meta_value' => '1',
+                    'meta_query' => array(
+                        'relation' => 'AND',
+                        array(
+                            'key' => 'is_lite_category',
+                            'value' => '1',
+                        ),
+                        array(
+                            'key' => 'lite_category_name',
+                            'value' => $settings['lite_category_name'],
+                        ),
+                    ),
                     'fields' => 'ids',
                 )),
                 'operator' => 'IN',
@@ -438,13 +461,23 @@ class MsLmsCoursesChild extends Widget_Base {
 			),
 		);
 
+		//Chindevs edit to query on both is_lite_category and by category name
         if(isset($settings['show_lite_courses']) && !empty($settings['show_lite_courses'])) {
             $tax_query = array(
                 'taxonomy' => 'stm_lms_course_taxonomy',
                 'field' => 'term_id',
                 'terms' => get_terms('stm_lms_course_taxonomy', array(
-                    'meta_key' => 'is_lite_category',
-                    'meta_value' => '1',
+                    'meta_query' => array(
+                        'relation' => 'AND',
+                        array(
+                            'key' => 'is_lite_category',
+                            'value' => '1',
+                        ),
+                        array(
+                            'key' => 'lite_category_name',
+                            'value' => $settings['lite_category_name'],
+                        ),
+                    ),
                     'fields' => 'ids',
                 )),
                 'operator' => 'IN',
@@ -527,6 +560,8 @@ class MsLmsCoursesChild extends Widget_Base {
 			'course_card_presets' => $settings['course_card_presets'],
 //			'taxonomy' => $settings['taxonomy'],
 			'show_lite_courses' => $settings['show_lite_courses'],
+			//Chindevs code,
+			'lite_category_name' => $settings['lite_category_name'],
 			'meta_slots'          => $meta_slots,
 			'card_data'           => array(
 				'show_popup'        => $settings['show_popup'],
@@ -556,7 +591,8 @@ class MsLmsCoursesChild extends Widget_Base {
 		$atts        = wp_parse_args( $widget_atts, $atts );
 
         set_query_var( 'show_lite_courses', $settings['show_lite_courses'] );
-
+		//ChinDevs code to add this variable as query var
+		set_query_var( 'lite_category_name', $settings['lite_category_name'] );
 		\STM_LMS_Templates::show_lms_template( "elementor-widgets/courses/{$settings['type']}/main", $atts );
 	}
 
