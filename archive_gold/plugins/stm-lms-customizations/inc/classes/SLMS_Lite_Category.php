@@ -41,6 +41,8 @@ class SLMS_Lite_Category {
     // Render custom field on term edit page
     public function render_custom_field($term, $taxonomy) {
         $field_value = get_term_meta($term->term_id, 'is_lite_category', true);
+        $lite_category_name = get_term_meta($term->term_id, 'lite_category_name', true);
+
         ?>
         <tr class="form-field">
             <th scope="row" valign="top">
@@ -49,6 +51,19 @@ class SLMS_Lite_Category {
             <td>
                 <input type="checkbox" id="is_lite_category" name="is_lite_category" value="1" <?php checked($field_value, '1'); ?> />
                 <p class="description"><?php _e('This term will display "Lite" non-certified courses on its own page, will not be part of the course carousel', 'slms'); ?></p>
+            </td>
+        </tr>
+         <tr class="form-field">
+            <th scope="row" valign="top">
+                <label for="lite_category_name"><?php _e('Lite Category Name', 'slms'); ?></label>
+            </th>
+            <td>
+                <select id="lite_category_name" name="lite_category_name">
+                    <option value="event" <?php selected($lite_category_name, 'event'); ?>><?php _e('Event', 'slms'); ?></option>
+                    <option value="shravana_mangalam" <?php selected($lite_category_name, 'shravana_mangalam'); ?>><?php _e('Shravana Mangalam', 'slms'); ?></option>
+                    <option value="webinar" <?php selected($lite_category_name, 'webinar'); ?>><?php _e('Webinar', 'slms'); ?></option>
+                </select>
+                <p class="description"><?php _e('The name of the lite category, if applicable', 'slms'); ?></p>
             </td>
         </tr>
         <?php
@@ -62,6 +77,16 @@ class SLMS_Lite_Category {
             <input type="checkbox" id="is_lite_category" name="is_lite_category" value="1" />
             <p class="description"><?php _e('This term will display "Lite" non-certified courses on its own page, will not be part of the course carousel', 'slms'); ?></p>
         </div>
+        <div class="form-field">
+                <label for="lite_category_name"><?php _e('Lite Category Name', 'slms'); ?></label>
+                <select id="lite_category_name" name="lite_category_name">
+                    <option value=""><?php _e('Select a Lite Category Name', 'slms'); ?></option>
+                    <option value="event"><?php _e('Event', 'slms'); ?></option>
+                    <option value="shravana_mangalam"><?php _e('Shravana Mangalam', 'slms'); ?></option>
+                    <option value="webinar"><?php _e('Webinar', 'slms'); ?></option>
+                </select>
+                <p class="description"><?php _e('Select a Lite Category Name for this term', 'slms'); ?></p>
+            </div>
         <?php
     }
 
@@ -85,6 +110,14 @@ class SLMS_Lite_Category {
             update_term_meta($term_id, 'is_lite_category', '1');
         } else {
             delete_term_meta($term_id, 'is_lite_category');
+        }
+
+        //ChinDevs Code to also save the category name
+        if (isset($_POST['lite_category_name'])) {
+            $lite_category_name = $_POST['lite_category_name'];
+            update_term_meta($term_id, 'lite_category_name', $lite_category_name);
+        } else {
+            delete_term_meta($term_id, 'lite_category_name');
         }
     }
 
@@ -148,6 +181,11 @@ class SLMS_Lite_Category {
 
         $show_only_lite_courses  =  ( isset( $_POST['args']['show_only_lite'] ) ) ? sanitize_text_field($_POST['args']['show_only_lite']) : '';
 
+		//Chindevs code to get the lite category name from ajax call
+        $lite_category_name = ( isset($_POST['args']['lite_category_name'] ) ) ? sanitize_text_field($_POST['args']['lite_category_name']) : '';
+		error_log("inside the slms lite category php 170");
+		error_log("Lite Cat Name: " . $lite_category_name);
+
         /* query courses */
         $default_args = array(
             'posts_per_page' => $posts_per_page,
@@ -204,15 +242,25 @@ class SLMS_Lite_Category {
             $default_args['tax_query'][] = $tax_query_terms;
         }
 
+		//Chindevs code to also filter on the category name
         if(!empty($show_only_lite_courses)) {
             $tax_query = array(
                 'taxonomy' => 'stm_lms_course_taxonomy',
                 'field' => 'term_id',
-                'terms' => get_terms('stm_lms_course_taxonomy', array(
-                    'meta_key' => 'is_lite_category',
-                    'meta_value' => '1',
-                    'fields' => 'ids',
-                )),
+                'terms' =>  get_terms('stm_lms_course_taxonomy', array(
+                   'meta_query' => array(
+                       'relation' => 'AND',
+                       array(
+                           'key' => 'is_lite_category',
+                           'value' => '1',
+                       ),
+                       array(
+                           'key' => 'lite_category_name',
+                           'value' => $lite_category_name,
+                       ),
+                   ),
+                   'fields' => 'ids',
+               )),
                 'operator' => 'IN',
             );
         } else {
@@ -284,6 +332,10 @@ class SLMS_Lite_Category {
         $sort_by_default  = ( isset( $_POST['sort_by_default'] ) ) ? sanitize_text_field( wp_unslash( $_POST['sort_by_default'] ) ) : '';
 
         $show_only_lite_courses  =  ( isset( $_POST['args']['show_only_lite'] ) ) ? sanitize_text_field($_POST['args']['show_only_lite']) : '';
+		//Chindevs code to get the lite category name from ajax call
+        $lite_category_name = ( isset($_POST['args']['lite_category_name'] ) ) ? sanitize_text_field($_POST['args']['lite_category_name']) : '';
+		error_log("inside the slms lite category php 321");
+		error_log($lite_category_name);
 
         /* query courses */
         $default_args = array(
@@ -334,10 +386,19 @@ class SLMS_Lite_Category {
                 'taxonomy' => 'stm_lms_course_taxonomy',
                 'field' => 'term_id',
                 'terms' => get_terms('stm_lms_course_taxonomy', array(
-                    'meta_key' => 'is_lite_category',
-                    'meta_value' => '1',
-                    'fields' => 'ids',
-                )),
+                   'meta_query' => array(
+                       'relation' => 'AND',
+                       array(
+                           'key' => 'is_lite_category',
+                           'value' => '1',
+                       ),
+                       array(
+                           'key' => 'lite_category_name',
+                           'value' => $lite_category_name,
+                       ),
+                   ),
+                   'fields' => 'ids',
+               )),
                 'operator' => 'IN',
             );
         } else {
