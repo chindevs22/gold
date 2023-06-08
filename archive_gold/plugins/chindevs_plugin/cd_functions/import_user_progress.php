@@ -119,6 +119,10 @@ function progress_users_answers_from_csv($answerData) {
     $answerString = implode(",", $chosenAnswers); // comma seperated string of answers
     $isCorrect = ($answerData['question_marks'] == $answerData['marks_obtained']) ? "1" : "0";
 
+    $attempts = $answerData['running_total'];
+    if (empty($attempts) || $attempts = "NULL") {
+        $attempts = 1;
+    }
     $wpdb->insert($table_name, array(
         'user_answer_id' => NULL,
         'user_id' => $wp_user_id,
@@ -127,7 +131,7 @@ function progress_users_answers_from_csv($answerData) {
         'question_id' => $wp_question_id,
         'user_answer' => $answerString,
         'correct_answer' => $isCorrect,
-        'attempt_number' => 1, //TODO: fix to use the answerData of running total
+        'attempt_number' => $attempts, //TODO: fix to use the answerData of running total
     ));
 }
 
