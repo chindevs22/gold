@@ -83,26 +83,39 @@
         if(empty($curriculum_string) || strlen($curriculum_string) == 0) {
             $curriculum_string = "Sample Section, 5552";
         }
-        update_post_meta($sm_post_id, 'curriculum', $curriculum_string);
+        update_post_meta($sm_post_id, 'curriculum_old', $curriculum_string);
 
-		// Handling Pricing - what to do when 1 or both prices are null?
+		// Handling Pricing
 		$us_price = $smData['price_usd'];
 		$inr_price = $smData['price'];
-
+        $sale_us_price = $courseData['discounted_price_usd'];
+        $sale_inr_price = $courseData['discounted_price']
 		update_post_meta($sm_post_id, 'price', $inr_price);
+		update_post_meta($sm_post_id, 'price', $sale_inr_price);
 
+	    if ($sale_us_price == 0 || $sale_us_price == "NULL") {
+		    $sale_us_price = "";
+		}
+
+        if ($sale_inr_price == 0 || $sale_inr_price == "NULL") {
+            $sale_inr_price = "";
+        }
         $price_arr = array();
         if(isset($us_price) && $us_price != "NULL") {
             array_push($price_arr, array(
                 "country" => "US",
-                "price" => $us_price
+                "currency_symbol" => "USD",
+                "price" => $us_price,
+                "sale_price" => $sale_us_price
             ));
         }
 
          if(isset($inr_price) && $inr_price != "NULL") {
             array_push($price_arr, array(
                 "country" => "IN",
-                "price" => $inr_price
+                "currency_symbol" => "INR",
+                "price" => $inr_price,
+                "sale_price" => $sale_inr_price
             ));
         }
         update_post_meta($sm_post_id, 'prices_list', json_encode($price_arr));

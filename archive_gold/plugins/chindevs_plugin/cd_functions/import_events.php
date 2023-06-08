@@ -91,13 +91,17 @@
         if(isset($us_price) && $us_price != "NULL") {
             array_push($price_arr, array(
                 "country" => "US",
-                "price" => $us_price
+                "currency_symbol" => "USD",
+                "price" => $us_price,
+                "sale_price" => ""
             ));
         }
          if(isset($inr_price) && $inr_price != "NULL") {
             array_push($price_arr, array(
                 "country" => "IN",
-                "price" => $inr_price
+                "currency_symbol" => "INR",
+                "price" => $inr_price,
+                "sale_price" => ""
             ));
         }
 
@@ -150,7 +154,7 @@
         if(empty($curriculum_string) || strlen($curriculum_string) == 0) {
             $curriculum_string = "InPlace Section, 215654";
         }
-        update_post_meta($event_post_id, 'curriculum', $curriculum_string);
+        update_post_meta($event_post_id, 'curriculum_old', $curriculum_string);
 
 
 

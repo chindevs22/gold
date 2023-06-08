@@ -19,8 +19,9 @@
 		$usd_price =  $productData['usd_price']; //need to handle rupees
 		$inr_price =  $productData['inr_price'];
 		update_post_meta($product_post_id, '_regular_price', $usd_price);
-		update_post_meta($product_post_id, '_regular_price_wmcp', '{"INR": "' . $inr_price . '"}'); // INR price
+		update_post_meta($product_post_id, '_regular_price_INR', $inr_price); // INR price
 		update_post_meta($product_post_id, '_price', $usd_price);
+		update_post_meta($product_post_id, '_price_INR', $inr_price);
 		if ($productData['discount_flag'] == 1) {
 			$percent_off = $usd_price * $productData['discounted_price']/100;
 			$sale_price = round($usd_price - $percent_off);
@@ -29,8 +30,9 @@
 			$inr_sale_price = round($inr_price - $inr_percent_off);
 
 			update_post_meta($product_post_id, '_sale_price', $sale_price);
-			update_post_meta($product_post_id, '_sale_price_wmcp',  '{"INR": "' . $inr_sale_price .'"}');
+			update_post_meta($product_post_id, '_sale_price_INR', $inr_sale_price);
  			update_post_meta($product_post_id, '_price', $sale_price);
+			update_post_meta($product_post_id, '_price_INR', $inr_sale_price);
 		}
 
         update_post_meta($product_post_id, 'mgml_product_id', $productData['id']);
