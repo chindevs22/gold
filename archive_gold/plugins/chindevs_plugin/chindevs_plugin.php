@@ -65,7 +65,6 @@ $orderMetaMapping = array (
     '_order_currency' => 'currency'
 );
 
-
 // Other meta keys might be needed (hear/hear_source/cm_center/)
 $newMetaMapping = array (
      'date_of_birth' => 'dob',
@@ -143,52 +142,53 @@ add_action('wp_enqueue_scripts', 'payment_faq_style');
 
 // All Course Data migration functions
 function create_course_data() {
-// 	echo " <br> <br> STARTING QUESTIONS <br> <br> ";
-//     read_csv("split_questions.csv", "question");
-// 	echo "<br> <br>  DONE WITH QUESTIONS <br> <br> ";
 
-// 	echo " <br> <br> STARTING LESSONS <br> <br> ";
-//     read_csv("split_lessons.csv", "lesson");
-// 	echo "<br> <br>  DONE WITH LESSONS <br> <br> ";
-
-// 	echo " <br> <br> STARTING ASSIGNMENT <br> <br> ";
-//     read_csv("split_assignments.csv", "assignment");
-// 	echo "<br> <br>  DONE WITH ASSIGNMENT <br> <br> ";
-
-//    echo " <br> <br> STARTING POSTAL ASSIGNMENT<br> <br> ";
-//    read_csv("postal_lessons.csv", "postal");
-//    echo "<br> <br>  DONE WITH POSTAL ASSIGNMENT<br> <br> ";
-
-// 	echo " <br> <br> STARTING COURSES <br> <br> ";
-//     read_csv("postal_courses.csv", "course");
-// 	echo "<br> <br>  DONE WITH COURSES <br> <br> ";
-
-// 	echo " <br> <br> STARTING USERS <br> <br> "; //two user files
-//     read_csv("cd-courses-docs/validusers2.csv", "user");
+// 	echo " <br> <br> STARTING USERS <br> <br> ";
+//  	read_csv("data-migration/users.csv", "user");
 // 	echo " <br> <br> ENDING USERS <br> <br> ";
 
-// 	echo " <br> <br> STARTING USER ASSESSMENT <br> <br> ";
-//     read_csv("usa_c7.csv", "userquiz");
-// 	echo " <br> <br> ENDING USER ASSESSMENT <br> <br> ";
+// 	echo " <br> <br> STARTING QUESTIONS <br> <br> ";
+//     read_csv("data-migration/questions.csv", "question");
+// 	echo "<br> <br>  DONE WITH QUESTIONS <br> <br> ";
 
-// 	echo " <br> <br> STARTING USER ASSESSMENT FOR ASSIGNMENTS/POSTAL <br> <br> ";
+// 	echo " <br> <br> STARTING LESSONS (OBJ) <br> <br> ";
+//     read_csv("data-migration/obj_lessons.csv", "lesson");
+// 	echo "<br> <br>  DONE WITH LESSONS <br> <br> ";
+
+// 	echo " <br> <br> STARTING ASSIGNMENT (SUBJ) <br> <br> ";
+// 	read_csv("data-migration/subj_lessons.csv", "assignment");
+// 	echo "<br> <br>  DONE WITH ASSIGNMENT <br> <br> ";
+
+//  echo " <br> <br> STARTING POSTAL ASSIGNMENT<br> <br> ";
+// 	read_csv("cd-courses-docs/pos_lessons.csv", "postal");
+// 	echo "<br> <br>  DONE WITH POSTAL ASSIGNMENT<br> <br> ";
+
+// 	echo " <br> <br> STARTING COURSES <br> <br> ";
+//  read_csv("cd-courses-docs/courses.csv", "course");
+// 	echo "<br> <br>  DONE WITH COURSES <br> <br> ";
+
+// 	echo " <br> <br> STARTING USA (obj) <br> <br> ";
+//     read_csv("cd-courses-docs/usa_obj.csv", "userquiz");
+// 	echo " <br> <br> ENDING USA (obj) <br> <br> ";
+
+// 	echo " <br> <br> STARTING USA (subj) <br> <br> ";
 //    read_csv("postal_usa.csv", "userassignment");
-// 	echo " <br> <br> ENDING USER  ASSESSMENT FOR ASSIGNMENTS <br> <br> ";
+// 	echo " <br> <br> ENDING USA (subj) <br> <br> ";
 
-// 		echo " <br> <br> STARTING USER ASSESSMENT FOR POSTAL <br> <br> ";
-//    read_csv("postal_usa.csv", "userassignmentpostal");
-// 	echo " <br> <br> ENDING USER  ASSESSMENT FOR POSTAL <br> <br> ";
+// 	echo " <br> <br> STARTING USA (postal) <br> <br> ";
+//   read_csv("postal_usa.csv", "userassignmentpostal");
+// 	echo " <br> <br> ENDING USA (postal) <br> <br> ";
 
-// 	echo " <br> <br> STARTING USER ASSESSMENT DETAILS FOR ASSIGNMENTS <br> <br> ";
-//     read_csv("postal_usad.csv", "userassignmentanswers");
-// 	echo " <br> <br> ENDING USER ASSESSMENT DETAILS  FOR ASSIGNMENTS <br> <br> ";
+// 	echo " <br> <br> STARTING USAD (assignment) <br> <br> ";
+	//     read_csv("postal_usad.csv", "userassignmentanswers");
+// 	echo " <br> <br> ENDING USAD (assignment) <br> <br> ";
 
-// 	echo " <br> <br> STARTING USER ASSESSMENT DETAILS <br> <br> ";
+// 	echo " <br> <br> STARTING USADs <br> <br> ";
 //     read_csv("split_usad_obj.csv", "useranswers");
-// 	echo " <br> <br> ENDING USER ASSESSMENT DETAILS <br> <br> ";
+// 	echo " <br> <br> ENDING USADs <br> <br> ";
 
 // 	echo " <br> <br> STARTING ENROLL <br> <br> ";
-//    read_csv("split_enrol.csv", "enrol");
+//    read_csv("cd-courses-docs/enrol_courses.csv", "enrol");
 //    echo " <br> <br> ENDING ENROLL <br> <br> ";
 
 // 	echo " <br> <br> STARTING PUBLICATIONS <br> <br> ";
@@ -196,7 +196,7 @@ function create_course_data() {
 // 	echo " <br> <br> ENDING PUBLICATIONS <br> <br> ";
 
 // 	echo " <br> <br> STARTING ORDERS <br> <br> ";
-// 	read_csv("cd-products/orders.csv", "orders");
+// 	read_csv("cd-products/orders_contrived.csv", "orders");
 // 	echo " <br> <br> ENDING ORDERS <br> <br> ";
 }
 
@@ -219,8 +219,8 @@ function read_csv($file_name, $type) {
         $tempArray = array();
         // create mapping based on header
         foreach($line as $value) {
-            //$sanitized_value = preg_replace("/\\\\u([0-9abcdef]{4})/", "&#x$1;", $value);
-            $tempArray[$mappingLine[$count++]] = $value;
+            $sanitized_value = preg_replace("/\\\\u([0-9abcdef]{4})/", "&#x$1;", $value);
+            $tempArray[$mappingLine[$count++]] = $sanitized_value;
         }
         if ($type == "lesson") {
             create_lesson_from_csv($tempArray);
@@ -254,7 +254,7 @@ function read_csv($file_name, $type) {
     }
     fclose($file);
 }
-//add_shortcode( 'test-functions', 'create_course_data' );
+add_shortcode( 'test-functions', 'create_course_data' );
 
 
 /// --------------------------------------------------------- LITE DATA MIGRATION ---------------------------------------------------------------
