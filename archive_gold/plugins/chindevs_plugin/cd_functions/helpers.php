@@ -29,7 +29,7 @@ function build_attr_array($attr, $count) {
 function progress_user_lessons($wp_course_id, $wp_quiz_id, $wp_user_id) {
     global $wpdb;
 	error_log("progressing user lessons");
-    $curriculum_string = get_post_meta($wp_course_id, 'curriculum', true);
+    $curriculum_string = get_post_meta($wp_course_id, 'curriculum_old', true);
     $ca = create_array_from_string($curriculum_string, ',');
     $arrLength = count($ca);
     $quizIndex = 0;
