@@ -8,11 +8,18 @@
 	function create_lesson_from_csv($lessonData) {
 		global $lessonToQuestionsMap, $sectionToLessonMap, $lessonMGMLtoWP;
 
+		$questionArray = array();
+
 		$wpdata['post_title'] = $lessonData['title'];
 		$wpdata['post_status'] ='publish';
 		if ($lessonData['lesson_type'] == 'quiz') {
 			$wpdata['post_type'] = 'stm-quizzes';
 			$wpdata['post_content'] = $lessonData['summary'];
+			$questionArray = get_questions_for_quiz($lessonData['id']);
+			if (empty($questionArray)) {
+				echo "No questions available for Quiz " . $lessonData['id'] . "  so not making <br> ";
+				return;
+			}
 		} else {
 			$file_content = '';
 			$embedded_audio = '';
@@ -28,7 +35,6 @@
 				// audio post meta
 				$embedded_audio = '[embed]'.$lessonData['audio_url'].'[/embed]';
 			}
-
 			$wpdata['post_type'] = 'stm-lessons';
 			$wpdata['post_content'] = $file_content . $embedded_audio;
 		}
@@ -38,6 +44,7 @@
 		update_post_meta($lesson_post_id, 'mgml_lesson_id', $lessonData['id']);
 		update_post_meta($lesson_post_id, 'mgml_section_id', $lessonData['section_id']);
 		update_post_meta($lesson_post_id, 'mgml_section_name', $lessonData['section_name']);
+        update_post_meta($lesson_post_id, 'type', 'text');
 
 		$sectionID = $lessonData['section_id']; //map section ID for course
 
@@ -48,7 +55,7 @@
 			  update_post_meta($lesson_post_id, 'quiz_style', 'global');
 
 			  //assign questions
-			  $questionArray = get_questions_for_quiz($lessonData['id']);
+// 			  $questionArray = get_questions_for_quiz($lessonData['id']);
 			  error_log(print_r($questionArray, true));
 //			  $questionArray = $lessonToQuestionsMap[$lessonData['id']];
 			  if (!empty($questionArray)) {
@@ -56,7 +63,7 @@
 				  error_log(print_r($questionString, true));
 				  update_post_meta($lesson_post_id, 'questions', $questionString);
 			  } else {
-				  echo "No questions available for Quiz <br>";
+				  echo "Second No questions available for Quiz " . $lessonData['id'] . "  <br> ";
 			  }
 		} else {
 			//video post meta
