@@ -17,6 +17,7 @@
 			$wpdata['post_content'] = $lessonData['summary'];
 			$questionArray = get_questions_for_quiz($lessonData['id']);
 			if (empty($questionArray)) {
+				error_log("No questions available for Quiz " . $lessonData['id'] . "  so not making <br> ");
 				echo "No questions available for Quiz " . $lessonData['id'] . "  so not making <br> ";
 				return;
 			}
@@ -35,6 +36,7 @@
 				// audio post meta
 				$embedded_audio = '[embed]'.$lessonData['audio_url'].'[/embed]';
 			}
+
 			$wpdata['post_type'] = 'stm-lessons';
 			$wpdata['post_content'] = $file_content . $embedded_audio;
 		}
@@ -65,9 +67,12 @@
 			  } else {
 				  echo "Second No questions available for Quiz " . $lessonData['id'] . "  <br> ";
 			  }
-		} else {
+		} else if ($lessonData['lesson_type'] == 'video') {
 			//video post meta
-			update_post_meta($lesson_post_id, 'duration', $lessonData['duration']);
+			if (!empty($lessonData['duration']) && $lessonData['duration'] != "NULL") {
+                update_post_meta($lesson_post_id, 'duration', $lessonData['duration']);
+			}
+
 			update_post_meta($lesson_post_id, 'type', $lessonData['lesson_type']);
 			$video_type = strtolower($lessonData['video_type']);
 			update_post_meta($lesson_post_id, 'video_type', $video_type);
