@@ -9,7 +9,7 @@ function progress_users_quiz_from_csv($progressData) {
     //, $userMGMLtoWP, $courseMGMLtoWP, $selfAssessmentToUser, $lessonMGMLtoWP, $attemptNumberMap;
 
     if ($progressData['quiz_marks'] == 0) {
-        error_log("No quiz marks for the quiz on this row: " . $progressData['id']);
+        error_log("DATA ERROR: No quiz marks for the quiz on this row: " . $progressData['id']);
         return;
     }
 
@@ -22,17 +22,18 @@ function progress_users_quiz_from_csv($progressData) {
     //Get Ids from metadata of each type
     $wp_user_id = get_user_id('mgml_user_id', $progressData['user_id']);
     if (!isset($wp_user_id)) {
-        error_log("No data for this user: " . $mgml_user_id);
-        return;
+		error_log("DATA ERROR: No data for this user: " .  $progressData['user_id']);
+		$wp_user_id = 1; //Setting to Dadmin for Testing
+        //return;
     }
     $wp_quiz_id = get_from_post('stm-quizzes', 'mgml_lesson_id', $progressData['quiz_id']);
     if (!isset($wp_quiz_id)) {
-        error_log("No data for this quiz: ");
+        error_log("DATA ERROR: No data for this quiz: " . $progressData['quiz_id']);
         return;
     }
     $wp_course_id = get_from_post('stm-courses', 'mgml_course_id', $progressData['course_id']);
     if (!isset($wp_course_id)) {
-        error_log("No data for this course: ");
+        error_log("DATA ERROR: No data for this course: " . $progressData['course_id']);
         return;
     }
 
@@ -82,8 +83,9 @@ function progress_users_answers_from_csv($answerData) {
     // Ensure the User Answers table has user_id for each self assessment id
     $wp_user_id = get_user_id('mgml_user_id', $answerData['user_id']);
     if (!isset($wp_user_id)) {
-        error_log("No data for this user: ");
-        return;
+        error_log("DATA ERROR: No data for this user: " .  $enrolData['user_id']);
+		$wp_user_id = 1; //Setting to Dadmin for Testing
+        //return;
     }
     $wp_quiz_id = get_from_post('stm-quizzes', 'mgml_lesson_id', $mgml_quiz_id);
     if (!isset($wp_quiz_id)) {
@@ -120,7 +122,7 @@ function progress_users_answers_from_csv($answerData) {
     $isCorrect = ($answerData['question_marks'] == $answerData['marks_obtained']) ? "1" : "0";
 
     $attempts = $answerData['running_total'];
-    if (empty($attempts) || $attempts = "NULL") {
+    if (empty($attempts) || $attempts == "NULL") {
         $attempts = 1;
     }
     $wpdb->insert($table_name, array(
@@ -144,13 +146,14 @@ function enrol_users_from_csv($enrolData) {
 
     $wp_course_id = get_from_post('stm-courses', 'mgml_course_id', $enrolData['course_id']);
     if (!isset($wp_course_id)) {
-        error_log("No data for this course: ");
+        error_log("DATA ERROR: No data for this course: " . $enrolData['course_id']);
         return;
     }
     $wp_user_id = get_user_id('mgml_user_id', $enrolData['user_id']);
     if (!isset($wp_user_id)) {
-        error_log("No data for this user: ");
-        return;
+        error_log("DATA ERROR: No data for this user: " .  $enrolData['user_id']);
+		$wp_user_id = 1; //Setting to Dadmin for Testing
+        //return;
     }
     $wpdb->insert($table_name, array(
         'user_course_id' => NULL,
