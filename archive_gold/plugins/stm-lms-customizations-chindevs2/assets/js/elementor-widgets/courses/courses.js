@@ -441,6 +441,7 @@ var MsLmsCourses = /*#__PURE__*/function (_elementorModules$fro) {
         var args = {
           'terms': [],
           'show_only_lite': '',
+          'lite_category_name': '',
           'meta_query': {
             'status': [],
             'level': [],
@@ -456,6 +457,8 @@ var MsLmsCourses = /*#__PURE__*/function (_elementorModules$fro) {
             args['terms'].push(element['value']);
           } else if (element['name'] === 'show_only_lite') {
             args['show_only_lite'] = element['value'];
+          } else if (element['name'] === 'lite_category_name') {
+            args['lite_category_name'] = element['value'];
           } else {
             var index = element['name'].slice(0, -2);
             args['meta_query'][index].push(element['value']);
@@ -473,6 +476,7 @@ var MsLmsCourses = /*#__PURE__*/function (_elementorModules$fro) {
         var args = {
           'terms': [],
           'show_only_lite': '',
+          'lite_category_name': '',
           's': '',
           'meta_query': {
             'status': [],
@@ -503,6 +507,8 @@ var MsLmsCourses = /*#__PURE__*/function (_elementorModules$fro) {
                 args['s'] = item[1];
               } else if (item[0] === 'show_only_lite') {
                 args['show_only_lite'] = item[1];
+              } else if (item[0] === 'lite_category_name') {
+                args['lite_category_name'] = item[1];
               } else if (item[0] !== 'sort' && item[0] !== 'current_page') {
                 var index = item[0].slice(0, -2);
                 args['meta_query'][index].push(item[1]);
@@ -531,6 +537,7 @@ var MsLmsCourses = /*#__PURE__*/function (_elementorModules$fro) {
       this.urlAddParams(sort_by, args, page);
 
       args['show_only_lite'] = jQuery('input[name=show_only_lite]').val();
+	  args['lite_category_name'] = jQuery('input[name=lite_category_name').val();
 
       jQuery.ajax({
         url: ms_lms_courses_archive_filter.ajax_url,
@@ -599,6 +606,7 @@ var MsLmsCourses = /*#__PURE__*/function (_elementorModules$fro) {
           scroll_container = this.elements.$containerGrid;
 
       args['show_only_lite'] = jQuery('input[name=show_only_lite]').val();
+	  args['lite_category_name'] = jQuery('input[name=lite_category_name').val();
 
       jQuery.ajax({
         url: ms_lms_courses_archive_filter.ajax_url,

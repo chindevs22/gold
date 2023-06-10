@@ -25,6 +25,7 @@
                     'show_filter' => $show_filter,
                     'filter_data' => $filter_data,
                     'show_lite_courses' => $show_lite_courses,
+					'lite_category_name' => $lite_category_name
 //                    'terms' => $taxonomy
                 )
             );

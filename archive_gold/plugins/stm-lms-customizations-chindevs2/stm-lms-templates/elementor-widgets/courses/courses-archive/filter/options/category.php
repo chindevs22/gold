@@ -6,14 +6,7 @@
         </div>
         <div class="ms_lms_courses_archive__filter_options_item_content">
             <?php
-//            pre_var($display_terms);
             foreach ( $option['terms'] as $term ) {
-                $parents[] = $term->term_id;
-//                if(count($display_terms)) {
-//                    if(!in_array($term->term_id, $display_terms)) {
-//                        continue;
-//                    }
-//                }
                 if(!empty($show_lite_courses)) {
                     if(empty(get_term_meta($term->term_id,'is_lite_category', true))) {
                         continue;
