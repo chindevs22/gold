@@ -61,7 +61,7 @@
 			$lessonArray = get_lessons_for_section($sectionID);
 
             // Add Feedback lesson to the last section
-			if ($sectionCount == count($sectionArray) - 1) {
+			if ($sectionCount == count($sectionArray)) {
                 $insert_index = count($lessonArray) - 1;
                 array_splice($lessonArray, $insert_index, 0, 232704); // TODO: Make sure this lesson exists
             }
@@ -114,7 +114,7 @@
             $sale_inr_price = "";
         }
 		update_post_meta($course_post_id, 'price', $inr_price);
-		update_post_meta($course_post_id, 'price', $sale_inr_price);
+		update_post_meta($course_post_id, 'sale_price', $sale_inr_price);
 
         $price_arr = array();
         if(isset($us_price) && $us_price != "NULL") {
@@ -173,7 +173,11 @@
 
         // Handle Category -----------------------------------------------------------------
         $taxonomy = 'stm_lms_course_taxonomy';
-        $parent_cat_name =  $courseData['category_name'];
+        $parent_cat_name =  $courseData['new_subcat'];
+
+		if (empty($parent_cat_name) || $parent_cat_name == "" || $parent_cat_name == "NULL") {
+			return;
+		}
         $parentTerm = get_term_by( 'name', $parent_cat_name , $taxonomy );
 
         // Create or Find Parent Category ID
@@ -189,18 +193,18 @@
         }
 
         // Create or Find Sub Category ID
-        $sub_cat_name =  $courseData['subcategory_name'];
-        $subCatTerm = get_term_by( 'name', $sub_cat_name , $taxonomy );
-        if ( $subCatTerm ) { // if Sub Category Exists already
-             $sub_category_id = $subCatTerm->term_id;
-             echo "The ID of the term " . $sub_cat_name . " is: " . $sub_category_id;
-        } else {
-            $new_sub_term = wp_insert_term($sub_cat_name, $taxonomy, array('parent'=> $parent_category_id));
-            $sub_category_id = intval($new_sub_term['term_id']);
-            echo "Created category " . $sub_cat_name;
-            error_log("Created category " . $sub_cat_name);
-        }
-        wp_set_object_terms($course_post_id, $sub_category_id,  $taxonomy, $append = true );
+//         $sub_cat_name =  $courseData['subcategory_name'];
+//         $subCatTerm = get_term_by( 'name', $sub_cat_name , $taxonomy );
+//         if ( $subCatTerm ) { // if Sub Category Exists already
+//              $sub_category_id = $subCatTerm->term_id;
+//              echo "The ID of the term " . $sub_cat_name . " is: " . $sub_category_id;
+//         } else {
+//             $new_sub_term = wp_insert_term($sub_cat_name, $taxonomy, array('parent'=> $parent_category_id));
+//             $sub_category_id = intval($new_sub_term['term_id']);
+//             echo "Created category " . $sub_cat_name;
+//             error_log("Created category " . $sub_cat_name);
+//         }
+        wp_set_object_terms($course_post_id, $parent_category_id,  $taxonomy, $append = true );
 
 	}
 ?>

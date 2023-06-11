@@ -25,6 +25,25 @@ function build_attr_array($attr, $count) {
     return $data_arr;
 }
 
+function progress_user_sm($wp_course_id, $wp_user_id) {
+	global $wpdb;
+	$curriculum_string = get_post_meta($wp_course_id, 'curriculum_old', true);
+    $ca = create_array_from_string($curriculum_string, ',');
+	array_shift($ca);
+	error_log("these are the sm lessons to mark complete");
+// 	error_log(print_r($ca, true));
+
+	 foreach($ca as $lesson_id) {
+        echo "lesson completed: " . $lesson_id . " <br>";
+        $table_name = 'wp_stm_lms_user_lessons';
+        $wpdb->insert($table_name, array(
+            'user_lesson_id' => NULL,
+            'user_id' => $wp_user_id,
+            'course_id' => $wp_course_id,
+            'lesson_id' => $lesson_id
+        ));
+    }
+}
 
 function progress_user_lessons($wp_course_id, $wp_quiz_id, $wp_user_id) {
     global $wpdb;

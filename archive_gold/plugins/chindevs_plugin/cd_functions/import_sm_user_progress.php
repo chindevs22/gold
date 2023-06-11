@@ -5,8 +5,15 @@
 		echo print_r($enrolData);
 		echo $type;
 
+		$wp_user_id = get_user_id('mgml_user_id', $enrolData['user_id']);
+        if (!isset($wp_user_id)) {
+            error_log("No data for this user: ");
+            return;
+        }
+
 		if ($type === "sm") {
 			$wp_course_id = get_sm($enrolData['course_id']);
+			progress_user_sm($wp_course_id, $wp_user_id);
 		} else {
 			$wp_course_id = get_sm($enrolData['event_id']);
 		}
@@ -16,11 +23,7 @@
             return;
         }
         echo $wp_course_id;
-		$wp_user_id = get_user_id('mgml_user_id', $enrolData['user_id']);
-        if (!isset($wp_user_id)) {
-            error_log("No data for this user: ");
-            return;
-        }
+
 		echo "User idL " . $wp_user_id;
         $wpdb->insert($table_name, array(
             'user_course_id' => NULL,

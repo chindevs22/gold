@@ -17,7 +17,7 @@
 
         $file_content = '';
         if (isset($eventLessonData['attachment']) && $eventLessonData['attachment'] != "NULL") {
-            $link = 'https://dev108.freewaydns.net/wp-content/uploads/course_materials/'.$eventLessonData['event_id'].'/'.$eventLessonData['attachment'];
+            $link = 'https://dev108.freewaydns.net/wp-content/uploads/course_materials/'.$eventLessonData['course_id'].'/'.$eventLessonData['attachment'];
             $file_content = '<a href="https:////dev108.freewaydns.net/wp-content/plugins/pdfjs-viewer-shortcode/pdfjs/web/viewer.php?file='.$link.'&amp;dButton=false&amp;pButton=true&amp;oButton=false&amp;sButton=true#zoom=auto&amp;pagemode=none" target="_blank" rel="noopener"><img src="https://dev108.freewaydns.net/wp-content/uploads/2023/02/button_open-pdf.png" alt="PDF icon" /></a>';
         }
 
@@ -32,7 +32,7 @@
 		$lesson_post_id = wp_insert_post( $wpdata );
 
 		update_post_meta($lesson_post_id, 'mgml_lesson_id', $eventLessonData['id']);
-		update_post_meta($lesson_post_id, 'mgml_webinar_id', $eventLessonData['event_id']); //change to webinar
+		update_post_meta($lesson_post_id, 'mgml_webinar_id', $eventLessonData['course_id']); //change to webinar
 
 		update_post_meta($lesson_post_id, 'lite_type', 'webinar'); //change to webinar
 

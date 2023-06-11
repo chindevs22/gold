@@ -8,6 +8,7 @@
 	require_once ABSPATH . 'wp-admin/includes/taxonomy.php';
 
 	function create_sm_from_csv($smData) {
+		global $wpdb;
 		echo "IMPORTING SHRAVANA MANGALAM <br> <br>";
 
         $faq_description;
@@ -88,25 +89,14 @@
 		// Handling Pricing
 		$us_price = $smData['price_usd'];
 		$inr_price = $smData['price'];
-        $sale_us_price = $courseData['discounted_price_usd'];
-        $sale_inr_price = $courseData['discounted_price']
 		update_post_meta($sm_post_id, 'price', $inr_price);
-		update_post_meta($sm_post_id, 'price', $sale_inr_price);
-
-	    if ($sale_us_price == 0 || $sale_us_price == "NULL") {
-		    $sale_us_price = "";
-		}
-
-        if ($sale_inr_price == 0 || $sale_inr_price == "NULL") {
-            $sale_inr_price = "";
-        }
         $price_arr = array();
         if(isset($us_price) && $us_price != "NULL") {
             array_push($price_arr, array(
                 "country" => "US",
                 "currency_symbol" => "USD",
                 "price" => $us_price,
-                "sale_price" => $sale_us_price
+                "sale_price" => ""
             ));
         }
 
@@ -115,7 +105,7 @@
                 "country" => "IN",
                 "currency_symbol" => "INR",
                 "price" => $inr_price,
-                "sale_price" => $sale_inr_price
+                "sale_price" => ""
             ));
         }
         update_post_meta($sm_post_id, 'prices_list', json_encode($price_arr));
