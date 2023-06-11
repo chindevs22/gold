@@ -297,6 +297,9 @@ var MsLmsCourses = /*#__PURE__*/function (_elementorModules$fro) {
 
       var sort_by = this.getSortArgs();
       var args = this.getFormArgs();
+      console.log("inside course.js 300");
+      console.log(args);
+      console.log(sort_by);
       var current_page = 1;
       this.filtering(sort_by, args, current_page, false);
     }

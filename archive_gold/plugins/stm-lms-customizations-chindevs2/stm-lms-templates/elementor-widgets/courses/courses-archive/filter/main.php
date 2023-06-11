@@ -13,6 +13,7 @@
             <?php
 			error_log("inside courses-archive flter main");
 			error_log($lite_category_name);
+			error_log($show_lite_courses);
             foreach ( $filter_data['filter_options'] as $option ) {
                 STM_LMS_Templates::show_lms_template(
                     "elementor-widgets/courses/courses-archive/filter/options/{$option['template']}",

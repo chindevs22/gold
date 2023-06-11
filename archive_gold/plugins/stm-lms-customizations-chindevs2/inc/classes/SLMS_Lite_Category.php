@@ -196,6 +196,7 @@ class SLMS_Lite_Category {
         $lite_category_name = ( isset($_POST['args']['lite_category_name'] ) ) ? sanitize_text_field($_POST['args']['lite_category_name']) : '';
 		error_log("inside the slms lite category php 170");
 		error_log("Lite Cat Name: " . $lite_category_name);
+		error_log("show only lite: " . $show_only_lite_courses);
 
         /* query courses */
         $default_args = array(
