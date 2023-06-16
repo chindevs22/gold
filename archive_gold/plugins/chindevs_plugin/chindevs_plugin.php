@@ -284,7 +284,7 @@ function create_lite_data() {
 
 // 	echo " <br> <br> STARTING ENROLL SM USERS <br> <br> ";
 // 	read_lite_csv("cd-sm-docs/sm_enrol.csv", "user_sm");
-// 	echo " <br> <br> ENDING ENROLL SM USERS <br> <br> ";
+// 	echo " <br> <br> ENDING ENROLL SM USERSF <br> <br> ";
 
 
 // 	read_event_sm_csv("cd-sm-docs/sm_courses_small", "shravana_mangalam");

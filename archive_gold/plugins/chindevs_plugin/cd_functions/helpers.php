@@ -25,6 +25,30 @@ function build_attr_array($attr, $count) {
     return $data_arr;
 }
 
+// Helper Function to set Prices List
+function set_prices($course_post_id, $us_price, $inr_price, $sale_us_price, $sale_inr_price){
+    $price_arr = array();
+    if(isset($us_price) && $us_price != "NULL") {
+        array_push($price_arr, array(
+            "country" => "US",
+            "currency_symbol" => "$",
+            "price" => $us_price,
+            "sale_price" => $sale_us_price
+        ));
+    }
+
+     if(isset($inr_price) && $inr_price != "NULL") {
+        array_push($price_arr, array(
+            "country" => "IN",
+            "currency_symbol" => "\u20A8",
+            "price" => $inr_price,
+            "sale_price" => $sale_inr_price
+        ));
+    }
+    update_post_meta($course_post_id, 'prices_list', json_encode($price_arr));
+}
+
+// Helper Function to set progress for all lessons
 function progress_user_sm($wp_course_id, $wp_user_id) {
 	global $wpdb;
 	$curriculum_string = get_post_meta($wp_course_id, 'curriculum_old', true);

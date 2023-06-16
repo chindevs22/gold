@@ -133,25 +133,8 @@
 
         update_post_meta($event_post_id, 'price', $inr_price);
 
-        $price_arr = array();
-        if(isset($us_price) && $us_price != "NULL") {
-            array_push($price_arr, array(
-                "country" => "US",
-                "currency_symbol" => "USD",
-                "price" => $us_price,
-                "sale_price" => ""
-            ));
-        }
-         if(isset($inr_price) && $inr_price != "NULL") {
-            array_push($price_arr, array(
-                "country" => "IN",
-                "currency_symbol" => "INR",
-                "price" => $inr_price,
-                "sale_price" => ""
-            ));
-        }
+        set_prices($event_post_id, $us_price, $inr_price, "", "");
 
-        update_post_meta($event_post_id, 'prices_list', json_encode($price_arr));
         update_post_meta($event_post_id, 'level', $eventData['level']);
         update_post_meta($event_post_id, 'current_students', 0);
 

@@ -90,25 +90,8 @@
 		$us_price = $smData['price_usd'];
 		$inr_price = $smData['price'];
 		update_post_meta($sm_post_id, 'price', $inr_price);
-        $price_arr = array();
-        if(isset($us_price) && $us_price != "NULL") {
-            array_push($price_arr, array(
-                "country" => "US",
-                "currency_symbol" => "USD",
-                "price" => $us_price,
-                "sale_price" => ""
-            ));
-        }
 
-         if(isset($inr_price) && $inr_price != "NULL") {
-            array_push($price_arr, array(
-                "country" => "IN",
-                "currency_symbol" => "INR",
-                "price" => $inr_price,
-                "sale_price" => ""
-            ));
-        }
-        update_post_meta($sm_post_id, 'prices_list', json_encode($price_arr));
+        set_prices($sm_post_id, $us_price, $inr_price, "", "");
 		update_post_meta($sm_post_id, 'lite_type', 'shravana_mangalam');
 
 		update_post_meta($sm_post_id, 'level', $smData['level']);
