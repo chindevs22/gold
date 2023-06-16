@@ -81,30 +81,20 @@
 	}
 
 	function get_questions_for_quiz($quiz_id) {
-        $args = array(
-            'post_type' => 'stm-questions',
-            'meta_query' => array(
-                   array(
-                       'key' => 'mgml_quiz_id',
-                       'value' => $quiz_id,
-                       'compare' => '='
-                   )
-               )
-        );
 
-        $the_query = new WP_Query( $args );
+		 $args = array(
+			'post_type'      => 'stm-questions',
+			'meta_key'       => 'mgml_quiz_id',
+			'meta_value'     => $quiz_id,
+			'orderby'        => 'ID',
+			'order'          => 'ASC',
+			'posts_per_page' => -1, // Retrieve all matching posts
+		);
 
-        $post_ids = array(); // create an empty array to store post IDs
+        $query = new WP_Query( $args );
 
-        if ( $the_query->have_posts() ) {
-            while ( $the_query->have_posts() ) {
-                $the_query->the_post();
-                $post_ids[] = get_the_ID(); // add post ID to the array
-            }
-            wp_reset_postdata();
-        }
-
-        return $post_ids;
+		$posts = wp_list_pluck( $query->posts, 'ID' );
+		return $posts;
 
 	}
 ?>
