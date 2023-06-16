@@ -28,11 +28,9 @@ if(isset($course_meta['drip_content']) && !empty($course_meta['drip_content'])) 
 }
 
 $settings = get_option( 'stm_lms_sequential_drip_content_settings', array() );
-$completed = STM_LMS_Lesson::is_lesson_completed( null, $post_id, $item_id );
-if ( ! empty( $settings['locked'] ) && empty( $previous_completed ) ) {
+if ( ! empty( $settings['locked'] )) {
     $lite_terms = [];
 }
-
 
 if ( ! empty( $course_meta['curriculum'] ) ) :
     $curriculum_full = explode( ',', $course_meta['curriculum'] );
@@ -62,6 +60,11 @@ if ( ! empty( $course_meta['curriculum'] ) ) :
         $section           = STM_LMS_Lesson::get_lesson_info( $curriculum_full, $item_id );
         $prev_lesson       = ( ! empty( $curriculum[ $current_lesson_id - 1 ] ) ) ? $curriculum[ $current_lesson_id - 1 ] : '';
         $next_lesson       = ( ! empty( $curriculum[ $current_lesson_id + 1 ] ) ) ? $curriculum[ $current_lesson_id + 1 ] : '';
+
+        $previous_completed = STM_LMS_Lesson::is_lesson_completed( null, $post_id, $prev_lesson );
+        if ( ! empty( $settings['locked'] ) && empty( $previous_completed ) ) {
+            $lite_terms = [];
+        }
     }
 
 
