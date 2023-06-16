@@ -305,7 +305,7 @@ class SLMS_Lite_Category {
             );
             if ( ! empty( $pagination_style ) && $courses['total_pages'] > 1 ) {
                 $response['pagination'] = STM_LMS_Templates::load_lms_template(
-                    "elementor-widgets/courses/courses-archive/pagination/{$pagination_style}",
+                    "elementor-widgets/courses/courses-grid/pagination/{$pagination_style}",
                     array(
                         'pagination_data' => array(
                             'current_page'   => $current_page,
@@ -443,7 +443,7 @@ class SLMS_Lite_Category {
             );
             if ( ! empty( $pagination_style ) && $courses['total_pages'] > 1 ) {
                 $response['pagination'] = STM_LMS_Templates::load_lms_template(
-                    "elementor-widgets/courses/courses-grid/pagination/{$pagination_style}",
+                    "elementor-widgets/courses/courses-archive/pagination/{$pagination_style}",
                     array(
                         'pagination_data' => array(
                             'current_page'   => $current_page,
