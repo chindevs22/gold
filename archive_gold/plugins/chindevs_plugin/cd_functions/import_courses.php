@@ -48,58 +48,11 @@
 
 		// Generate Curriculum
 
-		$curriculum_string = "";
-		$combinedArray = array();
+
 		$sectionString = $courseData['section'];
 		$sectionArray = create_array_from_string($sectionString, ",");
-        $sectionCount = 1;
-		foreach ($sectionArray as $sectionID) {
-			if (empty($sectionID) || $sectionID == "NULL") {
-				error_log("ERROR: No Section provided");
-				continue;
-			}
-			$lessonArray = get_lessons_for_section($sectionID);
 
-            // Add Feedback lesson to the last section
-			if ($sectionCount == count($sectionArray)) {
-                $insert_index = count($lessonArray) - 1;
-                array_splice($lessonArray, $insert_index, 0, 232704); // TODO: Make sure this lesson exists
-            }
-            //Create a Section Record
-            $sectionName = get_post_meta($lessonArray[0], 'mgml_section_name', true);
-            $sArray = array($sectionName);
-            $section_table_name = 'wp_stm_lms_curriculum_sections';
-            $wpdb->insert($section_table_name, array(
-                'title' => $sectionName,
-                'course_id' => $course_post_id,
-                'order' => $sectionCount++,
-            ));
-            $wp_section_id = $wpdb->insert_id;
-
-            //Create a Curriculum Materials Record
-            $curr_materials_table_name = 'wp_stm_lms_curriculum_materials';
-            $lessonCount = 1;
-            foreach($lessonArray as $lessonID) {
-                if ($lessonCount == 1) {
-                    //First Lesson - populate free lesson url, preview on
-                    update_post_meta($course_post_id, 'free_lesson', $lessonID);
-                    update_post_meta($lessonID, 'preview', 'on');
-                }
-                $post_type = get_post_type($lessonID);
-                $wpdb->insert($curr_materials_table_name, array(
-                    'post_id' => $lessonID,
-                    'post_type' => $post_type,
-                    'section_id' => $wp_section_id,
-                    'order' => $lessonCount++
-                ));
-            }
-
-            $combinedArray = array_merge($combinedArray, $sArray, $lessonArray);
-
-		}
-        $curriculum_string = implode(",", $combinedArray);
-        update_post_meta($course_post_id, 'curriculum_old', $curriculum_string);
-
+        create_curriculum($course_post_id, $sectionArray, null, 'course');
 
 		// Handling Pricing - what to do when 1 or both prices are null?
 		$us_price = $courseData['price_usd'];
