@@ -266,6 +266,10 @@ function get_from_post($post_type, $key, $value) {
 
 // Gets lessons for the section
 function get_lessons_for_section($section_id) {
+	if (empty($section_id) || $section_id == "NULL") {
+		error_log("ERROR: No Section provided");
+		return;
+	}
     $args = array(
         'post_type'      => array( 'stm-lessons', 'stm-quizzes', 'stm-assignments' ),
         'meta_key'       => 'mgml_section_id',

@@ -32,8 +32,8 @@ $user_id = $user['id'];
 		  <div class="col-sm-12">
 			  <?php foreach ( $event_price_options as $key => $value ) : ?>
 			  <div class="radio">
-				  <label><b><?php echo esc_html( $key ); ?></b> - <?php echo STM_LMS_Helpers::display_price( $value ); ?>
                   	<input type="radio" name="price" value="<?php echo esc_attr( $value ); ?>" data-price="<?php echo esc_attr( $value ); ?>">
+				  <label><b><?php echo esc_html( $key ); ?></b> - <?php echo STM_LMS_Helpers::display_price( $value ); ?>
 				  </label>
 			  </div>
 			  <?php endforeach; ?>

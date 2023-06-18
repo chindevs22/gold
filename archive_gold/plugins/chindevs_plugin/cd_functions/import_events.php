@@ -7,9 +7,9 @@
 	require_once ABSPATH . 'wp-admin/includes/taxonomy.php';
 
 
-	function create_event_from_csv($eventData) {
+	function create_event_from_csv($eventData, $isWebinar) {
 		global $wpdb;
-		echo('came to create event from csv method');
+		echo('creating a webinar');
 		// Event info mapped from CSV
 		$wpdata['post_title'] = $eventData['title']; // Ensure all content doesn't have any special characters
 
@@ -31,17 +31,13 @@
 		$event_post_id = wp_insert_post( $wpdata );
         update_post_meta($event_post_id, 'mgml_course_id', $eventData['id']);
 		echo "post id: " . $event_post_id;
-
         // Generate Curriculum String
-        $isWebinar = false;
         $eventLessons = cd_get_posts('stm-lessons', 'mgml_webinar_id', $eventData['id']);
         $curriculum_string = "";
 
         if ( !isset($eventLessons) ||  count($eventLessons) == 0 ) {
             error_log("No lessons for this Event: " .  $eventData['id']);
         } else {
-             $isWebinar = true;
-
              //Create a Section Record
              $section_table_name = 'wp_stm_lms_curriculum_sections';
              $wpdb->insert($section_table_name, array(

@@ -11,7 +11,7 @@
             return;
         }
 
-		if ($type === "sm") {
+		if ($type === "sm" || $type === "webinar") {
 			$wp_course_id = get_sm($enrolData['course_id']);
 			progress_user_sm($wp_course_id, $wp_user_id);
 		} else {

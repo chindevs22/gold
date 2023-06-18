@@ -83,7 +83,7 @@ function progress_users_answers_from_csv($answerData) {
     // Ensure the User Answers table has user_id for each self assessment id
     $wp_user_id = get_user_id('mgml_user_id', $answerData['user_id']);
     if (!isset($wp_user_id)) {
-        error_log("DATA ERROR: No data for this user: " .  $enrolData['user_id']);
+        error_log("DATA ERROR: No data for this user: " .  $answerData['user_id']);
 		$wp_user_id = 1; //Setting to Dadmin for Testing
         //return;
     }
