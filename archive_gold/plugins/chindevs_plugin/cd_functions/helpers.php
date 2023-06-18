@@ -27,7 +27,7 @@ function build_attr_array($attr, $count) {
 
 // Helper Function to create Curriculum
 function create_curriculum($course_post_id, $sectionArray, $lessonArray, $type) {
-	$curriculum_string = "";
+	global $wpdb;
     $combinedArray = array();
     $sectionCount = 1;
 
@@ -36,8 +36,7 @@ function create_curriculum($course_post_id, $sectionArray, $lessonArray, $type) 
             error_log("ERROR: No Section provided");
             continue;
         }
-        if (empty($lessonArray)) {
-            echo "Lesson Array is empty to start - i am a course";
+        if ($type == 'course') {
             $lessonArray = get_lessons_for_section($sectionID);
         }
         $currPostsArray = array();
@@ -79,7 +78,6 @@ function create_curriculum($course_post_id, $sectionArray, $lessonArray, $type) 
             ));
             array_push($currPostsArray, $wpdb->insert_id);
         }
-
         $combinedArray = array_merge($combinedArray, $sArray, $currPostsArray);
     }
     $curriculum_string = implode(",", $combinedArray);
