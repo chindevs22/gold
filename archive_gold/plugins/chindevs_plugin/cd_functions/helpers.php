@@ -28,7 +28,8 @@ function build_attr_array($attr, $count) {
 // Helper Function to create Curriculum
 function create_curriculum($course_post_id, $sectionArray, $lessonArray, $type) {
 	global $wpdb;
-    $combinedArray = array();
+    $combinedNewArray = array();
+    $combinedOldArray = array();
     $sectionCount = 1;
 
     foreach ($sectionArray as $sectionID) {
@@ -78,10 +79,13 @@ function create_curriculum($course_post_id, $sectionArray, $lessonArray, $type) 
             ));
             array_push($currPostsArray, $wpdb->insert_id);
         }
-        $combinedArray = array_merge($combinedArray, $sArray, $currPostsArray);
+        $combinedNewArray = array_merge($combinedNewArray, $sArray, $currPostsArray);
+        $combinedOldArray = array_merge($combinedOldArray, $sArray, $lessonArray);
     }
-    $curriculum_string = implode(",", $combinedArray);
-    update_post_meta($course_post_id, 'curriculum', $curriculum_string);
+    $new_curriculum_string = implode(",", $combinedNewArray);
+    $old_curriculum_string = implode(",", $combinedOldArray);
+    update_post_meta($course_post_id, 'curriculum', $new_curriculum_string);
+    update_post_meta($course_post_id, 'curriculum_old', $old_curriculum_string);
 }
 
 // Helper Function to set Prices List
