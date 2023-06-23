@@ -150,8 +150,16 @@ class STM_LMS_User_Assignment {
 		);
 
 		//ChinDevs code to add grade
-        $grade       = wp_kses_post( $_POST['assignment_grade'] );
+        $points_earned = wp_kses_post ($_POST['points_earned']);
+		$orig_assignment = get_post_meta($assignment_id, 'assignment_id', true);
+		$total_points = get_post_meta($orig_assignment, 'total_points', true);
+		if (empty($total_points) || $total_points == 0) {
+			$total_points = 100;
+			update_post_meta($orig_assignment, 'total_points', 100);
+		}
+		$grade = $points_earned/$total_points * 100;
         update_post_meta( $assignment_id, 'assignment_grade', $grade );
+        update_post_meta( $assignment_id, 'points_earned', $points_earned );
 
 		update_post_meta( $assignment_id, 'editor_comment', $comment );
 		update_post_meta( $assignment_id, 'status', $status );

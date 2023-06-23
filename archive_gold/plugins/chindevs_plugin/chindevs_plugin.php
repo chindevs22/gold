@@ -366,8 +366,17 @@ function stm_lms_assignment_field($fields) {
 		'type'  => 'number',
 		'label' => esc_html__( 'Assignment Grade', 'masterstudy-lms-learning-management-system-pro' ),
 	);
-	return $fields;
+	$fields['stm_student_assignment']['section_group']['fields']['points_earned'] = array(
+        'type'  => 'number',
+        'label' => esc_html__( 'Points Earned', 'masterstudy-lms-learning-management-system-pro' ),
+    );
+	$fields['assignment_settings']['tab_1']['fields']['total_points'] = array(
+        'type'        => 'number',
+        'label'       => esc_html__( 'Total Points on Assignment', 'masterstudy-lms-learning-management-system-pro' ),
+    );
+    return $fields;
 }
+
 
 //Add Event fields to backend Admin View
 add_filter('stm_wpcfto_fields', 'stm_lms_event_fields', 99, 1);

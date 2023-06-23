@@ -78,6 +78,11 @@ if ( $q->have_posts() ) :
 					<?php echo wp_kses_post( $passed['content'] ); ?>
 				</div>
 
+				<!-- ChinDevs code to add point total to the Student View of Assignment -->
+                <div class="assignment_approved_grade">
+                     <?php echo "Points Earned: " .  $passed['meta']['points_earned'][0] . " / " . $passed['meta']['total_points'][0]; ?>
+                </div>
+
 				<?php STM_LMS_Templates::show_lms_template( 'course/parts/assignment_parts/file_loader', array( 'readonly' => true ) ); ?>
 
 			</div>

@@ -17,11 +17,12 @@
     if ($draft.hasClass('loading')) return false;
     var status = $(this).hasClass('approve') ? 'approve' : 'reject';
 	//ChinDevs code for adding grade
-    var grade = $('#assignment_grade').val(); // Get the value of the assignment grade input field
+    var points_earned = $('#points_earned').val(); // Get the value of the assignment grade input field
+
     var formData = new FormData();
     formData.append('content', content);
     formData.append('status', status);
-	formData.append('assignment_grade', grade); // Append the grade to the FormData object
+	formData.append('points_earned', points_earned); //Append Points Earned to Form data
     formData.append('assignment_id', stm_lms_user_assignment['assignment_id']);
     var url = stm_lms_ajaxurl + '?action=stm_lms_edit_user_answer&nonce=' + stm_lms_nonces['stm_lms_edit_user_answer'];
     $.ajax({
