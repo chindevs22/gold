@@ -47,14 +47,25 @@ $attempts = SLMS_User_Quizzes::get_user_quiz_attempts($post_id, $item_id, $user[
                     $slms_points += (int)get_post_meta($question_id, 'slms_points', true);
                 }
             }
-        }
+        } else {
+			// ChinDevs code to calculate fake points for when user doesn't have USAD
+            $total_quiz_points = 0;
+			$questions = get_post_meta( $attempt['quiz_id'], 'questions', true );
+			$questions = ( ! empty( $questions ) ) ? explode( ',', $questions ) : array();
+            foreach($questions as $question) {
+                $total_quiz_points += (int)get_post_meta($question, 'slms_points', true);
+            }
+            $slms_points = $attempt['progress']/100 * $total_quiz_points;
+		}
         ?>
         <tr>
             <td><?php echo $key+1; ?></td>
             <td><?php echo $slms_points; ?></td>
             <td><?php echo $attempt['progress']; ?>%</td>
             <td><?php echo ($attempt['status'] == 'passed') ? __('Passed', 'slms') : __('Failed', 'slms'); ?></td>
-            <td>
+			<!-- 	ChinDevs code to only show button if there are details available -->
+            <?php if(count($last_answers) > 0): ?>
+			<td>
                 <a href="#attempt-details-<?php echo $key+1; ?>"
                    onclick="return false;"
                    data-toggle="collapse"
@@ -64,6 +75,11 @@ $attempts = SLMS_User_Quizzes::get_user_quiz_attempts($post_id, $item_id, $user[
                     <i class="fa fa-chevron-down"></i>
                 </a>
             </td>
+			<?php else: ?>
+			<td>
+				<?php _e('No Answers Recorded', 'slms'); ?>
+			</td>
+			<?php endif; ?>
         </tr>
         <tr id="attempt-details-<?php echo $key+1; ?>" class="collapse">
             <td colspan="5">
