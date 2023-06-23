@@ -32,15 +32,23 @@
         $hasDot = str_contains($progressData['quiz_id'], '.');
         if ($hasDot || $isPostal) {
 			error_log("is a split assignment");
-			
-//             $ids = explode( '.', $progressData['quiz_id']); //quizID.questionID
-//             $questionID = $ids[1];
-            $wp_assignment_id = get_from_post('stm-assignments', 'mgml_assignment_id', $progressData['quiz_id']);
-			
+
+			if ($isPostal) {
+				$wp_assignment_id = get_from_post('stm-assignments', 'mgml_assignment_quiz_id', $progressData['quiz_id']);
+			} elseif ($hasDot) {
+				$wp_assignment_id = get_from_post('stm-assignments', 'mgml_assignment_id', $progressData['quiz_id']);
+			}
+
 			 if (!isset($wp_assignment_id)) {
-					error_log("DATA ERROR: No Assignment found for this Self Assessment: " . $progressData['quiz_id']);
-					return;
-				}
+				 error_log("DATA ERROR: No Assignment found for this Self Assessment: " . $progressData['quiz_id']);
+				 return;
+			 }
+
+			 if(empty(get_post_meta($wp_assignment_id, 'total_points', true)) {
+			    echo "Updating Assignment Total Points for " . $wp_assignment_id;
+			    update_post_meta($wp_assignment_id, 'total_points', $progressData['quiz_marks']);
+			 }
+
 			
 			error_log($wp_assignment_id);
             //Student Name
@@ -71,19 +79,18 @@
 			error_log($user_assignment_post_id);
             // Update Metadata
             $date = strtotime($progressData['completion_date'] . "06:00:00") * 1000;
-			$grade = $progressData['marks']/$progressData['quiz_marks'] * 100; //aka progress
+//			$grade = $progressData['marks']/$progressData['quiz_marks'] * 100; //aka progress
 
 			
             update_post_meta($user_assignment_post_id, 'try_num', $progressData['running_total']);
             update_post_meta($user_assignment_post_id, 'start_time', $date);
             update_post_meta($user_assignment_post_id, 'end_time', $date);
             update_post_meta($user_assignment_post_id, 'mgml_usa_id', $progressData['id']);
-            update_post_meta($user_assignment_post_id, 'assignment_grade', $grade);
+//            update_post_meta($user_assignment_post_id, 'assignment_grade', $grade);
 			update_post_meta($user_assignment_post_id, 'points_earned', $progressData['marks']);
-            update_post_meta($user_assignment_post_id, 'total_points', $progressData['quiz_marks']);
             update_post_meta($user_assignment_post_id, 'who_view', 1);
 
-            if(!empty($progressData['remarks']) &&  $progressData['remarks'] != NULL) {
+            if(!empty($progressData['remarks']) &&  $progressData['remarks'] != "NULL") {
                update_post_meta($user_assignment_post_id, 'editor_comment', $progressData['remarks']);
             }
 

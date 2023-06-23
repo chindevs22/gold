@@ -10,8 +10,8 @@
         $assignment_post_id = get_from_post('stm-assignments', 'mgml_assignment_quiz_id', $ids[0]); //10
 
         if (empty($assignment_post_id)) {
-            $wpdata['post_title'] = $assignmentData['title'];
-            $wpdata['post_content'] = '1) ' . $assignmentData['summary'];
+            $wpdata['post_title'] = 'Assignment - ' . $assignmentData['section_name'];
+            $wpdata['post_content'] = '1) ' .  strip_tags($assignmentData['summary']);
             $wpdata['post_status'] ='publish';
             $wpdata['post_type'] = 'stm-assignments';
             $assignment_post_id = wp_insert_post( $wpdata );
@@ -35,7 +35,7 @@
 			$current_post = get_post($assignment_post_id);
 		 	error_log(print_r($current_post, true));
 			$content = $current_post->post_content;
-			$content .= '<br><br>' . $numQuestions . ') ' . $assignmentData['summary'];
+			$content .= '<br>' . $numQuestions . ') ' . strip_tags($assignmentData['summary']);
 			$updated_post = array(
 				'ID'           => $current_post->ID,
 				'post_content' => $content
