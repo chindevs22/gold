@@ -27,7 +27,7 @@ function build_attr_array($attr, $count) {
 
 // Helper Function to create Curriculum
 function create_curriculum($course_post_id, $sectionArray, $lessonArray, $type) {
-	global $wpdb;
+	global $wpdb, $feedbackLessonID;
     $combinedNewArray = array();
     $combinedOldArray = array();
     $sectionCount = 1;
@@ -44,7 +44,7 @@ function create_curriculum($course_post_id, $sectionArray, $lessonArray, $type) 
         // Add Feedback lesson to the last section
         if ($sectionCount == count($sectionArray)) {
             $insert_index = count($lessonArray) - 1;
-            array_splice($lessonArray, $insert_index, 0, 321807); // TODO: Make sure this lesson exists
+            array_splice($lessonArray, $insert_index, 0, $feedbackLessonID); // TODO: Make sure this lesson exists
         }
         //Create a Section Record
         if ($type == 'course') {
@@ -134,40 +134,27 @@ function progress_user_sm($wp_course_id, $wp_user_id) {
 
 function progress_user_lessons($wp_course_id, $wp_quiz_id, $wp_user_id) {
     global $wpdb;
-	error_log("progressing user lessons");
     $curriculum_string = get_post_meta($wp_course_id, 'curriculum_old', true);
     $ca = create_array_from_string($curriculum_string, ',');
-    $arrLength = count($ca);
-    $quizIndex = 0;
-    for($x = 0; $x < $arrLength; $x++) {
-        if ($wp_quiz_id == $ca[$x]) {
-            $quizIndex = $x;
-            break;
-        }
-    }
-    error_log("Course ID: " . $wp_course_id . " Quiz ID: " . $wp_quiz_id . " Index found: " . $quizIndex);
 
-    $isLeft = false;
-    $isRight = false;
-    $lessonsCompleted = array();
-    $indexLeft = $quizIndex - 1;
-    $indexRight = $quizIndex + 1;
-    // Go through curriculum array searching for the Lessons surrounding the quiz
-    // When you hit a Section Name (intval will be false) or the ends of the array stop.
-    // TODO: This code cant handle 2 quizzes in a section
-    // Solution: Go Left Only, Check if I've hit a Quiz or Section
-    while (!$isLeft) {
-        if( $indexLeft < 0 || intval($ca[$indexLeft]) == 0 || 'stm-quizzes' === get_post_type( $ca[$indexLeft] ) ) {
-            $isLeft = true;
-        } else {
-            array_push($lessonsCompleted, $ca[$indexLeft--]);
-        }
-    }
+    $section_id = get_post_meta($wp_quiz_id, 'mgml_section_id', true);
+    $args = array(
+            'post_type'      => 'stm-lessons',
+            'meta_key'       => 'mgml_section_id',
+            'meta_value'     => $section_id,
+            'orderby'        => 'ID',
+            'order'          => 'ASC',
+            'posts_per_page' => -1, // Retrieve all matching posts
+    );
+
+    $query = new WP_Query( $args );
+
+    $posts = wp_list_pluck( $query->posts, 'ID' );
 
     echo "COMPLETING LESSONS FOR QUIZ <br>";
-    error_log("# of LESSONS COMPLETED : " . count($lessonsCompleted));
+    error_log("# of LESSONS COMPLETED : " . count($posts));
     // Insert Each Completed Lesson Based on Completed Quiz
-    foreach($lessonsCompleted as $lesson_id) {
+    foreach($posts as $lesson_id) {
         echo "lesson completed: " . $lesson_id . " <br>";
         $table_name = 'wp_stm_lms_user_lessons';
         $wpdb->insert($table_name, array(
@@ -308,6 +295,32 @@ function cd_get_posts($post_type, $key, $value) {
     return $posts;
 }
 
+function get_event_post($value) {
+	global $wpdb;
+	$post_type = 'stm-courses';
+	$meta_key = 'mgml_ew_id';
+	$query = "SELECT $wpdb->posts.*
+			  FROM $wpdb->posts
+			  INNER JOIN $wpdb->postmeta ON ($wpdb->posts.ID = $wpdb->postmeta.post_id)
+			  WHERE 1=1
+				AND $wpdb->posts.post_type = %s
+				AND ($wpdb->postmeta.meta_key = %s AND $wpdb->postmeta.meta_value = %s)
+			  ORDER BY $wpdb->posts.ID ASC";
+
+	$results = $wpdb->get_results( $wpdb->prepare( $query, $post_type, $meta_key, $value ) );
+	error_log("getting result from sm for " . $value);
+
+	 if (count($results) > 1 ) {
+        error_log("ERROR: More than one " . $post_type . " with the same MGML ID: " . $value);
+        error_log(print_r($results, true));
+        return null;
+    }
+    if ( count($results) == 0) {
+        error_log("ERROR: No " . $post_type . " with this MGML ID: " . $value);
+        return null;
+    }
+    return $results[0]->ID;
+}
 // Get single post matching post_type and meta_key / meta_value pair or error if more than 1 found
 function get_from_post($post_type, $key, $value) {
 

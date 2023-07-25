@@ -15,9 +15,6 @@ function progress_users_quiz_from_csv($progressData) {
 
     $mgml_user_id = $progressData['user_id'];
     $table_name = 'wp_stm_lms_user_quizzes';
-    //      $wp_user_id = $userMGMLtoWP[$mgml_user_id];
-    // 		$wp_quiz_id = $lessonMGMLtoWP[$progressData['quiz_id']];
-    // 		$wp_course_id =  $courseMGMLtoWP[$progressData['course_id']];
 
     //Get Ids from metadata of each type
     $wp_user_id = get_user_id('mgml_user_id', $progressData['user_id']);
@@ -39,19 +36,6 @@ function progress_users_quiz_from_csv($progressData) {
 
     $grade = $progressData['marks']/$progressData['quiz_marks'] * 100; //aka progress
 
-
-// 		// TODO: don't think we need this! Update/Set the user metadata field to append an array of their assessments
-// 		$users_assessments = get_user_meta($wp_user_id, 'mgml_self_assessment_id', true);
-// 		if (is_array($users_assessments)) {
-// 			// if it's an array, append the new value to it
-// 			$users_assessments[] = $progressData['id'];
-// 			update_user_meta($wp_user_id, 'mgml_self_assessment_id', $users_assessments);
-// 		} else {
-// 			// if it's not an array, create a new array with the new value
-// 			$users_assessments = array($progressData['id']);
-// 			update_user_meta($wp_user_id, 'mgml_self_assessment_id', $users_assessments);
-// 		}
-
     $wpdb->insert($table_name, array(
         'user_quiz_id' => NULL,
         'user_id' => $wp_user_id,
@@ -66,16 +50,7 @@ function progress_users_quiz_from_csv($progressData) {
 
 function progress_users_answers_from_csv($answerData) {
     global $wpdb;
-    //, $userMGMLtoWP, $attemptNumberMap, $courseMGMLtoWP, $lessonMGMLtoWP, $selfAssessmentToUser, $questionMGMLtoWP, $wpQuestionsToAnswers;
     $table_name = 'wp_stm_lms_user_answers';
-
-    // get IDS
-    //		$mgml_user_id = $selfAssessmentToUser[$sa_id];
-    //		$wp_user_id = $userMGMLtoWP[$mgml_user_id];
-    //		$wp_course_id = $courseMGMLtoWP[$answerData['course_id']];
-    //		$wp_quiz_id = $lessonMGMLtoWP[$answerData['quiz_id']];
-    // TODO CHECK the WP question ID should be part of the $lessonToQuestionsMap of $answerData['quiz_id']
-    //		$wp_question_id = $questionMGMLtoWP[$answerData['question_id']];
 
     $sa_id = $answerData['self_assessment_id'];
     $mgml_quiz_id = $answerData['quiz_id'];
@@ -105,9 +80,6 @@ function progress_users_answers_from_csv($answerData) {
         return;
     }
 
-    // need to re-run the import questions for this to work
-    //        $options = $wpQuestionsToAnswers[$wp_question_id];
-
     $options = get_post_meta($wp_question_id, 'mgml_answer_options', true);
     $userAnswers = create_array_from_string($answerData['answers'], '","'); // ex [ 2, 4 ]
 
@@ -133,12 +105,12 @@ function progress_users_answers_from_csv($answerData) {
         'question_id' => $wp_question_id,
         'user_answer' => $answerString,
         'correct_answer' => $isCorrect,
-        'attempt_number' => $attempts, //TODO: fix to use the answerData of running total
+        'attempt_number' => $attempts,
     ));
 }
 
 function enrol_users_from_csv($enrolData) {
-    global $wpdb;
+    global $wpdb, $feedbackLessonID;
     // $userMGMLtoWP, $courseMGMLtoWP, $lessonMGMLtoWP, $selfAssessmentToUser, $questionMGMLtoWP;
     $table_name = 'wp_stm_lms_user_courses';
     // TODO: Hardcoding since we didn't make that lesson - $enrolData['current_lesson_id']
@@ -164,6 +136,17 @@ function enrol_users_from_csv($enrolData) {
         'status' => 'enrolled',
         'start_time' => time(),
     ));
+
+    // If course is complete, go back and mark Feedback Lesson as complete
+    $user_lessons_table_name = $wpdb->prefix . 'stm_lms_user_lessons';
+    if($enrolData['progress_percent'] == 100) {
+        $wpdb->insert($user_lessons_table_name, array(
+            'user_lesson_id' => NULL,
+            'user_id' => $wp_user_id,
+            'course_id' => $wp_course_id,
+            'lesson_id' => $feedbackLessonID
+        ));
+    }
 
     $students = get_post_meta($wp_course_id, 'current_students', true);
     update_post_meta($wp_course_id, 'current_students', $students + 1);

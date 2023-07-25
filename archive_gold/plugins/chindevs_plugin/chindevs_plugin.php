@@ -22,7 +22,7 @@ define( 'GIFT_COURSE_URL', plugin_dir_url( __FILE__ ) );
 // --------------------------------------------------------------------------------------------
 // CHIN DEVS GLOBAL VARIABLES
 // --------------------------------------------------------------------------------------------
-
+$feedbackLessonID = 321807;
 $sectionToLessonMap = array(); //mgml section ID -> array string "Section Name WP_LESSONID1 WP_LESSONID2"
 $lessonToQuestionsMap = array(); // mgml quiz ID -> array of WP question IDS
 $lessonMGMLtoWP = array();
