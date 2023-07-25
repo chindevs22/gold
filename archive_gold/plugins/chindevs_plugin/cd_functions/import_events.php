@@ -29,7 +29,11 @@
 
 		$wpdata['post_type'] = 'stm-courses';
 		$event_post_id = wp_insert_post( $wpdata );
-        update_post_meta($event_post_id, 'mgml_course_id', $eventData['id']);
+		if ($isWebinar) {
+			update_post_meta($event_post_id, 'mgml_course_id', $eventData['id']);
+		} else {
+			update_post_meta($event_post_id, 'mgml_ew_id', $eventData['id']);
+		}
 		echo "post id: " . $event_post_id;
         // Generate Curriculum String
         $eventLessons = cd_get_posts('stm-lessons', 'mgml_webinar_id', $eventData['id']);
@@ -94,7 +98,7 @@
             $inr_price = isset($lowestINRPrice) ? $lowestINRPrice : 0;
         }
 
-        update_post_meta($event_post_id, 'price', $inr_price);
+        update_post_meta($event_post_id, 'price', $us_price);
 
         set_prices($event_post_id, $us_price, $inr_price, "", "");
 
