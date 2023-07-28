@@ -43,18 +43,15 @@
 		$course_post_id = wp_insert_post( $wpdata );
 
 		echo "Course ID: " . $courseData['id'] . "  Course Post Id: " . $course_post_id . " <br> <br>";
-// 		$courseMGMLtoWP[$courseData['id']] = $course_post_id;
 		update_post_meta($course_post_id, 'mgml_course_id', $courseData['id']);
 
 		// Generate Curriculum
-
-
 		$sectionString = $courseData['section'];
 		$sectionArray = create_array_from_string($sectionString, ",");
 
         create_curriculum($course_post_id, $sectionArray, null, 'course');
 
-		// Handling Pricing - what to do when 1 or both prices are null?
+		// Handling Pricing
 		$us_price = $courseData['price_usd'];
 		$inr_price = $courseData['price'];
 		$sale_us_price = $courseData['discounted_price_usd'];
@@ -76,10 +73,10 @@
 		update_post_meta($course_post_id, 'current_students', 0);
 
 // 		Make Trial Course
-// 		if (!empty($price) || $price != 0) {
-// 			update_post_meta($course_post_id, 'shareware', 'on');
-// 		}
-//
+ 		if (!empty($price) || $price != 0) {
+ 			update_post_meta($course_post_id, 'shareware', 'on');
+ 		}
+
 		//append faq
 		if($faq_flag) {
 		    $faq_string = build_faq($faq_description);
@@ -96,15 +93,7 @@
 // 		add_course_image($course_post_id, $courseData['id']); // adds the image to the course
 
 // 		this appends the category as a term with the taxonomy relationship to the course ID
-
-// 		$category = $courseData['parent_category'];
-// 		//TODO: Fix the categorization to mimic publications (create terms)
 		$category_arr  = array("Course Category");
-// 		if ($category == 'Satsang Webinars' || $category == 'Text-based Webinars') {
-// 			$category_arr = array("Study Format", $category);
-// 		} else {
-// 			$category_arr = array("Subject Matter", $category);
-// 		}
 
         // Handle Category -----------------------------------------------------------------
         $taxonomy = 'stm_lms_course_taxonomy';
@@ -126,19 +115,6 @@
             echo "Created category " . $parent_cat_name;
             error_log("Created category " . $parent_cat_name);
         }
-
-        // Create or Find Sub Category ID
-//         $sub_cat_name =  $courseData['subcategory_name'];
-//         $subCatTerm = get_term_by( 'name', $sub_cat_name , $taxonomy );
-//         if ( $subCatTerm ) { // if Sub Category Exists already
-//              $sub_category_id = $subCatTerm->term_id;
-//              echo "The ID of the term " . $sub_cat_name . " is: " . $sub_category_id;
-//         } else {
-//             $new_sub_term = wp_insert_term($sub_cat_name, $taxonomy, array('parent'=> $parent_category_id));
-//             $sub_category_id = intval($new_sub_term['term_id']);
-//             echo "Created category " . $sub_cat_name;
-//             error_log("Created category " . $sub_cat_name);
-//         }
         wp_set_object_terms($course_post_id, $parent_category_id,  $taxonomy, $append = true );
 
 	}

@@ -31,6 +31,7 @@ function create_curriculum($course_post_id, $sectionArray, $lessonArray, $type) 
     $combinedNewArray = array();
     $combinedOldArray = array();
     $sectionCount = 1;
+    $totalLessonCount = 0;
 
     foreach ($sectionArray as $sectionID) {
         if (empty($sectionID) || $sectionID == "NULL") {
@@ -40,6 +41,7 @@ function create_curriculum($course_post_id, $sectionArray, $lessonArray, $type) 
         if ($type == 'course') {
             $lessonArray = get_lessons_for_section($sectionID);
         }
+        $totalLessonCount += count($lessonArray);
         $currPostsArray = array();
         // Add Feedback lesson to the last section
         if ($sectionCount == count($sectionArray)) {
@@ -86,6 +88,33 @@ function create_curriculum($course_post_id, $sectionArray, $lessonArray, $type) 
     $old_curriculum_string = implode(",", $combinedOldArray);
     update_post_meta($course_post_id, 'curriculum', $new_curriculum_string);
     update_post_meta($course_post_id, 'curriculum_old', $old_curriculum_string);
+
+    // Update duration for course based on # of lessons
+    $duration = calcDuration($totalLessonCount);
+    update_post_meta($course_post_id, 'duration_info', $duration);
+}
+
+//Helper Function to calculate course duration from lesson hours
+function calcDuration($num) {
+  $oneDay = 24;
+  $oneMonth = 730;
+  $oneYear = 8760;
+
+  if ($num < $oneDay) {
+      return "" . $num . " hours";
+  }
+
+  if ($num < $oneMonth) {
+      return round($num/$oneDay) . " days";
+  }
+
+  if ($num < $oneYear) {
+      return round($num/$oneMonth) . " months";
+  }
+
+  if ($num > $oneYear) {
+      return round($num/$oneYear) . " years";
+  }
 }
 
 // Helper Function to set Prices List
