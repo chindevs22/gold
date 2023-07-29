@@ -30,8 +30,10 @@
 		$wpdata['post_type'] = 'stm-courses';
 		$event_post_id = wp_insert_post( $wpdata );
 		if ($isWebinar) {
+		    update_post_meta($course_post_id, 'mgml_type', 'webinar');
 			update_post_meta($event_post_id, 'mgml_course_id', $eventData['id']);
 		} else {
+            update_post_meta($course_post_id, 'mgml_type', 'event');
 			update_post_meta($event_post_id, 'mgml_ew_id', $eventData['id']);
 		}
 		echo "post id: " . $event_post_id;

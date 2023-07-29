@@ -44,6 +44,7 @@
 
 		echo "Course ID: " . $courseData['id'] . "  Course Post Id: " . $course_post_id . " <br> <br>";
 		update_post_meta($course_post_id, 'mgml_course_id', $courseData['id']);
+		update_post_meta($course_post_id, 'mgml_type', 'course');
 
 		// Generate Curriculum
 		$sectionString = $courseData['section'];

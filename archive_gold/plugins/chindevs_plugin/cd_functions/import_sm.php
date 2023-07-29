@@ -58,6 +58,7 @@
 
         set_prices($sm_post_id, $us_price, $inr_price, "", "");
 		update_post_meta($sm_post_id, 'lite_type', 'shravana_mangalam');
+        update_post_meta($course_post_id, 'mgml_type', 'shravana_mangalam');
 
 		update_post_meta($sm_post_id, 'level', $smData['level']);
 		update_post_meta($sm_post_id, 'current_students', 0);
