@@ -17,11 +17,8 @@ function chindevs_generate_certificate_student_gpa ( $user_id , $course_id ) {
     global $wpdb;
     $table = stm_lms_user_quizzes_name( $wpdb );
 
-	// Calculate Quiz Grade TODO: needs to only take attempt #1
-    $request = "SELECT progress FROM {$table}
-            WHERE
-            user_id = {$user_id} AND
-            course_id = {$course_id}";
+	// Calculate Quiz Grade
+    $request =  "SELECT t1.* FROM {$table} t1 INNER JOIN (SELECT user_id, course_id, quiz_id, MIN(user_quiz_id) AS min_id FROM wp_stm_lms_user_quizzes WHERE user_id =  {$user_id} AND course_id = {$course_id} GROUP BY user_id, quiz_id, course_id) t2 ON t1.user_id = t2.user_id AND t1.course_id = t2.course_id AND t1.quiz_id = t2.quiz_id AND t1.user_quiz_id = t2.min_id where t1.user_id = {$user_id} and t1.course_id = {$course_id}";
 
     // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
     $quiz_grades = $wpdb->get_results( $request, ARRAY_A );
