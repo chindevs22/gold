@@ -8,14 +8,15 @@
 		$wp_user_id = get_user_id('mgml_user_id', $enrolData['user_id']);
         if (!isset($wp_user_id)) {
             error_log("No data for this user: ");
-            return;
+			$wp_user_id = 1;
+//             return;
         }
 
 		if ($type === "sm" || $type === "webinar") {
 			$wp_course_id = get_sm($enrolData['course_id']);
 			progress_user_sm($wp_course_id, $wp_user_id);
 		} else {
-			$wp_course_id = get_sm($enrolData['event_id']);
+			$wp_course_id = get_event_post($enrolData['course_id']);
 		}
 
 		if (!isset($wp_course_id) || $wp_course_id === 0) {
@@ -24,7 +25,7 @@
         }
         echo $wp_course_id;
 
-		echo "User idL " . $wp_user_id;
+		echo "User id " . $wp_user_id;
         $wpdb->insert($table_name, array(
             'user_course_id' => NULL,
             'user_id' => $wp_user_id,
@@ -34,7 +35,7 @@
             'status' => 'enrolled',
             'start_time' => time(),
         ));
-		error_log("inserted into table");
+		error_log("inserted into table: " . $wpdb->insert_id);
         $students = get_post_meta($wp_course_id, 'current_students', true);
         update_post_meta($wp_course_id, 'current_students', $students + 1);
 		error_log("finished enrol");
