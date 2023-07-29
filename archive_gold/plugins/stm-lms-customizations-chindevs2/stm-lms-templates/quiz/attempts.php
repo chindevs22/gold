@@ -40,6 +40,15 @@ $attempts = SLMS_User_Quizzes::get_user_quiz_attempts($post_id, $item_id, $user[
 //        pre_var($last_answers);
 
         $slms_points = 0;
+
+        // ChinDevs Code - calculate total points
+        $total_quiz_points = 0;
+            $questions = get_post_meta( $attempt['quiz_id'], 'questions', true );
+            $questions = ( ! empty( $questions ) ) ? explode( ',', $questions ) : array();
+            foreach($questions as $question) {
+                $total_quiz_points += (int)get_post_meta($question, 'slms_points', true);
+        }
+
         if(count($last_answers)) {
             foreach ($last_answers as $answer) {
                 $question_id = intval($answer['question_id']);
@@ -49,19 +58,14 @@ $attempts = SLMS_User_Quizzes::get_user_quiz_attempts($post_id, $item_id, $user[
             }
         } else {
 			// ChinDevs code to calculate fake points for when user doesn't have USAD
-            $total_quiz_points = 0;
-			$questions = get_post_meta( $attempt['quiz_id'], 'questions', true );
-			$questions = ( ! empty( $questions ) ) ? explode( ',', $questions ) : array();
-            foreach($questions as $question) {
-                $total_quiz_points += (int)get_post_meta($question, 'slms_points', true);
-            }
             $slms_points = $attempt['progress']/100 * $total_quiz_points;
 		}
         ?>
         <tr>
             <td><?php echo $key+1; ?></td>
             <td><?php echo $slms_points; ?></td>
-            <td><?php echo $attempt['progress']; ?>%</td>
+            <!-- 	ChinDevs code to update percent based off slms/total_quiz_points   -->
+            <td><?php echo round($slms_points/$total_quiz_points * 100) ; ?>%</td>
             <td><?php echo ($attempt['status'] == 'passed') ? __('Passed', 'slms') : __('Failed', 'slms'); ?></td>
 			<!-- 	ChinDevs code to only show button if there are details available -->
             <?php if(count($last_answers) > 0): ?>
