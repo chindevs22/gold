@@ -157,7 +157,7 @@ class STM_LMS_User_Assignment {
 			$total_points = 100;
 			update_post_meta($orig_assignment, 'total_points', 100);
 		}
-		$grade = $points_earned/$total_points * 100;
+		$grade = round($points_earned/$total_points) * 100;
         update_post_meta( $assignment_id, 'assignment_grade', $grade );
         update_post_meta( $assignment_id, 'points_earned', $points_earned );
 

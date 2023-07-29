@@ -79,14 +79,14 @@
 			error_log($user_assignment_post_id);
             // Update Metadata
             $date = strtotime($progressData['completion_date'] . "06:00:00") * 1000;
-//			$grade = $progressData['marks']/$progressData['quiz_marks'] * 100; //aka progress
+			$grade = round($progressData['marks']/$progressData['quiz_marks']) * 100; //aka progress
 
 			
             update_post_meta($user_assignment_post_id, 'try_num', $progressData['running_total']);
             update_post_meta($user_assignment_post_id, 'start_time', $date);
             update_post_meta($user_assignment_post_id, 'end_time', $date);
             update_post_meta($user_assignment_post_id, 'mgml_usa_id', $progressData['id']);
-//            update_post_meta($user_assignment_post_id, 'assignment_grade', $grade);
+            update_post_meta($user_assignment_post_id, 'assignment_grade', $grade);
 			update_post_meta($user_assignment_post_id, 'points_earned', $progressData['marks']);
             update_post_meta($user_assignment_post_id, 'who_view', 1);
 
