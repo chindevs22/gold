@@ -9,7 +9,7 @@
 		if(!is_email($userData['email'])) {
 			error_log("User doesn't have a valid email so was not created in our system");
 			error_log(print_r($userData,true));
-			return;
+//			return;
 		}
 
 		//  Create array of User info from CSV data
@@ -45,6 +45,9 @@
 // 			$userMGMLtoWP[$userData['id']] = $user_id;
 			$wp_user->set_role('subscriber');
 			create_meta($userData, $user_id, $userData['id']);
+
+            // Send Password Reset Notification for user
+            wp_new_user_notification($user_id, null, 'both');
 		} else {
 			// user already exists
 			error_log("Updating existing user <br>");
