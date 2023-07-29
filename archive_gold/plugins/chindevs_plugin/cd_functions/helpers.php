@@ -132,7 +132,7 @@ function set_prices($course_post_id, $us_price, $inr_price, $sale_us_price, $sal
      if(isset($inr_price) && $inr_price != "NULL") {
         array_push($price_arr, array(
             "country" => "IN",
-            "currency_symbol" => "\u20A8",
+            "currency_symbol" => "₹",
             "price" => $inr_price,
             "sale_price" => $sale_inr_price
         ));
