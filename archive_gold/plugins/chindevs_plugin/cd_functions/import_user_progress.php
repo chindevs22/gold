@@ -64,12 +64,12 @@ function progress_users_answers_from_csv($answerData) {
     }
     $wp_quiz_id = get_from_post('stm-quizzes', 'mgml_lesson_id', $mgml_quiz_id);
     if (!isset($wp_quiz_id)) {
-        error_log("No data for this quiz: ");
+        error_log("DATA ERROR: No data for this quiz: " . $mgml_quiz_id);
         return;
     }
     $wp_course_id = get_from_post('stm-courses', 'mgml_course_id', $answerData['course_id']);
     if (!isset($wp_course_id)) {
-        error_log("No data for this course: ");
+        error_log("DATA ERROR: No data for this course: ". $answerData['course_id']);
         return;
     }
 
@@ -87,6 +87,10 @@ function progress_users_answers_from_csv($answerData) {
     $chosenAnswers = array();
     for($x = 0; $x < $arrLength; $x++) {
         $correctAnswer = $userAnswers[$x]; //2
+		if (!is_numeric($correctAnswer)) {
+			error_log("Not a integer answer value so quitting");
+			return;
+		}
         array_push($chosenAnswers, $options[$correctAnswer - 1]);
     }
 

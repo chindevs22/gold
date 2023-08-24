@@ -12,11 +12,17 @@ add_action( 'stm_lms_delete_from_cart', 'delete_from_cart_gc', 10, 1 );
 add_filter( 'stm_lms_delete_from_cart_filter', 'delete_from_cart_gc_filter', 10, 1 );
 add_filter( 'stm_lms_cart_items_fields', 'gc_cart_items_fields' );
 add_filter( 'stm_lms_before_create_order', 'stm_lms_before_create_gc_order', 100, 2 );
-add_filter( 'stm_lms_post_types', 'gc_stm_lms_post_types', 10, 1 );
+//add_filter( 'stm_lms_post_types', 'gc_stm_lms_post_types', 10, 1 );
 add_filter( 'stm_lms_accept_order', 'stm_lms_accept_order' );
 add_filter( 'stm_lms_after_single_item_cart_title', 'after_single_item_cart_title_gc');
 add_filter( 'woocommerce_cart_item_name', 'woo_cart_gift_course_name', 999, 3 );
 
+/* STM */
+add_action('init', 'gc_register_post_types');
+add_action('gc_check_user_cart_gift_column', 'gc_check_user_cart_gift_column');
+add_action( 'woocommerce_order_status_processing', 'gc_order_status_success' );
+add_action( 'woocommerce_order_status_completed', 'gc_order_status_success' );
+add_action('woocommerce_checkout_update_order_meta', 'gc_update_order_meta');
 /** ORDER FUNCTIONS **/
 function gc_order_accepted( $user_id, $cart_items ) {
 error_log("here inside woocommerce order accepted");
@@ -50,7 +56,7 @@ error_log("here inside woocommerce order approved");
 
 // TODO: need to re-address ideal functionality
 function gc_order_removed( $course_id, $cart_item ) {
-	stm_lms_get_delete_cart_items( $user_id );
+	// stm_lms_get_delete_cart_items( $user_id );
 }
 
 function stm_lms_before_create_gc_order( $order_meta, $cart_item ) {
@@ -129,6 +135,27 @@ function add_to_cart_gc() {
 		$data['emails'] = array_splice( $_GET['emails'], 0, $limit );
 	}
 
+   foreach ($data['emails'] as $email) {
+        $email = sanitize_email($email);
+        if($recepient = get_user_by('email', $email)) {
+            $user_course = stm_lms_get_user_course($recepient->ID, $item_id);
+            if(count($user_course)) {
+                $key = array_search($email, $data['emails']);
+                unset($data['emails'][$key]);
+            }
+        }
+    }
+
+    if(!count($data['emails'])) {
+        $r['success'] = false;
+        $text = sprintf(
+            esc_html__( 'Add to cart %s', 'masterstudy-lms-learning-management-system-pro' ),
+            '<span>' . STM_LMS_Helpers::display_price( '0' ) . '</span>'
+        );
+        $r['text']     = $text;
+        $r['cart_url'] = '#';
+        wp_send_json( $r );
+    }
 	$emails = ( ! empty( $data['emails'] ) ) ? sanitize_text_field( implode( ',', $data['emails'] ) ) : '';
 	// create a post with the email
 	$gc_email_id = wp_insert_post(
@@ -142,12 +169,14 @@ function add_to_cart_gc() {
 
 	update_post_meta( $gc_email_id, 'emails', $emails );
 	update_post_meta( $gc_email_id, 'author_id', $user_id );
+	update_post_meta( $gc_email_id, 'course_id', $item_id );
 
 	$gift_course = $gc_email_id;
 	$quantity = 1;
 	$price = get_price($item_id);
 	$is_woocommerce = STM_LMS_Cart::woocommerce_checkout_enabled();
 
+    do_action('gc_check_user_cart_gift_column');
 	// check if in cart
 	$item_added = count( check_gift_course_in_cart( $user_id, $item_id, $gift_course, array( 'user_cart_id', 'gift_course' ) ) );
 
@@ -166,9 +195,12 @@ function add_to_cart_gc() {
 		$product_id = create_product( $item_id );
 		error_log("the product ID");
 		error_log($product_id);
-		// Load cart functions which are loaded only on the front-end.
-		include_once WC_ABSPATH . 'includes/wc-cart-functions.php';
-		include_once WC_ABSPATH . 'includes/class-wc-cart.php';
+	
+        if(defined('WC_ABSPATH')) {
+            // Load cart functions which are loaded only on the front-end.
+            include_once WC_ABSPATH . 'includes/wc-cart-functions.php';
+            include_once WC_ABSPATH . 'includes/class-wc-cart.php';
+        }
 
 		if ( is_null( WC()->cart ) ) {
 			wc_load_cart();
@@ -224,7 +256,7 @@ function get_price( $course_id ) {
 }
 
 //** USER FUNCTIONS **/
-function add_users_to_course($emails, $course_id) {
+function add_users_to_course($emails, $course_id, $author_id = 0) {
 	$users    = create_group_users( $emails );
 	if ( ! empty( $users ) ) {
 		foreach ( $users as $id ) {
@@ -235,8 +267,11 @@ function add_users_to_course($emails, $course_id) {
             $user = get_user_by( 'ID', $id );
             $course_title = get_the_title( $course_id );
 
-            gift_course_emails($user, $course_title);
-		}
+              if(!empty($author_id)) {
+                $donor = get_userdata($author_id);
+                gift_course_emails($user, $course_title, $donor);
+            }
+        }
 	}
 }
 
@@ -329,5 +364,71 @@ function has_product( $id ) {
 	 }
 	 return $product_id;
 }
+function gc_register_post_types(){
+    $labels = [
+        'name' => __('GC Emails', 'chindevs'),
+        'singular_name' => __('GC Emails', 'chindevs'),
+        'menu_name' => __('GC Emails', 'chindevs'),
+        'all_items' => __('All GC Emails', 'chindevs'),
+        'add_new' => __('Add New', 'chindevs'),
+        'add_new_item' => __('Add New', 'chindevs'),
+        'edit_item' => __('Edit', 'chindevs'),
+        'new_item' => __('New', 'chindevs'),
+        'view_item' => __('View', 'chindevs'),
+        'search_items' => __('Search', 'chindevs'),
+        'not_found' => __('No GC Emails found', 'chindevs'),
+        'not_found_in_trash' => __('No GC Emails found in trash', 'chindevs')
+    ];
 
+    $args = [
+        'labels' => $labels,
+        'public' => true,
+        'publicly_queryable' => false,
+        'has_archive' => true,
+        'show_in_admin_bar' => true,
+        'show_in_menu' => true,
+        'supports' => ['title', 'editor', 'excerpt', 'thumbnail', 'custom-fields'],
+    ];
+
+    register_post_type('stm-gc-emails', $args);
+}
+
+function gc_check_user_cart_gift_column(){
+    global $wpdb;
+    $table_name = stm_lms_user_cart_name( $wpdb );
+
+    $sql = "ALTER TABLE {$table_name} ADD COLUMN IF NOT EXISTS gift_course mediumint(9);";
+
+    require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+
+    dbDelta( $sql );
+}
+
+function gc_order_status_success($order_id){
+    if ( ! $order = wc_get_order( $order_id ) ) {
+        return;
+    }
+
+    $gift_course_id = (int)get_post_meta($order_id, 'gift_course_id', true);
+    if(!empty($gift_course_id)) {
+        $course_id = (int)get_post_meta($gift_course_id, 'course_id', true);
+        $emails = get_post_meta($gift_course_id, 'emails', true);
+        $author_id = (int)get_post_meta($gift_course_id, 'author_id', true);
+        if(!empty($course_id) && !empty($emails)) {
+            add_users_to_course($emails, $course_id, $author_id);
+        }
+    }
+}
+
+function gc_update_order_meta($order_id){
+    $cartItems = WC()->cart->get_cart();
+    if(!empty($cartItems)) {
+        foreach ($cartItems as $cartItemKey => $cartItem) {
+            $gift_course_id = intval($cartItem['gift_course_id']);
+            if(!empty($gift_course_id)) {
+                update_post_meta($order_id,'gift_course_id',$gift_course_id);
+            }
+        }
+    }
+}
 ?>

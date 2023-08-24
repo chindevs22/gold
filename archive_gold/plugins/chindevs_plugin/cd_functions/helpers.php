@@ -175,7 +175,7 @@ function progress_user_lessons($wp_course_id, $wp_quiz_id, $wp_user_id) {
             'order'          => 'ASC',
             'posts_per_page' => -1, // Retrieve all matching posts
     );
-
+    
     $query = new WP_Query( $args );
 
     $posts = wp_list_pluck( $query->posts, 'ID' );
@@ -318,8 +318,8 @@ function cd_get_posts($post_type, $key, $value) {
     );
     $query = new WP_Query( $args );
     $posts = wp_list_pluck( $query->posts, 'ID' );
-	error_log(print_r($args, true));
-	error_log(print_r($posts, true));
+	//error_log(print_r($args, true));
+	//error_log(print_r($posts, true));
 
     return $posts;
 }

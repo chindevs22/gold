@@ -36,7 +36,11 @@
           if (data.redirect) {
             window.location.replace(data.cart_url);
           } else {
-            $this.html(data.text).attr('href', data.cart_url).removeClass('add-to-cart');
+              if(data.cart_url !== '#') {
+                  $this.html(data.text).attr('href', data.cart_url).removeClass('add-to-cart');
+              } else {
+                  $this.html(data.text).attr('href', data.cart_url);
+              }
           }
         }
       });

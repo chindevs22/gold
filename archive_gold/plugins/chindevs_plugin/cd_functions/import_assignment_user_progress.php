@@ -6,6 +6,7 @@
 
     function progress_users_assignment_from_csv($progressData, $isPostal) {
         global $wpdb;
+		error_log("starting import for row: " . $progressData['id']);
 
         if ($progressData['quiz_marks'] == 0) {
             error_log("DATA ERROR: No quiz marks for the quiz on this row: " . $progressData['id']);
@@ -114,9 +115,11 @@
             ));
             progress_user_lessons($wp_course_id, $wp_quiz_id, $wp_user_id);
         }
+		error_log("ending import for row: " . $progressData['id']);
     }
 
     function progress_user_assignment_answers_from_csv($answerData) {
+		error_log("starting import for row: " . $answerData['id']);
 
         $wp_assignment_id = get_from_post('stm-user-assignment', 'mgml_usa_id', $answerData['self_assessment_id']);
 		
@@ -133,7 +136,14 @@
 			'ID'           => $current_post->ID,
 			'post_content' => $content
 		);
-		wp_update_post($updated_post);
-	
+		
+		$updated_id = wp_update_post($updated_post);
+		
+		if ( is_wp_error( $updated_id ) ) {
+			error_log("DATA ERROR: Something went wrong when updating assignment " . $updated_id->get_error_message());
+		}
+		
+		error_log("ending import for row: " . $answerData['id']);
+
     }
 ?>

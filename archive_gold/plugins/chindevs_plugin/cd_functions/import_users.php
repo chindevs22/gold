@@ -7,9 +7,8 @@
 		global $userMGMLtoWP, $randomEmailCounter;
 
 		if(!is_email($userData['email'])) {
-			error_log("User doesn't have a valid email so was not created in our system");
-			error_log(print_r($userData,true));
-//			return;
+			error_log("DATA ERROR: User doesn't have a valid email so was not created in our system: id of user in row => 0" . $userData['id']);
+			return;
 		}
 
 		//  Create array of User info from CSV data
@@ -33,6 +32,7 @@
 
 				$error_message = $user_id->get_error_message();
 				error_log("Didn't create user because of an error: " . $error_message);
+				error_log("DATA ERROR: User ID that caused an error: " .  $userData['id']);
 				return;
 			}
 
@@ -50,7 +50,7 @@
             wp_new_user_notification($user_id, null, 'both');
 		} else {
 			// user already exists
-			error_log("Updating existing user <br>");
+			error_log("updating existing user: id of user in row => 0" . $userData['id']);
 			$user = get_user_by('login', $wpdata['user_login']);
 			if ($user) {
 				$wpdata['ID'] = $user->ID;
@@ -58,7 +58,7 @@
 // 				$userMGMLtoWP[$userData['id']] = $user_id;
 				create_meta($userData, $user_id, $userData['id']);
 			} else {
-				error_log("ERROR: Could not find existing user <br>");
+				error_log("ERROR: Could not find existing user: id of user in row => 0" . $userData['id'] . "<br>");
 			}
 		}
 	}

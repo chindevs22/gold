@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Chindevs Plugin
  * Description:       Code for all changes made by ChinDevs team
- * Version:           1.0.0
+ * Version:           1.0.1
  * Author:            Chin Devs
  * Author URI:        https://www.alecrust.com/
  * Text Domain:       chindevs
@@ -266,12 +266,13 @@ function create_lite_data() {
 
 // 	echo " <br> <br> STARTING EVENT<br> <br> ";
 // 	read_lite_csv("cd-event-docs/webinar_courses.csv", "webinar");
+// 	read_lite_csv("cd-event-docs/event_courses.csv", "event");
 // 	echo " <br> <br> ENDING EVENT <br> <br> ";
 
-// 	echo " <br> <br> STARTING ENROLL EVENT<br> <br> ";
+	echo " <br> <br> STARTING ENROLL EVENT<br> <br> ";
 // 	read_lite_csv("cd-event-docs/enrol_webinars.csv", "user_webinar");
-// 	echo " <br> <br> ENDING ENROLL EVENT<br> <br> ";
-//    read_lite_csv("cd-event-docs/user_event.csv", "user_event");
+	read_lite_csv("cd-event-docs/enrol_event.csv", "user_event");
+	echo " <br> <br> ENDING ENROLL EVENT<br> <br> ";
 
 // 	// SM FILES
 // 	echo " <br> <br> STARTING SM LESSONS <br> <br> ";
@@ -318,8 +319,12 @@ function read_lite_csv($file_name, $type) {
             create_event_lesson_from_csv($tempArray);
         } else if ($type == "webinar") {
             create_event_from_csv($tempArray, true);
+		} else if ($type == "event") {
+		    create_event_from_csv($tempArray, false);
         } else if ($type == "user_webinar") {
             enrol_sm_users_from_csv($tempArray, "webinar");
+	    } else if ($type == "user_event") {
+	        enrol_sm_users_from_csv($tempArray, "event");
         } else if ($type == "sm_lesson") { //utilizes the defailt create lesson
             create_sm_lesson_from_csv($tempArray);
         } else if ($type == "shravana_mangalam") { //utilizes the defailt create lesson
@@ -366,6 +371,16 @@ function stm_lms_assignment_field($fields) {
 		'type'  => 'number',
 		'label' => esc_html__( 'Assignment Grade', 'masterstudy-lms-learning-management-system-pro' ),
 	);
+	$fields['stm_student_assignment']['section_group']['fields']['status'] = array(
+        'type'  => 'select',
+        'label' => esc_html__( 'Status', 'masterstudy-lms-learning-management-system-pro' ),
+        'options' => [
+            '' => __('Not selected', 'masterstudy-lms-learning-management-system-pro'),
+            'not_passed' => __('Not Passed', 'masterstudy-lms-learning-management-system-pro'),
+            'passed' => __('Passed', 'masterstudy-lms-learning-management-system-pro'),
+        ],
+        'default' => ''
+    );
 	$fields['stm_student_assignment']['section_group']['fields']['points_earned'] = array(
         'type'  => 'number',
         'label' => esc_html__( 'Points Earned', 'masterstudy-lms-learning-management-system-pro' ),
@@ -558,7 +573,7 @@ function user_missing_profile_fields($user) {
     }
 }
 
-add_action( 'stm_lms_template_main', 'my_custom_banner', 10 );
+// add_action( 'stm_lms_template_main', 'my_custom_banner', 10 );
 function my_custom_banner() {
     $user = wp_get_current_user();
     if (user_missing_profile_fields($user)) {
