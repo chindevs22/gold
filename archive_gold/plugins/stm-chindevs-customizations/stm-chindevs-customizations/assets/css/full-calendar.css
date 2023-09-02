@@ -1,0 +1,32 @@
+.fc td, .fc th {
+    background-color: #fff;
+    color: #0d8383;
+}
+.fc td a.fc-daygrid-day-number, .fc th a.fc-col-header-cell-cushion {
+    color: inherit;
+}
+.fc .fc-col-header {
+    margin-bottom: 0;
+}
+.fc .fc-scrollgrid-sync-table {
+    margin-bottom: 0;
+}
+.fc .fc-button {
+    min-height: 40px;
+}
+.fc .fc-event {
+    padding: 2px 5px;
+    background-color: #0d8383;
+    color: #fff;
+}
+.fc .fc-event:hover {
+    background-color: #0d8383;
+    color: #fff;
+}
+.fc .fc-event .fc-daygrid-event-dot {
+    display: none;
+}
+
+.fc .fc-button-primary {
+    background-color: #07294D;
+}
