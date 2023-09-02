@@ -100,8 +100,6 @@
             $inr_price = isset($lowestINRPrice) ? $lowestINRPrice : 0;
         }
 
-        update_post_meta($event_post_id, 'price', $us_price);
-
         set_prices($event_post_id, $us_price, $inr_price, "", "");
 
         update_post_meta($event_post_id, 'level', $eventData['level']);

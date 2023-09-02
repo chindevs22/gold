@@ -54,7 +54,6 @@
 		// Handling Pricing
 		$us_price = $smData['price_usd'];
 		$inr_price = $smData['price'];
-		update_post_meta($sm_post_id, 'price', $us_price);
 
         set_prices($sm_post_id, $us_price, $inr_price, "", "");
 		update_post_meta($sm_post_id, 'lite_type', 'shravana_mangalam');

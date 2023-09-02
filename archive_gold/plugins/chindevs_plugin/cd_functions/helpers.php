@@ -118,26 +118,16 @@ function calcDuration($num) {
 }
 
 // Helper Function to set Prices List
-function set_prices($course_post_id, $us_price, $inr_price, $sale_us_price, $sale_inr_price){
-    $price_arr = array();
-    if(isset($us_price) && $us_price != "NULL") {
-        array_push($price_arr, array(
-            "country" => "US",
-            "currency_symbol" => "$",
-            "price" => $us_price,
-            "sale_price" => $sale_us_price
-        ));
-    }
+function set_prices($course_post_id, $us_price, $inr_price, $sale_us_price, $sale_inr_price) {
+    // US prices
+    update_post_meta($course_post_id, 'price', $us_price);
+	update_post_meta($course_post_id, 'sale_price', $sale_us_price);
 
+	// INR prices
      if(isset($inr_price) && $inr_price != "NULL") {
-        array_push($price_arr, array(
-            "country" => "IN",
-            "currency_symbol" => "₹",
-            "price" => $inr_price,
-            "sale_price" => $sale_inr_price
-        ));
+       update_post_meta($course_post_id, 'price_saarc', $inr_price);
+       update_post_meta($course_post_id, 'sale_price_saarc', $sale_inr_price);
     }
-    update_post_meta($course_post_id, 'prices_list', json_encode($price_arr));
 }
 
 // Helper Function to set progress for all lessons

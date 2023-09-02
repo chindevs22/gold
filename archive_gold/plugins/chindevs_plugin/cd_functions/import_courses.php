@@ -64,8 +64,6 @@
         if ($sale_inr_price == 0 || $sale_inr_price == "NULL") {
             $sale_inr_price = "";
         }
-		update_post_meta($course_post_id, 'price', $us_price);
-		update_post_meta($course_post_id, 'sale_price', $sale_inr_price);
 
         //Set Prices
         set_prices($course_post_id, $us_price, $inr_price, $sale_us_price, $sale_inr_price);
