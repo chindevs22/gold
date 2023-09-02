@@ -48,18 +48,18 @@ $attempts = SLMS_User_Quizzes::get_user_quiz_attempts($post_id, $item_id, $user[
         $questions = get_post_meta( $attempt['quiz_id'], 'questions', true );
         $questions = ( ! empty( $questions ) ) ? explode( ',', $questions ) : array();
         foreach($questions as $question) {
-            $total_quiz_points += (int)get_post_meta($question, 'slms_points', true);`
+            $total_quiz_points += (int)get_post_meta($question, 'slms_points', true);
         }
 
         // ChinDevs Code - if stored points exist, use it
         if(isset($attempt['stored_points']) && !empty($attempt['stored_points'])) {
             $points_to_display = $attempt['stored_points'];
         } else {
-            $points_earned = round($attempt['progress'] * $total_quiz_points / 100);
+            $points_earned = round($attempt['progress'] * $total_quiz_points / 100, 2);
             $points_to_display = $points_earned . '/' . $total_quiz_points;
         }
-//      ChinDevs code to calculate fake points for when user doesn't have USAD or stored_points data
 //        else {
+//			// ChinDevs code to calculate fake points for when user doesn't have USAD
 //            $total_quiz_points = 0;
 //			$questions = get_post_meta( $attempt['quiz_id'], 'questions', true );
 //			$questions = ( ! empty( $questions ) ) ? explode( ',', $questions ) : array();
