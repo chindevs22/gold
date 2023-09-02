@@ -178,9 +178,11 @@ class SLMS_Course_Price {
 
         $post_id = (empty($post_id)) ? get_the_ID() : $post_id;
 
-        if(self::get_prices_list($post_id)) {
-            $symbol = self::get_currency($post_id);
-        }
+        // ChinDevs code to fix SAARC currency issue - no need for if statement
+        $symbol = self::get_currency($post_id);
+//        if(self::get_prices_list($post_id)) {
+//            $symbol = self::get_currency($post_id);
+//        }
 
 //        if($list = self::get_prices_list($post_id)) {
 //            $countrycode = SLMS_IP_Info::get_ip_info();
