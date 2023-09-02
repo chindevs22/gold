@@ -35,6 +35,7 @@ function progress_users_quiz_from_csv($progressData) {
     }
 
     $grade = $progressData['marks']/$progressData['quiz_marks'] * 100; //aka progress
+    $stored_points = $progressData['marks'] . '/' . $progressData['quiz_marks']; // the stored points variable
 
     $wpdb->insert($table_name, array(
         'user_quiz_id' => NULL,
@@ -42,6 +43,7 @@ function progress_users_quiz_from_csv($progressData) {
         'course_id' => $wp_course_id,
         'quiz_id' => $wp_quiz_id,
         'progress' => $grade,
+        'stored_points' => $stored_points,
         'status' => 'passed',
         'sequency' => '[]',
     ));
