@@ -58,8 +58,8 @@ $attempts = SLMS_User_Quizzes::get_user_quiz_attempts($post_id, $item_id, $user[
             $points_earned = round($attempt['progress'] * $total_quiz_points / 100);
             $points_to_display = $points_earned . '/' . $total_quiz_points;
         }
+//      ChinDevs code to calculate fake points for when user doesn't have USAD or stored_points data
 //        else {
-//			// ChinDevs code to calculate fake points for when user doesn't have USAD
 //            $total_quiz_points = 0;
 //			$questions = get_post_meta( $attempt['quiz_id'], 'questions', true );
 //			$questions = ( ! empty( $questions ) ) ? explode( ',', $questions ) : array();
