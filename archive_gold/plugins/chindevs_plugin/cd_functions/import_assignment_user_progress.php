@@ -45,7 +45,7 @@
 				 return;
 			 }
 
-			 if(empty(get_post_meta($wp_assignment_id, 'total_points', true)) {
+			 if(empty(get_post_meta($wp_assignment_id, 'total_points', true))) {
 			    echo "Updating Assignment Total Points for " . $wp_assignment_id;
 			    update_post_meta($wp_assignment_id, 'total_points', $progressData['quiz_marks']);
 			 }
