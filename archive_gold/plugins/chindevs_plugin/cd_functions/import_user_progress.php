@@ -97,7 +97,8 @@ function progress_users_answers_from_csv($answerData) {
     }
 
     $answerString = implode(",", $chosenAnswers); // comma seperated string of answers
-    $isCorrect = ($answerData['question_marks'] == $answerData['marks_obtained']) ? "1" : "0";
+    $isCorrect = ($answerData['question_marks'] != 0) ? "1" : "0"; // Changed for Partial Points
+//    $isCorrect = ($answerData['question_marks'] == $answerData['marks_obtained']) ? "1" : "0";
 
     $attempts = $answerData['running_total'];
     if (empty($attempts) || $attempts == "NULL") {
