@@ -147,9 +147,9 @@ function create_course_data() {
 //     read_csv("cd-courses-docs/question.csv", "question");
 // 	echo "<br> <br>  DONE WITH QUESTIONS <br> <br> ";
 
-	echo " <br> <br> STARTING LESSONS <br> <br> ";
-    read_csv("cd-courses-docs/obj_lessons.csv", "lesson");
-	echo "<br> <br>  DONE WITH LESSONS <br> <br> ";
+//	echo " <br> <br> STARTING LESSONS <br> <br> ";
+//    read_csv("cd-courses-docs/obj_lessons.csv", "lesson");
+//	echo "<br> <br>  DONE WITH LESSONS <br> <br> ";
 
 // 	echo " <br> <br> STARTING ASSIGNMENT <br> <br> ";
 // 	read_csv("cd-courses-docs/subj_lessons.csv", "assignment");
@@ -158,14 +158,14 @@ function create_course_data() {
 //  echo " <br> <br> STARTING POSTAL ASSIGNMENT<br> <br> ";
 // 	read_csv("cd-courses-docs/pos_lessons.csv", "postal");
 // 	echo "<br> <br>  DONE WITH POSTAL ASSIGNMENT<br> <br> ";
-  
+
 // 	echo " <br> <br> STARTING COURSES <br> <br> ";
 //  read_csv("cd-courses-docs/dm_courses.csv", "course");
 // 	echo "<br> <br>  DONE WITH COURSES <br> <br> ";
 
-// 	echo " <br> <br> STARTING USERS <br> <br> "; //two user files
-//  read_csv("cd-courses-docs/DM_USERS.csv", "user");
-// 	echo " <br> <br> ENDING USERS <br> <br> ";
+ 	echo " <br> <br> STARTING USERS <br> <br> "; //two user files
+  read_csv("cd_docs/DMN_USERS7.csv", "user");
+ 	echo " <br> <br> ENDING USERS <br> <br> ";
 
 // 	echo " <br> <br> STARTING USER ASSESSMENT <br> <br> ";
 //     read_csv("cd-courses-docs/small/usa_obj.csv", "userquiz");
@@ -178,9 +178,9 @@ function create_course_data() {
 // 	echo " <br> <br> STARTING USER ASSESSMENT FOR POSTAL <br> <br> ";
 //    read_csv("cd-courses-docs/usa_pos.csv", "userassignmentpostal");
 // 	echo " <br> <br> ENDING USER  ASSESSMENT FOR POSTAL <br> <br> ";
-	
+
 // 	echo " <br> <br> STARTING USER ASSESSMENT DETAILS FOR ASSIGNMENTS <br> <br> ";
-	//     read_csv("postal_usad.csv", "userassignmentanswers");
+//     read_csv("postal_usad.csv", "userassignmentanswers");
 // 	echo " <br> <br> ENDING USER ASSESSMENT DETAILS  FOR ASSIGNMENTS <br> <br> ";
 
 // 	echo " <br> <br> STARTING USER ASSESSMENT DETAILS <br> <br> ";
