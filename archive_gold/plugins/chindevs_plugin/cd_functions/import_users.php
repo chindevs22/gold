@@ -6,10 +6,10 @@
 	function create_user_from_csv($userData) {
 		global $userMGMLtoWP, $randomEmailCounter;
 
-		if(!is_email($userData['email'])) {
-			error_log("DATA ERROR: User doesn't have a valid email so was not created in our system: id of user in row => 0" . $userData['id']);
-			return;
-		}
+// 		if(!is_email($userData['email'])) {
+// 			error_log("DATA ERROR: User doesn't have a valid email so was not created in our system: id of user in row => 0" . $userData['id']);
+// 			return;
+// 		}
 
 		//  Create array of User info from CSV data
 		$wpdata['user_pass'] = "NewPassword!";
@@ -18,7 +18,7 @@
 		$wpdata['first_name'] = $userData['first_name'];
 		$wpdata['last_name'] = $userData['last_name'];
 		$wpdata['display_name'] = $userData['first_name'];
-        $wpdata['user_email'] = "chindevsRound1" . $randomEmailCounter . "@gmail.com";
+        $wpdata['user_email'] = "datamigration1" . $randomEmailCounter . "@chinfo.org";
         $randomEmailCounter += 1;
 
 		//  $wpdata['user_email'] = $userData['email']; TODO: Add back the actual email
