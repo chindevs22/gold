@@ -278,13 +278,15 @@ class SLMS_Quiz {
 
                 $slms_points = (int)get_post_meta($question_id, 'slms_points', true);
 
-                if($type_question == 'multi_choice') {
-                    $multi_choice_data = self::check_multi_choice_answer( $question_id, $answer, $answers_list[$question_id] );
-                    $correct_answer = $multi_choice_data['correct_answer'];
-                    $question_score = $multi_choice_data['question_score'];
-
-                    $slms_points = ($question_score > 0 && $slms_points > 0) ? round(($question_score / 100) * $slms_points) : 0;
-                } elseif($type_question == 'item_match') {
+//              ChinDevs code change to not have partial points for multiple choice
+//                    if($type_question == 'multi_choice') {
+//                    $multi_choice_data = self::check_multi_choice_answer( $question_id, $answer, $answers_list[$question_id] );
+//                    $correct_answer = $multi_choice_data['correct_answer'];
+//                    $question_score = $multi_choice_data['question_score'];
+//
+//                    $slms_points = ($question_score > 0 && $slms_points > 0) ? round(($question_score / 100) * $slms_points) : 0;
+//                } else
+                if($type_question == 'item_match') {
                     $item_match_data = self::check_item_match_answer( $question_id, $answer, $answers_list[$question_id] );
                     $correct_answer = $item_match_data['correct_answer'];
                     $question_score = $item_match_data['question_score'];
