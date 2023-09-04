@@ -7,26 +7,26 @@ stm_lms_register_style( 'instructor_courses' );
 
 stm_lms_register_style( 'expiration/main' );
 
-wp_enqueue_style( 'slms-full-calendar', SLMS_URL . 'assets/css/full-calendar.css', array( 'stm_theme_styles' ), SLMS_VERSION, 'all' );
-wp_enqueue_script( 'slms-full-calendar', SLMS_URL . 'assets/js/full-calendar.min.js', array( 'jquery' ), SLMS_VERSION, true );
-wp_enqueue_script( 'slms-calendar-init', SLMS_URL . 'assets/js/calendar-init.js', array( 'jquery' ), SLMS_VERSION, true );
-wp_localize_script('slms-calendar-init', 'slms_calendar', array('events' => SLMS_Events::get_courses_events([], 'courses') ));
+// wp_enqueue_style( 'slms-full-calendar', SLMS_URL . 'assets/css/full-calendar.css', array( 'stm_theme_styles' ), SLMS_VERSION, 'all' );
+// wp_enqueue_script( 'slms-full-calendar', SLMS_URL . 'assets/js/full-calendar.min.js', array( 'jquery' ), SLMS_VERSION, true );
+// wp_enqueue_script( 'slms-calendar-init', SLMS_URL . 'assets/js/calendar-init.js', array( 'jquery' ), SLMS_VERSION, true );
+// wp_localize_script('slms-calendar-init', 'slms_calendar', array('events' => SLMS_Events::get_courses_events([], 'courses') ));
 
 ?>
-// Chindevs - Remove Course Calendar from First tab
-//<div class="slms-calendar-section">
-//
-//    <div class="stm_lms_user_info_top">
-//        <h3><?php _e( 'Calendar', 'slms' ); ?></h3>
-//    </div>
-//
-//    <div class="row">
-//        <div class="col-sm-6">
-//            <div class="slms-calendar" id="slms-calendar"></div>
-//        </div>
-//    </div>
-//
-//</div>
+<!--  Chindevs - Remove Course Calendar from First tab
+<div class="slms-calendar-section">
+
+    <div class="stm_lms_user_info_top">
+        <h3><?php _e( 'Calendar', 'slms' ); ?></h3>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="slms-calendar" id="slms-calendar"></div>
+        </div>
+    </div>
+
+</div> -->
 
 
 <div class="stm_lms_user_info_top">
