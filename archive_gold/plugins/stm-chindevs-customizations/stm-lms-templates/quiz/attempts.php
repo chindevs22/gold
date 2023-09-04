@@ -40,6 +40,11 @@ $attempts = SLMS_User_Quizzes::get_user_quiz_attempts($post_id, $item_id, $user[
             $key+1
         );
 
+		// ChinDevs code to Sort the last answers array by 'question_id' in ascending order
+		usort($last_answers, function ($a, $b) {
+			return $a['question_id'] - $b['question_id'];
+		});
+
         $points_to_display = '';
         $slms_points = 0;
 
@@ -76,7 +81,7 @@ $attempts = SLMS_User_Quizzes::get_user_quiz_attempts($post_id, $item_id, $user[
             <td><?php echo $attempt['progress']; ?>%</td>
             <td><?php echo ($attempt['status'] == 'passed') ? __('Passed', 'slms') : __('Failed', 'slms'); ?></td>
 			<!-- 	ChinDevs code to only show button if there are details available -->
-            <?php if(count($last_answers) > 0): ?> 
+            <?php if(count($last_answers) > 0): ?>
 			<td>
                 <a href="#attempt-details-<?php echo $key+1; ?>"
                    onclick="return false;"
@@ -87,17 +92,19 @@ $attempts = SLMS_User_Quizzes::get_user_quiz_attempts($post_id, $item_id, $user[
                     <i class="fa fa-chevron-down"></i>
                 </a>
             </td>
-			<?php else: ?> 
+			<?php else: ?>
 			<td>
 				<?php _e('No Answers Recorded', 'slms'); ?>
 			</td>
-			<?php endif; ?> 
+			<?php endif; ?>
         </tr>
         <tr id="attempt-details-<?php echo $key+1; ?>" class="collapse">
             <td colspan="5">
                 <?php
                 $answers = [];
                 if(count($last_answers)) {
+					error_log("what is in last answer?");
+					error_log(print_r($last_answers, true));
                     foreach($last_answers as $answer) {
                         $question_id = intval($answer['question_id']);
                         $answers[] = array(
