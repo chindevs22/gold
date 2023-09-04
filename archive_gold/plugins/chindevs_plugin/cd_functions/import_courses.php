@@ -72,7 +72,7 @@
 		update_post_meta($course_post_id, 'current_students', 0);
 
 // 		Make Trial Course
- 		if (!empty($price) || $price != 0) {
+ 		if (!empty($us_price) || $us_price != 0) {
  			update_post_meta($course_post_id, 'shareware', 'on');
  		}
 
