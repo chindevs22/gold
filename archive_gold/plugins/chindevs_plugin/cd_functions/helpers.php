@@ -31,6 +31,7 @@ function create_curriculum($course_post_id, $sectionArray, $lessonArray, $type) 
     $combinedNewArray = array();
     $combinedOldArray = array();
     $sectionCount = 1;
+    $firstSection = true;
     $totalLessonCount = 0;
 
     foreach ($sectionArray as $sectionID) {
@@ -67,10 +68,11 @@ function create_curriculum($course_post_id, $sectionArray, $lessonArray, $type) 
         $curr_materials_table_name = 'wp_stm_lms_curriculum_materials';
         $lessonCount = 1;
         foreach($lessonArray as $lessonID) {
-            if ($lessonCount == 1 && $sectionCount == 1) {
+            if ($lessonCount == 1 && $firstSection) {
                 //First Lesson in First Section - populate free lesson url, preview on
                 update_post_meta($course_post_id, 'free_lesson', $lessonID);
                 update_post_meta($lessonID, 'preview', 'on');
+                $firstSection = false;
             }
             $post_type = get_post_type($lessonID);
             $wpdb->insert($curr_materials_table_name, array(
