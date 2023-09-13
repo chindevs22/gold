@@ -103,8 +103,6 @@ $attempts = SLMS_User_Quizzes::get_user_quiz_attempts($post_id, $item_id, $user[
                 <?php
                 $answers = [];
                 if(count($last_answers)) {
-					error_log("what is in last answer?");
-					error_log(print_r($last_answers, true));
                     foreach($last_answers as $answer) {
                         $question_id = intval($answer['question_id']);
                         $answers[] = array(
@@ -123,6 +121,7 @@ $attempts = SLMS_User_Quizzes::get_user_quiz_attempts($post_id, $item_id, $user[
                     <thead>
                     <tr>
                         <th><?php _e('Question', 'slms'); ?></th>
+                        <th><?php _e('User Answer', 'slms'); ?></th>
                         <th><?php _e('Status', 'slms'); ?></th>
                     </tr>
                     </thead>
@@ -130,6 +129,7 @@ $attempts = SLMS_User_Quizzes::get_user_quiz_attempts($post_id, $item_id, $user[
                     <?php foreach($answers as $answer): ?>
                     <tr>
                         <td><?php echo $answer['title']; ?></td>
+                        <td><span class="<?php echo $answer['correct_class']; ?>"><?php echo $answer['answer']; ?></span></td>
                         <td><span class="<?php echo $answer['correct_class']; ?>"><?php echo $answer['correct']; ?></span></td>
                     </tr>
                     <?php endforeach; ?>
