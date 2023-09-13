@@ -36,6 +36,7 @@ $attempts = SLMS_User_Quizzes::get_user_quiz_attempts($post_id, $item_id, $user[
                 'quiz_id',
                 'user_answer',
                 'correct_answer',
+                'attempt_number'
             ),
             $key+1
         );
@@ -105,6 +106,7 @@ $attempts = SLMS_User_Quizzes::get_user_quiz_attempts($post_id, $item_id, $user[
                 if(count($last_answers)) {
                     foreach($last_answers as $answer) {
                         $question_id = intval($answer['question_id']);
+                        $attempt_number = intval($answer['attempt_number']);
                         $answers[] = array(
                             'id' => $question_id,
                             'title' => get_the_title($question_id),
