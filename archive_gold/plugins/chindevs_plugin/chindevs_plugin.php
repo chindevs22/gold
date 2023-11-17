@@ -163,9 +163,9 @@ function create_course_data() {
 //  read_csv("cd-courses-docs/dm_courses.csv", "course");
 // 	echo "<br> <br>  DONE WITH COURSES <br> <br> ";
 
- 	echo " <br> <br> STARTING USERS <br> <br> "; //two user files
-  read_csv("cd_docs/DMN_USERS7.csv", "user");
- 	echo " <br> <br> ENDING USERS <br> <br> ";
+// 	echo " <br> <br> STARTING USERS <br> <br> "; //two user files
+//  read_csv("cd_docs/DMN_USERS7.csv", "user");
+// 	echo " <br> <br> ENDING USERS <br> <br> ";
 
 // 	echo " <br> <br> STARTING USER ASSESSMENT <br> <br> ";
 //     read_csv("cd-courses-docs/small/usa_obj.csv", "userquiz");

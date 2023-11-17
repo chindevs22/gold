@@ -17,7 +17,7 @@
 			$wpdata['post_content'] = $lessonData['summary'];
 			$questionArray = get_questions_for_quiz($lessonData['id']);
 			if (empty($questionArray)) {
-				error_log("No questions available for Quiz " . $lessonData['id'] . "  so not making <br> ");
+				error_log("ERROR: No questions available for Quiz " . $lessonData['id'] . "  so not making <br> ");
 				echo "No questions available for Quiz " . $lessonData['id'] . "  so not making <br> ";
 				return;
 			}
@@ -65,7 +65,7 @@
 				  error_log(print_r($questionString, true));
 				  update_post_meta($lesson_post_id, 'questions', $questionString);
 			  } else {
-				  echo "Second No questions available for Quiz " . $lessonData['id'] . "  <br> ";
+				  echo "ERROR: Second No questions available for Quiz " . $lessonData['id'] . "  <br> ";
 			  }
 		} else if ($lessonData['lesson_type'] == 'video') {
 			//video post meta

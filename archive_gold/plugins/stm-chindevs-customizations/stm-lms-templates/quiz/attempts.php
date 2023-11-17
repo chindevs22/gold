@@ -10,6 +10,33 @@ $user = STM_LMS_User::get_current_user();
 
 $attempts = SLMS_User_Quizzes::get_user_quiz_attempts($post_id, $item_id, $user['id']);
 
+function get_justification( $question_id ) {
+	return get_post_meta( $question_id, 'question_explanation', true);
+}
+function get_correct_answer( $question_id ) {
+	$answers = ! empty( $answers ) ? $answers : get_post_meta( $question_id, 'answers', true );
+    $correct_answers = array();
+
+    if ( empty( $answers ) ) {
+        return $correct_answers;
+    }
+    $type  = get_post_meta( $question_id, 'type', true );
+    foreach ( $answers as $stored_answer ) {
+        $full_answer = $stored_answer['text'];
+        if ( ! empty( $stored_answer['text_image']['url'] ) ) {
+            $full_answer .= '|' . esc_url( $stored_answer['text_image']['url'] );
+        }
+
+        if ( $stored_answer['isTrue'] ) {
+            array_push($correct_answers, $full_answer);
+            if ($type == 'single_choice') {
+                break;
+            }
+        }
+
+    }
+    return implode(', ', $correct_answers);
+}
 ?>
 <?php if(count($attempts)): ?>
 <span class="stm-lms-single_quiz__label"></span>
@@ -124,6 +151,8 @@ $attempts = SLMS_User_Quizzes::get_user_quiz_attempts($post_id, $item_id, $user[
                     <tr>
                         <th><?php _e('Question', 'slms'); ?></th>
                         <th><?php _e('User Answer', 'slms'); ?></th>
+						<th><?php _e('Correct Answer', 'slms'); ?></th>
+						<th><?php _e('Justification', 'slms'); ?></th>
                         <th><?php _e('Status', 'slms'); ?></th>
                     </tr>
                     </thead>
@@ -132,6 +161,8 @@ $attempts = SLMS_User_Quizzes::get_user_quiz_attempts($post_id, $item_id, $user[
                     <tr>
                         <td><?php echo $answer['title']; ?></td>
                         <td><span class="<?php echo $answer['correct_class']; ?>"><?php echo $answer['answer']; ?></span></td>
+						<td><span class="<?php echo $answer['correct_class']; ?>"><?php echo get_correct_answer( $answer['id']); ?></span></td>
+						<td><span class="<?php echo $answer['correct_class']; ?>"><?php echo get_justification( $answer['id']) ?></span></td>
                         <td><span class="<?php echo $answer['correct_class']; ?>"><?php echo $answer['correct']; ?></span></td>
                     </tr>
                     <?php endforeach; ?>
@@ -143,4 +174,4 @@ $attempts = SLMS_User_Quizzes::get_user_quiz_attempts($post_id, $item_id, $user[
     <?php endforeach; ?>
     </tbody>
 </table>
-<?php endif; ?>
+<?php endif; ?>F

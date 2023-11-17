@@ -7,10 +7,12 @@
     function progress_users_assignment_from_csv($progressData, $isPostal) {
         global $wpdb;
 		error_log("starting import for row: " . $progressData['id']);
-
-        if ($progressData['quiz_marks'] == 0) {
-            error_log("DATA ERROR: No quiz marks for the quiz on this row: " . $progressData['id']);
-            return;
+        $quiz_marks = $progressData['quiz_marks'];
+        $marks = $progressData['marks'];
+        if ($quiz_marks == 0) {
+            error_log("DATA NOTICE: No quiz marks for the quiz on this row - using 1: " . $progressData['id']);
+            $quiz_marks = 1;
+            $marks = 1;
         }
 
         $mgml_user_id = $progressData['user_id'];
@@ -47,7 +49,7 @@
 
 			 if(empty(get_post_meta($wp_assignment_id, 'total_points', true))) {
 			    echo "Updating Assignment Total Points for " . $wp_assignment_id;
-			    update_post_meta($wp_assignment_id, 'total_points', $progressData['quiz_marks']);
+			    update_post_meta($wp_assignment_id, 'total_points', $quiz_marks);
 			 }
 
 			
@@ -80,7 +82,7 @@
 			error_log($user_assignment_post_id);
             // Update Metadata
             $date = strtotime($progressData['completion_date'] . "06:00:00") * 1000;
-			$grade = round($progressData['marks']/$progressData['quiz_marks']) * 100; //aka progress
+			$grade = round($marks/$quiz_marks) * 100; //aka progress
 
 			
             update_post_meta($user_assignment_post_id, 'try_num', $progressData['running_total']);
@@ -88,7 +90,7 @@
             update_post_meta($user_assignment_post_id, 'end_time', $date);
             update_post_meta($user_assignment_post_id, 'mgml_usa_id', $progressData['id']);
             update_post_meta($user_assignment_post_id, 'assignment_grade', $grade);
-			update_post_meta($user_assignment_post_id, 'points_earned', $progressData['marks']);
+			update_post_meta($user_assignment_post_id, 'points_earned', $marks);
             update_post_meta($user_assignment_post_id, 'who_view', 1);
 
             if(!empty($progressData['remarks']) &&  $progressData['remarks'] != "NULL") {
@@ -102,7 +104,7 @@
                 error_log("No data for this quiz: ");
                 return;
             }
-            $grade = $progressData['marks']/$progressData['quiz_marks'] * 100; //aka progress
+            $grade = $marks/$quiz_marks * 100; //aka progress
 
             $wpdb->insert($table_name, array(
                 'user_quiz_id' => NULL,

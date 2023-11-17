@@ -15,7 +15,7 @@
 						continue;
 					}
 					if(get_term_meta($term->term_id, 'lite_category_name', true) !== $lite_category_name) {
-                        continue;
+                    c    continue;
                     }
                 } else {
                     if(!empty(get_term_meta($term->term_id,'is_lite_category', true))) {

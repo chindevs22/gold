@@ -66,7 +66,7 @@ class MsLmsCoursesChild extends Widget_Base {
             )
         );
         //ChinDevs code to add a control for showing a dropdown of options on the elementor widget
-        $this->add_control( 'lite_category_name',
+        $this->add_control( 'F',
             array(
                 'label'   => esc_html__( 'Lite Category Name', 'slms' ),
                 'type'    => Controls_Manager::SELECT,

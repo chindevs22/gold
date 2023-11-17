@@ -1,11 +1,13 @@
 <?php
+use MasterStudy\Lms\Repositories\CurriculumMaterialRepository;
+use MasterStudy\Lms\Repositories\CurriculumRepository;
+
 	// --------------------------------------------------------------------------------------------
 	// UPDATE COURSES
 	// --------------------------------------------------------------------------------------------
     require_once 'helpers.php';
 
-
-    // Expect $linkingData row to have mgml_lesson_id, mgml_course_id, attachment, audio_url
+	// Expect $linkingData row to have mgml_lesson_id, mgml_course_id, attachment, audio_url
     // Update Button Code
     // Link PDFs to real location
     function update_lesson_with_pdf($linkingData) {
@@ -13,13 +15,16 @@
         error_log("WP Lesson ID being updated: " . $wp_lesson_id);
 
         $file_content = '';
+		$embedded_audio = '';
         if (isset($linkingData['attachment']) && $linkingData['attachment'] != "NULL") {
             $link = '/wp-content/uploads/cd_media/lesson_materials/course_'.$linkingData['mgml_course_id'].'/'.$linkingData['attachment'];
             error_log("Crafted PDF Link path: " . $link);
-            $file_content = '<a class="elementor-button elementor-button-link elementor-size-md study_material" title="Study Material" href="/wp-content/plugins/pdfjs-viewer-shortcode/pdfjs/web/viewer.php?file='.$link.'" target="_blank" rel="noopener"><img class="pdf_img" src="/wp-content/uploads/2023/10/pdf.png" width="24" height="24" /> Study Material</a></p>
+            $file_content = '<a class="elementor-button elementor-button-link elementor-size-md study_material" title="Study Material" href="/wp-content/plugins/pdfjs-viewer-shortcode/pdfjs/web/viewer.php?file='.$link.'" target="_blank" rel="noopener"><img class="pdf_img" src="/wp-content/uploads/2023/10/pdf.png" width="24" height="24" /> Study Material</a></p>';
         }
 
-        $embedded_audio = '[embed]'.$linkingData['audio_url'].'[/embed]';
+		if (isset($linkingData['audio_url']) && $linkingData['audio_url'] != "NULL") {
+        	$embedded_audio = '[embed]'.$linkingData['audio_url'].'[/embed]';
+		}
         $updated_lesson_content = $embedded_audio . $file_content;
 
         wp_update_post(
@@ -29,10 +34,11 @@
             )
         );
 
+		error_log("WP Lesson ID Updated: " . $wp_lesson_id);
     }
 
     //Adds Image to Course
-    function update_course($attachment_linking_data) {
+    function update_courses() {
         global $wpdb;
 
         $posts = get_posts(
@@ -41,7 +47,7 @@
                 'post_status'    => 'publish',
                 'posts_per_page' => -1,
                 'meta_key' => 'mgml_type',
-                'meta_value' => 'course_test'
+                'meta_value' => 'course'
             )
         );
 
@@ -57,8 +63,7 @@
             }
 
 			// Add Thumbnail to Courses
-            // course_image_adding($post->ID, $mgml_course_id);
-
+            course_image_adding($post->ID, $mgml_course_id);
         }
     }
 
