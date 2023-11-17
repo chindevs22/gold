@@ -11,6 +11,22 @@ class SLMS_Instructor extends STM_LMS_Instructor {
 
     }
 
+    public static function search($quote = ''){
+        if(empty($quote)) return [];
+
+        global $wpdb;
+        $search_query = "SELECT ID FROM {$wpdb->prefix}posts
+                         WHERE post_type = 'stm-courses' 
+                         AND post_title LIKE %s LIMIT 50";
+
+        $like = '%' . $quote . '%';
+        $results = $wpdb->get_results($wpdb->prepare($search_query, $like), ARRAY_A);
+
+        $quote_ids = (count($results)) ? array_column($results, 'ID') : [];
+        $quote_ids = array_map('intval', $quote_ids);
+        return array_unique($quote_ids);
+    }
+
     public static function get_courses( $args = array(), $return = false, $get_all = false ) {
 
         if ( ! $return ) {
@@ -29,6 +45,9 @@ class SLMS_Instructor extends STM_LMS_Instructor {
 
         $pp     = ( empty( $_GET['pp'] ) ) ? 8 : sanitize_text_field( $_GET['pp'] );
         $offset = ( ! empty( $_GET['offset'] ) ) ? intval( $_GET['offset'] ) : 0;
+
+        $search = ( ! empty( $_GET['search'] ) ) ? sanitize_text_field( $_GET['search'] ) : '';
+        $searched = self::search($search);
 
         $get_ids = ( ! empty( $_GET['ids_only'] ) );
 
@@ -55,6 +74,10 @@ class SLMS_Instructor extends STM_LMS_Instructor {
             $args['s'] = sanitize_text_field( $_GET['s'] );
         }
 
+//        if ( empty( $args['search'] ) && ! empty( $_GET['search'] ) ) {
+//            $args['search'] = sanitize_text_field( $_GET['search'] );
+//        }
+
         if ( ! empty( $_GET['status'] ) ) {
             $args['post_status'] = sanitize_text_field( $_GET['status'] );
         }
@@ -68,12 +91,19 @@ class SLMS_Instructor extends STM_LMS_Instructor {
         $r['pages']    = (int) ceil( $r['found'] / $r['per_page'] );
 
         if ( $q->have_posts() ) {
+
             while ( $q->have_posts() ) {
                 $q->the_post();
                 $id = get_the_ID();
                 if ( $get_ids ) {
                     $r['posts'][ $id ] = get_the_title( $id );
                     continue;
+                }
+
+                if(count($searched) && !empty($search)) {
+                    if(!in_array($id, $searched)) {
+                        continue;
+                    }
                 }
 
                 $rating  = get_post_meta( $id, 'course_marks', true );

@@ -121,7 +121,7 @@ body .stm-lms-dynamic_sidebar .widget {
 @media(max-width:767px) {
     .blog .stm_lms_lesson_header .stm_lms_lesson_header__left .stm-lms-curriculum-trigger {
         bottom: auto;
-        top: 58px !important;
+        top: 90px !important;
         right: auto !important;
         border-radius: 50%;
         font-size: 16px;

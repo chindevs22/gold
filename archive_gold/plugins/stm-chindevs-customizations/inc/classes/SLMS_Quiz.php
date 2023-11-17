@@ -285,7 +285,7 @@ class SLMS_Quiz {
 //                    $question_score = $multi_choice_data['question_score'];
 //
 //                    $slms_points = ($question_score > 0 && $slms_points > 0) ? round(($question_score / 100) * $slms_points) : 0;
-//                } else
+//                }
                 if($type_question == 'item_match') {
                     $item_match_data = self::check_item_match_answer( $question_id, $answer, $answers_list[$question_id] );
                     $correct_answer = $item_match_data['correct_answer'];

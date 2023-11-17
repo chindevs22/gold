@@ -1,16 +1,17 @@
 <?php
 wp_enqueue_script( 'vue.js' );
 wp_enqueue_script( 'vue-resource.js' );
-stm_lms_register_script( 'account/v1/enrolled-courses' );
+//stm_lms_register_script( 'account/v1/enrolled-courses' );
+wp_enqueue_script( 'account/v1/enrolled-courses', SLMS_URL . 'assets/js/account/v1/enrolled-courses.js', array( 'jquery' ), SLMS_VERSION, true );
 stm_lms_register_style( 'user-courses' );
 stm_lms_register_style( 'instructor_courses' );
 
 stm_lms_register_style( 'expiration/main' );
 
-// wp_enqueue_style( 'slms-full-calendar', SLMS_URL . 'assets/css/full-calendar.css', array( 'stm_theme_styles' ), SLMS_VERSION, 'all' );
-// wp_enqueue_script( 'slms-full-calendar', SLMS_URL . 'assets/js/full-calendar.min.js', array( 'jquery' ), SLMS_VERSION, true );
-// wp_enqueue_script( 'slms-calendar-init', SLMS_URL . 'assets/js/calendar-init.js', array( 'jquery' ), SLMS_VERSION, true );
-// wp_localize_script('slms-calendar-init', 'slms_calendar', array('events' => SLMS_Events::get_courses_events([], 'courses') ));
+wp_enqueue_style( 'slms-full-calendar', SLMS_URL . 'assets/css/full-calendar.css', array( 'stm_theme_styles' ), SLMS_VERSION, 'all' );
+wp_enqueue_script( 'slms-full-calendar', SLMS_URL . 'assets/js/full-calendar.min.js', array( 'jquery' ), SLMS_VERSION, true );
+wp_enqueue_script( 'slms-calendar-init', SLMS_URL . 'assets/js/calendar-init.js', array( 'jquery' ), SLMS_VERSION, true );
+wp_localize_script('slms-calendar-init', 'slms_calendar', array('events' => SLMS_Events::get_courses_events([], 'courses') ));
 
 ?>
 <!--  Chindevs - Remove Course Calendar from First tab
@@ -33,7 +34,7 @@ stm_lms_register_style( 'expiration/main' );
 
     <h3><?php _e( 'Enrolled Courses & Albums', 'slms' ); ?></h3>
 
-	<div class="stm_lms_user_info_top__sort">
+    <div class="stm_lms_user_info_top__sort">
 
 		<select class="no-search">
 			<option value="date_low"><?php esc_html_e( 'Enrolled date (last one)', 'masterstudy-lms-learning-management-system' ); ?></option>
@@ -47,7 +48,10 @@ stm_lms_register_style( 'expiration/main' );
 </div>
 
 <div id="enrolled-courses">
-	<div class="stm-lms-user-courses">
+
+    <?php STM_LMS_Templates::show_lms_template( 'account/private/parts/search', ['page' => 'courses'] ); ?>
+
+    <div class="stm-lms-user-courses">
 
 		<div class="multiseparator"></div>
 

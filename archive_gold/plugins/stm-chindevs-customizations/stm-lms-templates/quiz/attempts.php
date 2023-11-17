@@ -43,7 +43,7 @@ function get_correct_answer( $question_id ) {
 
 <h3 class="stm-lms-single_question__text"><?php _e('Previous Results', 'slms'); ?></h3>
 
-<table style="text-align:center;">
+<table style="text-align:left;">
     <thead>
     <th><?php _e('Attempt', 'slms'); ?></th>
     <th><?php _e('Points', 'slms'); ?></th>
@@ -152,8 +152,8 @@ function get_correct_answer( $question_id ) {
                         <th><?php _e('Question', 'slms'); ?></th>
                         <th><?php _e('User Answer', 'slms'); ?></th>
 						<th><?php _e('Correct Answer', 'slms'); ?></th>
-						<th><?php _e('Justification', 'slms'); ?></th>
-                        <th><?php _e('Status', 'slms'); ?></th>
+						<!--<th><?php _e('Justification', 'slms'); ?></th>
+                        <th><?php _e('Status', 'slms'); ?></th>-->
                     </tr>
                     </thead>
                     <tbody>
@@ -162,8 +162,8 @@ function get_correct_answer( $question_id ) {
                         <td><?php echo $answer['title']; ?></td>
                         <td><span class="<?php echo $answer['correct_class']; ?>"><?php echo $answer['answer']; ?></span></td>
 						<td><span class="<?php echo $answer['correct_class']; ?>"><?php echo get_correct_answer( $answer['id']); ?></span></td>
-						<td><span class="<?php echo $answer['correct_class']; ?>"><?php echo get_justification( $answer['id']) ?></span></td>
-                        <td><span class="<?php echo $answer['correct_class']; ?>"><?php echo $answer['correct']; ?></span></td>
+						<!--<td><span class="<?php echo $answer['correct_class']; ?>"><?php echo get_justification( $answer['id']) ?></span></td>
+                        <td><span class="<?php echo $answer['correct_class']; ?>"><?php echo $answer['correct']; ?></span></td>-->
                     </tr>
                     <?php endforeach; ?>
                     </tbody>
@@ -174,4 +174,4 @@ function get_correct_answer( $question_id ) {
     <?php endforeach; ?>
     </tbody>
 </table>
-<?php endif; ?>F
+<?php endif; ?>

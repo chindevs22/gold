@@ -1,7 +1,8 @@
 <?php
 wp_enqueue_script( 'vue.js' );
 wp_enqueue_script( 'vue-resource.js' );
-stm_lms_register_script( 'account/v1/enrolled-courses' );
+//stm_lms_register_script( 'account/v1/enrolled-courses' );
+wp_enqueue_script( 'account/v1/enrolled-courses', SLMS_URL . 'assets/js/account/v1/enrolled-courses.js', array( 'jquery' ), SLMS_VERSION, true );
 stm_lms_register_style( 'user-courses' );
 stm_lms_register_style( 'instructor_courses' );
 
@@ -47,6 +48,7 @@ wp_localize_script('slms-calendar-init', 'slms_calendar', array('events' => SLMS
 </div>
 
 <div id="enrolled-courses">
+    <?php STM_LMS_Templates::show_lms_template( 'account/private/parts/search', ['page' => 'events']  ); ?>
     <div class="stm-lms-user-courses">
 
         <div class="multiseparator"></div>

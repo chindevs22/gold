@@ -146,7 +146,7 @@ class SLMS_Course_Builder {
     }
 
     public function updated_custom_fields($post_id, $data){
-//        pre_var($data);
+
     }
 
 }

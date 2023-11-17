@@ -48,7 +48,7 @@ if (!empty($questions)):
 		$last_answers = stm_lms_get_quiz_latest_answers( $user['id'], $item_id, $questions_quantity, array( 'question_id', 'user_answer', 'correct_answer' ) );
 		$last_answers = STM_LMS_Helpers::set_value_as_key( $last_answers, 'question_id' ); ?>
 
-        <?php if(SLMS_Quiz::show_answers($item_id)): ?>
+        <?php if(SLMS_Quiz::show_answers($item_id)):?>
 		    <?php STM_LMS_Templates::show_lms_template('quiz/circle_result', compact('last_quiz', 'passing_grade')); ?>
         <?php endif; ?>
 
