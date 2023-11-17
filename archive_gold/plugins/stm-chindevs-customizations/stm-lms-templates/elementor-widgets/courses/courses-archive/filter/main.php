@@ -6,6 +6,8 @@
         <div class="ms_lms_courses_archive__filter_options">
             <input type="hidden" name="show_only_lite" value="<?php echo $show_lite_courses; ?>">
             <input type="hidden" name="lite_category_name" value="<?php echo $lite_category_name; ?>">
+            <!-- added by Anjana -->
+            <input type="hidden" class="search-box" name="search" value="<?php echo !empty($filter_data['metas']['search']) ? $filter_data['metas']['search'] : ''; ?>">
             <?php /* if(count($terms)): ?>
                 <?php foreach ($terms as $term): ?>
 <!--                    <input type="hidden" name="category[]" value="--><?php //echo $term; ?><!--">-->

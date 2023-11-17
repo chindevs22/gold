@@ -190,6 +190,21 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     });
   });
 
+  /* changing search params in url after ajax
+  ** Author: Anjana
+  */
+  $(document).on('click', '.ms_lms_course_search_box__search_input_button', function (e) {
+    var search = $("input[name=search]").val();
+    var currentUrl = document.location.href;
+    var url = new URL(currentUrl);
+    var newUrl = url.href;
+    if(search){
+      url.searchParams.set("search", search);
+      history.pushState({}, null, location.origin + location.pathname + '?' + url.searchParams.toString());
+      $(this).attr('href',url);
+    }
+  });
+
   function sliderInit(widgetType, carouselArgs) {
     if (widgetType === 'courses-carousel') {
       CarouselInit(carouselArgs);
@@ -380,10 +395,12 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
   function getFormArgs(filter, filterForm) {
     if (filter.length) {
       var values = filterForm.serializeArray();
+      console.log(values);
       var args = {
         'terms': [],
         'show_only_lite': '',
         'lite_category_name': '',
+        's' : '',
         'meta_query': {
           'status': [],
           'level': [],
@@ -401,6 +418,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
           args['show_only_lite'] = element['value'];
         } else if (element['name'] === 'lite_category_name') {
           args['lite_category_name'] = element['value'];
+        } else if(element['name'] === 'search') {
+          args['s'] = element['value'];
         } else {
           var index = element['name'].slice(0, -2);
           args['meta_query'][index].push(element['value']);
@@ -534,9 +553,14 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
         if (data.cards) {
           courses_container.append(data.cards);
-
           if (data.pagination) {
             pagination_container.append(data.pagination);
+          }
+		  /*Author: Anjana
+		  ** changing search url
+		  */
+          if(data.search){
+            $(".ms_lms_course_search_box").html(data.search);
           }
         } else if (data.no_found) {
           courses_container.append(data.no_found);

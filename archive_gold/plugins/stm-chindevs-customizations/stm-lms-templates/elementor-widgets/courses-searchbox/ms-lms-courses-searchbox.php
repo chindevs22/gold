@@ -10,7 +10,12 @@ if ( ! empty( $categories ) ) {
 
 $include_lite_courses = (isset($include_lite_courses)) ? $include_lite_courses : '';
 $current_url = get_permalink();
-$target_url = (empty($include_lite_courses)) ? STM_LMS_Course::courses_page_url() : $current_url;
+$params = $_GET;
+$currentUrl = home_url($_SERVER['REQUEST_URI']);
+
+// $target_url = (empty($include_lite_courses)) ? STM_LMS_Course::courses_page_url() : $current_url;
+/* Author: Anjana */
+$target_url = $current_url;
 
 if ( ! empty( $popup ) ) { ?>
     <a href="#" class="ms_lms_course_search_box__popup_button">

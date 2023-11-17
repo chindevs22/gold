@@ -245,36 +245,64 @@ class SLMS_User extends STM_LMS_User {
         }
     }
 
+	/* changes for allowing user to access website on register
+	** Author: Anjana
+	*/
     public static function redirect_is_fields_empty(){
         if(is_user_logged_in()) {
             if(current_user_can('administrator')) return;
+            $value = isset($_SESSION['user_registered']) ? $_SESSION['user_registered'] : ''; // checking if user registers from session
+            if(!$value){
+                $fields = self::get_form_builder_fields();
+                $user_id = get_current_user_id();
+                $lms_template_current = get_query_var( 'lms_template' );
 
-            $fields = self::get_form_builder_fields();
-            $user_id = get_current_user_id();
-            $lms_template_current = get_query_var( 'lms_template' );
+                $has_empty_field = false;
+                $empty_fields = [];
 
-            $has_empty_field = false;
-            $empty_fields = [];
-
-            if(count($fields)) {
-                foreach ($fields as $field) {
-                    if(isset($field['required']) && !empty($field['required'])) {
-                        $meta = STM_LMS_User::get_user_meta($user_id, $field['id']);
-                        if(empty($meta)) {
-                            $has_empty_field = true;
-                            $empty_fields[] = $field['id'];
+                if(count($fields)) {
+                    foreach ($fields as $field) {
+                        if(isset($field['required']) && !empty($field['required'])) {
+                            $meta = STM_LMS_User::get_user_meta($user_id, $field['id']);
+                            if(empty($meta)) {
+                                $has_empty_field = true;
+                                $empty_fields[] = $field['id'];
+                            }
                         }
                     }
                 }
-            }
 
-            if($has_empty_field && 'stm-lms-user-settings' != $lms_template_current) {
-                $url = site_url() . '/user-account/settings';
-                $url = add_query_arg(['msg_error' => 1,'empty_fields' => implode(',',$empty_fields)], $url);
-                wp_safe_redirect($url);
+                if($has_empty_field && 'stm-lms-user-settings' != $lms_template_current) {
+                    $url = site_url() . '/user-account/settings';
+                    $url = add_query_arg(['msg_error' => 1,'empty_fields' => implode(',',$empty_fields)], $url);
+                    wp_safe_redirect($url);
+                }
+            }else{
+				//redirecting to home page if user first time registers
+                if(strstr($_SERVER['REQUEST_URI'], "user-account")){
+                    $url = site_url();
+                    wp_safe_redirect($url);
+                }
             }
 
         }
+    }
+
+    // Added by Anjana
+    public static function search($quote = ''){
+        if(empty($quote)) return [];
+
+        global $wpdb;
+        $search_query = "SELECT ID FROM {$wpdb->prefix}posts
+                         WHERE post_type = 'stm-courses'
+                         AND post_title LIKE %s LIMIT 50";
+
+        $like = '%' . $quote . '%';
+        $results = $wpdb->get_results($wpdb->prepare($search_query, $like), ARRAY_A);
+
+        $quote_ids = (count($results)) ? array_column($results, 'ID') : [];
+        $quote_ids = array_map('intval', $quote_ids);
+        return array_unique($quote_ids);
     }
 
     public static function get_user_courses(){
@@ -295,6 +323,12 @@ class SLMS_User extends STM_LMS_User {
             die;
         }
         $user_id = $user['id'];
+
+        //Added by Anjana
+        $search = ( ! empty( $_GET['search'] ) ) ? sanitize_text_field( $_GET['search'] ) : '';
+        $current_page = ( ! empty( $_GET['current_page'] ) ) ? sanitize_text_field( $_GET['current_page'] ) : '';
+
+        $searched = self::search($search);
 
         $r = array(
             'posts' => array(),
@@ -383,6 +417,12 @@ class SLMS_User extends STM_LMS_User {
                 }
                 if ( ! get_post_status( $id ) ) {
                     continue;
+                }
+                // Added by Anjana
+                if(count($searched) && !empty($search)) {
+                    if(!in_array($id, $searched)) {
+                        continue;
+                    }
                 }
 
                 $post_terms = wp_get_post_terms($id, 'stm_lms_course_taxonomy', ['fields' => 'ids']);

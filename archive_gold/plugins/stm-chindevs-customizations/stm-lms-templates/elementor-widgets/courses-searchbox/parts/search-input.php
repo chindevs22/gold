@@ -1,5 +1,9 @@
 <div class="ms_lms_course_search_box__search_input <?php echo ( ! empty( $parent_terms ) ) ? 'has_categories' : ''; ?> <?php echo ( ! empty( $presets ) ) ? esc_attr( $presets ) : 'search_button_inside'; ?>">
 	{{ search }}
+
+	<?php
+	$params = $_GET;
+	?>
 	<autocomplete
 		name="search"
 		placeholder="<?php echo esc_attr( $search_placeholder ); ?>"
@@ -12,8 +16,22 @@
 		:debounce="1000"
 		model="search">
 	</autocomplete>
+
+	<!-- Anjana's changes -->
+	<?php if(!empty($params)){
+		if(isset($params['search']) && !empty($params['search'])){
+			unset($params['search']);
+		}
+		$query = http_build_query($params);
+	?>
+	<a :href="'<?php echo esc_url( $target_url ); ?>?<?php echo $query; ?>&search=' + url"
+		class="ms_lms_course_search_box__search_input_button">
+		<i class="lnricons-magnifier"></i>
+	</a>
+	<?php }else{ ?>
 	<a :href="'<?php echo esc_url( $target_url ); ?>?search=' + url"
 		class="ms_lms_course_search_box__search_input_button">
 		<i class="lnricons-magnifier"></i>
 	</a>
+	<?php } ?>
 </div>

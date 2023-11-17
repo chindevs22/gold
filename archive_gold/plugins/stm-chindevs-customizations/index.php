@@ -6,10 +6,10 @@ Description: Chindevs Lite plugin
 Author: Chin Devs
 Author URI: https://stylemix.net/
 Text Domain: slms
-Version: 1.1.4
+Version: 1.1.5
 */
 
-define( 'SLMS_VERSION', '1.1.4' );
+define( 'SLMS_VERSION', '1.4.5' );
 define( 'SLMS_PATH', dirname( __FILE__ ) );
 define( 'SLMS_URL', plugin_dir_url( __FILE__ ) );
 $plugin_path = dirname( __FILE__ );

@@ -284,6 +284,21 @@ class SLMS_Lite_Category {
                     'course_card_presets' => $card_style,
                 )
             );
+
+            /* changing search url on ajax request for category search
+            ** Author: Anjana
+            */
+            $response['search'] = STM_LMS_Templates::load_lms_template(
+                'elementor-widgets/courses-searchbox/parts/search-input-ajax',
+                array(
+                    'parent_terms'       => ( ! empty( $parent_terms ) ) ? $parent_terms : array(),
+                    'presets'            => "search_button_outside",
+                    'search_placeholder' => "Search...",
+                    'target_url'         => get_permalink(),
+                    'terms'              => $terms
+                )
+            );
+
             if ( ! empty( $pagination_style ) && $courses['total_pages'] > 1 ) {
                 $response['pagination'] = STM_LMS_Templates::load_lms_template(
                     "elementor-widgets/courses/courses-archive/pagination/{$pagination_style}",

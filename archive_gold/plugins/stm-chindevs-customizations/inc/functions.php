@@ -20,6 +20,7 @@ require_once SLMS_PATH . '/inc/classes/SLMS_Whatsapp.php';
 require_once SLMS_PATH . '/inc/classes/SLMS_Events.php';
 require_once SLMS_PATH . '/inc/classes/SLMS_SAARC.php';
 require_once SLMS_PATH . '/inc/classes/SLMS_Course_Builder.php';
+require_once SLMS_PATH . '/inc/classes/SLMS_Quiz_Builder.php'; //Added by Anjana
 
 add_action('plugins_loaded', function(){
     require_once SLMS_PATH . '/inc/classes/SLMS_Manage_Course.php';
@@ -175,4 +176,65 @@ function stmSecondsToTime($seconds) {
     $minutes = floor(($seconds % 3600) / 60);
 
     return gmdate('H:i', $hours * 3600 + $minutes * 60);
+}
+
+/* Changes for search title first and then description
+** changes for generating synonyms for search keyword
+** Author: Anjana
+*/
+function custom_search_filter($query) {
+
+    if ($query->is_search) {
+        // Modify the search query to give priority to the title.
+        $query->set('orderby', 'relevance');
+        $query->set('order', 'DESC');
+
+        $searchTerm     = $query->query_vars['s'];
+        if(!empty($searchTerm)){
+            $probableTerms  = buildProbableSearchTerms($searchTerm);
+        }
+        // Check if the search term is in the synonyms array
+        if (!empty($probableTerms)) {
+            // Modify the search query to the synonym
+            $query->set('s', implode(' ',$probableTerms));
+            wp_enqueue_script('custom-search-notice', SLMS_URL . 'assets/js/custom-search-notice.js', array('jquery'), null, true);
+            wp_localize_script('custom-search-notice', 'searchData', array(
+                'noticeMessage' => 'Your search results for ' . esc_html(implode(', ',$probableTerms)),'search' => $searchTerm
+            ));
+        }
+
+    }
+
+    return $query;
+}
+
+add_filter('pre_get_posts', 'custom_search_filter', 1);
+
+/**
+ * Generating synonyms from search keyword using PHP soundex function
+ * Author: Anjana
+ */
+function buildProbableSearchTerms($searchTerm){
+
+    global $wpdb;
+
+    $custom_post_type = 'stm-courses'; // define your custom post type slug here
+    // A sql query to return all post titles
+    $results = $wpdb->get_results( $wpdb->prepare( "SELECT post_title FROM {$wpdb->posts} WHERE post_type = %s and post_status = 'publish'", $custom_post_type ), ARRAY_A );
+
+    $wordsArr = [];
+    foreach($results as $vals){
+        $wordsArr[] = $vals['post_title'];
+    }
+    $sound_arr = [];
+    foreach($wordsArr as $val) {
+        $words =  explode(' ',$val);
+        foreach($words as $word){
+            $soundex_code = soundex($word);
+            if (soundex($searchTerm) == $soundex_code) {
+                $sound_arr[] = $word;
+            }
+        }
+    }
+    return array_unique($sound_arr);
 }
