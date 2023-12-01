@@ -144,15 +144,15 @@ add_action('wp_enqueue_scripts', 'payment_faq_style');
 // All Course Data migration functions
 function create_course_data() {
 // 	echo " <br> <br> STARTING QUESTIONS <br> <br> ";
-//     read_csv("cd-courses-docs/question.csv", "question");
+// 	read_csv("cd_docs/DM2/DM2_ALL_QUESTION.csv", "question");
 // 	echo "<br> <br>  DONE WITH QUESTIONS <br> <br> ";
 
-//	echo " <br> <br> STARTING LESSONS <br> <br> ";
-//    read_csv("cd-courses-docs/obj_lessons.csv", "lesson");
-//	echo "<br> <br>  DONE WITH LESSONS <br> <br> ";
+// 	echo " <br> <br> STARTING LESSONS <br> <br> ";
+// 	read_csv("cd_docs/DM2/DM2_ALL_LESSONS.csv", "lesson");
+// 	echo "<br> <br>  DONE WITH LESSONS <br> <br> ";
 
 // 	echo " <br> <br> STARTING ASSIGNMENT <br> <br> ";
-// 	read_csv("cd-courses-docs/subj_lessons.csv", "assignment");
+// 	read_csv("cd_docs/DMN_SUBJ_LESSONS.csv", "assignment");
 // 	echo "<br> <br>  DONE WITH ASSIGNMENT <br> <br> ";
 
 //  echo " <br> <br> STARTING POSTAL ASSIGNMENT<br> <br> ";
@@ -160,19 +160,19 @@ function create_course_data() {
 // 	echo "<br> <br>  DONE WITH POSTAL ASSIGNMENT<br> <br> ";
 
 // 	echo " <br> <br> STARTING COURSES <br> <br> ";
-//  read_csv("cd-courses-docs/dm_courses.csv", "course");
+// 	read_csv("cd_docs/DM2/DM2_COURSES.csv", "course");
 // 	echo "<br> <br>  DONE WITH COURSES <br> <br> ";
 
-// 	echo " <br> <br> STARTING USERS <br> <br> "; //two user files
-//  read_csv("cd_docs/DMN_USERS7.csv", "user");
-// 	echo " <br> <br> ENDING USERS <br> <br> ";
+//  echo " <br> <br> STARTING USERS <br> <br> "; //two user files
+//  read_csv("cd_docs/DM2/DMN2_USERS.csv", "user");
+//  echo " <br> <br> ENDING USERS <br> <br> ";
 
 // 	echo " <br> <br> STARTING USER ASSESSMENT <br> <br> ";
-//     read_csv("cd-courses-docs/small/usa_obj.csv", "userquiz");
+// 	read_csv("cd_docs/DMN_USA_COURSES_9.csv", "userquiz");
 // 	echo " <br> <br> ENDING USER ASSESSMENT <br> <br> ";
 
 // 	echo " <br> <br> STARTING USER ASSESSMENT FOR ASSIGNMENTS <br> <br> ";
-//     read_csv("cd-courses-docs/usa_split.csv", "userassignment");
+//     read_csv("cd_docs/usa/DM_USA_SPLIT_21_23.csv", "userassignment");
 // 	echo " <br> <br> ENDING USER  ASSESSMENT FOR ASSIGNMENTS <br> <br> ";
 
 // 	echo " <br> <br> STARTING USER ASSESSMENT FOR POSTAL <br> <br> ";
@@ -184,26 +184,31 @@ function create_course_data() {
 // 	echo " <br> <br> ENDING USER ASSESSMENT DETAILS  FOR ASSIGNMENTS <br> <br> ";
 
 // 	echo " <br> <br> STARTING USER ASSESSMENT DETAILS <br> <br> ";
-//     read_csv("cd-courses-docs/small/usad_10.csv", "useranswers");
+// 	read_csv("cd_docs/DM2/DM2_COURSES_USAD_FV51_110_129.csv", "useranswers");
 // 	echo " <br> <br> ENDING USER ASSESSMENT DETAILS <br> <br> ";
 
-// 	echo " <br> <br> STARTING ENROLL <br> <br> ";
-//    read_csv("cd-courses-docs/small/enrol_courses.csv", "enrol");
-//    echo " <br> <br> ENDING ENROLL <br> <br> ";
+//  	echo " <br> <br> STARTING ENROLL <br> <br> ";
+// 	read_csv("cd_docs/DMN/DMN_ENROL1.csv", "enrol");
+// 	read_csv("cd_docs/DMN/DMN_ENROL2.csv", "enrol");
+// 	read_csv("cd_docs/DMN/DMN_ENROL3.csv", "enrol");
+// 	read_csv("cd_docs/DMN/DMN_ENROL4.csv", "enrol");
+// 	read_csv("cd_docs/DM2/DM2_ENROL_COURSES.csv", "enrol");
+//  	echo " <br> <br> ENDING ENROLL <br> <br> ";
 
 // 	echo " <br> <br> STARTING PUBLICATIONS <br> <br> ";
-// 	read_csv("products.csv", "publications");
+// 	read_csv("cd_docs/publications/products.csv", "publications");
 // 	echo " <br> <br> ENDING PUBLICATIONS <br> <br> ";
-	
+
 // 	echo " <br> <br> STARTING ORDERS <br> <br> ";
-// 	read_csv("cd-products/orders_contrived.csv", "orders");
+// 	read_csv("cd_docs/publications/orders_5.csv", "orders");
 // 	echo " <br> <br> ENDING ORDERS <br> <br> ";
 }
 
 // Course data migration
 function read_csv($file_name, $type) {
     //file mapping from our File Manager
-    $fileName = "/home/freewaydns-dev108/{$file_name}"; //Ensure this is the right file location
+    error_log(ABSPATH);
+    $fileName = ABSPATH . "{$file_name}"; //Ensure this is the right file location
     $file = fopen($fileName, 'r');
     $dataArray = array();
     $headerLine = true;
@@ -250,7 +255,9 @@ function read_csv($file_name, $type) {
             create_publications_from_csv($tempArray);
         } else if ($type == "orders") {
             create_orders_from_csv($tempArray);
-        }
+        } else if ($type = "update_lesson") { # SPECIFIC TO UPDATE SCRIPT
+			update_lesson_with_pdf($tempArray);
+		}
     }
     fclose($file);
 }
@@ -261,30 +268,30 @@ add_shortcode( 'test-functions', 'create_course_data' );
 function create_lite_data() {
 // 	EVENT FILES
 // 	echo " <br> <br> STARTING EVENT LESSON<br> <br> ";
-// 	read_lite_csv("cd-event-docs/webinar_lessons.csv", "event_lesson");
+// 	read_lite_csv("cd_docs/DM2/DM2_WEBINAR_LESSONS.csv", "event_lesson");
 // 	echo " <br> <br> ENDING EVENT LESSON<br> <br> ";
 
 // 	echo " <br> <br> STARTING EVENT<br> <br> ";
-// 	read_lite_csv("cd-event-docs/webinar_courses.csv", "webinar");
-// 	read_lite_csv("cd-event-docs/event_courses.csv", "event");
+// 	read_lite_csv("cd_docs/DM2/DM2_WEBINAR_COURSES.csv", "webinar");
+// 	read_lite_csv("cd_docs/event/event_courses.csv", "event");
 // 	echo " <br> <br> ENDING EVENT <br> <br> ";
 
-	echo " <br> <br> STARTING ENROLL EVENT<br> <br> ";
-// 	read_lite_csv("cd-event-docs/enrol_webinars.csv", "user_webinar");
-	read_lite_csv("cd-event-docs/enrol_event.csv", "user_event");
-	echo " <br> <br> ENDING ENROLL EVENT<br> <br> ";
+// 	echo " <br> <br> STARTING ENROLL EVENT<br> <br> ";
+// 	read_lite_csv("cd_docs/DM2/DM2_ENROL_WEBINARS.csv", "user_webinar");
+// 	read_lite_csv("cd_docs/event/event_enrol.csv", "user_event");
+// 	echo " <br> <br> ENDING ENROLL EVENT<br> <br> ";
 
-// 	// SM FILES
+// // 	SM FILES
 // 	echo " <br> <br> STARTING SM LESSONS <br> <br> ";
-// 	read_lite_csv("cd-sm-docs/sm_lessons.csv", "sm_lesson");
+// 	read_lite_csv("cd_docs/sm/sm_lessons.csv", "sm_lesson");
 // 	echo " <br> <br> ENDING SM LESSONS <br> <br> ";
 
 // 	echo " <br> <br> STARTING SM <br> <br> ";
-// 	read_lite_csv("cd-sm-docs/sm_courses.csv", "shravana_mangalam");
+// 	read_lite_csv("cd_docs/sm/sm_courses.csv", "shravana_mangalam");
 // 	echo " <br> <br> ENDING SM <br> <br> ";
 
 // 	echo " <br> <br> STARTING ENROLL SM USERS <br> <br> ";
-// 	read_lite_csv("cd-sm-docs/sm_enrol.csv", "user_sm");
+// 	read_lite_csv("cd_docs/sm/sm_enrol.csv", "user_sm");
 // 	echo " <br> <br> ENDING ENROLL SM USERS <br> <br> ";
 
 
@@ -338,9 +345,21 @@ function read_lite_csv($file_name, $type) {
 
 add_shortcode( 'test-functions-lite', 'create_lite_data' );
 
-
-
 ///-------------------------------------------------------- END DATA MIGRATION CODE ---------------------------------------------------------------------------------------
+
+///-------------------------------------------------------- UPDATE SCRIPT CODE --------------------------------------------------------------------------------------------
+
+
+function test_update_script() {
+	echo " <br> <br>STARTING UPDATES FOR COURSES<br> <br> ";
+	update_courses(); // updates image for course
+// 	read_csv("cd_docs/lesson_materials/lesson_attachments.csv", "update_lesson"); // updates pdf data
+	echo " <br> <br>ENDING UPDATES FOR COURSES<br> <br> ";
+}
+
+add_shortcode( 'course_updates', 'test_update_script' );
+
+///--------------------------------------------------------END UPDATE SCRIPT CODE --------------------------------------------------------------------------------------------
 
 // FEEDBACK FORM ---- based on form submission
 function submit_form_js() {
