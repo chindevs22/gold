@@ -1,6 +1,6 @@
 <?php
 foreach ( $courses as $course ) {
-	$course = STM_LMS_Courses::get_course_submetas( $course );
+	$course = STM_LMS_Courses::F( $course );
 	?>
 	<div class="ms_lms_courses_card_item <?php echo esc_attr( $featured ?? '' ); ?> <?php echo esc_attr( ( 'courses-carousel' === $widget_type ) ? 'swiper-slide' : '' ); ?>">
 		<div class="ms_lms_courses_card_item_wrapper">
