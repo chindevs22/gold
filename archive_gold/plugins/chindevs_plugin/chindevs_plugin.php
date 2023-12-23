@@ -352,7 +352,8 @@ add_shortcode( 'test-functions-lite', 'create_lite_data' );
 
 function test_update_script() {
 	echo " <br> <br>STARTING UPDATES FOR COURSES<br> <br> ";
-	update_courses(); // updates image for course
+	//update_courses(); // updates image for course
+	//update_course_description();
 // 	read_csv("cd_docs/lesson_materials/lesson_attachments.csv", "update_lesson"); // updates pdf data
 	echo " <br> <br>ENDING UPDATES FOR COURSES<br> <br> ";
 }
@@ -605,3 +606,5 @@ function my_custom_banner() {
     }
 
 }
+
+?>
