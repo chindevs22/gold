@@ -18,10 +18,8 @@
 		$wpdata['first_name'] = $userData['first_name'];
 		$wpdata['last_name'] = $userData['last_name'];
 		$wpdata['display_name'] = $userData['first_name'];
-        $wpdata['user_email'] = "datamigration1" . $randomEmailCounter . "@chinfo.org";
-        $randomEmailCounter += 1;
-
-		//  $wpdata['user_email'] = $userData['email']; TODO: Add back the actual email
+        $wpdata['user_email'] = 'chinfo_testing_' . $userData['email'];
+	//  $wpdata['user_email'] = $userData['email']; TODO: Add back the actual email
 
 		// Create User
 		if (!username_exists($wpdata['user_login']) && !email_exists($wpdata['user_email'])) {
@@ -41,8 +39,6 @@
 			error_log("USER: " . $userData['first_name']);
 			error_log("The MGML user id" . $userData['id']);
 			error_log("WordPRESS user ID" . $user_id);
-
-// 			$userMGMLtoWP[$userData['id']] = $user_id;
 			$wp_user->set_role('subscriber');
 			create_meta($userData, $user_id, $userData['id']);
 
