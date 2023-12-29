@@ -45,7 +45,7 @@ function create_curriculum($course_post_id, $sectionArray, $lessonArray, $type) 
         $totalLessonCount += count($lessonArray);
         $currPostsArray = array();
         // Add Feedback lesson to the last section
-        if ($sectionCount == count($sectionArray)) {
+        if ($sectionCount == count($sectionArray) && $type == 'course') {
             $insert_index = count($lessonArray) - 1;
             array_splice($lessonArray, $insert_index, 0, $feedbackLessonID); // TODO: Make sure this lesson exists
         }

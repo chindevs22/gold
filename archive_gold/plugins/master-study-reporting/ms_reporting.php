@@ -19,7 +19,7 @@ function get_sale_price( $post_id ) {
   * @see 'save_post'
   *
   * @param int $post_id The post being saved.
-  */
+  */F
   function save_course_details($post_id, $post) {
     global $table_prefix, $wpdb;
 	$tablename = 'wp_product_details';
@@ -32,7 +32,7 @@ function get_sale_price( $post_id ) {
 		$correct_course_id[] = $course_id;
 
 		$price     = get_post_meta($course_id->ID, 'price', true);
-		if(empty($price)){
+		if(empty($price)){F
 			$price = 0;
 		}
 		else{

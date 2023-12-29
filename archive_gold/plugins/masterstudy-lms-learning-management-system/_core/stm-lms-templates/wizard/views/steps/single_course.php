@@ -33,7 +33,7 @@
 			'wizard/views/field_data',
 			array(
 				'title' => esc_html__( 'Course tabs', 'masterstudy-lms-learning-management-system' ),
-				'desc'  => esc_html__( 'Turn on the courses’ tabs display to improve the navigation for users and to show additional information. The tabs include Description, Curriculum, FAQ, Announcement, Reviews.', 'masterstudy-lms-learning-management-system' ),
+				'desc'  => esc_html__( 'Turn on the coursFes’ tabs display to improve the navigation for users and to show additional information. The tabs include Description, Curriculum, FAQ, Announcement, Reviews.', 'masterstudy-lms-learning-management-system' ),
 			)
 		);
 		?>

@@ -4,16 +4,10 @@
 	// --------------------------------------------------------------------------------------------
 	require_once 'helpers.php';
 	function create_question_from_csv($questionData) {
-		echo "<br> inside create question <br>";
-
 		// TODO: we currently cannot handle "descriptive" type -> should actually be an assignment or fill gap?
 		if ($questionData['type'] == 'descriptive') {
 			return;
 		}
-
-		// Not handling $wpQuestionsToAnswers
-		global $lessonToQuestionsMap, $questionMGMLtoWP, $wpQuestionsToAnswers;
-
 
 		$wpdata['post_title'] = $questionData['title'];
 		$wpdata['post_content'] = $questionData['instruction'];
@@ -21,25 +15,20 @@
 		$wpdata['post_type'] = 'stm-questions';
 		$question_post_id = wp_insert_post( $wpdata );
 
+		if ( is_wp_error($question_post_id) || $question_post_id == 0) {
+			echo "ERRORED while creating question: " . $questionData['id'];
+			error_log("ERRORED while creating question: " . $questionData['id']);
+			return;
+		}
 
-		echo "QUESTION ID: " . $questionData['id'] . "POST ID:  " . $question_post_id;
-		error_log("QUESTION ID:  ");
-		error_log($questionData['id']);
-		error_log("POST ID:  ");
-		error_log($question_post_id);
+		error_log("QUESTION ID: " . $questionData['id'] . "   POST ID: " . $question_post_id);
+		echo "QUESTION ID: " . $questionData['id'] . "   POST ID: " . $question_post_id;
 
 		$quiz_id = $questionData['quiz_id'];
 
 		// Create metadata fields for MGML question and MGML quiz
 		update_post_meta($question_post_id, 'mgml_question_id', $questionData['id']);
 		update_post_meta($question_post_id, 'mgml_quiz_id', $quiz_id);
-// 		$questionMGMLtoWP[$questionData['id']] = $question_post_id; //map MGML question ID
-		// MAP question ID to quiz
-// 		if (!array_key_exists($quiz_id, $lessonToQuestionsMap)) {
-// 			$lessonToQuestionsMap[$quiz_id] = array($question_post_id);
-// 		} else {
-// 			array_push($lessonToQuestionsMap[$quiz_id], $question_post_id);
-// 		}
 
 		// add metadata for question
 		if ($questionData['type'] == 'multiple_choice') {
@@ -60,7 +49,6 @@
 
 
 		$answers = array();
-
 		$isCorrect = $questionData['correct_answers'];
 
 		if ($questionData['type'] != 'matching')  {
@@ -99,8 +87,7 @@
 				array_push($answers, $optionArray);
 			}
 		}
-		// map WP qusetion to WP Answers List
-//		$wpQuestionsToAnswers[$question_post_id] = $options;
+
 		update_post_meta($question_post_id, 'mgml_answer_options', $options);
 		update_post_meta($question_post_id, 'answers', $answers);
 	}

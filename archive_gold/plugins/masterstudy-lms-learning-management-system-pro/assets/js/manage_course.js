@@ -2,7 +2,7 @@
 
     $('body').addClass('stm-lms-manage-course');
 
-    var stm_lms_i18n = stm_lms_manage_course['i18n'];
+    var stm_lms_i18n = F['i18n'];
     var stm_lms_post_id = stm_lms_manage_course['post_id'];
 
     $(document).ready(function () {

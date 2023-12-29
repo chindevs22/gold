@@ -6,13 +6,14 @@
 	// create the course
 	require_once 'helpers.php';
 	function create_course_from_csv($courseData) {
-		global $courseMGMLtoWP, $sectionToLessonMap, $wpdb;
+		global $wpdb;
 
 		echo "IMPORTING COURSE <br> <br>";
 
         $faq_description;
         $new_desc = html_entity_decode($courseData['description']);
         $faq_flag = false;
+
 		// need to handle course types without this exact faq
         if (strpos($new_desc, "Frequently Asked Questions")) {
             $faq_flag = true;
@@ -71,10 +72,10 @@
 		update_post_meta($course_post_id, 'level', $courseData['level']);
 		update_post_meta($course_post_id, 'current_students', 0);
 
-// 		Make Trial Course
- 		if (!empty($us_price) || $us_price != 0) {
- 			update_post_meta($course_post_id, 'shareware', 'on');
- 		}
+// 		Make Trial Course - add to update script if needed
+//  	if (!empty($us_price) || $us_price != 0) {
+// 			update_post_meta($course_post_id, 'shareware', 'on');
+// 		}
 
 		//append faq
 		if($faq_flag) {
@@ -88,7 +89,6 @@
 		//handle payment FAQ
 		update_post_meta($course_post_id, 'payment_faq', '[{"question":"","answer":""}]');
 
-// 		TODO: uncomment this when we actually have images
 // 		add_course_image($course_post_id, $courseData['id']); // adds the image to the course
 
 // 		this appends the category as a term with the taxonomy relationship to the course ID

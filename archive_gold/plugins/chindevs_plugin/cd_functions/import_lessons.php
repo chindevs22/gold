@@ -6,8 +6,6 @@
 	// Create Lesson Data
 	require_once 'helpers.php';
 	function create_lesson_from_csv($lessonData) {
-		global $lessonToQuestionsMap, $sectionToLessonMap, $lessonMGMLtoWP;
-
 		$questionArray = array();
 
 		$wpdata['post_title'] = $lessonData['title'];
@@ -24,13 +22,11 @@
 		} else {
 			$file_content = '';
 			$embedded_audio = '';
-			//study material post meta
-			if (isset($lessonData['attachment']) && $lessonData['attachment'] != "NULL") {
-				$link = 'https://dev108.freewaydns.net/wp-content/uploads/cd_media/course_'.$lessonData['course_id'].'/'.$lessonData['attachment'];
-				// TODO: edit this to be the PDF flipbook code
-			// [3d-flip-book mode="fullscreen" pdf="https://dev108.freewaydns.net/wp-content/uploads/2023/04/shlokas.pdf"][/3d-flip-book]
-			$file_content = '<a href="https:////dev108.freewaydns.net/wp-content/plugins/pdfjs-viewer-shortcode/pdfjs/web/viewer.php?file='.$link.'&amp;dButton=false&amp;pButton=true&amp;oButton=false&amp;sButton=true#zoom=auto&amp;pagemode=none" target="_blank" rel="noopener"><img src="https://dev108.freewaydns.net/wp-content/uploads/2023/02/button_open-pdf.png" alt="PDF icon" /></a>';
-			}
+            if (isset($linkingData['attachment']) && $linkingData['attachment'] != "NULL") {
+                $link = '/wp-content/uploads/cd_media/lesson_materials/course_'.$linkingData['mgml_course_id'].'/'.$linkingData['attachment'];
+                error_log("Crafted PDF Link path: " . $link);
+                $file_content = '<a class="elementor-button elementor-button-link elementor-size-md study_material" title="Study Material" href="/wp-content/plugins/pdfjs-viewer-shortcode/pdfjs/web/viewer.php?file='.$link.'" target="_blank" rel="noopener"><img class="pdf_img" src="/wp-content/uploads/2023/10/pdf.png" width="24" height="24" /> Study Material</a></p>';
+            }
 
 			if (isset($lessonData['audio_url']) && $lessonData['audio_url'] != "NULL") {
 				// audio post meta
@@ -56,10 +52,7 @@
 			  update_post_meta($lesson_post_id, 're_take_cut', '0');
 			  update_post_meta($lesson_post_id, 'quiz_style', 'global');
 
-			  //assign questions
-// 			  $questionArray = get_questions_for_quiz($lessonData['id']);
 			  error_log(print_r($questionArray, true));
-//			  $questionArray = $lessonToQuestionsMap[$lessonData['id']];
 			  if (!empty($questionArray)) {
 				  $questionString = implode(",", $questionArray);
 				  error_log(print_r($questionString, true));

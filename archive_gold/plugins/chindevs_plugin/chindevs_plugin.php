@@ -129,7 +129,7 @@ add_action( 'wp_enqueue_scripts', 'gift_course_scripts' );
 
 
 function event_registration_scripts() {
-	wp_enqueue_script( 'event-registration-scripts', plugins_url( '/assets/js/event-registration.js', __FILE__ ), array(), false, true );
+	wp_enqueue_script( 'event-registration-scripts', plugins_url( '/assets/js/event-registration.js', __FILE__ ), array(), false, false );
     wp_enqueue_style( 'event-registration', GIFT_COURSE_URL . '/assets/css/event-registration.css', array(), 'false', false);
 }
 add_action( 'wp_enqueue_scripts', 'event_registration_scripts' );
@@ -358,7 +358,7 @@ function test_update_script() {
 	echo " <br> <br>ENDING UPDATES FOR COURSES<br> <br> ";
 }
 
-add_shortcode( 'course_updates', 'test_update_script' );
+add_shortcode( 'testing_update_script', 'test_update_script' );
 
 ///--------------------------------------------------------END UPDATE SCRIPT CODE --------------------------------------------------------------------------------------------
 
